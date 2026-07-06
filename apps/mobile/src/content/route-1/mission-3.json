@@ -1,0 +1,154 @@
+{
+  "missionId": "r1-m3",
+  "routeId": "route-1",
+  "title": "Road Markings",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r1-m3-s1", "type": "rule_card",
+      "conceptId": "c.markings.double-white", "sourceRef": "HC-129",
+      "title": "Solid line nearest you",
+      "body": "Double white lines, nearest line solid: you must not cross or straddle it except in a few specific cases.",
+      "question": {
+        "prompt": "You may cross a solid white centre line to…",
+        "options": [
+          { "id": "a", "text": "Pass a pedal cycle moving at 10 mph or less", "correct": true },
+          { "id": "b", "text": "Overtake any vehicle slower than you", "correct": false, "misconceptionId": "m.markings.solid-allows-slow-overtakes" },
+          { "id": "c", "text": "Save time when the road looks clear", "correct": false }
+        ],
+        "explanation": "Exceptions: entering premises or a side road, or passing a cycle, horse or works vehicle at 10 mph or less."
+      }
+    },
+    {
+      "id": "r1-m3-s2", "type": "contrast",
+      "conceptId": "c.markings.double-white", "sourceRef": "HC-128",
+      "a": { "label": "Nearest line solid", "body": "Don't cross or straddle it except for the listed exceptions." },
+      "b": { "label": "Nearest line broken", "body": "You may cross to overtake if it's safe and you finish before a solid line starts." },
+      "question": {
+        "prompt": "Double white lines with a broken line on your side. You may…",
+        "options": [
+          { "id": "a", "text": "Cross to overtake if safe, finishing before the solid line starts", "correct": true },
+          { "id": "b", "text": "Never cross for any reason", "correct": false },
+          { "id": "c", "text": "Cross freely — the lines are only advisory", "correct": false, "misconceptionId": "m.markings.white-lines-advisory" }
+        ],
+        "explanation": "A broken line on your side allows overtaking if you can complete it safely in time."
+      }
+    },
+    {
+      "id": "r1-m3-s3", "type": "contrast",
+      "conceptId": "c.markings.hatched", "sourceRef": "HC-130",
+      "a": { "label": "Broken border", "body": "Don't enter the hatched area unless it's necessary and safe." },
+      "b": { "label": "Solid border", "body": "Must not enter except in an emergency." },
+      "question": {
+        "prompt": "A hatched area bordered by solid white lines — you may enter…",
+        "options": [
+          { "id": "a", "text": "Only in an emergency", "correct": true },
+          { "id": "b", "text": "Whenever you are overtaking", "correct": false },
+          { "id": "c", "text": "Any time traffic is slow", "correct": false, "misconceptionId": "m.markings.hatched-is-spare-lane" }
+        ],
+        "explanation": "Solid borders mean keep out except in an emergency; broken borders mean only if necessary and safe."
+      }
+    },
+    {
+      "id": "r1-m3-s4", "type": "rule_card",
+      "conceptId": "c.markings.box-junction", "sourceRef": "HC-174",
+      "title": "Yellow box junctions",
+      "body": "Don't enter the box unless your exit road is clear.",
+      "question": {
+        "prompt": "You may wait inside a box junction when…",
+        "options": [
+          { "id": "a", "text": "Turning right, blocked only by oncoming traffic or other right-turners", "correct": true },
+          { "id": "b", "text": "Queueing straight ahead behind slow traffic", "correct": false, "misconceptionId": "m.markings.box-queueing-ok" },
+          { "id": "c", "text": "Never — the box must always stay empty", "correct": false, "misconceptionId": "m.markings.box-no-waiting-ever" }
+        ],
+        "explanation": "The right-turn wait is the one exception to keeping the box clear."
+      }
+    },
+    {
+      "id": "r1-m3-s5", "type": "rule_card",
+      "conceptId": "c.markings.studs", "sourceRef": "HC-132",
+      "title": "Cats' eyes colour code",
+      "body": "White studs mark lanes or the road centre. Red: left edge. Amber: right edge or central reservation. Green: slip roads and lay-bys.",
+      "question": {
+        "prompt": "Driving at night you see red studs on your left. They mark…",
+        "options": [
+          { "id": "a", "text": "The left-hand edge of the carriageway", "correct": true },
+          { "id": "b", "text": "The central reservation", "correct": false, "misconceptionId": "m.markings.red-studs-centre" },
+          { "id": "c", "text": "A slip road ahead", "correct": false }
+        ],
+        "explanation": "Red = left edge. Amber = right edge, white = lanes, green = slip roads and lay-bys."
+      }
+    },
+    {
+      "id": "r1-m3-s6", "type": "scene_decision",
+      "conceptId": "c.markings.box-junction", "sourceRef": "HC-174",
+      "scene": "You're turning right in a yellow box junction. Your exit is clear, but oncoming traffic stops you completing the turn.",
+      "question": {
+        "prompt": "What may you do?",
+        "options": [
+          { "id": "a", "text": "Wait in the box until a gap lets you finish the turn", "correct": true },
+          { "id": "b", "text": "Reverse back out of the box", "correct": false },
+          { "id": "c", "text": "You should never have entered the box", "correct": false, "misconceptionId": "m.markings.box-no-waiting-ever" }
+        ],
+        "explanation": "Waiting to turn right, held up only by oncoming traffic, is the permitted exception."
+      }
+    },
+    {
+      "id": "r1-m3-s7", "type": "checkpoint",
+      "conceptId": "c.checkpoint", "sourceRef": "HC-129",
+      "questions": [
+        {
+          "conceptId": "c.markings.double-white", "sourceRef": "HC-129",
+          "prompt": "The centre line nearest you is solid white. Crossing it is…",
+          "options": [
+            { "id": "a", "text": "Allowed only for exceptions like passing a cycle at 10 mph or less", "correct": true },
+            { "id": "b", "text": "Allowed to overtake anything slower", "correct": false, "misconceptionId": "m.markings.solid-allows-slow-overtakes" },
+            { "id": "c", "text": "Allowed at night when it's quiet", "correct": false }
+          ],
+          "explanation": "Solid nearest line: don't cross except for the specific listed exceptions."
+        },
+        {
+          "conceptId": "c.markings.double-white", "sourceRef": "HC-128",
+          "prompt": "When may you cross double white lines with a broken line on your side?",
+          "options": [
+            { "id": "a", "text": "To overtake if safe and you finish before your line turns solid", "correct": true },
+            { "id": "b", "text": "Only to enter a driveway", "correct": false },
+            { "id": "c", "text": "Never — they count as solid", "correct": false }
+          ],
+          "explanation": "Broken on your side: overtaking is allowed when safe and completed in time."
+        },
+        {
+          "conceptId": "c.markings.hatched", "sourceRef": "HC-130",
+          "prompt": "A hatched area with a broken border — when may you enter?",
+          "options": [
+            { "id": "a", "text": "Only if it is necessary and safe", "correct": true },
+            { "id": "b", "text": "Never, in any circumstances", "correct": false },
+            { "id": "c", "text": "Any time — it's a normal lane", "correct": false, "misconceptionId": "m.markings.hatched-is-spare-lane" }
+          ],
+          "explanation": "Broken border: don't enter unless necessary and safe. Solid border: emergencies only."
+        },
+        {
+          "conceptId": "c.markings.box-junction", "sourceRef": "HC-174",
+          "prompt": "Going straight ahead, you may enter a box junction only when…",
+          "options": [
+            { "id": "a", "text": "Your exit road is clear", "correct": true },
+            { "id": "b", "text": "The vehicle ahead starts to move", "correct": false, "misconceptionId": "m.markings.box-queueing-ok" },
+            { "id": "c", "text": "The lights are green, whatever the exit looks like", "correct": false, "misconceptionId": "m.markings.green-overrides-box" }
+          ],
+          "explanation": "Green light or not: enter the box only when your exit is clear."
+        },
+        {
+          "conceptId": "c.markings.studs", "sourceRef": "HC-132",
+          "prompt": "Green reflective studs mark…",
+          "options": [
+            { "id": "a", "text": "Slip-road entries and exits, and lay-bys", "correct": true },
+            { "id": "b", "text": "The middle of the road", "correct": false },
+            { "id": "c", "text": "The right-hand edge of the carriageway", "correct": false }
+          ],
+          "explanation": "Green = slip roads and lay-bys. White = lanes, red = left edge, amber = right edge."
+        }
+      ]
+    }
+  ]
+}

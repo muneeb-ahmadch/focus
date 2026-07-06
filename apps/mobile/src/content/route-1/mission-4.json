@@ -1,0 +1,154 @@
+{
+  "missionId": "r1-m4",
+  "routeId": "route-1",
+  "title": "Lights & Visibility",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r1-m4-s1", "type": "rule_card",
+      "conceptId": "c.lights.night", "sourceRef": "HC-113",
+      "title": "When headlights are a must",
+      "body": "Use headlights at night on unlit roads, and whenever visibility is seriously reduced.",
+      "question": {
+        "prompt": "You must use headlights…",
+        "options": [
+          { "id": "a", "text": "At night on an unlit road", "correct": true },
+          { "id": "b", "text": "Only on motorways", "correct": false },
+          { "id": "c", "text": "Only when other drivers switch theirs on", "correct": false, "misconceptionId": "m.lights.follow-the-crowd" }
+        ],
+        "explanation": "Unlit roads at night and seriously reduced visibility both require headlights."
+      }
+    },
+    {
+      "id": "r1-m4-s2", "type": "rule_card",
+      "conceptId": "c.lights.dipped", "sourceRef": "HC-115",
+      "title": "In town at night",
+      "body": "In built-up areas at night, use dipped headlights.",
+      "question": {
+        "prompt": "Driving through a lit town centre at night, you should use…",
+        "options": [
+          { "id": "a", "text": "Dipped headlights", "correct": true },
+          { "id": "b", "text": "Full beam for the best view", "correct": false, "misconceptionId": "m.lights.full-beam-always-best" },
+          { "id": "c", "text": "Sidelights only", "correct": false, "misconceptionId": "m.lights.sidelights-enough" }
+        ],
+        "explanation": "Built-up areas at night call for dipped headlights — seen without dazzling."
+      }
+    },
+    {
+      "id": "r1-m4-s3", "type": "scene_decision",
+      "conceptId": "c.lights.dazzle", "sourceRef": "HC-115",
+      "scene": "On a dark road, an oncoming car's full beam dazzles you and the road ahead disappears.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          { "id": "a", "text": "Slow down, and stop if you need to", "correct": true },
+          { "id": "b", "text": "Flash your own full beam back at them", "correct": false, "misconceptionId": "m.lights.flash-back" },
+          { "id": "c", "text": "Keep your speed and look away from the light", "correct": false }
+        ],
+        "explanation": "If dazzled, slow down and if necessary stop — never retaliate with your own beam."
+      }
+    },
+    {
+      "id": "r1-m4-s4", "type": "rule_card",
+      "conceptId": "c.lights.dazzle", "sourceRef": "HC-114",
+      "title": "Don't dazzle others",
+      "body": "Dip your headlights for oncoming traffic and when you're following another vehicle.",
+      "question": {
+        "prompt": "Following another car at night, you should…",
+        "options": [
+          { "id": "a", "text": "Dip your headlights", "correct": true },
+          { "id": "b", "text": "Use full beam so they can see further too", "correct": false, "misconceptionId": "m.lights.full-beam-helps-ahead" },
+          { "id": "c", "text": "Switch your lights off briefly", "correct": false }
+        ],
+        "explanation": "Full beam in a following position dazzles through their mirrors — dip it."
+      }
+    },
+    {
+      "id": "r1-m4-s5", "type": "contrast",
+      "conceptId": "c.lights.fog", "sourceRef": "HC-236",
+      "a": { "label": "Visibility under 100 m", "body": "Fog lights allowed — visibility is seriously reduced." },
+      "b": { "label": "Fog lifting", "body": "You must switch fog lights off as visibility improves." },
+      "question": {
+        "prompt": "Your rear fog lights are on and the fog clears. You must…",
+        "options": [
+          { "id": "a", "text": "Switch them off", "correct": true },
+          { "id": "b", "text": "Leave them on until you park", "correct": false, "misconceptionId": "m.lights.fog-leave-on" },
+          { "id": "c", "text": "Keep them on in case fog returns", "correct": false }
+        ],
+        "explanation": "Fog lights must go off when visibility improves — they dazzle and hide your brake lights."
+      }
+    },
+    {
+      "id": "r1-m4-s6", "type": "misconception",
+      "conceptId": "c.lights.fog", "sourceRef": "HC-226",
+      "wrongBelief": "Fog lights make you safer in any rain or drizzle.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          { "id": "a", "text": "They're only for seriously reduced visibility — generally under 100 m", "correct": true },
+          { "id": "b", "text": "Fog lights don't work in rain", "correct": false },
+          { "id": "c", "text": "It isn't wrong — brighter is always safer", "correct": false, "misconceptionId": "m.lights.brighter-always-safer" }
+        ],
+        "explanation": "Use fog lights only when visibility is seriously reduced, generally below 100 m."
+      },
+      "repairNote": "Fog lights are for fog-level visibility, under about 100 m. In ordinary rain they just dazzle drivers behind."
+    },
+    {
+      "id": "r1-m4-s7", "type": "checkpoint",
+      "conceptId": "c.checkpoint", "sourceRef": "HC-113",
+      "questions": [
+        {
+          "conceptId": "c.lights.night", "sourceRef": "HC-113",
+          "prompt": "On an unlit road at night you must…",
+          "options": [
+            { "id": "a", "text": "Use your headlights", "correct": true },
+            { "id": "b", "text": "Use sidelights only", "correct": false, "misconceptionId": "m.lights.sidelights-enough" },
+            { "id": "c", "text": "Use hazard warning lights", "correct": false }
+          ],
+          "explanation": "Headlights are required at night on unlit roads."
+        },
+        {
+          "conceptId": "c.lights.dipped", "sourceRef": "HC-115",
+          "prompt": "In a built-up area at night, use…",
+          "options": [
+            { "id": "a", "text": "Dipped headlights", "correct": true },
+            { "id": "b", "text": "Full beam", "correct": false, "misconceptionId": "m.lights.full-beam-always-best" },
+            { "id": "c", "text": "Front fog lights", "correct": false }
+          ],
+          "explanation": "Dipped headlights keep you visible without dazzling in town."
+        },
+        {
+          "conceptId": "c.lights.dazzle", "sourceRef": "HC-115",
+          "prompt": "If you're dazzled by oncoming headlights, you should…",
+          "options": [
+            { "id": "a", "text": "Slow down and stop if necessary", "correct": true },
+            { "id": "b", "text": "Speed up to pass them sooner", "correct": false },
+            { "id": "c", "text": "Flash your full beam in reply", "correct": false, "misconceptionId": "m.lights.flash-back" }
+          ],
+          "explanation": "Slow down — and stop if you can't see. Retaliating blinds the other driver too."
+        },
+        {
+          "conceptId": "c.lights.fog", "sourceRef": "HC-236",
+          "prompt": "Visibility improves after fog. Your fog lights…",
+          "options": [
+            { "id": "a", "text": "Must be switched off", "correct": true },
+            { "id": "b", "text": "Can stay on for the rest of the trip", "correct": false, "misconceptionId": "m.lights.fog-leave-on" },
+            { "id": "c", "text": "Should be left on whenever it's cloudy", "correct": false }
+          ],
+          "explanation": "You must switch fog lights off when visibility improves."
+        },
+        {
+          "conceptId": "c.lights.night", "sourceRef": "HC-226",
+          "prompt": "Whatever the time of day, you must use headlights when…",
+          "options": [
+            { "id": "a", "text": "Visibility is seriously reduced", "correct": true },
+            { "id": "b", "text": "The sky is overcast", "correct": false },
+            { "id": "c", "text": "You join any dual carriageway", "correct": false }
+          ],
+          "explanation": "Seriously reduced visibility — generally under 100 m — means headlights on."
+        }
+      ]
+    }
+  ]
+}
