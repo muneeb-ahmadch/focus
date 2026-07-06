@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "name": "Focus",
+    "slug": "focus",
+    "version": "0.1.0",
+    "scheme": "focus",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.focusapp.mobile"
+    },
+    "android": {
+      "package": "com.focusapp.mobile"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite"
+    ]
+  }
+}
