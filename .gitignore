@@ -1,0 +1,22 @@
+# deps
+node_modules/
+.venv/
+
+# expo / metro
+.expo/
+dist/
+*.tsbuildinfo
+
+# turbo
+.turbo/
+
+# python
+__pycache__/
+*.pyc
+
+# env
+.env
+.env.*
+
+# os / editor
+.DS_Store
