@@ -3,9 +3,8 @@ import { getActiveDays, getRecentAccuracy, getScoredCount } from '@/db/repo/acti
 import { getProfile, type UserProfile } from '@/db/repo/profile';
 import { getDue } from '@/db/repo/reviews';
 import { getAllRouteStates } from '@/db/repo/routes';
-import { computeReadiness, type Readiness, type ReadinessInputs } from '@/engine/readiness';
-import { computeStreak } from '@/engine/streak';
-import { addDaysLocal, diffDaysLocal, todayLocal } from '@/lib/clock';
+import { computeReadiness, computeStreak, type Readiness, type ReadinessInputs } from '@focus/engine';
+import { addDaysLocal, dayNumber, diffDaysLocal, todayLocal } from '@/lib/clock';
 
 export interface AppStats {
   today: string;
@@ -55,7 +54,7 @@ export function buildStats(db: Db): AppStats {
     profile,
     scoredAnswers,
     dueCount,
-    streak: computeStreak(activeDays, today),
+    streak: computeStreak(activeDays.map(dayNumber), dayNumber(today)),
     inputs,
     readiness: computeReadiness(inputs),
     daysToTest: profile ? diffDaysLocal(today, profile.test_date) : null,

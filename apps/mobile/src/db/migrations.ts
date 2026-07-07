@@ -83,4 +83,14 @@ export function migrate(db: Db): void {
     db.transaction(() => db.exec(batch));
     db.exec(`PRAGMA user_version = ${v + 1}`);
   }
+
+  const version = db.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0;
+  const table = db.get<{ name: string }>(
+    `SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'user_profile'`,
+  );
+  if (!table) {
+    throw new Error(
+      `Database corrupt: user_version is ${version} but table 'user_profile' does not exist.`,
+    );
+  }
 }

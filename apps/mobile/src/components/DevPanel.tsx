@@ -4,8 +4,8 @@ import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { getDb } from '@/db';
 import { getActivity, getActiveDays, getRecentAccuracy, getScoredCount } from '@/db/repo/activity';
 import { getAllReviewItems, getDue } from '@/db/repo/reviews';
-import { computeStreak } from '@/engine/streak';
-import { __getDayOffset, __setDayOffset, fromEpochMs, todayLocal } from '@/lib/clock';
+import { computeStreak } from '@focus/engine';
+import { __getDayOffset, __setDayOffset, dayNumber, fromEpochMs, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 import { rescheduleAll, scheduleTestNotification } from '@/notifications/scheduler';
 import { colors, font, radius, space } from '@/theme/tokens';
@@ -66,7 +66,7 @@ export function DevPanel() {
   const items = getAllReviewItems(db);
   const due = getDue(db, today);
   const activity = getActivity(db);
-  const streak = computeStreak(getActiveDays(db), today);
+  const streak = computeStreak(getActiveDays(db).map(dayNumber), dayNumber(today));
   const scoredCount = getScoredCount(db);
   const accuracy = getRecentAccuracy(db);
 

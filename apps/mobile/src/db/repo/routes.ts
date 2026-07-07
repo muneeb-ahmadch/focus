@@ -1,5 +1,5 @@
 import { todayLocal } from '@/lib/clock';
-import { computeRouteMastery } from '@/engine/mastery';
+import { computeRouteMastery } from '@focus/engine';
 import type { Db } from '../adapter';
 
 export interface RouteState {

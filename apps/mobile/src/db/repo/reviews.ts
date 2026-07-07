@@ -1,5 +1,5 @@
 import { addDaysLocal } from '@/lib/clock';
-import { gradeReview, type SrsGrade } from '@/engine/srs';
+import { gradeReview, type SrsGrade } from '@focus/engine';
 import type { Db } from '../adapter';
 
 export type ReviewOrigin = 'wrong' | 'unsure' | 'slow' | 'hint_heavy';

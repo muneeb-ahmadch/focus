@@ -8,10 +8,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "lint": "eslint .",
+    "test": "TZ=Europe/London vitest run"
   },
   "dependencies": {
     "@expo/metro-runtime": "~4.0.1",
+    "@focus/engine": "workspace:*",
     "@react-native-community/datetimepicker": "8.2.0",
     "@shopify/flash-list": "1.7.3",
     "@tanstack/react-query": "^5.101.2",
@@ -37,9 +39,12 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
     "@types/better-sqlite3": "^7.6.13",
     "@types/react": "^18.3.31",
     "better-sqlite3": "^12.11.1",
+    "jsdom": "^29.1.1",
     "typescript": "^5.9.3",
     "vitest": "^4.1.9"
   }

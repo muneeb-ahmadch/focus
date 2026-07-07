@@ -10,6 +10,9 @@ dist/
 # turbo
 .turbo/
 
+# test output
+coverage/
+
 # python
 __pycache__/
 *.pyc

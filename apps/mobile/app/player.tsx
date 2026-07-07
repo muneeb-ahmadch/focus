@@ -8,6 +8,7 @@ import { getMission, ROUTES } from '@/content';
 import { getDb } from '@/db';
 import { getMissionState } from '@/db/repo/missions';
 import { usePlayerStore, type ResumePayload } from '@/stores/playerStore';
+import { parseResumePayload } from '@/stores/resumePayload';
 import { colors, font, radius, space } from '@/theme/tokens';
 
 export default function PlayerRoute() {
@@ -28,12 +29,28 @@ export default function PlayerRoute() {
   const resume = useMemo<ResumePayload | undefined>(() => {
     if (isDrill || !missionId) return undefined;
     const state = getMissionState(getDb(), missionId);
-    return state?.status === 'in_progress' && state.resume_payload_json
-      ? (JSON.parse(state.resume_payload_json) as ResumePayload)
-      : undefined;
+    return state?.status === 'in_progress' ? parseResumePayload(state.resume_payload_json) : undefined;
   }, [isDrill, missionId]);
 
   if (active) return <PlayerScreen />;
+
+  if (!isDrill && !mission) {
+    return (
+      <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
+        <View style={styles.body}>
+          <Text style={styles.title}>Mission not found</Text>
+          <Text style={styles.explainer}>
+            This mission isn&apos;t available. It may have been removed or the link is out of
+            date.
+          </Text>
+        </View>
+        <View style={styles.footer}>
+          <PrimaryButton title="Go back" onPress={() => router.back()} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   if (isDrill || started || !mission) return <View style={styles.blank} />;
 
   const routeTitle = ROUTES.find((r) => r.routeId === mission.routeId)?.title ?? '';

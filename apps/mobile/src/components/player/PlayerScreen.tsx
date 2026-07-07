@@ -49,9 +49,10 @@ export function PlayerScreen() {
   const autoPlay = useMemo(() => (getProfile(getDb())?.auto_play_audio ?? 1) === 1, []);
   const [confirmExit, setConfirmExit] = useState(false);
 
+  const isCardPhase = store.phase === 'card';
   useEffect(() => {
-    if (store.phase === 'card' && card && autoPlay) speak(promptText(card));
-  }, [card, store.phase === 'card', autoPlay]);
+    if (isCardPhase && card && autoPlay) speak(promptText(card));
+  }, [isCardPhase, card, autoPlay]);
 
   useEffect(() => () => stopSpeech(), []);
 
@@ -135,6 +136,7 @@ export function PlayerScreen() {
     content = (
       <View style={styles.cardArea}>
         <StepRenderer
+          key={`${store.index}:${card.stepId}`}
           card={card}
           heading={heading}
           answered={store.phase === 'feedback'}

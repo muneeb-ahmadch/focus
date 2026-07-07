@@ -5,12 +5,11 @@ import type { Mission, Question, Step } from '@/content/schema';
 import { getDb } from '@/db';
 import { bumpActivity, getActiveDays } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
-import { completeMission, failCheckpoint, saveResume } from '@/db/repo/missions';
+import { completeMission, ensureMissionRow, failCheckpoint, saveResume } from '@/db/repo/missions';
 import { applyGrade, getDue, upsertMiss } from '@/db/repo/reviews';
 import { getRouteState, recomputeRoute } from '@/db/repo/routes';
-import { gradeCheckpoint } from '@/engine/checkpoint';
-import { computeStreak, hitMilestone } from '@/engine/streak';
-import { todayLocal } from '@/lib/clock';
+import { gradeCheckpoint, computeStreak, hitMilestone } from '@focus/engine';
+import { dayNumber, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 import { rescheduleAll } from '@/notifications/scheduler';
 
@@ -177,7 +176,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     const routeId = s.routeId;
     if (!missionId || !routeId) return;
     const today = todayLocal();
-    const streakBefore = computeStreak(getActiveDays(db), today);
+    const streakBefore = computeStreak(getActiveDays(db).map(dayNumber), dayNumber(today));
     if (s.attemptId !== undefined) {
       finishAttempt(db, s.attemptId, 'submitted', score, JSON.stringify({ answers: s.answers }));
     }
@@ -187,7 +186,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     const info = routeInfo(routeId);
     if (info) recomputeRoute(db, routeId, info);
     const masteryAfter = getRouteState(db, routeId)?.mastery ?? 0;
-    const streakAfter = computeStreak(getActiveDays(db), today);
+    const streakAfter = computeStreak(getActiveDays(db).map(dayNumber), dayNumber(today));
     const milestone = hitMilestone(streakBefore, streakAfter);
     const newReviews = s.missedConcepts.length;
     void rescheduleAll(db);
@@ -240,7 +239,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         JSON.stringify({ answers: s.answers }),
       );
     }
-    for (const _ of s.answers) bumpActivity(db, today, 'reviews_cleared');
+    s.answers.forEach(() => bumpActivity(db, today, 'reviews_cleared'));
     for (const route of getRouteManifest()) {
       if (route.totalMissions > 0) recomputeRoute(db, route.routeId, route);
     }
@@ -272,25 +271,31 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       const mission = getMission(missionId);
       if (!mission) return;
       const db = getDb();
+      ensureMissionRow(db, missionId, mission.routeId);
       const attemptId = startAttempt(db, 'lesson', missionId);
       if (resume) {
-        set({
-          ...initial,
-          mode: 'mission',
-          missionId,
-          routeId: mission.routeId,
-          attemptId,
-          queue: cardsFromIds(mission, resume.queueIds),
-          index: resume.index,
-          phase: resume.phase === 'feedback' ? 'card' : resume.phase,
-          answers: resume.answers,
-          checkpointAnswers: resume.checkpointAnswers,
-          inRepair: resume.inRepair,
-          originalCheckpointScore: resume.originalCheckpointScore,
-          missedConcepts: [],
-          active: true,
-        });
-        return;
+        const queue = cardsFromIds(mission, resume.queueIds);
+        const resumeIsValid =
+          queue.length === resume.queueIds.length && queue.length > 0 && resume.index < queue.length;
+        if (resumeIsValid) {
+          set({
+            ...initial,
+            mode: 'mission',
+            missionId,
+            routeId: mission.routeId,
+            attemptId,
+            queue,
+            index: resume.index,
+            phase: resume.phase === 'feedback' ? 'card' : resume.phase,
+            answers: resume.answers,
+            checkpointAnswers: resume.checkpointAnswers,
+            inRepair: resume.inRepair,
+            originalCheckpointScore: resume.originalCheckpointScore,
+            missedConcepts: [],
+            active: true,
+          });
+          return;
+        }
       }
       set({
         ...initial,
@@ -407,6 +412,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
 
     advance() {
       const s = get();
+
+      if (s.phase !== 'feedback' && s.phase !== 'checkpoint-intro' && s.phase !== 'repair-intro') {
+        return;
+      }
 
       if (s.phase === 'checkpoint-intro' || s.phase === 'repair-intro') {
         set({ phase: 'card', lastAnswer: undefined });

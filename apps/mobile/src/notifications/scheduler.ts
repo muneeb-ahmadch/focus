@@ -5,8 +5,8 @@ import { getActiveDays } from '@/db/repo/activity';
 import { getMeta, setMeta } from '@/db/repo/meta';
 import { getProfile } from '@/db/repo/profile';
 import { countActiveDueOnOrBefore } from '@/db/repo/reviews';
-import { computeStreak } from '@/engine/streak';
-import { addDaysLocal, diffDaysLocal, localDayToDate, now, todayLocal } from '@/lib/clock';
+import { computeStreak } from '@focus/engine';
+import { addDaysLocal, dayNumber, diffDaysLocal, localDayToDate, now, todayLocal } from '@/lib/clock';
 
 // expo-notifications has no web support — every export must no-op there
 const isWeb = Platform.OS === 'web';
@@ -35,7 +35,7 @@ export async function rescheduleAll(db: Db): Promise<void> {
   await Notifications.cancelAllScheduledNotificationsAsync();   // idempotent by design
   const profile = getProfile(db);
   if (!profile) return;
-  const streak = computeStreak(getActiveDays(db), todayLocal());
+  const streak = computeStreak(getActiveDays(db).map(dayNumber), dayNumber(todayLocal()));
   for (let i = 0; i < 7; i++) {
     const day = addDaysLocal(todayLocal(), i);
     const fireAt = localDayToDate(day, 18, 0);

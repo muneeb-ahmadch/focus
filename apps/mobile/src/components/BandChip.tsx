@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import type { Band } from '@/engine/readiness';
+import type { Band } from '@focus/engine';
 import { colors, font, radius, space } from '@/theme/tokens';
 
 const BAND_STYLE: Record<Band, { bg: string; label: string }> = {

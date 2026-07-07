@@ -24,3 +24,13 @@ export function fromEpochMs(ms: number): Date { return new Date(ms); }
 export function diffDaysLocal(from: string, to: string): number {
   return Math.round((localDayToDate(to).getTime() - localDayToDate(from).getTime()) / 86_400_000);
 }
+
+export function dayNumber(day: string): number {
+  const [y, m, d] = day.split('-').map(Number);
+  return Math.round(Date.UTC(y, m - 1, d) / 86_400_000);
+}
+
+export function dayFromNumber(n: number): string {
+  const dt = new Date(n * 86_400_000);
+  return `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth() + 1)}-${pad(dt.getUTCDate())}`;
+}

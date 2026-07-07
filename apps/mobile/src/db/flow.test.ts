@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { getMission, getRouteManifest } from '@/content';
-import { gradeCheckpoint } from '@/engine/checkpoint';
-import { computeReadiness } from '@/engine/readiness';
-import { computeStreak } from '@/engine/streak';
+import { gradeCheckpoint, computeReadiness, computeStreak } from '@focus/engine';
+import { dayNumber } from '@/lib/clock';
 import type { Db } from './adapter';
 import { openTestDb } from './testing/adapter.node';
 import { migrate } from './migrations';
@@ -93,7 +92,7 @@ describe('core loop flow (data layer)', () => {
       [TODAY],
     );
     expect(activity?.missions_completed).toBe(1);
-    expect(computeStreak(getActiveDays(db), TODAY)).toBe(1);
+    expect(computeStreak(getActiveDays(db).map(dayNumber), dayNumber(TODAY))).toBe(1);
 
     expect(getMissionState(db, 'r1-m1')?.status).toBe('completed');
     expect(getMissionState(db, 'r1-m1')?.best_checkpoint_score).toBe(0.8);
