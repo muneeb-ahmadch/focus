@@ -1,0 +1,128 @@
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useMemo, useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { PlayerScreen } from '@/components/player/PlayerScreen';
+import { PrimaryButton } from '@/components/PrimaryButton';
+import { getMission, ROUTES } from '@/content';
+import { getDb } from '@/db';
+import { getMissionState } from '@/db/repo/missions';
+import { usePlayerStore, type ResumePayload } from '@/stores/playerStore';
+import { colors, font, radius, space } from '@/theme/tokens';
+
+export default function PlayerRoute() {
+  const params = useLocalSearchParams<{ mode?: string; missionId?: string }>();
+  const active = usePlayerStore((s) => s.active);
+  const startMission = usePlayerStore((s) => s.startMission);
+  const startDrill = usePlayerStore((s) => s.startDrill);
+  const [started, setStarted] = useState(false);
+
+  const isDrill = params.mode === 'drill';
+  useEffect(() => {
+    if (isDrill) startDrill();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const missionId = params.missionId;
+  const mission = useMemo(() => (missionId ? getMission(missionId) : undefined), [missionId]);
+  const resume = useMemo<ResumePayload | undefined>(() => {
+    if (isDrill || !missionId) return undefined;
+    const state = getMissionState(getDb(), missionId);
+    return state?.status === 'in_progress' && state.resume_payload_json
+      ? (JSON.parse(state.resume_payload_json) as ResumePayload)
+      : undefined;
+  }, [isDrill, missionId]);
+
+  if (active) return <PlayerScreen />;
+  if (isDrill || started || !mission) return <View style={styles.blank} />;
+
+  const routeTitle = ROUTES.find((r) => r.routeId === mission.routeId)?.title ?? '';
+  const teachSteps = mission.steps.filter((s) => s.type !== 'checkpoint');
+  const conceptCount = new Set(teachSteps.map((s) => s.conceptId)).size;
+
+  const begin = (payload?: ResumePayload) => {
+    setStarted(true);
+    startMission(mission.missionId, payload);
+  };
+
+  return (
+    <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
+      <Pressable
+        onPress={() => router.back()}
+        hitSlop={12}
+        style={styles.close}
+        accessibilityLabel="Close"
+      >
+        <Text style={styles.closeText}>✕</Text>
+      </Pressable>
+      <View style={styles.body}>
+        <Text style={styles.routeLabel}>{routeTitle}</Text>
+        <Text style={styles.title}>{mission.title}</Text>
+        <View style={styles.metaRow}>
+          <Text style={styles.metaChip}>~{mission.estimatedMinutes} min</Text>
+          <Text style={styles.metaChip}>
+            {teachSteps.length} card{teachSteps.length === 1 ? '' : 's'}
+          </Text>
+          <Text style={styles.metaChip}>
+            {conceptCount} concept{conceptCount === 1 ? '' : 's'}
+          </Text>
+        </View>
+        <Text style={styles.explainer}>
+          {resume
+            ? 'You left part-way through — pick up right where you stopped.'
+            : 'Work through the cards, then pass a 5-question checkpoint to complete the mission.'}
+        </Text>
+      </View>
+      <View style={styles.footer}>
+        {resume ? (
+          <>
+            <PrimaryButton title="Resume mission" onPress={() => begin(resume)} />
+            <PrimaryButton title="Start over" variant="secondary" onPress={() => begin()} />
+          </>
+        ) : (
+          <PrimaryButton title="Start mission" onPress={() => begin()} />
+        )}
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  blank: { flex: 1, backgroundColor: colors.bg },
+  screen: { flex: 1, backgroundColor: colors.bg },
+  close: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: space.lg,
+    paddingVertical: space.md,
+  },
+  closeText: { fontSize: font.lg, color: colors.textMuted },
+  body: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: space.xl,
+    gap: space.md,
+  },
+  routeLabel: { fontSize: font.sm, fontWeight: '600', color: colors.accent },
+  title: { fontSize: font.xxl, fontWeight: '700', color: colors.text, textAlign: 'center' },
+  metaRow: { flexDirection: 'row', gap: space.sm, marginTop: space.xs },
+  metaChip: {
+    fontSize: font.xs,
+    color: colors.textMuted,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.pill,
+    paddingHorizontal: space.md,
+    paddingVertical: space.xs,
+    overflow: 'hidden',
+  },
+  explainer: {
+    fontSize: font.md,
+    color: colors.textMuted,
+    textAlign: 'center',
+    lineHeight: 24,
+    marginTop: space.sm,
+  },
+  footer: { paddingHorizontal: space.xl, paddingBottom: space.lg, gap: space.md },
+});

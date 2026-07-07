@@ -1,0 +1,168 @@
+{
+  "missionId": "r1-m5",
+  "routeId": "route-1",
+  "title": "Sharing the Road",
+  "estimatedMinutes": 7,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r1-m5-s1", "type": "rule_card",
+      "conceptId": "c.sharing.hierarchy", "sourceRef": "HC-H1",
+      "title": "Who bears most responsibility",
+      "body": "Those who can do the greatest harm bear the greatest responsibility to reduce danger to others.",
+      "question": {
+        "prompt": "Under the hierarchy of road users, the greatest responsibility lies with…",
+        "options": [
+          { "id": "a", "text": "Those whose vehicles can cause the greatest harm", "correct": true },
+          { "id": "b", "text": "Pedestrians, because they're most at risk", "correct": false, "misconceptionId": "m.sharing.vulnerable-carry-burden" },
+          { "id": "c", "text": "Whoever reached the road first", "correct": false }
+        ],
+        "explanation": "Greater potential harm brings greater responsibility to reduce danger to others."
+      }
+    },
+    {
+      "id": "r1-m5-s2", "type": "scene_decision",
+      "conceptId": "c.sharing.junction-pedestrians", "sourceRef": "HC-170",
+      "scene": "You're turning left into a side road. A pedestrian is waiting to cross the side road you're entering.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          { "id": "a", "text": "Give way — let them cross before you turn in", "correct": true },
+          { "id": "b", "text": "Turn quickly before they step out", "correct": false, "misconceptionId": "m.sharing.cars-first-at-junctions" },
+          { "id": "c", "text": "Sound your horn so they wait", "correct": false }
+        ],
+        "explanation": "Give way to pedestrians crossing or waiting to cross a road you turn into or from."
+      }
+    },
+    {
+      "id": "r1-m5-s3", "type": "rule_card",
+      "conceptId": "c.sharing.cyclists", "sourceRef": "HC-H3",
+      "title": "Don't cut across",
+      "body": "When turning into or out of a junction or changing lane, don't cut across cyclists or horse riders going ahead.",
+      "question": {
+        "prompt": "A cyclist is going straight on as you wait to turn left. You should…",
+        "options": [
+          { "id": "a", "text": "Wait — don't cut across their path", "correct": true },
+          { "id": "b", "text": "Accelerate to turn in ahead of them", "correct": false, "misconceptionId": "m.sharing.beat-the-cyclist" },
+          { "id": "c", "text": "Edge alongside them and turn slowly", "correct": false }
+        ],
+        "explanation": "Riders going ahead have priority — turning across them causes serious collisions."
+      }
+    },
+    {
+      "id": "r1-m5-s4", "type": "rule_card",
+      "conceptId": "c.sharing.cyclists", "sourceRef": "HC-163",
+      "title": "Passing a cyclist",
+      "body": "Leave at least 1.5 metres when overtaking cyclists at speeds up to 30 mph — and more space at higher speeds.",
+      "question": {
+        "prompt": "Overtaking a cyclist at 28 mph, leave at least…",
+        "options": [
+          { "id": "a", "text": "1.5 metres", "correct": true },
+          { "id": "b", "text": "Half a metre", "correct": false, "misconceptionId": "m.sharing.squeeze-past-ok" },
+          { "id": "c", "text": "The width of a car door", "correct": false }
+        ],
+        "explanation": "At least 1.5 m up to 30 mph; leave more room when passing faster."
+      }
+    },
+    {
+      "id": "r1-m5-s5", "type": "rule_card",
+      "conceptId": "c.sharing.horses", "sourceRef": "HC-163",
+      "title": "Passing horses",
+      "body": "Pass horse riders at under 10 mph, leaving at least 2 metres of space.",
+      "question": {
+        "prompt": "The safe way past a horse rider is…",
+        "options": [
+          { "id": "a", "text": "Under 10 mph, with at least 2 metres of space", "correct": true },
+          { "id": "b", "text": "Quickly, to spend less time alongside", "correct": false, "misconceptionId": "m.sharing.pass-fast-is-kind" },
+          { "id": "c", "text": "Slow but close, so the horse sees you", "correct": false }
+        ],
+        "explanation": "Horses spook: under 10 mph and at least 2 m of space."
+      }
+    },
+    {
+      "id": "r1-m5-s6", "type": "hazard_cue",
+      "conceptId": "c.sharing.cyclists", "sourceRef": "HC-232",
+      "scene": "Night, heavy rain. The cyclist ahead wobbles as gusts of wind hit them.",
+      "question": {
+        "prompt": "What's the cue telling you?",
+        "options": [
+          { "id": "a", "text": "Give extra room — riders need more space in bad weather and at night", "correct": true },
+          { "id": "b", "text": "Overtake before the next gust arrives", "correct": false },
+          { "id": "c", "text": "Nothing — cyclists must hold their line", "correct": false }
+        ],
+        "explanation": "Give motorcyclists, cyclists and horse riders extra room in bad weather and at night."
+      }
+    },
+    {
+      "id": "r1-m5-s7", "type": "misconception",
+      "conceptId": "c.sharing.junction-pedestrians", "sourceRef": "HC-H2",
+      "wrongBelief": "Cars have priority over pedestrians at junctions.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          { "id": "a", "text": "Give way to pedestrians crossing or waiting to cross a road you're turning into", "correct": true },
+          { "id": "b", "text": "Pedestrians only have priority at traffic lights", "correct": false, "misconceptionId": "m.sharing.priority-only-at-lights" },
+          { "id": "c", "text": "It isn't wrong — bigger vehicles go first", "correct": false, "misconceptionId": "m.sharing.might-is-right" }
+        ],
+        "explanation": "At junctions, pedestrians crossing or waiting to cross the road you turn into or from go first."
+      },
+      "repairNote": "At a junction, a pedestrian crossing or waiting to cross the road you're turning into or from has priority over your car."
+    },
+    {
+      "id": "r1-m5-s8", "type": "checkpoint",
+      "conceptId": "c.checkpoint", "sourceRef": "HC-H1",
+      "questions": [
+        {
+          "conceptId": "c.sharing.hierarchy", "sourceRef": "HC-H1",
+          "prompt": "The hierarchy of road users says…",
+          "options": [
+            { "id": "a", "text": "Those who can do most harm have most responsibility to reduce danger", "correct": true },
+            { "id": "b", "text": "All road users carry exactly equal responsibility", "correct": false, "misconceptionId": "m.sharing.equal-responsibility" },
+            { "id": "c", "text": "Vulnerable users must keep out of the way", "correct": false }
+          ],
+          "explanation": "The greatest capacity for harm brings the greatest responsibility."
+        },
+        {
+          "conceptId": "c.sharing.junction-pedestrians", "sourceRef": "HC-170",
+          "prompt": "Turning into a side road where a pedestrian is crossing, you should…",
+          "options": [
+            { "id": "a", "text": "Give way to them", "correct": true },
+            { "id": "b", "text": "Proceed — vehicles have priority", "correct": false, "misconceptionId": "m.sharing.cars-first-at-junctions" },
+            { "id": "c", "text": "Pass close behind them", "correct": false }
+          ],
+          "explanation": "Pedestrians crossing or waiting to cross the road you enter have priority."
+        },
+        {
+          "conceptId": "c.sharing.cyclists", "sourceRef": "HC-163",
+          "prompt": "The minimum passing distance for a cyclist at up to 30 mph is…",
+          "options": [
+            { "id": "a", "text": "1.5 metres", "correct": true },
+            { "id": "b", "text": "0.5 metres", "correct": false, "misconceptionId": "m.sharing.squeeze-past-ok" },
+            { "id": "c", "text": "Three car lengths behind them", "correct": false }
+          ],
+          "explanation": "At least 1.5 m at up to 30 mph — more space at higher speeds."
+        },
+        {
+          "conceptId": "c.sharing.horses", "sourceRef": "HC-163",
+          "prompt": "You should pass a horse rider at…",
+          "options": [
+            { "id": "a", "text": "Under 10 mph, at least 2 metres away", "correct": true },
+            { "id": "b", "text": "30 mph, about 1 metre away", "correct": false, "misconceptionId": "m.sharing.pass-fast-is-kind" },
+            { "id": "c", "text": "Any speed, if you give a wide berth", "correct": false }
+          ],
+          "explanation": "Under 10 mph and at least 2 m — speed and space both matter."
+        },
+        {
+          "conceptId": "c.sharing.cyclists", "sourceRef": "HC-H3",
+          "prompt": "Before turning across a cyclist going straight ahead, you should…",
+          "options": [
+            { "id": "a", "text": "Wait and avoid cutting across them", "correct": true },
+            { "id": "b", "text": "Sound your horn and complete the turn", "correct": false },
+            { "id": "c", "text": "Cut in if your vehicle is faster", "correct": false, "misconceptionId": "m.sharing.beat-the-cyclist" }
+          ],
+          "explanation": "Don't cut across cyclists going ahead when turning into or out of a junction."
+        }
+      ]
+    }
+  ]
+}
