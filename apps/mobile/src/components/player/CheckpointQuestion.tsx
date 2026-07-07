@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import type { Question } from '@/content/schema';
+import type { Question } from '@focus/shared';
 import { colors, font, space } from '@/theme/tokens';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';

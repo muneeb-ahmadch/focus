@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import type { Step } from '@/content/schema';
+import type { Step } from '@focus/shared';
 import { colors, font, radius, space } from '@/theme/tokens';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';

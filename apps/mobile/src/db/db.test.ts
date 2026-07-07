@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import type { Db } from './adapter';
 import { openTestDb } from './testing/adapter.node';
-import { migrate } from './migrations';
+import { migrate, MIGRATIONS } from './migrations';
 import { createProfile, getProfile } from './repo/profile';
 import { applyGrade, getDue, upsertMiss, type ReviewItem } from './repo/reviews';
 import { completeMission, ensureMissionRow, getMissionState } from './repo/missions';
@@ -20,9 +20,9 @@ describe('db', () => {
     migrate(db);
   });
 
-  it('migrate on empty DB sets user_version 1 and creates all 8 tables', () => {
+  it('migrate on empty DB sets the latest user_version and creates all tables', () => {
     const version = db.get<{ user_version: number }>('PRAGMA user_version');
-    expect(version?.user_version).toBe(1);
+    expect(version?.user_version).toBe(MIGRATIONS.length);
     const tables = db
       .all<{ name: string }>(`SELECT name FROM sqlite_master WHERE type = 'table'`)
       .map((r) => r.name);
@@ -35,15 +35,16 @@ describe('db', () => {
       'answer_event',
       'daily_activity',
       'app_meta',
+      'misconception',
     ]) {
       expect(tables).toContain(t);
     }
   });
 
-  it('migrate run twice is a no-op, version stays 1', () => {
+  it('migrate run twice is a no-op, version stays at the latest', () => {
     expect(() => migrate(db)).not.toThrow();
     const version = db.get<{ user_version: number }>('PRAGMA user_version');
-    expect(version?.user_version).toBe(1);
+    expect(version?.user_version).toBe(MIGRATIONS.length);
   });
 
   it('createProfile → getProfile roundtrip with auto_play_audio defaulting to 1', () => {

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import type { SignShape } from '@/content/schema';
+import type { SignShape } from '@focus/shared';
 import { colors, font, space } from '@/theme/tokens';
 
 const RED = '#C0392B';

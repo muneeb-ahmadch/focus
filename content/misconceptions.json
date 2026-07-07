@@ -1,0 +1,240 @@
+[
+  {
+    "misconceptionId": "m.signs.blue-means-ban",
+    "conceptId": "c.signs.circle-colour",
+    "wrongBelief": "A blue circle showing a white bicycle means cycling is banned there.",
+    "repairNote": "Blue circles are positive orders — here, a route only pedal cycles may use.",
+    "sourceRef": "KYTS-circles"
+  },
+  {
+    "misconceptionId": "m.speed.nsl-means-no-limit",
+    "conceptId": "c.speed.nsl-sign",
+    "wrongBelief": "The national speed limit sign means there is no speed limit.",
+    "repairNote": "It ends local limits: the national limit for your vehicle and road type now applies.",
+    "sourceRef": "HC-124"
+  },
+  {
+    "misconceptionId": "m.speed.nsl-is-70-everywhere",
+    "conceptId": "c.speed.nsl-sign",
+    "wrongBelief": "The national speed limit sign means a maximum of 70 mph on every road.",
+    "repairNote": "It ends local limits: the national limit for your vehicle and road type now applies.",
+    "sourceRef": "HC-124"
+  },
+  {
+    "misconceptionId": "m.speed.limit-by-feel",
+    "conceptId": "c.speed.default-limits",
+    "wrongBelief": "With no speed limit signs in sight, you should just drive at whatever feels safe.",
+    "repairNote": "Street lighting normally means a 30 mph limit applies unless signs show otherwise.",
+    "sourceRef": "HC-124"
+  },
+  {
+    "misconceptionId": "m.speed.limit-is-target",
+    "conceptId": "c.speed.limit-is-limit",
+    "wrongBelief": "Driving exactly at the speed limit is always correct because it keeps traffic flowing.",
+    "repairNote": "Rule 125: the limit is the absolute maximum — it doesn't make that speed safe.",
+    "sourceRef": "HC-125"
+  },
+  {
+    "misconceptionId": "m.stopping.braking-only",
+    "conceptId": "c.stopping.components",
+    "wrongBelief": "Overall stopping distance is made up of braking distance only.",
+    "repairNote": "You travel during your reaction time too — overall = thinking + braking distance.",
+    "sourceRef": "HC-126"
+  },
+  {
+    "misconceptionId": "m.stopping.car-length-rule",
+    "conceptId": "c.stopping.two-second-rule",
+    "wrongBelief": "On a dry road, one car length behind the vehicle ahead is a safe enough gap.",
+    "repairNote": "Dry roads: at least two seconds behind the vehicle in front.",
+    "sourceRef": "HC-126"
+  },
+  {
+    "misconceptionId": "m.stopping.wet-same-as-dry",
+    "conceptId": "c.stopping.wet-ice",
+    "wrongBelief": "In the wet, a two-second gap — the same as on a dry road — is enough.",
+    "repairNote": "Wet roads at least double stopping distances — leave at least four seconds.",
+    "sourceRef": "HC-126"
+  },
+  {
+    "misconceptionId": "m.stopping.distances-grow-linearly",
+    "conceptId": "c.stopping.distances",
+    "wrongBelief": "The typical overall stopping distance at 70 mph is about 53 metres.",
+    "repairNote": "At 70 mph you need about 96 m — far more than double the 30 mph distance.",
+    "sourceRef": "HC-126"
+  },
+  {
+    "misconceptionId": "m.stopping.brake-to-warn",
+    "conceptId": "c.stopping.tailgating",
+    "wrongBelief": "If someone is tailgating you, you should brake hard to warn them off.",
+    "repairNote": "Ease back: a bigger gap ahead gives you and the tailgater room to stop safely.",
+    "sourceRef": "HC-168"
+  },
+  {
+    "misconceptionId": "m.stopping.abs-stops-instantly",
+    "conceptId": "c.stopping.components",
+    "wrongBelief": "Modern brakes remove the need for any gap behind the car in front.",
+    "repairNote": "Thinking distance exists because you travel on while you react — then braking begins.",
+    "sourceRef": "HC-126"
+  },
+  {
+    "misconceptionId": "m.stopping.instant-reactions",
+    "conceptId": "c.stopping.components",
+    "wrongBelief": "Reactions are instant, so you can always react the moment the car in front brakes.",
+    "repairNote": "Thinking distance exists because you travel on while you react — then braking begins.",
+    "sourceRef": "HC-126"
+  },
+  {
+    "misconceptionId": "m.markings.solid-allows-slow-overtakes",
+    "conceptId": "c.markings.double-white",
+    "wrongBelief": "You may cross a solid white centre line to overtake any vehicle slower than you.",
+    "repairNote": "Exceptions: entering premises or a side road, or passing a cycle, horse or works vehicle at 10 mph or less.",
+    "sourceRef": "HC-129"
+  },
+  {
+    "misconceptionId": "m.markings.white-lines-advisory",
+    "conceptId": "c.markings.double-white",
+    "wrongBelief": "Double white lines are only advisory, so you may cross them freely.",
+    "repairNote": "A broken line on your side allows overtaking if you can complete it safely in time.",
+    "sourceRef": "HC-128"
+  },
+  {
+    "misconceptionId": "m.markings.hatched-is-spare-lane",
+    "conceptId": "c.markings.hatched",
+    "wrongBelief": "A hatched area with solid white borders may be entered any time traffic is slow.",
+    "repairNote": "Solid borders mean keep out except in an emergency; broken borders mean only if necessary and safe.",
+    "sourceRef": "HC-130"
+  },
+  {
+    "misconceptionId": "m.markings.box-queueing-ok",
+    "conceptId": "c.markings.box-junction",
+    "wrongBelief": "You may wait inside a box junction while queueing straight ahead behind slow traffic.",
+    "repairNote": "The right-turn wait is the one exception to keeping the box clear.",
+    "sourceRef": "HC-174"
+  },
+  {
+    "misconceptionId": "m.markings.box-no-waiting-ever",
+    "conceptId": "c.markings.box-junction",
+    "wrongBelief": "A box junction must always stay empty — you may never wait inside one.",
+    "repairNote": "The right-turn wait is the one exception to keeping the box clear.",
+    "sourceRef": "HC-174"
+  },
+  {
+    "misconceptionId": "m.markings.red-studs-centre",
+    "conceptId": "c.markings.studs",
+    "wrongBelief": "Red reflective studs on your left mark the central reservation.",
+    "repairNote": "Red = left edge. Amber = right edge, white = lanes, green = slip roads and lay-bys.",
+    "sourceRef": "HC-132"
+  },
+  {
+    "misconceptionId": "m.markings.green-overrides-box",
+    "conceptId": "c.markings.box-junction",
+    "wrongBelief": "You may enter a box junction whenever the lights are green, whatever the exit looks like.",
+    "repairNote": "Green light or not: enter the box only when your exit is clear.",
+    "sourceRef": "HC-174"
+  },
+  {
+    "misconceptionId": "m.lights.follow-the-crowd",
+    "conceptId": "c.lights.night",
+    "wrongBelief": "You must use headlights only when other drivers switch theirs on.",
+    "repairNote": "Unlit roads at night and seriously reduced visibility both require headlights.",
+    "sourceRef": "HC-113"
+  },
+  {
+    "misconceptionId": "m.lights.full-beam-always-best",
+    "conceptId": "c.lights.dipped",
+    "wrongBelief": "Driving through a lit town centre at night, full beam gives the best view.",
+    "repairNote": "Built-up areas at night call for dipped headlights — seen without dazzling.",
+    "sourceRef": "HC-115"
+  },
+  {
+    "misconceptionId": "m.lights.sidelights-enough",
+    "conceptId": "c.lights.dipped",
+    "wrongBelief": "Driving through a lit town centre at night, sidelights only are enough.",
+    "repairNote": "Built-up areas at night call for dipped headlights — seen without dazzling.",
+    "sourceRef": "HC-115"
+  },
+  {
+    "misconceptionId": "m.lights.flash-back",
+    "conceptId": "c.lights.dazzle",
+    "wrongBelief": "If dazzled by oncoming full beam, you should flash your own full beam back at them.",
+    "repairNote": "If dazzled, slow down and if necessary stop — never retaliate with your own beam.",
+    "sourceRef": "HC-115"
+  },
+  {
+    "misconceptionId": "m.lights.full-beam-helps-ahead",
+    "conceptId": "c.lights.dazzle",
+    "wrongBelief": "Following another car at night, you should use full beam so they can see further too.",
+    "repairNote": "Full beam in a following position dazzles through their mirrors — dip it.",
+    "sourceRef": "HC-114"
+  },
+  {
+    "misconceptionId": "m.lights.fog-leave-on",
+    "conceptId": "c.lights.fog",
+    "wrongBelief": "Once fog clears, you may leave your rear fog lights on until you park.",
+    "repairNote": "Fog lights must go off when visibility improves — they dazzle and hide your brake lights.",
+    "sourceRef": "HC-236"
+  },
+  {
+    "misconceptionId": "m.lights.brighter-always-safer",
+    "conceptId": "c.lights.fog",
+    "wrongBelief": "Fog lights make you safer in any rain or drizzle because brighter is always safer.",
+    "repairNote": "Use fog lights only when visibility is seriously reduced, generally below 100 m.",
+    "sourceRef": "HC-226"
+  },
+  {
+    "misconceptionId": "m.sharing.vulnerable-carry-burden",
+    "conceptId": "c.sharing.hierarchy",
+    "wrongBelief": "Under the hierarchy of road users, pedestrians carry the greatest responsibility since they're most at risk.",
+    "repairNote": "Greater potential harm brings greater responsibility to reduce danger to others.",
+    "sourceRef": "HC-H1"
+  },
+  {
+    "misconceptionId": "m.sharing.cars-first-at-junctions",
+    "conceptId": "c.sharing.junction-pedestrians",
+    "wrongBelief": "When a pedestrian is waiting to cross, you should turn quickly before they step out.",
+    "repairNote": "Give way to pedestrians crossing or waiting to cross a road you turn into or from.",
+    "sourceRef": "HC-170"
+  },
+  {
+    "misconceptionId": "m.sharing.beat-the-cyclist",
+    "conceptId": "c.sharing.cyclists",
+    "wrongBelief": "When a cyclist is going straight on, you should accelerate to turn in ahead of them.",
+    "repairNote": "Riders going ahead have priority — turning across them causes serious collisions.",
+    "sourceRef": "HC-H3"
+  },
+  {
+    "misconceptionId": "m.sharing.squeeze-past-ok",
+    "conceptId": "c.sharing.cyclists",
+    "wrongBelief": "Overtaking a cyclist at 28 mph, leaving at least half a metre is enough space.",
+    "repairNote": "At least 1.5 m up to 30 mph; leave more room when passing faster.",
+    "sourceRef": "HC-163"
+  },
+  {
+    "misconceptionId": "m.sharing.pass-fast-is-kind",
+    "conceptId": "c.sharing.horses",
+    "wrongBelief": "The safe way past a horse rider is quickly, to spend less time alongside.",
+    "repairNote": "Horses spook: under 10 mph and at least 2 m of space.",
+    "sourceRef": "HC-163"
+  },
+  {
+    "misconceptionId": "m.sharing.priority-only-at-lights",
+    "conceptId": "c.sharing.junction-pedestrians",
+    "wrongBelief": "Pedestrians only have priority over cars at traffic lights, not at other junctions.",
+    "repairNote": "At junctions, pedestrians crossing or waiting to cross the road you turn into or from go first.",
+    "sourceRef": "HC-H2"
+  },
+  {
+    "misconceptionId": "m.sharing.might-is-right",
+    "conceptId": "c.sharing.junction-pedestrians",
+    "wrongBelief": "Cars have priority over pedestrians at junctions because bigger vehicles go first.",
+    "repairNote": "At junctions, pedestrians crossing or waiting to cross the road you turn into or from go first.",
+    "sourceRef": "HC-H2"
+  },
+  {
+    "misconceptionId": "m.sharing.equal-responsibility",
+    "conceptId": "c.sharing.hierarchy",
+    "wrongBelief": "The hierarchy of road users says all road users carry exactly equal responsibility.",
+    "repairNote": "The greatest capacity for harm brings the greatest responsibility.",
+    "sourceRef": "HC-H1"
+  }
+]

@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { create } from 'zustand';
 import { getMission, getRouteManifest, pickDrillQuestion } from '@/content';
-import type { Mission, Question, Step } from '@/content/schema';
+import type { Mission, Question, Step } from '@focus/shared';
 import { getDb } from '@/db';
 import { bumpActivity, getActiveDays } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';

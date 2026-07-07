@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-export const ConceptId = z.string().regex(/^c\.[a-z0-9.-]+$/);
-export const SourceRef = z.string().regex(/^(HC|KYTS|TSRGD|DVSA)-[A-Za-z0-9.-]+$/);
+export const ConceptId = z.string({ required_error: 'missing conceptId' }).regex(/^c\.[a-z0-9.-]+$/);
+export const SourceRef = z.string({ required_error: 'missing sourceRef' }).regex(/^(HC|KYTS|TSRGD|DVSA)-[A-Za-z0-9.-]+$/);
 export const MisconceptionId = z.string().regex(/^m\.[a-z0-9.-]+$/);
 
 const Option = z.object({
@@ -125,7 +125,7 @@ const MisconceptionStep = z.object({
 const CheckpointStep = z.object({
   ...StepBase,
   type: z.literal('checkpoint'),
-  questions: z.array(CheckpointQuestion).length(5),
+  questions: z.array(CheckpointQuestion).length(5, 'checkpoint must have exactly 5 questions'),
 });
 
 export const Step = z
@@ -157,10 +157,41 @@ export type StepType = Step['type'];
 
 export const MissionSchema = z.object({
   missionId: z.string().regex(/^r\d-m\d$/),
-  routeId: z.string().regex(/^route-[1-7]$/),
+  routeId: z.string().regex(/^route-\d+$/),
   title: z.string().trim().min(1).max(40),
   estimatedMinutes: z.number().int().min(4).max(10),
   reviewStatus: z.enum(['draft', 'verified']),
   steps: z.array(Step).min(6).max(10),
 });
 export type Mission = z.infer<typeof MissionSchema>;
+
+export const MisconceptionEntry = z.object({
+  misconceptionId: MisconceptionId,
+  conceptId: ConceptId,
+  wrongBelief: z.string().trim().min(1).max(120),
+  repairNote: z.string().trim().min(1).max(160),
+  sourceRef: SourceRef,
+});
+export type MisconceptionEntry = z.infer<typeof MisconceptionEntry>;
+
+export const SourceRefEntry = z.object({
+  title: z.string().trim().min(1).max(120),
+  url: z.string().url().optional(),
+});
+export type SourceRefEntry = z.infer<typeof SourceRefEntry>;
+
+export const RouteMeta = z.object({
+  routeId: z.string().regex(/^route-\d+$/),
+  title: z.string().trim().min(1).max(40),
+});
+export type RouteMeta = z.infer<typeof RouteMeta>;
+
+export const ContentPackSchema = z.object({
+  packFormat: z.literal(1),
+  routes: z
+    .array(z.object({ routeId: z.string(), title: z.string(), missions: z.array(MissionSchema) }))
+    .length(7),
+  misconceptions: z.array(MisconceptionEntry),
+  sourceRefs: z.record(SourceRef, SourceRefEntry),
+});
+export type ContentPack = z.infer<typeof ContentPackSchema>;

@@ -1,0 +1,9 @@
+[
+  { "routeId": "route-1", "title": "Road Basics" },
+  { "routeId": "route-2", "title": "Signs" },
+  { "routeId": "route-3", "title": "Hazard Awareness" },
+  { "routeId": "route-4", "title": "Junctions" },
+  { "routeId": "route-5", "title": "Motorways" },
+  { "routeId": "route-6", "title": "Vulnerable Road Users" },
+  { "routeId": "route-7", "title": "Vehicle & Documents" }
+]

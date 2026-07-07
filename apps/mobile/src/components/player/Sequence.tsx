@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import type { Step } from '@/content/schema';
+import type { Step } from '@focus/shared';
 import { colors, font, radius, space } from '@/theme/tokens';
 import { AudioButton } from './AudioButton';
 

@@ -6,7 +6,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ReactNode } from 'react';
 import { getMission, getRouteManifest } from '@/content';
-import type { Question } from '@/content/schema';
+import type { Question } from '@focus/shared';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { createProfile } from '@/db/repo/profile';

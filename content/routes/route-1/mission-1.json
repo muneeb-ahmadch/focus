@@ -1,0 +1,348 @@
+{
+  "missionId": "r1-m1",
+  "routeId": "route-1",
+  "title": "Signs & Speed",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r1-m1-s1",
+      "type": "rule_card",
+      "conceptId": "c.signs.shape-grammar",
+      "sourceRef": "KYTS-shapes",
+      "title": "The shape is the message",
+      "body": "Circles give orders. Triangles warn. Rectangles give information.",
+      "question": {
+        "prompt": "A triangular sign ahead will…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Show tourist information",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Give you an order",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Warn you about a hazard",
+            "correct": true
+          }
+        ],
+        "explanation": "Triangles warn. Circles give orders, rectangles inform."
+      }
+    },
+    {
+      "id": "r1-m1-s2",
+      "type": "contrast",
+      "conceptId": "c.signs.circle-colour",
+      "sourceRef": "KYTS-circles",
+      "a": {
+        "label": "Red ring",
+        "body": "Tells you what you must NOT do — a prohibition."
+      },
+      "b": {
+        "label": "Solid blue circle",
+        "body": "Tells you what you MUST do — a positive instruction."
+      },
+      "question": {
+        "prompt": "A blue circle showing a white bicycle means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "No cycling",
+            "correct": false,
+            "misconceptionId": "m.signs.blue-means-ban"
+          },
+          {
+            "id": "b",
+            "text": "Cycle parking ahead",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Route for pedal cycles only",
+            "correct": true
+          }
+        ],
+        "explanation": "Blue circles are positive orders — here, a route only pedal cycles may use."
+      }
+    },
+    {
+      "id": "r1-m1-s3",
+      "type": "sign_meaning",
+      "conceptId": "c.speed.nsl-sign",
+      "sourceRef": "HC-124",
+      "sign": {
+        "shape": "nsl-white"
+      },
+      "question": {
+        "prompt": "What does this sign mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "National speed limit applies",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "No speed limit — drive at any speed",
+            "correct": false,
+            "misconceptionId": "m.speed.nsl-means-no-limit"
+          },
+          {
+            "id": "c",
+            "text": "Maximum 70 mph on every road",
+            "correct": false,
+            "misconceptionId": "m.speed.nsl-is-70-everywhere"
+          }
+        ],
+        "explanation": "It ends local limits: the national limit for your vehicle and road type now applies."
+      }
+    },
+    {
+      "id": "r1-m1-s4",
+      "type": "rule_card",
+      "conceptId": "c.speed.default-limits",
+      "sourceRef": "HC-124",
+      "title": "The default limits",
+      "body": "Street lights usually mean 30 mph unless signs say otherwise. Cars: 60 on single carriageways, 70 on duals and motorways.",
+      "question": {
+        "prompt": "In a car on a single carriageway at the national limit, your maximum is…",
+        "options": [
+          {
+            "id": "a",
+            "text": "60 mph",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "50 mph",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "70 mph",
+            "correct": false,
+            "misconceptionId": "m.speed.nsl-is-70-everywhere"
+          }
+        ],
+        "explanation": "70 applies to dual carriageways and motorways — single carriageways are 60 for cars."
+      }
+    },
+    {
+      "id": "r1-m1-s5",
+      "type": "scene_decision",
+      "conceptId": "c.speed.default-limits",
+      "sourceRef": "HC-124",
+      "scene": "You turn onto a busy street with lamp posts every few metres. No speed limit signs anywhere.",
+      "question": {
+        "prompt": "What should you assume?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Drive at whatever feels safe",
+            "correct": false,
+            "misconceptionId": "m.speed.limit-by-feel"
+          },
+          {
+            "id": "b",
+            "text": "It's a 30 mph limit unless signs say otherwise",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "It's a 40 mph limit",
+            "correct": false
+          }
+        ],
+        "explanation": "Street lighting normally means a 30 mph limit applies unless signs show otherwise."
+      }
+    },
+    {
+      "id": "r1-m1-s6",
+      "type": "misconception",
+      "conceptId": "c.speed.limit-is-limit",
+      "sourceRef": "HC-125",
+      "wrongBelief": "If the limit is 60, the right speed is 60.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It isn't wrong — matching the limit keeps traffic flowing",
+            "correct": false,
+            "misconceptionId": "m.speed.limit-is-target"
+          },
+          {
+            "id": "b",
+            "text": "Drivers should always stay exactly 10 mph under the limit",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The limit is a maximum — conditions often make a lower speed the safe one",
+            "correct": true
+          }
+        ],
+        "explanation": "Rule 125: the limit is the absolute maximum — it doesn't make that speed safe."
+      },
+      "repairNote": "A limit is the legal maximum, not a target. Rain, bends and pedestrians can make 60 dangerous."
+    },
+    {
+      "id": "r1-m1-s7",
+      "type": "hazard_cue",
+      "conceptId": "c.hazard.parked-cars",
+      "sourceRef": "HC-206",
+      "scene": "A residential street lined with parked cars. A football bounces out between two of them.",
+      "question": {
+        "prompt": "What's the cue telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A child may follow the ball — slow down, be ready to stop",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Nothing — the road ahead is still clear",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The ball may damage your tyres",
+            "correct": false
+          }
+        ],
+        "explanation": "Where children might be, expect them: ease off and cover the brake."
+      }
+    },
+    {
+      "id": "r1-m1-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-124",
+      "questions": [
+        {
+          "conceptId": "c.signs.shape-grammar",
+          "sourceRef": "KYTS-shapes",
+          "prompt": "Which sign shape gives orders?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Triangles",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "Circles",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "Rectangles",
+              "correct": false
+            }
+          ],
+          "explanation": "Circles order, triangles warn, rectangles inform."
+        },
+        {
+          "conceptId": "c.speed.nsl-sign",
+          "sourceRef": "HC-124",
+          "prompt": "A white circle with a black diagonal stripe means…",
+          "options": [
+            {
+              "id": "a",
+              "text": "No limit — any speed is legal",
+              "correct": false,
+              "misconceptionId": "m.speed.nsl-means-no-limit"
+            },
+            {
+              "id": "b",
+              "text": "National speed limit applies",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "Maximum 30 mph",
+              "correct": false
+            }
+          ],
+          "explanation": "The stripe ends local limits — the national limit for your vehicle and road applies."
+        },
+        {
+          "conceptId": "c.speed.default-limits",
+          "sourceRef": "HC-124",
+          "prompt": "A car on a dual carriageway under the national limit may not exceed…",
+          "options": [
+            {
+              "id": "a",
+              "text": "80 mph",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "70 mph",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "text": "60 mph",
+              "correct": false
+            }
+          ],
+          "explanation": "Cars: 70 on dual carriageways and motorways, 60 on single carriageways."
+        },
+        {
+          "conceptId": "c.speed.limit-is-limit",
+          "sourceRef": "HC-125",
+          "prompt": "In heavy rain on a 60 mph road, you should drive…",
+          "options": [
+            {
+              "id": "a",
+              "text": "At exactly 50",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "text": "At 60 — it's the limit",
+              "correct": false,
+              "misconceptionId": "m.speed.limit-is-target"
+            },
+            {
+              "id": "c",
+              "text": "At a speed you can stop in safely — often well below 60",
+              "correct": true
+            }
+          ],
+          "explanation": "The limit is a maximum, not a promise that the speed is safe in all conditions."
+        },
+        {
+          "conceptId": "c.hazard.parked-cars",
+          "sourceRef": "HC-206",
+          "prompt": "Passing parked cars on a residential street, you should…",
+          "options": [
+            {
+              "id": "a",
+              "text": "Expect pedestrians to step out and be ready to stop",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": "Keep at the limit to clear them quickly",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "text": "Sound your horn as you pass",
+              "correct": false
+            }
+          ],
+          "explanation": "Parked cars hide pedestrians — especially children. Slow down and cover the brake."
+        }
+      ]
+    }
+  ]
+}

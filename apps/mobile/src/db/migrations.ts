@@ -73,7 +73,17 @@ CREATE TABLE daily_activity (
 CREATE TABLE app_meta ( key TEXT PRIMARY KEY, value TEXT NOT NULL );
 `;
 
-export const MIGRATIONS: string[] = [V1];
+const V2 = `
+CREATE TABLE misconception (
+  misconception_id TEXT PRIMARY KEY,
+  concept_id TEXT NOT NULL,
+  wrong_belief TEXT NOT NULL,
+  repair_note TEXT NOT NULL,
+  source_ref TEXT NOT NULL
+);
+`;
+
+export const MIGRATIONS: string[] = [V1, V2];
 
 export function migrate(db: Db): void {
   const row = db.get<{ user_version: number }>('PRAGMA user_version');
@@ -85,12 +95,15 @@ export function migrate(db: Db): void {
   }
 
   const version = db.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0;
-  const table = db.get<{ name: string }>(
-    `SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'user_profile'`,
-  );
-  if (!table) {
-    throw new Error(
-      `Database corrupt: user_version is ${version} but table 'user_profile' does not exist.`,
+  for (const requiredTable of ['user_profile', 'misconception']) {
+    const table = db.get<{ name: string }>(
+      `SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?`,
+      [requiredTable],
     );
+    if (!table) {
+      throw new Error(
+        `Database corrupt: user_version is ${version} but table '${requiredTable}' does not exist.`,
+      );
+    }
   }
 }

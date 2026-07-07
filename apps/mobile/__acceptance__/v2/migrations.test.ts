@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getRouteManifest } from '@/content';
-import { migrate } from '@/db/migrations';
+import { MIGRATIONS, migrate } from '@/db/migrations';
 import { syncRoutesFromContent } from '@/db/repo/routes';
 import { openTestDb } from '@/db/testing/adapter.node';
 
@@ -13,6 +13,7 @@ const TABLES = [
   'answer_event',
   'daily_activity',
   'app_meta',
+  'misconception',
 ];
 
 function tableNames(db: ReturnType<typeof openTestDb>): string[] {
@@ -22,10 +23,12 @@ function tableNames(db: ReturnType<typeof openTestDb>): string[] {
 }
 
 describe('migrations', () => {
-  it('fresh database lands on user_version 1 with every table', () => {
+  it('fresh database lands on the latest user_version with every table', () => {
     const db = openTestDb();
     migrate(db);
-    expect(db.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(1);
+    expect(db.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(
+      MIGRATIONS.length,
+    );
     const names = tableNames(db);
     for (const t of TABLES) expect(names).toContain(t);
   });
@@ -36,13 +39,15 @@ describe('migrations', () => {
     const before = tableNames(db).sort();
     expect(() => migrate(db)).not.toThrow();
     expect(() => migrate(db)).not.toThrow();
-    expect(db.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(1);
+    expect(db.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(
+      MIGRATIONS.length,
+    );
     expect(tableNames(db).sort()).toEqual(before);
   });
 
   it('user_version ahead of the actual schema fails loudly, never silently', () => {
     const db = openTestDb();
-    db.exec('PRAGMA user_version = 1');
+    db.exec(`PRAGMA user_version = ${MIGRATIONS.length}`);
     expect(() => migrate(db)).toThrow();
   });
 

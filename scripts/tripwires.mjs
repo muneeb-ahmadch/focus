@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SKIP_DIRS = new Set(['node_modules', '.expo', '.turbo', 'dist', '.git']);
 
-function walk(dir) {
+function walk(dir, exts = ['.ts', '.tsx']) {
   let entries;
   try {
     entries = readdirSync(dir, { withFileTypes: true });
@@ -17,8 +17,8 @@ function walk(dir) {
     if (SKIP_DIRS.has(entry.name)) continue;
     const full = join(dir, entry.name);
     if (entry.isDirectory()) {
-      files = files.concat(walk(full));
-    } else if (entry.name.endsWith('.ts') || entry.name.endsWith('.tsx')) {
+      files = files.concat(walk(full, exts));
+    } else if (exts.some((ext) => entry.name.endsWith(ext))) {
       files.push(full);
     }
   }
@@ -78,6 +78,8 @@ let ok = true;
     'apps/mobile/__acceptance__',
     'packages/engine/src',
     'packages/engine/__tests__',
+    'packages/shared/src',
+    'packages/shared/__tests__',
   ];
   const files = dirs.flatMap((d) => walk(join(ROOT, d)));
   const violations = scan(
@@ -85,6 +87,29 @@ let ok = true;
     /: any|as any|@ts-ignore|@ts-expect-error|it\.only|describe\.only|it\.skip/,
   );
   ok = report('ESCAPE HATCHES', violations) && ok;
+}
+
+// 4. CONTENT PACK BOUNDARY — app code imports no raw content JSON, only the CLI-built pack;
+//    no raw content JSON files live inside the app tree.
+{
+  const files = [...walk(join(ROOT, 'apps/mobile/src')), ...walk(join(ROOT, 'apps/mobile/app'))];
+  const violations = [];
+  for (const file of files) {
+    const lines = readFileSync(file, 'utf8').split('\n');
+    lines.forEach((line, i) => {
+      const match = /(?:from\s+|require\(\s*)['"]([^'"]+\.json)['"]/.exec(line);
+      if (match && !match[1].endsWith('generated/pack.json')) {
+        violations.push(`${relative(ROOT, file)}:${i + 1} — raw JSON import "${match[1]}"`);
+      }
+    });
+  }
+  const contentDir = join(ROOT, 'apps/mobile/src/content');
+  for (const f of walk(contentDir, ['.json'])) {
+    if (relative(contentDir, f) !== join('generated', 'pack.json')) {
+      violations.push(`${relative(ROOT, f)} — raw content JSON inside the app tree`);
+    }
+  }
+  ok = report('CONTENT PACK BOUNDARY (apps/mobile)', violations) && ok;
 }
 
 if (!ok) {
