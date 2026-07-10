@@ -9,9 +9,11 @@ import { getDb } from '@/db';
 import { getMissionState } from '@/db/repo/missions';
 import { usePlayerStore, type ResumePayload } from '@/stores/playerStore';
 import { parseResumePayload } from '@/stores/resumePayload';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
 
 export default function PlayerRoute() {
+  const styles = useThemedStyles(makeStyles);
   const params = useLocalSearchParams<{ mode?: string; missionId?: string }>();
   const active = usePlayerStore((s) => s.active);
   const startMission = usePlayerStore((s) => s.startMission);
@@ -104,42 +106,43 @@ export default function PlayerRoute() {
   );
 }
 
-const styles = StyleSheet.create({
-  blank: { flex: 1, backgroundColor: colors.bg },
-  screen: { flex: 1, backgroundColor: colors.bg },
-  close: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: space.lg,
-    paddingVertical: space.md,
-  },
-  closeText: { fontSize: font.lg, color: colors.textMuted },
-  body: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: space.xl,
-    gap: space.md,
-  },
-  routeLabel: { fontSize: font.sm, fontWeight: '600', color: colors.accent },
-  title: { fontSize: font.xxl, fontWeight: '700', color: colors.text, textAlign: 'center' },
-  metaRow: { flexDirection: 'row', gap: space.sm, marginTop: space.xs },
-  metaChip: {
-    fontSize: font.xs,
-    color: colors.textMuted,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.pill,
-    paddingHorizontal: space.md,
-    paddingVertical: space.xs,
-    overflow: 'hidden',
-  },
-  explainer: {
-    fontSize: font.md,
-    color: colors.textMuted,
-    textAlign: 'center',
-    lineHeight: 24,
-    marginTop: space.sm,
-  },
-  footer: { paddingHorizontal: space.xl, paddingBottom: space.lg, gap: space.md },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    blank: { flex: 1, backgroundColor: t.colors.bg },
+    screen: { flex: 1, backgroundColor: t.colors.bg },
+    close: {
+      alignSelf: 'flex-start',
+      paddingHorizontal: t.space.lg,
+      paddingVertical: t.space.md,
+    },
+    closeText: { ...t.text(t.font.lg), color: t.colors.textMuted },
+    body: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: t.space.xl,
+      gap: t.space.md,
+    },
+    routeLabel: { ...t.text(t.font.sm), fontWeight: '600', color: t.colors.accent },
+    title: { ...t.text(t.font.xxl), fontWeight: '700', color: t.colors.text, textAlign: 'center' },
+    metaRow: { flexDirection: 'row', gap: t.space.sm, marginTop: t.space.xs },
+    metaChip: {
+      ...t.text(t.font.xs),
+      color: t.colors.textMuted,
+      backgroundColor: t.colors.surface,
+      borderWidth: 1,
+      borderColor: t.colors.border,
+      borderRadius: t.radius.pill,
+      paddingHorizontal: t.space.md,
+      paddingVertical: t.space.xs,
+      overflow: 'hidden',
+    },
+    explainer: {
+      ...t.text(t.font.md),
+      color: t.colors.textMuted,
+      textAlign: 'center',
+      lineHeight: 24,
+      marginTop: t.space.sm,
+    },
+    footer: { paddingHorizontal: t.space.xl, paddingBottom: t.space.lg, gap: t.space.md },
+  });

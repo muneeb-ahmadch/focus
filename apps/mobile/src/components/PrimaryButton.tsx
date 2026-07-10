@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
 
 export function PrimaryButton(props: {
   title: string;
@@ -8,10 +9,13 @@ export function PrimaryButton(props: {
   disabled?: boolean;
 }) {
   const variant = props.variant ?? 'primary';
+  const styles = useThemedStyles(makeStyles);
   return (
     <Pressable
       onPress={props.onPress}
       disabled={props.disabled}
+      accessibilityRole="button"
+      accessibilityLabel={props.title}
       style={({ pressed }) => [
         styles.button,
         variant === 'secondary' && styles.secondary,
@@ -26,21 +30,22 @@ export function PrimaryButton(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: colors.accent,
-    borderRadius: radius.control,
-    paddingVertical: space.md,
-    paddingHorizontal: space.xl,
-    alignItems: 'center',
-  },
-  secondary: {
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  danger: { backgroundColor: colors.danger },
-  pressed: { opacity: 0.7 },
-  label: { color: colors.surface, fontSize: font.md, fontWeight: '600' },
-  secondaryLabel: { color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    button: {
+      backgroundColor: t.colors.accent,
+      borderRadius: t.radius.control,
+      paddingVertical: t.space.md,
+      paddingHorizontal: t.space.xl,
+      alignItems: 'center',
+    },
+    secondary: {
+      backgroundColor: t.colors.surface,
+      borderWidth: 1,
+      borderColor: t.colors.border,
+    },
+    danger: { backgroundColor: t.colors.danger },
+    pressed: { opacity: 0.7 },
+    label: { color: t.colors.onAccent, ...t.text(t.font.md), fontWeight: '600' },
+    secondaryLabel: { color: t.colors.text },
+  });

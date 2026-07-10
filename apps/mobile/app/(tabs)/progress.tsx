@@ -4,11 +4,13 @@ import { BandChip } from "@/components/BandChip";
 import { getDb } from "@/db";
 import { getActivity } from "@/db/repo/activity";
 import { buildStats } from "@/lib/stats";
-import { colors, font, radius, space } from "@/theme/tokens";
+import { type Theme } from "@/theme/tokens";
+import { useThemedStyles } from "@/theme/useTheme";
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
 export default function ProgressScreen() {
+  const styles = useThemedStyles(makeStyles);
   const { data } = useQuery({
     queryKey: ["progress"],
     queryFn: () => {
@@ -90,41 +92,42 @@ export default function ProgressScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: colors.bg },
-  content: { padding: space.lg, gap: space.md },
-  card: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    padding: space.lg,
-    gap: space.md,
-  },
-  score: { fontSize: font.xxl, fontWeight: "700", color: colors.text },
-  bandRow: { flexDirection: "row", alignItems: "center", gap: space.sm },
-  provisional: { fontSize: font.xs, color: colors.textMuted },
-  lockedLine: { fontSize: font.sm, color: colors.textMuted },
-  breakdown: { gap: space.sm },
-  breakdownRow: { gap: space.xs },
-  breakdownLabel: { fontSize: font.xs, color: colors.text, fontWeight: "600" },
-  breakdownWeight: { color: colors.textMuted, fontWeight: "400" },
-  miniTrack: {
-    height: 6,
-    backgroundColor: colors.lockedBg,
-    borderRadius: radius.pill,
-    overflow: "hidden",
-  },
-  miniFill: { height: "100%", backgroundColor: colors.accent, borderRadius: radius.pill },
-  testLine: { fontSize: font.sm, color: colors.text, paddingHorizontal: space.xs },
-  sectionTitle: { fontSize: font.sm, fontWeight: "700", color: colors.text },
-  dots: { flexDirection: "row", gap: space.xs, flexWrap: "wrap" },
-  dot: {
-    width: 16,
-    height: 16,
-    borderRadius: radius.pill,
-    backgroundColor: colors.lockedBg,
-  },
-  dotActive: { backgroundColor: colors.success },
-  totalLine: { fontSize: font.sm, color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    screen: { flex: 1, backgroundColor: t.colors.bg },
+    content: { padding: t.space.lg, gap: t.space.md },
+    card: {
+      backgroundColor: t.colors.surface,
+      borderRadius: t.radius.card,
+      borderWidth: 1,
+      borderColor: t.colors.border,
+      padding: t.space.lg,
+      gap: t.space.md,
+    },
+    score: { ...t.text(t.font.xxl), fontWeight: "700", color: t.colors.text },
+    bandRow: { flexDirection: "row", alignItems: "center", gap: t.space.sm },
+    provisional: { ...t.text(t.font.xs), color: t.colors.textMuted },
+    lockedLine: { ...t.text(t.font.sm), color: t.colors.textMuted },
+    breakdown: { gap: t.space.sm },
+    breakdownRow: { gap: t.space.xs },
+    breakdownLabel: { ...t.text(t.font.xs), color: t.colors.text, fontWeight: "600" },
+    breakdownWeight: { color: t.colors.textMuted, fontWeight: "400" },
+    miniTrack: {
+      height: 6,
+      backgroundColor: t.colors.lockedBg,
+      borderRadius: t.radius.pill,
+      overflow: "hidden",
+    },
+    miniFill: { height: "100%", backgroundColor: t.colors.accent, borderRadius: t.radius.pill },
+    testLine: { ...t.text(t.font.sm), color: t.colors.text, paddingHorizontal: t.space.xs },
+    sectionTitle: { ...t.text(t.font.sm), fontWeight: "700", color: t.colors.text },
+    dots: { flexDirection: "row", gap: t.space.xs, flexWrap: "wrap" },
+    dot: {
+      width: 16,
+      height: 16,
+      borderRadius: t.radius.pill,
+      backgroundColor: t.colors.lockedBg,
+    },
+    dotActive: { backgroundColor: t.colors.success },
+    totalLine: { ...t.text(t.font.sm), color: t.colors.text },
+  });

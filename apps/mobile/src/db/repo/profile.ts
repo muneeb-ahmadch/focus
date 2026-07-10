@@ -15,8 +15,35 @@ export interface UserProfile {
 
 export function createProfile(
   db: Db,
-  p: { testDate: string; dailyMinutesTarget: number },
+  p: {
+    testDate: string;
+    dailyMinutesTarget: number;
+    accessibility?: {
+      autoPlayAudio: boolean;
+      reduceMotion: boolean;
+      highContrast: boolean;
+      dyslexiaFont: boolean;
+    };
+  },
 ): void {
+  if (p.accessibility) {
+    db.run(
+      `INSERT INTO user_profile
+         (user_id, test_date, daily_minutes_target, created_at,
+          auto_play_audio, reduce_motion, high_contrast, dyslexia_font)
+       VALUES ('local', ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        p.testDate,
+        p.dailyMinutesTarget,
+        todayLocal(),
+        p.accessibility.autoPlayAudio ? 1 : 0,
+        p.accessibility.reduceMotion ? 1 : 0,
+        p.accessibility.highContrast ? 1 : 0,
+        p.accessibility.dyslexiaFont ? 1 : 0,
+      ],
+    );
+    return;
+  }
   db.run(
     `INSERT INTO user_profile (user_id, test_date, daily_minutes_target, created_at)
      VALUES ('local', ?, ?, ?)`,
@@ -26,4 +53,17 @@ export function createProfile(
 
 export function getProfile(db: Db): UserProfile | undefined {
   return db.get<UserProfile>(`SELECT * FROM user_profile WHERE user_id = 'local'`);
+}
+
+type SettingsColumn = 'auto_play_audio' | 'reduce_motion' | 'high_contrast' | 'dyslexia_font';
+
+export function updateProfileSettings(
+  db: Db,
+  patch: Partial<Record<SettingsColumn, 0 | 1>>,
+): void {
+  const entries = Object.entries(patch) as [SettingsColumn, 0 | 1][];
+  if (entries.length === 0) return;
+  const setClause = entries.map(([column]) => `${column} = ?`).join(', ');
+  const values = entries.map(([, value]) => value);
+  db.run(`UPDATE user_profile SET ${setClause} WHERE user_id = 'local'`, values);
 }

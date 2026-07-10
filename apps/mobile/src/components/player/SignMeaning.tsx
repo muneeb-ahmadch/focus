@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import type { Step } from '@focus/shared';
-import { colors, font, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
+import { stepNarration } from '@/lib/narration';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';
 import { SignView } from './SignView';
@@ -11,6 +13,7 @@ export function SignMeaning(props: {
   selectedId?: string;
   onAnswer: (id: string) => void;
 }) {
+  const styles = useThemedStyles(makeStyles);
   return (
     <View style={styles.card}>
       <SignView
@@ -20,7 +23,7 @@ export function SignMeaning(props: {
       />
       <View style={styles.promptRow}>
         <Text style={styles.prompt}>{props.step.question.prompt}</Text>
-        <AudioButton text={props.step.question.prompt} />
+        <AudioButton text={stepNarration(props.step)} />
       </View>
       <AnswerOptions
         question={props.step.question}
@@ -32,8 +35,9 @@ export function SignMeaning(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  card: { gap: space.lg },
-  promptRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  prompt: { flex: 1, fontSize: font.md, fontWeight: '600', color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    card: { gap: t.space.lg },
+    promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
+    prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
+  });

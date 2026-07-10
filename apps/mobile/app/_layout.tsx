@@ -2,15 +2,18 @@ import { QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { router, Stack, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { AppState } from "react-native";
+import { AppState, useColorScheme } from "react-native";
 import { getDb, initDb } from "@/db";
 import { getProfile } from "@/db/repo/profile";
 import { queryClient } from "@/lib/queryClient";
 import { initNarrationVoice } from "@/lib/speech";
 import { rescheduleAll } from "@/notifications/scheduler";
+import { useSettingsStore } from "@/stores/settingsStore";
+import { useTheme } from "@/theme/useTheme";
 
 function Gate() {
   const segments = useSegments();
+  const t = useTheme();
   const { data: profile, isPending } = useQuery({
     queryKey: ["profile"],
     queryFn: () => getProfile(getDb()) ?? null,
@@ -22,7 +25,12 @@ function Gate() {
   }, [needsOnboarding]);
   if (isPending) return null;
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: t.colors.surface },
+        headerTintColor: t.colors.text,
+      }}
+    >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="onboarding" options={{ headerShown: false }} />
       <Stack.Screen
@@ -33,15 +41,20 @@ function Gate() {
         name="mission-complete"
         options={{ headerShown: false, gestureEnabled: false }}
       />
+      <Stack.Screen name="settings/accessibility" options={{ title: "Accessibility" }} />
     </Stack>
   );
 }
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
+  const scheme = useColorScheme();
 
   useEffect(() => {
-    void initDb().then(() => setReady(true)); // open + migrate + sync route content before first render
+    void initDb().then(() => {
+      useSettingsStore.getState().hydrate();
+      setReady(true); // open + migrate + sync route content + settings before first render
+    });
     void initNarrationVoice();
     const sub = AppState.addEventListener("change", (state) => {
       if (state === "active") void rescheduleAll(getDb());
@@ -53,7 +66,7 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <Gate />
-      <StatusBar style="dark" />
+      <StatusBar style={scheme === "dark" ? "light" : "dark"} />
     </QueryClientProvider>
   );
 }

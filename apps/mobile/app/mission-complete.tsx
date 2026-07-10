@@ -7,9 +7,11 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import { getDb } from "@/db";
 import { getMeta } from "@/db/repo/meta";
 import { requestPermissionOnce } from "@/notifications/scheduler";
-import { colors, font, radius, space } from "@/theme/tokens";
+import { type Theme } from "@/theme/tokens";
+import { useThemedStyles } from "@/theme/useTheme";
 
 export default function MissionCompleteRoute() {
+  const styles = useThemedStyles(makeStyles);
   const params = useLocalSearchParams<{
     missionId?: string;
     score?: string;
@@ -73,31 +75,32 @@ export default function MissionCompleteRoute() {
   );
 }
 
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: colors.bg, padding: space.xl },
-  body: { flex: 1, alignItems: "center", justifyContent: "center", gap: space.lg },
-  title: { fontSize: font.xl, fontWeight: "700", color: colors.text },
-  ring: {
-    width: 140,
-    height: 140,
-    borderRadius: radius.pill,
-    borderWidth: 10,
-    borderColor: colors.success,
-    backgroundColor: colors.surface,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  ringScore: { fontSize: font.xxl, fontWeight: "700", color: colors.text },
-  ringLabel: { fontSize: font.xs, color: colors.textMuted },
-  milestone: {
-    backgroundColor: colors.warning,
-    borderRadius: radius.pill,
-    paddingHorizontal: space.lg,
-    paddingVertical: space.sm,
-  },
-  milestoneText: { color: colors.surface, fontSize: font.md, fontWeight: "700" },
-  streakLine: { fontSize: font.md, color: colors.text },
-  masteryBlock: { alignSelf: "stretch", gap: space.sm },
-  masteryLabel: { fontSize: font.sm, fontWeight: "600", color: colors.text },
-  reviewLine: { fontSize: font.sm, color: colors.textMuted },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    screen: { flex: 1, backgroundColor: t.colors.bg, padding: t.space.xl },
+    body: { flex: 1, alignItems: "center", justifyContent: "center", gap: t.space.lg },
+    title: { ...t.text(t.font.xl), fontWeight: "700", color: t.colors.text },
+    ring: {
+      width: 140,
+      height: 140,
+      borderRadius: t.radius.pill,
+      borderWidth: 10,
+      borderColor: t.colors.success,
+      backgroundColor: t.colors.surface,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    ringScore: { ...t.text(t.font.xxl), fontWeight: "700", color: t.colors.text },
+    ringLabel: { ...t.text(t.font.xs), color: t.colors.textMuted },
+    milestone: {
+      backgroundColor: t.colors.warning,
+      borderRadius: t.radius.pill,
+      paddingHorizontal: t.space.lg,
+      paddingVertical: t.space.sm,
+    },
+    milestoneText: { color: t.colors.onAccent, ...t.text(t.font.md), fontWeight: "700" },
+    streakLine: { ...t.text(t.font.md), color: t.colors.text },
+    masteryBlock: { alignSelf: "stretch", gap: t.space.sm },
+    masteryLabel: { ...t.text(t.font.sm), fontWeight: "600", color: t.colors.text },
+    reviewLine: { ...t.text(t.font.sm), color: t.colors.textMuted },
+  });

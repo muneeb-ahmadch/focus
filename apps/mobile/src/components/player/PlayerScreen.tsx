@@ -1,39 +1,18 @@
 import { router } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PrimaryButton } from '@/components/PrimaryButton';
-import { getDb } from '@/db';
-import { getProfile } from '@/db/repo/profile';
+import { cardNarration } from '@/lib/narration';
 import { speak, stopSpeech } from '@/lib/speech';
+import { useSettingsStore } from '@/stores/settingsStore';
 import { usePlayerStore, type PlayerCard } from '@/stores/playerStore';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
 import { ConfidenceFooter } from './ConfidenceFooter';
 import { FeedbackBanner } from './FeedbackBanner';
 import { PlayerProgressBar } from './PlayerProgressBar';
 import { StepRenderer } from './StepRenderer';
-
-function promptText(card: PlayerCard): string {
-  if (card.kind !== 'step') return card.question.prompt;
-  const step = card.step;
-  switch (step.type) {
-    case 'rule_card':
-      return `${step.title}. ${step.body}. ${step.question.prompt}`;
-    case 'scene_decision':
-    case 'hazard_cue':
-      return `${step.scene}. ${step.question.prompt}`;
-    case 'sign_meaning':
-      return step.question.prompt;
-    case 'contrast':
-      return `${step.a.label}: ${step.a.body}. ${step.b.label}: ${step.b.body}. ${step.question.prompt}`;
-    case 'sequence':
-      return step.prompt;
-    case 'misconception':
-      return `Some people think: ${step.wrongBelief}. ${step.question.prompt}`;
-    case 'checkpoint':
-      return '';
-  }
-}
 
 function explanationFor(card: PlayerCard): string {
   if (card.kind !== 'step') return card.question.explanation;
@@ -44,15 +23,20 @@ function explanationFor(card: PlayerCard): string {
 }
 
 export function PlayerScreen() {
+  const styles = useThemedStyles(makeStyles);
   const store = usePlayerStore();
   const card = store.queue[store.index];
-  const autoPlay = useMemo(() => (getProfile(getDb())?.auto_play_audio ?? 1) === 1, []);
+  const autoPlay = useSettingsStore((s) => s.autoPlayAudio);
   const [confirmExit, setConfirmExit] = useState(false);
 
   const isCardPhase = store.phase === 'card';
   useEffect(() => {
-    if (isCardPhase && card && autoPlay) speak(promptText(card));
+    if (isCardPhase && card && autoPlay) speak(cardNarration(card));
   }, [isCardPhase, card, autoPlay]);
+
+  useEffect(() => {
+    if (!autoPlay) stopSpeech();
+  }, [autoPlay]);
 
   useEffect(() => () => stopSpeech(), []);
 
@@ -188,39 +172,50 @@ export function PlayerScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: colors.bg },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: space.md,
-    paddingHorizontal: space.lg,
-    paddingVertical: space.md,
-  },
-  close: { padding: space.xs },
-  closeText: { fontSize: font.lg, color: colors.textMuted },
-  cardArea: { flex: 1, paddingHorizontal: space.lg, gap: space.lg },
-  feedbackArea: { marginTop: 'auto', gap: space.md, paddingBottom: space.lg },
-  interstitial: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: space.xl,
-    gap: space.lg,
-  },
-  interTitle: { fontSize: font.xl, fontWeight: '700', color: colors.text, textAlign: 'center' },
-  interBody: { fontSize: font.md, color: colors.textMuted, textAlign: 'center' },
-  confirmOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'center',
-    padding: space.xl,
-  },
-  confirmCard: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.card,
-    padding: space.xl,
-    gap: space.md,
-  },
-  confirmTitle: { fontSize: font.lg, fontWeight: '700', color: colors.text, textAlign: 'center' },
-  confirmBody: { fontSize: font.md, color: colors.textMuted, textAlign: 'center' },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    screen: { flex: 1, backgroundColor: t.colors.bg },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: t.space.md,
+      paddingHorizontal: t.space.lg,
+      paddingVertical: t.space.md,
+    },
+    close: { padding: t.space.xs },
+    closeText: { ...t.text(t.font.lg), color: t.colors.textMuted },
+    cardArea: { flex: 1, paddingHorizontal: t.space.lg, gap: t.space.lg },
+    feedbackArea: { marginTop: 'auto', gap: t.space.md, paddingBottom: t.space.lg },
+    interstitial: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: t.space.xl,
+      gap: t.space.lg,
+    },
+    interTitle: {
+      ...t.text(t.font.xl),
+      fontWeight: '700',
+      color: t.colors.text,
+      textAlign: 'center',
+    },
+    interBody: { ...t.text(t.font.md), color: t.colors.textMuted, textAlign: 'center' },
+    confirmOverlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: t.colors.overlay,
+      justifyContent: 'center',
+      padding: t.space.xl,
+    },
+    confirmCard: {
+      backgroundColor: t.colors.surface,
+      borderRadius: t.radius.card,
+      padding: t.space.xl,
+      gap: t.space.md,
+    },
+    confirmTitle: {
+      ...t.text(t.font.lg),
+      fontWeight: '700',
+      color: t.colors.text,
+      textAlign: 'center',
+    },
+    confirmBody: { ...t.text(t.font.md), color: t.colors.textMuted, textAlign: 'center' },
+  });

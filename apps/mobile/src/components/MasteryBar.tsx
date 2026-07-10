@@ -5,14 +5,19 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useTheme, useThemedStyles } from '@/theme/useTheme';
+import { useMotion } from '@/theme/useMotion';
 
 export function MasteryBar(props: { value: number; animateFrom?: number; showLabel?: boolean }) {
+  const theme = useTheme();
+  const styles = useThemedStyles(makeStyles);
+  const { ms } = useMotion();
   const width = useSharedValue((props.animateFrom ?? props.value) * 100);
 
   useEffect(() => {
-    width.value = withTiming(props.value * 100, { duration: 800 });
-  }, [props.value, width]);
+    width.value = withTiming(props.value * 100, { duration: ms(theme.motion.slow) });
+  }, [props.value, width, ms, theme.motion.slow]);
 
   const fillStyle = useAnimatedStyle(() => ({ width: `${width.value}%` }));
 
@@ -28,15 +33,16 @@ export function MasteryBar(props: { value: number; animateFrom?: number; showLab
   );
 }
 
-const styles = StyleSheet.create({
-  wrap: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  track: {
-    flex: 1,
-    height: 10,
-    backgroundColor: colors.lockedBg,
-    borderRadius: radius.pill,
-    overflow: 'hidden',
-  },
-  fill: { height: '100%', backgroundColor: colors.success, borderRadius: radius.pill },
-  label: { fontSize: font.xs, color: colors.textMuted, minWidth: 36, textAlign: 'right' },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    wrap: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
+    track: {
+      flex: 1,
+      height: 10,
+      backgroundColor: t.colors.lockedBg,
+      borderRadius: t.radius.pill,
+      overflow: 'hidden',
+    },
+    fill: { height: '100%', backgroundColor: t.colors.success, borderRadius: t.radius.pill },
+    label: { ...t.text(t.font.xs), color: t.colors.textMuted, minWidth: 36, textAlign: 'right' },
+  });

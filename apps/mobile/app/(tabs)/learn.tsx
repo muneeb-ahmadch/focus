@@ -6,9 +6,11 @@ import { getRouteMissions, ROUTES } from "@/content";
 import { getDb } from "@/db";
 import { getMissionState, type MissionState } from "@/db/repo/missions";
 import { getRouteState } from "@/db/repo/routes";
-import { colors, font, radius, space } from "@/theme/tokens";
+import { type Theme } from "@/theme/tokens";
+import { useThemedStyles } from "@/theme/useTheme";
 
 export default function LearnScreen() {
+  const styles = useThemedStyles(makeStyles);
   const { data } = useQuery({
     queryKey: ["learn"],
     queryFn: () => {
@@ -81,41 +83,42 @@ export default function LearnScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: colors.bg },
-  content: { padding: space.lg, gap: space.md },
-  routeCard: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    padding: space.lg,
-    gap: space.md,
-  },
-  routeTitle: { fontSize: font.lg, fontWeight: "700", color: colors.text },
-  missionList: { gap: space.sm },
-  missionRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: space.md,
-    backgroundColor: colors.bg,
-    borderRadius: radius.control,
-    padding: space.md,
-  },
-  missionLocked: { backgroundColor: colors.lockedBg },
-  missionIcon: { fontSize: font.md, width: 28, textAlign: "center" },
-  missionInfo: { flex: 1 },
-  missionTitle: { fontSize: font.sm, fontWeight: "600", color: colors.text },
-  mutedText: { color: colors.textMuted },
-  missionMeta: { fontSize: font.xs, color: colors.textMuted },
-  comingSoon: {
-    backgroundColor: colors.lockedBg,
-    borderRadius: radius.card,
-    padding: space.lg,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  comingSoonTitle: { fontSize: font.sm, fontWeight: "600", color: colors.textMuted },
-  comingSoonTag: { fontSize: font.xs, color: colors.textMuted },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    screen: { flex: 1, backgroundColor: t.colors.bg },
+    content: { padding: t.space.lg, gap: t.space.md },
+    routeCard: {
+      backgroundColor: t.colors.surface,
+      borderRadius: t.radius.card,
+      borderWidth: 1,
+      borderColor: t.colors.border,
+      padding: t.space.lg,
+      gap: t.space.md,
+    },
+    routeTitle: { ...t.text(t.font.lg), fontWeight: "700", color: t.colors.text },
+    missionList: { gap: t.space.sm },
+    missionRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: t.space.md,
+      backgroundColor: t.colors.bg,
+      borderRadius: t.radius.control,
+      padding: t.space.md,
+    },
+    missionLocked: { backgroundColor: t.colors.lockedBg },
+    missionIcon: { ...t.text(t.font.md), width: 28, textAlign: "center", color: t.colors.text },
+    missionInfo: { flex: 1 },
+    missionTitle: { ...t.text(t.font.sm), fontWeight: "600", color: t.colors.text },
+    mutedText: { color: t.colors.textMuted },
+    missionMeta: { ...t.text(t.font.xs), color: t.colors.textMuted },
+    comingSoon: {
+      backgroundColor: t.colors.lockedBg,
+      borderRadius: t.radius.card,
+      padding: t.space.lg,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    comingSoonTitle: { ...t.text(t.font.sm), fontWeight: "600", color: t.colors.textMuted },
+    comingSoonTag: { ...t.text(t.font.xs), color: t.colors.textMuted },
+  });

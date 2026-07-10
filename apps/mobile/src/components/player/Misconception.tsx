@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import type { Step } from '@focus/shared';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
+import { stepNarration } from '@/lib/narration';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';
 
@@ -10,6 +12,7 @@ export function Misconception(props: {
   selectedId?: string;
   onAnswer: (id: string) => void;
 }) {
+  const styles = useThemedStyles(makeStyles);
   return (
     <View style={styles.card}>
       <View style={styles.belief}>
@@ -18,7 +21,7 @@ export function Misconception(props: {
       </View>
       <View style={styles.promptRow}>
         <Text style={styles.prompt}>{props.step.question.prompt}</Text>
-        <AudioButton text={props.step.question.prompt} />
+        <AudioButton text={stepNarration(props.step)} />
       </View>
       <AnswerOptions
         question={props.step.question}
@@ -35,24 +38,25 @@ export function Misconception(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  card: { gap: space.lg },
-  belief: {
-    backgroundColor: colors.lockedBg,
-    borderRadius: radius.card,
-    padding: space.lg,
-    gap: space.xs,
-  },
-  beliefLabel: { fontSize: font.xs, fontWeight: '700', color: colors.textMuted },
-  beliefText: { fontSize: font.md, color: colors.text, fontStyle: 'italic' },
-  promptRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  prompt: { flex: 1, fontSize: font.md, fontWeight: '600', color: colors.text },
-  repair: {
-    backgroundColor: '#2E6BE614',
-    borderRadius: radius.control,
-    padding: space.md,
-    borderWidth: 1,
-    borderColor: colors.accent,
-  },
-  repairText: { fontSize: font.sm, color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    card: { gap: t.space.lg },
+    belief: {
+      backgroundColor: t.colors.lockedBg,
+      borderRadius: t.radius.card,
+      padding: t.space.lg,
+      gap: t.space.xs,
+    },
+    beliefLabel: { ...t.text(t.font.xs), fontWeight: '700', color: t.colors.textMuted },
+    beliefText: { ...t.text(t.font.md), color: t.colors.text, fontStyle: 'italic' },
+    promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
+    prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
+    repair: {
+      backgroundColor: t.colors.accentSoft,
+      borderRadius: t.radius.control,
+      padding: t.space.md,
+      borderWidth: 1,
+      borderColor: t.colors.accent,
+    },
+    repairText: { ...t.text(t.font.sm), color: t.colors.text },
+  });

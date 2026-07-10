@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import type { Question } from '@focus/shared';
-import { colors, font, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';
 
@@ -11,6 +12,7 @@ export function CheckpointQuestion(props: {
   selectedId?: string;
   onAnswer: (id: string) => void;
 }) {
+  const styles = useThemedStyles(makeStyles);
   return (
     <View style={styles.card}>
       <Text style={styles.heading}>{props.heading}</Text>
@@ -28,9 +30,15 @@ export function CheckpointQuestion(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  card: { gap: space.lg },
-  heading: { fontSize: font.xs, fontWeight: '700', color: colors.textMuted, letterSpacing: 1 },
-  promptRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  prompt: { flex: 1, fontSize: font.md, fontWeight: '600', color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    card: { gap: t.space.lg },
+    heading: {
+      ...t.text(t.font.xs),
+      fontWeight: '700',
+      color: t.colors.textMuted,
+      letterSpacing: 1,
+    },
+    promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
+    prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
+  });

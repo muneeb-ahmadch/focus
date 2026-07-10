@@ -8,7 +8,8 @@ import { getRouteMissions } from "@/content";
 import { getDb } from "@/db";
 import { getMissionState, type MissionState } from "@/db/repo/missions";
 import { buildStats } from "@/lib/stats";
-import { colors, font, radius, space } from "@/theme/tokens";
+import { type Theme } from "@/theme/tokens";
+import { useThemedStyles } from "@/theme/useTheme";
 
 interface NextMission {
   label: string;
@@ -34,6 +35,7 @@ function nextMission(states: (MissionState | undefined)[]): NextMission {
 }
 
 export default function HomeScreen() {
+  const styles = useThemedStyles(makeStyles);
   const { data } = useQuery({
     queryKey: ["home"],
     queryFn: () => {
@@ -104,29 +106,30 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: colors.bg },
-  content: { padding: space.lg, gap: space.lg },
-  greeting: { fontSize: font.xl, fontWeight: "700", color: colors.text },
-  card: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    padding: space.lg,
-    gap: space.sm,
-  },
-  streak: { fontSize: font.md, fontWeight: "600", color: colors.text },
-  streakMuted: { fontSize: font.md, color: colors.textMuted },
-  testLine: { fontSize: font.sm, color: colors.text },
-  readinessRow: { flexDirection: "row", alignItems: "center", gap: space.sm },
-  provisional: { fontSize: font.xs, color: colors.textMuted },
-  lockedLine: { fontSize: font.xs, color: colors.textMuted, flex: 1 },
-  reviewPill: {
-    backgroundColor: colors.warning,
-    borderRadius: radius.pill,
-    paddingVertical: space.md,
-    alignItems: "center",
-  },
-  reviewPillText: { color: colors.surface, fontSize: font.sm, fontWeight: "700" },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    screen: { flex: 1, backgroundColor: t.colors.bg },
+    content: { padding: t.space.lg, gap: t.space.lg },
+    greeting: { ...t.text(t.font.xl), fontWeight: "700", color: t.colors.text },
+    card: {
+      backgroundColor: t.colors.surface,
+      borderRadius: t.radius.card,
+      borderWidth: 1,
+      borderColor: t.colors.border,
+      padding: t.space.lg,
+      gap: t.space.sm,
+    },
+    streak: { ...t.text(t.font.md), fontWeight: "600", color: t.colors.text },
+    streakMuted: { ...t.text(t.font.md), color: t.colors.textMuted },
+    testLine: { ...t.text(t.font.sm), color: t.colors.text },
+    readinessRow: { flexDirection: "row", alignItems: "center", gap: t.space.sm },
+    provisional: { ...t.text(t.font.xs), color: t.colors.textMuted },
+    lockedLine: { ...t.text(t.font.xs), color: t.colors.textMuted, flex: 1 },
+    reviewPill: {
+      backgroundColor: t.colors.warning,
+      borderRadius: t.radius.pill,
+      paddingVertical: t.space.md,
+      alignItems: "center",
+    },
+    reviewPillText: { color: t.colors.onAccent, ...t.text(t.font.sm), fontWeight: "700" },
+  });

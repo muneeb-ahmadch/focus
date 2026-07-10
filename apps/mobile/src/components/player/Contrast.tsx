@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import type { Step } from '@focus/shared';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
+import { stepNarration } from '@/lib/narration';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';
 
@@ -10,6 +12,7 @@ export function Contrast(props: {
   selectedId?: string;
   onAnswer: (id: string) => void;
 }) {
+  const styles = useThemedStyles(makeStyles);
   return (
     <View style={styles.card}>
       <View style={styles.pair}>
@@ -24,7 +27,7 @@ export function Contrast(props: {
       </View>
       <View style={styles.promptRow}>
         <Text style={styles.prompt}>{props.step.question.prompt}</Text>
-        <AudioButton text={props.step.question.prompt} />
+        <AudioButton text={stepNarration(props.step)} />
       </View>
       <AnswerOptions
         question={props.step.question}
@@ -36,20 +39,21 @@ export function Contrast(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  card: { gap: space.lg },
-  pair: { flexDirection: 'row', gap: space.sm },
-  side: {
-    flex: 1,
-    backgroundColor: colors.surface,
-    borderRadius: radius.card,
-    padding: space.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    gap: space.xs,
-  },
-  label: { fontSize: font.sm, fontWeight: '700', color: colors.accent },
-  body: { fontSize: font.sm, color: colors.text },
-  promptRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  prompt: { flex: 1, fontSize: font.md, fontWeight: '600', color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    card: { gap: t.space.lg },
+    pair: { flexDirection: 'row', gap: t.space.sm },
+    side: {
+      flex: 1,
+      backgroundColor: t.colors.surface,
+      borderRadius: t.radius.card,
+      padding: t.space.md,
+      borderWidth: 1,
+      borderColor: t.colors.border,
+      gap: t.space.xs,
+    },
+    label: { ...t.text(t.font.sm), fontWeight: '700', color: t.colors.accent },
+    body: { ...t.text(t.font.sm), color: t.colors.text },
+    promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
+    prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
+  });

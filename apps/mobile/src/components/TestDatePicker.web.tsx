@@ -1,4 +1,4 @@
-import { colors, font, space } from "@/theme/tokens";
+import { useTheme } from "@/theme/useTheme";
 
 type Props = {
   value: string;
@@ -7,6 +7,7 @@ type Props = {
 };
 
 export function TestDatePicker({ value, min, onChange }: Props) {
+  const t = useTheme();
   return (
     <input
       type="date"
@@ -14,9 +15,9 @@ export function TestDatePicker({ value, min, onChange }: Props) {
       min={min}
       onChange={(e) => onChange(e.target.value)}
       style={{
-        fontSize: font.md,
-        color: colors.text,
-        padding: space.md,
+        fontSize: t.font.md,
+        color: t.colors.text,
+        padding: t.space.md,
         border: "none",
         background: "transparent",
         width: "100%",

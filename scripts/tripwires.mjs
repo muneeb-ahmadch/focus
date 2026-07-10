@@ -112,6 +112,18 @@ let ok = true;
   ok = report('CONTENT PACK BOUNDARY (apps/mobile)', violations) && ok;
 }
 
+// 5. TOKEN COLOURS — no hardcoded colour literals outside src/theme/tokens.ts;
+//    every colour flows through the theme so dark/high-contrast modes hold.
+{
+  const tokensPath = join(ROOT, 'apps/mobile/src/theme/tokens.ts');
+  const files = [
+    ...walk(join(ROOT, 'apps/mobile/src')),
+    ...walk(join(ROOT, 'apps/mobile/app')),
+  ].filter((f) => f !== tokensPath && !f.endsWith('.test.ts') && !f.endsWith('.test.tsx'));
+  const violations = scan(files, /#[0-9a-fA-F]{3,8}\b|rgba?\(/);
+  ok = report('TOKEN COLOURS (apps/mobile)', violations) && ok;
+}
+
 if (!ok) {
   console.error('\ntripwires failed — see violations above');
   process.exit(1);

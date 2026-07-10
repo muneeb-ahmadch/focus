@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import type { Step } from '@focus/shared';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
+import { stepNarration } from '@/lib/narration';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';
 
@@ -10,6 +12,7 @@ export function HazardCue(props: {
   selectedId?: string;
   onAnswer: (id: string) => void;
 }) {
+  const styles = useThemedStyles(makeStyles);
   return (
     <View style={styles.card}>
       <View style={styles.scene}>
@@ -18,7 +21,7 @@ export function HazardCue(props: {
       </View>
       <View style={styles.promptRow}>
         <Text style={styles.prompt}>{props.step.question.prompt}</Text>
-        <AudioButton text={props.step.question.prompt} />
+        <AudioButton text={stepNarration(props.step)} />
       </View>
       <AnswerOptions
         question={props.step.question}
@@ -30,18 +33,19 @@ export function HazardCue(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  card: { gap: space.lg },
-  scene: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.card,
-    padding: space.lg,
-    borderLeftWidth: 4,
-    borderLeftColor: colors.warning,
-    gap: space.xs,
-  },
-  sceneLabel: { fontSize: font.xs, fontWeight: '700', color: colors.warning },
-  sceneText: { fontSize: font.md, color: colors.text, fontStyle: 'italic' },
-  promptRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  prompt: { flex: 1, fontSize: font.md, fontWeight: '600', color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    card: { gap: t.space.lg },
+    scene: {
+      backgroundColor: t.colors.surface,
+      borderRadius: t.radius.card,
+      padding: t.space.lg,
+      borderLeftWidth: 4,
+      borderLeftColor: t.colors.warning,
+      gap: t.space.xs,
+    },
+    sceneLabel: { ...t.text(t.font.xs), fontWeight: '700', color: t.colors.warning },
+    sceneText: { ...t.text(t.font.md), color: t.colors.text, fontStyle: 'italic' },
+    promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
+    prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
+  });

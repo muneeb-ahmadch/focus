@@ -8,7 +8,8 @@ import { computeStreak } from '@focus/engine';
 import { __getDayOffset, __setDayOffset, dayNumber, fromEpochMs, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 import { rescheduleAll, scheduleTestNotification } from '@/notifications/scheduler';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
 
 interface ScheduledRow {
   body: string;
@@ -16,6 +17,7 @@ interface ScheduledRow {
 }
 
 export function DevPanel() {
+  const styles = useThemedStyles(makeStyles);
   const [open, setOpen] = useState(false);
   const [tick, setTick] = useState(0);
   const [scheduled, setScheduled] = useState<ScheduledRow[]>([]);
@@ -131,32 +133,38 @@ export function DevPanel() {
   );
 }
 
-const styles = StyleSheet.create({
-  collapsed: {
-    backgroundColor: colors.lockedBg,
-    borderRadius: radius.control,
-    padding: space.md,
-    alignItems: 'center',
-  },
-  collapsedText: { fontSize: font.xs, color: colors.textMuted },
-  panel: {
-    backgroundColor: colors.lockedBg,
-    borderRadius: radius.control,
-    padding: space.md,
-    gap: space.xs,
-  },
-  title: { fontSize: font.xs, fontWeight: '700', color: colors.text },
-  heading: { fontSize: font.xs, fontWeight: '700', color: colors.textMuted, marginTop: space.xs },
-  line: { fontSize: font.xs, color: colors.text },
-  mono: { fontSize: 11, color: colors.text, fontVariant: ['tabular-nums'] },
-  row: { flexDirection: 'row', gap: space.sm },
-  button: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.control,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingVertical: space.xs,
-    paddingHorizontal: space.md,
-  },
-  buttonText: { fontSize: font.xs, color: colors.accent, fontWeight: '600' },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    collapsed: {
+      backgroundColor: t.colors.lockedBg,
+      borderRadius: t.radius.control,
+      padding: t.space.md,
+      alignItems: 'center',
+    },
+    collapsedText: { ...t.text(t.font.xs), color: t.colors.textMuted },
+    panel: {
+      backgroundColor: t.colors.lockedBg,
+      borderRadius: t.radius.control,
+      padding: t.space.md,
+      gap: t.space.xs,
+    },
+    title: { ...t.text(t.font.xs), fontWeight: '700', color: t.colors.text },
+    heading: {
+      ...t.text(t.font.xs),
+      fontWeight: '700',
+      color: t.colors.textMuted,
+      marginTop: t.space.xs,
+    },
+    line: { ...t.text(t.font.xs), color: t.colors.text },
+    mono: { ...t.text(11), color: t.colors.text, fontVariant: ['tabular-nums'] },
+    row: { flexDirection: 'row', gap: t.space.sm },
+    button: {
+      backgroundColor: t.colors.surface,
+      borderRadius: t.radius.control,
+      borderWidth: 1,
+      borderColor: t.colors.border,
+      paddingVertical: t.space.xs,
+      paddingHorizontal: t.space.md,
+    },
+    buttonText: { ...t.text(t.font.xs), color: t.colors.accent, fontWeight: '600' },
+  });

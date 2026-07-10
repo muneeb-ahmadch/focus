@@ -10,6 +10,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
       'react-native': 'react-native-web',
+      '@expo/vector-icons': path.resolve(__dirname, 'src/testing/vectorIconsStub.tsx'),
     },
   },
 });

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { Step } from '@focus/shared';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
+import { stepNarration } from '@/lib/narration';
 import { AudioButton } from './AudioButton';
 
 export function Sequence(props: {
@@ -9,6 +11,7 @@ export function Sequence(props: {
   answered: boolean;
   onAnswer: (order: string[]) => void;
 }) {
+  const styles = useThemedStyles(makeStyles);
   const [picked, setPicked] = useState<string[]>([]);
 
   useEffect(() => {
@@ -28,7 +31,7 @@ export function Sequence(props: {
       {props.step.title ? <Text style={styles.title}>{props.step.title}</Text> : null}
       <View style={styles.promptRow}>
         <Text style={styles.prompt}>{props.step.prompt}</Text>
-        <AudioButton text={props.step.prompt} />
+        <AudioButton text={stepNarration(props.step)} />
       </View>
       <View style={styles.list}>
         {props.step.items.map((item) => {
@@ -38,6 +41,8 @@ export function Sequence(props: {
               key={item.id}
               onPress={() => toggle(item.id)}
               disabled={props.answered}
+              accessibilityRole="button"
+              accessibilityLabel={item.text}
               style={({ pressed }) => [
                 styles.row,
                 position >= 0 && styles.rowPicked,
@@ -59,36 +64,37 @@ export function Sequence(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  card: { gap: space.lg },
-  title: { fontSize: font.lg, fontWeight: '700', color: colors.text },
-  promptRow: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
-  prompt: { flex: 1, fontSize: font.md, fontWeight: '600', color: colors.text },
-  list: { gap: space.sm },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: space.sm,
-    backgroundColor: colors.surface,
-    borderWidth: 2,
-    borderColor: colors.border,
-    borderRadius: radius.control,
-    paddingVertical: space.md,
-    paddingHorizontal: space.md,
-  },
-  rowPicked: { borderColor: colors.accent },
-  pressed: { opacity: 0.7 },
-  chip: {
-    width: 28,
-    height: 28,
-    borderRadius: radius.pill,
-    borderWidth: 2,
-    borderColor: colors.border,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  chipFilled: { backgroundColor: colors.accent, borderColor: colors.accent },
-  chipText: { fontSize: font.sm, fontWeight: '700', color: colors.textMuted },
-  chipTextFilled: { color: colors.surface },
-  text: { flex: 1, fontSize: font.sm, color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    card: { gap: t.space.lg },
+    title: { ...t.text(t.font.lg), fontWeight: '700', color: t.colors.text },
+    promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
+    prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
+    list: { gap: t.space.sm },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: t.space.sm,
+      backgroundColor: t.colors.surface,
+      borderWidth: 2,
+      borderColor: t.colors.border,
+      borderRadius: t.radius.control,
+      paddingVertical: t.space.md,
+      paddingHorizontal: t.space.md,
+    },
+    rowPicked: { borderColor: t.colors.accent },
+    pressed: { opacity: 0.7 },
+    chip: {
+      width: 28,
+      height: 28,
+      borderRadius: t.radius.pill,
+      borderWidth: 2,
+      borderColor: t.colors.border,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    chipFilled: { backgroundColor: t.colors.accent, borderColor: t.colors.accent },
+    chipText: { ...t.text(t.font.sm), fontWeight: '700', color: t.colors.textMuted },
+    chipTextFilled: { color: t.colors.onAccent },
+    text: { flex: 1, ...t.text(t.font.sm), color: t.colors.text },
+  });

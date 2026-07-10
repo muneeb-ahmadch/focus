@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { Question } from '@focus/shared';
-import { colors, font, radius, space } from '@/theme/tokens';
+import { type Theme } from '@/theme/tokens';
+import { useThemedStyles } from '@/theme/useTheme';
 import { AudioButton } from './AudioButton';
 
 function shuffle<T>(input: T[]): T[] {
@@ -24,6 +25,7 @@ export function AnswerOptions(props: {
   selectedId?: string;
   onAnswer: (optionId: string) => void;
 }) {
+  const styles = useThemedStyles(makeStyles);
   const [options] = useState(() => shuffle(props.question.options));
   return (
     <View style={styles.list}>
@@ -35,6 +37,8 @@ export function AnswerOptions(props: {
           <Pressable
             key={option.id}
             disabled={props.answered}
+            accessibilityRole="button"
+            accessibilityLabel={option.text}
             onPress={() => props.onAnswer(option.id)}
             style={({ pressed }) => [
               styles.row,
@@ -52,22 +56,23 @@ export function AnswerOptions(props: {
   );
 }
 
-const styles = StyleSheet.create({
-  list: { gap: space.sm },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: colors.surface,
-    borderWidth: 2,
-    borderColor: colors.border,
-    borderRadius: radius.control,
-    paddingVertical: space.md,
-    paddingHorizontal: space.lg,
-    gap: space.sm,
-  },
-  pressed: { opacity: 0.7 },
-  correct: { borderColor: colors.success, backgroundColor: '#1E9E5A14' },
-  wrong: { borderColor: colors.danger, backgroundColor: '#D9383814' },
-  text: { flex: 1, fontSize: font.sm, color: colors.text },
-});
+const makeStyles = (t: Theme) =>
+  StyleSheet.create({
+    list: { gap: t.space.sm },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: t.colors.surface,
+      borderWidth: 2,
+      borderColor: t.colors.border,
+      borderRadius: t.radius.control,
+      paddingVertical: t.space.md,
+      paddingHorizontal: t.space.lg,
+      gap: t.space.sm,
+    },
+    pressed: { opacity: 0.7 },
+    correct: { borderColor: t.colors.success, backgroundColor: t.colors.successSoft },
+    wrong: { borderColor: t.colors.danger, backgroundColor: t.colors.dangerSoft },
+    text: { flex: 1, ...t.text(t.font.sm), color: t.colors.text },
+  });
