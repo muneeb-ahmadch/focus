@@ -110,6 +110,40 @@ export function pickDrillQuestion(conceptId: string): DrillQuestion | undefined 
   return undefined;
 }
 
+export function pickScenarioQuestion(conceptId: string): DrillQuestion | undefined {
+  for (const mission of MISSIONS) {
+    for (const step of mission.steps) {
+      if (step.type !== 'scene_decision' && step.type !== 'hazard_cue') continue;
+      if (step.conceptId === conceptId) {
+        return {
+          conceptId,
+          missionId: mission.missionId,
+          stepId: step.id,
+          question: step.question,
+        };
+      }
+    }
+  }
+  return undefined;
+}
+
+function prettifyConceptId(conceptId: string): string {
+  const segment = conceptId.split('.').pop() ?? conceptId;
+  const words = segment.replace(/-/g, ' ');
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
+export function conceptLabel(conceptId: string): string {
+  for (const mission of MISSIONS) {
+    for (const step of mission.steps) {
+      if (step.type === 'checkpoint') continue;
+      if (step.conceptId !== conceptId) continue;
+      if ('title' in step && step.title) return step.title;
+    }
+  }
+  return prettifyConceptId(conceptId);
+}
+
 export function getRouteManifest(): RouteContentInfo[] {
   return ROUTES.map((route) => {
     const conceptIds = new Set<string>();

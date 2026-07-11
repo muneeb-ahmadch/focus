@@ -13,9 +13,10 @@ export function StepRenderer(props: {
   heading: string;
   answered: boolean;
   selectedId?: string;
+  hintOptionId?: string;
   onAnswer: (input: string | string[]) => void;
 }) {
-  const { card, answered, selectedId, onAnswer } = props;
+  const { card, answered, selectedId, hintOptionId, onAnswer } = props;
 
   if (card.kind === 'checkpoint-q' || card.kind === 'drill-q') {
     return (
@@ -24,6 +25,7 @@ export function StepRenderer(props: {
         heading={props.heading}
         answered={answered}
         selectedId={selectedId}
+        hintOptionId={hintOptionId}
         onAnswer={onAnswer}
       />
     );
@@ -32,24 +34,66 @@ export function StepRenderer(props: {
   const step = card.step;
   switch (step.type) {
     case 'rule_card':
-      return <RuleCard step={step} answered={answered} selectedId={selectedId} onAnswer={onAnswer} />;
+      return (
+        <RuleCard
+          step={step}
+          answered={answered}
+          selectedId={selectedId}
+          hintOptionId={hintOptionId}
+          onAnswer={onAnswer}
+        />
+      );
     case 'scene_decision':
       return (
-        <SceneDecision step={step} answered={answered} selectedId={selectedId} onAnswer={onAnswer} />
+        <SceneDecision
+          step={step}
+          answered={answered}
+          selectedId={selectedId}
+          hintOptionId={hintOptionId}
+          onAnswer={onAnswer}
+        />
       );
     case 'sign_meaning':
       return (
-        <SignMeaning step={step} answered={answered} selectedId={selectedId} onAnswer={onAnswer} />
+        <SignMeaning
+          step={step}
+          answered={answered}
+          selectedId={selectedId}
+          hintOptionId={hintOptionId}
+          onAnswer={onAnswer}
+        />
       );
     case 'contrast':
-      return <Contrast step={step} answered={answered} selectedId={selectedId} onAnswer={onAnswer} />;
+      return (
+        <Contrast
+          step={step}
+          answered={answered}
+          selectedId={selectedId}
+          hintOptionId={hintOptionId}
+          onAnswer={onAnswer}
+        />
+      );
     case 'sequence':
       return <Sequence step={step} answered={answered} onAnswer={onAnswer} />;
     case 'hazard_cue':
-      return <HazardCue step={step} answered={answered} selectedId={selectedId} onAnswer={onAnswer} />;
+      return (
+        <HazardCue
+          step={step}
+          answered={answered}
+          selectedId={selectedId}
+          hintOptionId={hintOptionId}
+          onAnswer={onAnswer}
+        />
+      );
     case 'misconception':
       return (
-        <Misconception step={step} answered={answered} selectedId={selectedId} onAnswer={onAnswer} />
+        <Misconception
+          step={step}
+          answered={answered}
+          selectedId={selectedId}
+          hintOptionId={hintOptionId}
+          onAnswer={onAnswer}
+        />
       );
     case 'checkpoint':
       return null;

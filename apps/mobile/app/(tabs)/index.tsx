@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { BandChip } from "@/components/BandChip";
 import { DevPanel } from "@/components/DevPanel";
 import { PrimaryButton } from "@/components/PrimaryButton";
@@ -78,14 +78,10 @@ export default function HomeScreen() {
       </View>
 
       {stats.dueCount > 0 ? (
-        <Pressable
-          style={styles.reviewPill}
-          onPress={() => router.push({ pathname: "/player", params: { mode: "drill" } })}
-        >
-          <Text style={styles.reviewPillText}>
-            Clear {stats.dueCount} review{stats.dueCount === 1 ? "" : "s"}
-          </Text>
-        </Pressable>
+        <PrimaryButton
+          title={`Clear ${stats.dueCount} review${stats.dueCount === 1 ? "" : "s"}`}
+          onPress={() => router.push("/review-queue")}
+        />
       ) : null}
 
       <PrimaryButton
@@ -125,11 +121,4 @@ const makeStyles = (t: Theme) =>
     readinessRow: { flexDirection: "row", alignItems: "center", gap: t.space.sm },
     provisional: { ...t.text(t.font.xs), color: t.colors.textMuted },
     lockedLine: { ...t.text(t.font.xs), color: t.colors.textMuted, flex: 1 },
-    reviewPill: {
-      backgroundColor: t.colors.warning,
-      borderRadius: t.radius.pill,
-      paddingVertical: t.space.md,
-      alignItems: "center",
-    },
-    reviewPillText: { color: t.colors.onAccent, ...t.text(t.font.sm), fontWeight: "700" },
   });

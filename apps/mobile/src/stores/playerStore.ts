@@ -1,25 +1,28 @@
 import { router } from 'expo-router';
 import { create } from 'zustand';
-import { getMission, getRouteManifest, pickDrillQuestion } from '@/content';
+import { getMission, getRouteManifest, pickDrillQuestion, pickScenarioQuestion } from '@/content';
 import type { Mission, Question, Step } from '@focus/shared';
 import { getDb } from '@/db';
 import { bumpActivity, getActiveDays } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
 import { completeMission, ensureMissionRow, failCheckpoint, saveResume } from '@/db/repo/missions';
-import { applyGrade, getDue, upsertMiss } from '@/db/repo/reviews';
+import { applyGrade, clearItem, getDue, upsertMiss } from '@/db/repo/reviews';
 import { getRouteState, recomputeRoute } from '@/db/repo/routes';
-import { gradeCheckpoint, computeStreak, hitMilestone } from '@focus/engine';
-import { dayNumber, todayLocal } from '@/lib/clock';
+import { gradeCheckpoint, computeStreak, hitMilestone, rehabOutcome } from '@focus/engine';
+import { dayNumber, now, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 import { rescheduleAll } from '@/notifications/scheduler';
 
-export type Mode = 'mission' | 'drill';
+export const SLOW_ANSWER_MS = 20_000;
+
+export type Mode = 'mission' | 'drill' | 'rehab';
 export type Phase =
   | 'card'
   | 'feedback'
   | 'checkpoint-intro'
   | 'repair-intro'
   | 'drill-summary'
+  | 'rehab-summary'
   | 'failed';
 
 export type PlayerCard =
@@ -43,6 +46,7 @@ export interface ResumePayload {
   inRepair: boolean;
   originalCheckpointScore?: number;
   queueIds: string[];
+  missedConcepts?: string[];
 }
 
 interface PlayerState {
@@ -61,12 +65,18 @@ interface PlayerState {
   missedConcepts: string[];
   drillCorrect: number;
   active: boolean;
+  hintOptionId?: string;
+  rehabConceptId?: string;
+  rehabCleared: boolean;
   startMission(missionId: string, resume?: ResumePayload): void;
-  startDrill(): void;
+  startDrill(conceptIds?: string[]): void;
+  startRehab(conceptId: string): void;
   answer(input: string | string[]): void;
   confirmConfidence(c: 'sure' | 'unsure' | 'easy' | 'okay'): void;
+  useHint(): void;
   advance(): void;
   abandon(): void;
+  dismiss(): void;
 }
 
 function questionForCard(card: PlayerCard): Question | undefined {
@@ -128,9 +138,21 @@ const initial = {
   missedConcepts: [] as string[],
   drillCorrect: 0,
   active: false,
+  hintOptionId: undefined,
+  rehabConceptId: undefined,
+  rehabCleared: false,
 };
 
 export const usePlayerStore = create<PlayerState>((set, get) => {
+  let hintUsedForCard = false;
+  let cardShownAtMs = 0;
+  let slowForCurrentAnswer = false;
+
+  function presentCard(): void {
+    cardShownAtMs = now().getTime();
+    hintUsedForCard = false;
+    set({ hintOptionId: undefined });
+  }
   function persistResume(): void {
     const s = get();
     if (s.mode !== 'mission' || !s.missionId || !s.active) return;
@@ -143,6 +165,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       inRepair: s.inRepair,
       originalCheckpointScore: s.originalCheckpointScore,
       queueIds: s.queue.map((c) => c.stepId),
+      missedConcepts: s.missedConcepts,
     };
     saveResume(getDb(), s.missionId, s.index, JSON.stringify(payload));
   }
@@ -161,7 +184,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     });
   }
 
-  function addMiss(conceptId: string, origin: 'wrong' | 'unsure'): void {
+  function addMiss(conceptId: string, origin: 'wrong' | 'unsure' | 'hint_heavy' | 'slow'): void {
     const s = get();
     upsertMiss(getDb(), conceptId, origin, todayLocal());
     if (!s.missedConcepts.includes(conceptId)) {
@@ -202,6 +225,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         masteryBefore: String(masteryBefore),
         masteryAfter: String(masteryAfter),
         newReviews: String(newReviews),
+        missed: s.missedConcepts.join(','),
       },
     });
   }
@@ -248,6 +272,28 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     set({ phase: 'drill-summary', drillCorrect: correct });
   }
 
+  function endRehab(): void {
+    const s = get();
+    const conceptId = s.rehabConceptId;
+    if (!conceptId) return;
+    const db = getDb();
+    const today = todayLocal();
+    const outcome = rehabOutcome(s.answers.map((a) => ({ correct: a.correct, confidence: a.confidence })));
+    if (outcome.cleared) {
+      clearItem(db, conceptId, today);
+      bumpActivity(db, today, 'reviews_cleared');
+    } else {
+      applyGrade(db, conceptId, outcome.grade, today);
+    }
+    const correct = s.answers.filter((a) => a.correct).length;
+    const total = s.answers.length;
+    if (s.attemptId !== undefined) {
+      finishAttempt(db, s.attemptId, 'submitted', correct / total, JSON.stringify({ answers: s.answers }));
+    }
+    void queryClient.invalidateQueries();
+    set({ phase: 'rehab-summary', rehabCleared: outcome.cleared });
+  }
+
   function buildRepairQueue(mission: Mission, missedConceptIds: string[]): PlayerCard[] {
     const cards: PlayerCard[] = [];
     for (const step of mission.steps) {
@@ -291,9 +337,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
             checkpointAnswers: resume.checkpointAnswers,
             inRepair: resume.inRepair,
             originalCheckpointScore: resume.originalCheckpointScore,
-            missedConcepts: [],
+            missedConcepts: resume.missedConcepts ?? [],
             active: true,
           });
+          presentCard();
           return;
         }
       }
@@ -308,25 +355,35 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         phase: 'card',
         active: true,
       });
+      presentCard();
       persistResume();
     },
 
-    startDrill() {
+    startDrill(conceptIds) {
       const db = getDb();
-      const due = getDue(db, todayLocal()).slice(0, 10);
       const queue: PlayerCard[] = [];
-      for (const item of due) {
-        const dq = pickDrillQuestion(item.concept_id);
-        if (dq) {
-          queue.push({
-            kind: 'drill-q',
-            stepId: dq.stepId,
-            conceptId: item.concept_id,
-            question: dq.question,
-          });
+      if (conceptIds) {
+        for (const conceptId of conceptIds) {
+          const dq = pickDrillQuestion(conceptId);
+          if (dq) {
+            queue.push({ kind: 'drill-q', stepId: dq.stepId, conceptId, question: dq.question });
+          }
+        }
+      } else {
+        const due = getDue(db, todayLocal()).slice(0, 10);
+        for (const item of due) {
+          const dq = pickDrillQuestion(item.concept_id);
+          if (dq) {
+            queue.push({
+              kind: 'drill-q',
+              stepId: dq.stepId,
+              conceptId: item.concept_id,
+              question: dq.question,
+            });
+          }
         }
       }
-      const attemptId = startAttempt(db, 'drill', 'daily-drill');
+      const attemptId = startAttempt(db, 'drill', conceptIds ? 'fresh-drill' : 'daily-drill');
       set({
         ...initial,
         mode: 'drill',
@@ -336,6 +393,33 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         phase: 'card',
         active: true,
       });
+      presentCard();
+    },
+
+    startRehab(conceptId) {
+      const recall = pickDrillQuestion(conceptId);
+      if (!recall) return;
+      const scenario = pickScenarioQuestion(conceptId);
+      const queue: PlayerCard[] = [
+        { kind: 'drill-q', stepId: recall.stepId, conceptId, question: recall.question },
+      ];
+      if (scenario && scenario.stepId !== recall.stepId) {
+        queue.push({ kind: 'drill-q', stepId: scenario.stepId, conceptId, question: scenario.question });
+      }
+      const db = getDb();
+      const attemptId = startAttempt(db, 'drill', `rehab:${conceptId}`);
+      set({
+        ...initial,
+        mode: 'rehab',
+        attemptId,
+        queue,
+        index: 0,
+        phase: 'card',
+        rehabConceptId: conceptId,
+        rehabCleared: false,
+        active: true,
+      });
+      presentCard();
     },
 
     answer(input) {
@@ -350,6 +434,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         const correct =
           order.length === sequenceStep.correctOrder.length &&
           order.every((id, i) => id === sequenceStep.correctOrder[i]);
+        slowForCurrentAnswer = now().getTime() - cardShownAtMs >= SLOW_ANSWER_MS;
         set({ phase: 'feedback', lastAnswer: { optionId: order.join(','), correct } });
         if (!correct) {
           recordAndTrack({
@@ -359,7 +444,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
             confidence: 'unsure',
           });
           if (s.mode === 'mission') addMiss(card.conceptId, 'wrong');
-          else applyGrade(getDb(), card.conceptId, 'wrong', todayLocal());
+          else if (s.mode === 'drill') applyGrade(getDb(), card.conceptId, 'wrong', todayLocal());
         }
         return;
       }
@@ -369,6 +454,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       const optionId = Array.isArray(input) ? input[0] : input;
       const option = question.options.find((o) => o.id === optionId);
       if (!option) return;
+      slowForCurrentAnswer = now().getTime() - cardShownAtMs >= SLOW_ANSWER_MS;
       set({
         phase: 'feedback',
         lastAnswer: {
@@ -386,7 +472,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
           misconceptionId: option.misconceptionId,
         });
         if (s.mode === 'mission') addMiss(card.conceptId, 'wrong');
-        else applyGrade(getDb(), card.conceptId, 'wrong', todayLocal());
+        else if (s.mode === 'drill') applyGrade(getDb(), card.conceptId, 'wrong', todayLocal());
       }
     },
 
@@ -403,11 +489,26 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         confidence,
       });
       if (s.mode === 'mission') {
-        if (c === 'unsure') addMiss(card.conceptId, 'unsure');
-      } else {
+        if (hintUsedForCard) addMiss(card.conceptId, 'hint_heavy');
+        else if (c === 'unsure') addMiss(card.conceptId, 'unsure');
+        else if (slowForCurrentAnswer) addMiss(card.conceptId, 'slow');
+      } else if (s.mode === 'drill') {
         applyGrade(getDb(), card.conceptId, c === 'sure' ? 'okay' : c, todayLocal());
       }
       get().advance();
+    },
+
+    useHint() {
+      const s = get();
+      if (s.phase !== 'card' || s.mode !== 'mission' || s.hintOptionId) return;
+      const card = s.queue[s.index];
+      if (!card || card.kind !== 'step') return;
+      const question = questionForCard(card);
+      if (!question || question.options.length < 3) return;
+      const wrongOption = question.options.find((o) => o.correct === false);
+      if (!wrongOption) return;
+      hintUsedForCard = true;
+      set({ hintOptionId: wrongOption.id });
     },
 
     advance() {
@@ -419,7 +520,13 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
 
       if (s.phase === 'checkpoint-intro' || s.phase === 'repair-intro') {
         set({ phase: 'card', lastAnswer: undefined });
+        presentCard();
         persistResume();
+        return;
+      }
+
+      if (s.mode === 'rehab' && s.lastAnswer?.correct === false) {
+        endRehab();
         return;
       }
 
@@ -434,6 +541,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       const nextIndex = s.index + 1;
 
       if (nextIndex >= s.queue.length) {
+        if (s.mode === 'rehab') {
+          endRehab();
+          return;
+        }
         if (s.mode === 'drill') {
           finishDrill();
           return;
@@ -475,6 +586,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         phase: enteringCheckpoint ? 'checkpoint-intro' : 'card',
         lastAnswer: undefined,
       });
+      if (!enteringCheckpoint) presentCard();
       persistResume();
     },
 
@@ -484,6 +596,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       const db = getDb();
       if (s.attemptId !== undefined) finishAttempt(db, s.attemptId, 'abandoned', null, null);
       void queryClient.invalidateQueries();
+      set({ ...initial });
+    },
+
+    dismiss() {
+      const s = get();
+      if (s.phase !== 'drill-summary' && s.phase !== 'rehab-summary' && s.phase !== 'failed') return;
       set({ ...initial });
     },
   };

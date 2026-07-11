@@ -5,26 +5,24 @@ import { useThemedStyles } from '@/theme/useTheme';
 type Choice = 'sure' | 'unsure' | 'easy' | 'okay';
 
 export function ConfidenceFooter(props: {
-  mode: 'mission' | 'drill';
+  mode: 'mission' | 'drill' | 'rehab';
   onSelect: (c: Choice) => void;
 }) {
   const styles = useThemedStyles(makeStyles);
-  const choices: { label: string; value: Choice }[] =
-    props.mode === 'mission'
-      ? [
-          { label: 'I was sure', value: 'sure' },
-          { label: 'Not sure', value: 'unsure' },
-        ]
-      : [
-          { label: 'Easy', value: 'easy' },
-          { label: 'Got it', value: 'okay' },
-          { label: 'Not sure', value: 'unsure' },
-        ];
+  const isMissionLike = props.mode === 'mission' || props.mode === 'rehab';
+  const choices: { label: string; value: Choice }[] = isMissionLike
+    ? [
+        { label: 'I was sure', value: 'sure' },
+        { label: 'Not sure', value: 'unsure' },
+      ]
+    : [
+        { label: 'Easy', value: 'easy' },
+        { label: 'Got it', value: 'okay' },
+        { label: 'Not sure', value: 'unsure' },
+      ];
   return (
     <View style={styles.footer}>
-      <Text style={styles.prompt}>
-        {props.mode === 'mission' ? 'Were you sure?' : 'How did that feel?'}
-      </Text>
+      <Text style={styles.prompt}>{isMissionLike ? 'Were you sure?' : 'How did that feel?'}</Text>
       <View style={styles.row}>
         {choices.map((choice) => (
           <Pressable

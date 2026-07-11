@@ -10,6 +10,7 @@ export function Contrast(props: {
   step: Extract<Step, { type: 'contrast' }>;
   answered: boolean;
   selectedId?: string;
+  hintOptionId?: string;
   onAnswer: (id: string) => void;
 }) {
   const styles = useThemedStyles(makeStyles);
@@ -33,6 +34,7 @@ export function Contrast(props: {
         question={props.step.question}
         answered={props.answered}
         selectedId={props.selectedId}
+        hintOptionId={props.hintOptionId}
         onAnswer={props.onAnswer}
       />
     </View>

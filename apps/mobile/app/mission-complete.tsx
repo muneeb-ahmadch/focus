@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MasteryBar } from "@/components/MasteryBar";
@@ -7,6 +7,7 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import { getDb } from "@/db";
 import { getMeta } from "@/db/repo/meta";
 import { requestPermissionOnce } from "@/notifications/scheduler";
+import { usePlayerStore } from "@/stores/playerStore";
 import { type Theme } from "@/theme/tokens";
 import { useThemedStyles } from "@/theme/useTheme";
 
@@ -20,6 +21,7 @@ export default function MissionCompleteRoute() {
     masteryBefore?: string;
     masteryAfter?: string;
     newReviews?: string;
+    missed?: string;
   }>();
 
   const score = Number(params.score ?? 0);
@@ -28,6 +30,21 @@ export default function MissionCompleteRoute() {
   const masteryBefore = Number(params.masteryBefore ?? 0);
   const masteryAfter = Number(params.masteryAfter ?? 0);
   const newReviews = Number(params.newReviews ?? 0);
+  const missed = (params.missed ?? "").split(",").filter(Boolean);
+
+  const navGuardRef = useRef(false);
+  const guardedNav = (fn: () => void) => {
+    if (navGuardRef.current) return;
+    navGuardRef.current = true;
+    fn();
+  };
+  const onFixThemNow = () =>
+    guardedNav(() => {
+      usePlayerStore.getState().startDrill(missed);
+      router.replace("/player");
+    });
+  const onLater = () => guardedNav(() => router.replace("/(tabs)"));
+  const onContinue = () => guardedNav(() => router.replace("/(tabs)"));
 
   useEffect(() => {
     const db = getDb();
@@ -70,7 +87,14 @@ export default function MissionCompleteRoute() {
         ) : null}
       </View>
 
-      <PrimaryButton title="Continue" onPress={() => router.replace("/(tabs)")} />
+      {newReviews > 0 ? (
+        <View style={styles.actions}>
+          <PrimaryButton title="Fix them now" onPress={onFixThemNow} />
+          <PrimaryButton title="Later" variant="secondary" onPress={onLater} />
+        </View>
+      ) : (
+        <PrimaryButton title="Continue" onPress={onContinue} />
+      )}
     </SafeAreaView>
   );
 }
@@ -78,6 +102,7 @@ export default function MissionCompleteRoute() {
 const makeStyles = (t: Theme) =>
   StyleSheet.create({
     screen: { flex: 1, backgroundColor: t.colors.bg, padding: t.space.xl },
+    actions: { gap: t.space.sm },
     body: { flex: 1, alignItems: "center", justifyContent: "center", gap: t.space.lg },
     title: { ...t.text(t.font.xl), fontWeight: "700", color: t.colors.text },
     ring: {

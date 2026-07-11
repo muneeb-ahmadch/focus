@@ -3,3 +3,4 @@ export * from './mastery';
 export * from './readiness';
 export * from './checkpoint';
 export * from './streak';
+export * from './rehab';

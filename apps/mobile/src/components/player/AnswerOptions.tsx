@@ -23,6 +23,7 @@ export function AnswerOptions(props: {
   question: Question;
   answered: boolean;
   selectedId?: string;
+  hintOptionId?: string;
   onAnswer: (optionId: string) => void;
 }) {
   const styles = useThemedStyles(makeStyles);
@@ -33,18 +34,23 @@ export function AnswerOptions(props: {
         const isSelected = props.answered && props.selectedId === option.id;
         const showCorrect = props.answered && option.correct;
         const showWrong = isSelected && !option.correct;
+        const isHinted = props.hintOptionId === option.id;
+        const disabled = props.answered || isHinted;
         return (
           <Pressable
             key={option.id}
-            disabled={props.answered}
+            disabled={disabled}
             accessibilityRole="button"
             accessibilityLabel={option.text}
+            accessibilityState={{ disabled }}
+            aria-disabled={disabled}
             onPress={() => props.onAnswer(option.id)}
             style={({ pressed }) => [
               styles.row,
               pressed && styles.pressed,
               showCorrect && styles.correct,
               showWrong && styles.wrong,
+              isHinted && styles.hinted,
             ]}
           >
             <Text style={styles.text}>{option.text}</Text>
@@ -74,5 +80,6 @@ const makeStyles = (t: Theme) =>
     pressed: { opacity: 0.7 },
     correct: { borderColor: t.colors.success, backgroundColor: t.colors.successSoft },
     wrong: { borderColor: t.colors.danger, backgroundColor: t.colors.dangerSoft },
+    hinted: { backgroundColor: t.colors.lockedBg, opacity: 0.5 },
     text: { flex: 1, ...t.text(t.font.sm), color: t.colors.text },
   });

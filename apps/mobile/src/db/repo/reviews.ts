@@ -20,7 +20,7 @@ export interface ReviewItem {
 export function getDue(db: Db, today: string): ReviewItem[] {
   return db.all<ReviewItem>(
     `SELECT * FROM review_item
-     WHERE status = 'active' AND due_at <= ?
+     WHERE status IN ('active', 'snoozed') AND due_at <= ?
      ORDER BY due_at, concept_id`,
     [today],
   );
@@ -33,7 +33,7 @@ export function getAllReviewItems(db: Db): ReviewItem[] {
 export function countActiveDueOnOrBefore(db: Db, day: string): number {
   return (
     db.get<{ n: number }>(
-      `SELECT COUNT(*) AS n FROM review_item WHERE status = 'active' AND due_at <= ?`,
+      `SELECT COUNT(*) AS n FROM review_item WHERE status IN ('active', 'snoozed') AND due_at <= ?`,
       [day],
     )?.n ?? 0
   );
@@ -46,6 +46,13 @@ export function getActiveLapsedConcepts(db: Db): string[] {
     )
     .map((r) => r.concept_id);
 }
+
+const ORIGIN_RANK: Record<ReviewOrigin, number> = {
+  slow: 0,
+  unsure: 1,
+  hint_heavy: 2,
+  wrong: 3,
+};
 
 export function upsertMiss(db: Db, conceptId: string, origin: ReviewOrigin, today: string): void {
   const existing = db.get<ReviewItem>(
@@ -61,11 +68,26 @@ export function upsertMiss(db: Db, conceptId: string, origin: ReviewOrigin, toda
     );
     return;
   }
+  const nextOrigin = ORIGIN_RANK[origin] > ORIGIN_RANK[existing.origin_type] ? origin : existing.origin_type;
   db.run(
     `UPDATE review_item
-     SET status = 'active', interval_days = 1, due_at = ?, lapses = lapses + 1, updated_at = ?
+     SET status = 'active', origin_type = ?, interval_days = 1, due_at = ?, lapses = lapses + 1, updated_at = ?
      WHERE concept_id = ?`,
-    [due, today, conceptId],
+    [nextOrigin, due, today, conceptId],
+  );
+}
+
+export function snoozeItem(db: Db, conceptId: string, today: string): void {
+  db.run(
+    `UPDATE review_item SET status = 'snoozed', due_at = ?, updated_at = ? WHERE concept_id = ?`,
+    [addDaysLocal(today, 3), today, conceptId],
+  );
+}
+
+export function clearItem(db: Db, conceptId: string, today: string): void {
+  db.run(
+    `UPDATE review_item SET status = 'cleared', updated_at = ? WHERE concept_id = ?`,
+    [today, conceptId],
   );
 }
 

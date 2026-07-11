@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PrimaryButton } from '@/components/PrimaryButton';
@@ -39,6 +39,24 @@ export function PlayerScreen() {
   }, [autoPlay]);
 
   useEffect(() => () => stopSpeech(), []);
+
+  const interstitialActionRef = useRef(false);
+  useEffect(() => {
+    interstitialActionRef.current = false;
+  }, [store.phase]);
+
+  const onDismissDone = () => {
+    if (interstitialActionRef.current) return;
+    interstitialActionRef.current = true;
+    store.dismiss();
+    router.replace('/(tabs)');
+  };
+
+  const onFixNow = () => {
+    if (interstitialActionRef.current) return;
+    interstitialActionRef.current = true;
+    store.startDrill(store.missedConcepts);
+  };
 
   const onExit = () => {
     stopSpeech();
@@ -102,7 +120,21 @@ export function PlayerScreen() {
         <Text style={styles.interBody}>
           {store.drillCorrect}/{store.queue.length} correct
         </Text>
-        <PrimaryButton title="Done" onPress={() => router.replace('/(tabs)')} />
+        <PrimaryButton title="Done" onPress={onDismissDone} />
+      </View>
+    );
+  } else if (store.phase === 'rehab-summary') {
+    content = (
+      <View style={styles.interstitial}>
+        <Text style={styles.interTitle}>
+          {store.rehabCleared ? 'Out of your review queue' : 'Keep at it'}
+        </Text>
+        <Text style={styles.interBody}>
+          {store.rehabCleared
+            ? "You fixed this one with confidence. It's gone from your reviews."
+            : 'Not quite locked in yet — this one stays in your queue for tomorrow.'}
+        </Text>
+        <PrimaryButton title="Done" onPress={onDismissDone} />
       </View>
     );
   } else if (store.phase === 'failed') {
@@ -113,10 +145,17 @@ export function PlayerScreen() {
           Those concepts are in your review queue now — clear them tomorrow and this mission will
           feel easy. You can replay it any time.
         </Text>
-        <PrimaryButton title="Back to Home" onPress={() => router.replace('/(tabs)')} />
+        <PrimaryButton title="Fix these now" onPress={onFixNow} />
+        <PrimaryButton title="Back to Home" variant="secondary" onPress={onDismissDone} />
       </View>
     );
   } else if (card) {
+    const showHint =
+      store.phase === 'card' &&
+      store.mode === 'mission' &&
+      card.kind === 'step' &&
+      card.step.type !== 'sequence' &&
+      card.step.type !== 'checkpoint';
     content = (
       <View style={styles.cardArea}>
         <StepRenderer
@@ -125,8 +164,19 @@ export function PlayerScreen() {
           heading={heading}
           answered={store.phase === 'feedback'}
           selectedId={store.lastAnswer?.optionId}
+          hintOptionId={store.hintOptionId}
           onAnswer={onAnswer}
         />
+        {showHint ? (
+          <Pressable
+            onPress={store.useHint}
+            accessibilityRole="button"
+            accessibilityLabel="Show a hint"
+            style={styles.hintButton}
+          >
+            <Text style={styles.hintText}>Hint</Text>
+          </Pressable>
+        ) : null}
         {store.phase === 'feedback' && store.lastAnswer ? (
           <View style={styles.feedbackArea}>
             <FeedbackBanner correct={store.lastAnswer.correct} explanation={explanationFor(card)} />
@@ -185,6 +235,8 @@ const makeStyles = (t: Theme) =>
     close: { padding: t.space.xs },
     closeText: { ...t.text(t.font.lg), color: t.colors.textMuted },
     cardArea: { flex: 1, paddingHorizontal: t.space.lg, gap: t.space.lg },
+    hintButton: { alignSelf: 'flex-start', paddingVertical: t.space.xs },
+    hintText: { ...t.text(t.font.sm), color: t.colors.accent, fontWeight: '600' },
     feedbackArea: { marginTop: 'auto', gap: t.space.md, paddingBottom: t.space.lg },
     interstitial: {
       flex: 1,

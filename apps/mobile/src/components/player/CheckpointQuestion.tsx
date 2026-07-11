@@ -10,6 +10,7 @@ export function CheckpointQuestion(props: {
   heading: string;
   answered: boolean;
   selectedId?: string;
+  hintOptionId?: string;
   onAnswer: (id: string) => void;
 }) {
   const styles = useThemedStyles(makeStyles);
@@ -24,6 +25,7 @@ export function CheckpointQuestion(props: {
         question={props.question}
         answered={props.answered}
         selectedId={props.selectedId}
+        hintOptionId={props.hintOptionId}
         onAnswer={props.onAnswer}
       />
     </View>

@@ -7,6 +7,7 @@ const phaseSchema: z.ZodType<Phase> = z.union([
   z.literal('checkpoint-intro'),
   z.literal('repair-intro'),
   z.literal('drill-summary'),
+  z.literal('rehab-summary'),
   z.literal('failed'),
 ]);
 
@@ -26,6 +27,7 @@ const resumePayloadSchema: z.ZodType<ResumePayload> = z.object({
   inRepair: z.boolean(),
   originalCheckpointScore: z.number().min(0).max(1).optional(),
   queueIds: z.array(z.string()),
+  missedConcepts: z.array(z.string()).optional(),
 });
 
 export function parseResumePayload(json: string | null | undefined): ResumePayload | undefined {

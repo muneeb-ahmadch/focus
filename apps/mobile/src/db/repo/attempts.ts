@@ -5,7 +5,15 @@ import { bumpActivity } from './activity';
 export type AttemptType = 'lesson' | 'drill';
 export type AttemptStatus = 'in_progress' | 'submitted' | 'abandoned';
 
+export function abandonStaleAttempts(db: Db): void {
+  db.run(
+    `UPDATE attempt SET status = 'abandoned', completed_at = ? WHERE status = 'in_progress'`,
+    [now().toISOString()],
+  );
+}
+
 export function startAttempt(db: Db, type: AttemptType, contentId: string): number {
+  abandonStaleAttempts(db);
   db.run(
     `INSERT INTO attempt (attempt_type, content_id, status, started_at)
      VALUES (?, ?, 'in_progress', ?)`,
@@ -24,7 +32,7 @@ export function finishAttempt(
 ): void {
   db.run(
     `UPDATE attempt SET status = ?, score = ?, result_payload_json = ?, completed_at = ?
-     WHERE attempt_id = ?`,
+     WHERE attempt_id = ? AND status = 'in_progress'`,
     [status, score, payloadJson, now().toISOString(), id],
   );
 }
