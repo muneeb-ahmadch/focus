@@ -7,6 +7,7 @@ export interface DailyActivity {
   missions_completed: number;
   reviews_cleared: number;
   answers_scored: number;
+  xp: number;
 }
 
 const FIELDS: readonly ActivityField[] = ['missions_completed', 'reviews_cleared', 'answers_scored'];
@@ -18,6 +19,19 @@ export function bumpActivity(db: Db, day: string, field: ActivityField): void {
      ON CONFLICT(day) DO UPDATE SET ${field} = ${field} + 1`,
     [day],
   );
+}
+
+export function addXp(db: Db, day: string, amount: number): void {
+  if (amount <= 0) return;
+  db.run(
+    `INSERT INTO daily_activity (day, xp) VALUES (?, ?)
+     ON CONFLICT(day) DO UPDATE SET xp = xp + excluded.xp`,
+    [day, amount],
+  );
+}
+
+export function getTotalXp(db: Db): number {
+  return db.get<{ total: number }>('SELECT COALESCE(SUM(xp), 0) AS total FROM daily_activity')?.total ?? 0;
 }
 
 export function getActivity(db: Db): DailyActivity[] {

@@ -41,6 +41,7 @@ function Gate() {
         name="mission-complete"
         options={{ headerShown: false, gestureEnabled: false }}
       />
+      <Stack.Screen name="route/[routeId]" options={{ title: "" }} />
       <Stack.Screen name="settings/accessibility" options={{ title: "Accessibility" }} />
       <Stack.Screen name="review-queue" options={{ title: "Review queue" }} />
     </Stack>

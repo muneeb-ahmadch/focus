@@ -47,8 +47,10 @@ beforeEach(() => {
 afterEach(cleanup);
 
 describe('onboarding accessibility step', () => {
-  it('walks date → accessibility → start, persisting the chosen flags', () => {
+  it('walks welcome → date → schedule → accessibility → start, persisting the chosen flags', () => {
     render(<OnboardingScreen />);
+
+    fireEvent.click(screen.getByText('Get started'));
 
     expect(screen.queryByRole('switch', { name: 'Reduce motion' })).toBeNull();
     fireEvent.click(screen.getByText('Continue'));
@@ -58,6 +60,7 @@ describe('onboarding accessibility step', () => {
     ).toBeNull();
 
     fireEvent.click(screen.getByText('pick-date'));
+    fireEvent.click(screen.getByText('Continue'));
     fireEvent.click(screen.getByText('Continue'));
 
     for (const label of [
@@ -102,7 +105,9 @@ describe('onboarding accessibility step', () => {
   it('double-tapping Start creates exactly one profile and does not crash (QA v4 BLOCK finding)', () => {
     render(<OnboardingScreen />);
 
+    fireEvent.click(screen.getByText('Get started'));
     fireEvent.click(screen.getByText('pick-date'));
+    fireEvent.click(screen.getByText('Continue'));
     fireEvent.click(screen.getByText('Continue'));
     fireEvent.click(screen.getByText('Start'));
     fireEvent.click(screen.getByText('Start'));

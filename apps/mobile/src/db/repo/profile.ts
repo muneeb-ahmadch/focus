@@ -18,6 +18,7 @@ export function createProfile(
   p: {
     testDate: string;
     dailyMinutesTarget: number;
+    studyDays?: number[];
     accessibility?: {
       autoPlayAudio: boolean;
       reduceMotion: boolean;
@@ -26,15 +27,17 @@ export function createProfile(
     };
   },
 ): void {
+  const studyDaysJson = JSON.stringify(p.studyDays ?? [1, 2, 3, 4, 5, 6, 7]);
   if (p.accessibility) {
     db.run(
       `INSERT INTO user_profile
-         (user_id, test_date, daily_minutes_target, created_at,
+         (user_id, test_date, daily_minutes_target, study_days_json, created_at,
           auto_play_audio, reduce_motion, high_contrast, dyslexia_font)
-       VALUES ('local', ?, ?, ?, ?, ?, ?, ?)`,
+       VALUES ('local', ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         p.testDate,
         p.dailyMinutesTarget,
+        studyDaysJson,
         todayLocal(),
         p.accessibility.autoPlayAudio ? 1 : 0,
         p.accessibility.reduceMotion ? 1 : 0,
@@ -45,9 +48,9 @@ export function createProfile(
     return;
   }
   db.run(
-    `INSERT INTO user_profile (user_id, test_date, daily_minutes_target, created_at)
-     VALUES ('local', ?, ?, ?)`,
-    [p.testDate, p.dailyMinutesTarget, todayLocal()],
+    `INSERT INTO user_profile (user_id, test_date, daily_minutes_target, study_days_json, created_at)
+     VALUES ('local', ?, ?, ?, ?)`,
+    [p.testDate, p.dailyMinutesTarget, studyDaysJson, todayLocal()],
   );
 }
 

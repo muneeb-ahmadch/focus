@@ -1,5 +1,5 @@
 import type { Db } from '@/db/adapter';
-import { getActiveDays, getRecentAccuracy, getScoredCount } from '@/db/repo/activity';
+import { getActiveDays, getRecentAccuracy, getScoredCount, getTotalXp } from '@/db/repo/activity';
 import { getProfile, type UserProfile } from '@/db/repo/profile';
 import { getDue } from '@/db/repo/reviews';
 import { getAllRouteStates } from '@/db/repo/routes';
@@ -12,6 +12,7 @@ export interface AppStats {
   scoredAnswers: number;
   dueCount: number;
   streak: number;
+  xpTotal: number;
   inputs: ReadinessInputs;
   readiness: Readiness;
   daysToTest: number | null;
@@ -55,6 +56,7 @@ export function buildStats(db: Db): AppStats {
     scoredAnswers,
     dueCount,
     streak: computeStreak(activeDays.map(dayNumber), dayNumber(today)),
+    xpTotal: getTotalXp(db),
     inputs,
     readiness: computeReadiness(inputs),
     daysToTest: profile ? diffDaysLocal(today, profile.test_date) : null,

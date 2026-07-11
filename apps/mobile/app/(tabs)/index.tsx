@@ -53,11 +53,14 @@ export default function HomeScreen() {
       <Text style={styles.greeting}>Hi there 👋</Text>
 
       <View style={styles.card}>
-        {stats.streak > 0 ? (
-          <Text style={styles.streak}>🔥 {stats.streak}-day streak</Text>
-        ) : (
-          <Text style={styles.streakMuted}>Start your streak today</Text>
-        )}
+        <View style={styles.statRow}>
+          {stats.streak > 0 ? (
+            <Text style={styles.streak}>🔥 {stats.streak}-day streak</Text>
+          ) : (
+            <Text style={styles.streakMuted}>Start your streak today</Text>
+          )}
+          <Text style={styles.xp}>⚡ {stats.xpTotal} XP</Text>
+        </View>
         {stats.daysToTest !== null ? (
           <Text style={styles.testLine}>
             Your test is in {stats.daysToTest} day{stats.daysToTest === 1 ? "" : "s"}
@@ -115,8 +118,15 @@ const makeStyles = (t: Theme) =>
       padding: t.space.lg,
       gap: t.space.sm,
     },
+    statRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      gap: t.space.sm,
+    },
     streak: { ...t.text(t.font.md), fontWeight: "600", color: t.colors.text },
     streakMuted: { ...t.text(t.font.md), color: t.colors.textMuted },
+    xp: { ...t.text(t.font.sm), fontWeight: "600", color: t.colors.accent },
     testLine: { ...t.text(t.font.sm), color: t.colors.text },
     readinessRow: { flexDirection: "row", alignItems: "center", gap: t.space.sm },
     provisional: { ...t.text(t.font.xs), color: t.colors.textMuted },

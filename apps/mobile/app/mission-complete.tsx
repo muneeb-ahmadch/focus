@@ -22,6 +22,7 @@ export default function MissionCompleteRoute() {
     masteryAfter?: string;
     newReviews?: string;
     missed?: string;
+    xp?: string;
   }>();
 
   const score = Number(params.score ?? 0);
@@ -31,6 +32,7 @@ export default function MissionCompleteRoute() {
   const masteryAfter = Number(params.masteryAfter ?? 0);
   const newReviews = Number(params.newReviews ?? 0);
   const missed = (params.missed ?? "").split(",").filter(Boolean);
+  const xp = Number(params.xp ?? 0);
 
   const navGuardRef = useRef(false);
   const guardedNav = (fn: () => void) => {
@@ -66,6 +68,8 @@ export default function MissionCompleteRoute() {
           <Text style={styles.ringScore}>{Math.round(score * 5)}/5</Text>
           <Text style={styles.ringLabel}>checkpoint</Text>
         </View>
+
+        {xp > 0 ? <Text style={styles.xpLine}>⚡ +{xp} XP</Text> : null}
 
         {milestone !== null ? (
           <View style={styles.milestone}>
@@ -125,6 +129,7 @@ const makeStyles = (t: Theme) =>
     },
     milestoneText: { color: t.colors.onAccent, ...t.text(t.font.md), fontWeight: "700" },
     streakLine: { ...t.text(t.font.md), color: t.colors.text },
+    xpLine: { ...t.text(t.font.md), fontWeight: "700", color: t.colors.accent },
     masteryBlock: { alignSelf: "stretch", gap: t.space.sm },
     masteryLabel: { ...t.text(t.font.sm), fontWeight: "600", color: t.colors.text },
     reviewLine: { ...t.text(t.font.sm), color: t.colors.textMuted },

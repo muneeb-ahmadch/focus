@@ -83,7 +83,11 @@ CREATE TABLE misconception (
 );
 `;
 
-export const MIGRATIONS: string[] = [V1, V2];
+const V3 = `
+ALTER TABLE daily_activity ADD COLUMN xp INTEGER NOT NULL DEFAULT 0;
+`;
+
+export const MIGRATIONS: string[] = [V1, V2, V3];
 
 export function migrate(db: Db): void {
   const row = db.get<{ user_version: number }>('PRAGMA user_version');

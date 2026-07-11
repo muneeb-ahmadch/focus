@@ -3,12 +3,20 @@ import { create } from 'zustand';
 import { getMission, getRouteManifest, pickDrillQuestion, pickScenarioQuestion } from '@/content';
 import type { Mission, Question, Step } from '@focus/shared';
 import { getDb } from '@/db';
-import { bumpActivity, getActiveDays } from '@/db/repo/activity';
+import { addXp, bumpActivity, getActiveDays } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
 import { completeMission, ensureMissionRow, failCheckpoint, saveResume } from '@/db/repo/missions';
 import { applyGrade, clearItem, getDue, upsertMiss } from '@/db/repo/reviews';
 import { getRouteState, recomputeRoute } from '@/db/repo/routes';
-import { gradeCheckpoint, computeStreak, hitMilestone, rehabOutcome } from '@focus/engine';
+import {
+  gradeCheckpoint,
+  computeStreak,
+  drillXp,
+  hitMilestone,
+  missionXp,
+  rehabOutcome,
+  rehabXp,
+} from '@focus/engine';
 import { dayNumber, now, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 import { rescheduleAll } from '@/notifications/scheduler';
@@ -205,6 +213,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     }
     completeMission(db, missionId, score);
     bumpActivity(db, today, 'missions_completed');
+    const xpEarned = missionXp(score);
+    addXp(db, today, xpEarned);
     const masteryBefore = getRouteState(db, routeId)?.mastery ?? 0;
     const info = routeInfo(routeId);
     if (info) recomputeRoute(db, routeId, info);
@@ -226,6 +236,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         masteryAfter: String(masteryAfter),
         newReviews: String(newReviews),
         missed: s.missedConcepts.join(','),
+        xp: String(xpEarned),
       },
     });
   }
@@ -264,6 +275,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       );
     }
     s.answers.forEach(() => bumpActivity(db, today, 'reviews_cleared'));
+    addXp(db, today, drillXp(correct));
     for (const route of getRouteManifest()) {
       if (route.totalMissions > 0) recomputeRoute(db, route.routeId, route);
     }
@@ -282,6 +294,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     if (outcome.cleared) {
       clearItem(db, conceptId, today);
       bumpActivity(db, today, 'reviews_cleared');
+      addXp(db, today, rehabXp(true));
     } else {
       applyGrade(db, conceptId, outcome.grade, today);
     }
