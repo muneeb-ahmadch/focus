@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { BandChip } from "@/components/BandChip";
 import { getDb } from "@/db";
 import { getActivity } from "@/db/repo/activity";
 import { buildStats } from "@/lib/stats";
 import { type Theme } from "@/theme/tokens";
 import { useThemedStyles } from "@/theme/useTheme";
-
-const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
 export default function ProgressScreen() {
   const styles = useThemedStyles(makeStyles);
@@ -30,13 +29,6 @@ export default function ProgressScreen() {
   if (!data) return <View style={styles.screen} />;
   const { stats, totals } = data;
 
-  const breakdown = [
-    { label: "Coverage", weight: "38%", value: clamp01(stats.inputs.routeCoverage) },
-    { label: "Review debt", weight: "23%", value: clamp01(1 - stats.inputs.dueReviews / 20) },
-    { label: "Accuracy", weight: "23%", value: clamp01(stats.inputs.recentAccuracy) },
-    { label: "Consistency", weight: "15%", value: clamp01(stats.inputs.consistency) },
-  ];
-
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <View style={styles.card}>
@@ -45,26 +37,27 @@ export default function ProgressScreen() {
             <Text style={styles.score}>{stats.readiness.score}</Text>
             <View style={styles.bandRow}>
               <BandChip band={stats.readiness.band} />
-              <Text style={styles.provisional}>Provisional</Text>
+              {stats.readiness.provisional ? (
+                <Text style={styles.provisional}>Provisional</Text>
+              ) : null}
             </View>
+            <Pressable
+              onPress={() => router.push("/readiness")}
+              accessibilityRole="button"
+              accessibilityLabel="See breakdown"
+              style={styles.breakdownLink}
+            >
+              <Text style={styles.breakdownLinkText}>See breakdown</Text>
+            </Pressable>
           </>
         ) : (
-          <Text style={styles.lockedLine}>
-            Answer 20 questions to unlock your readiness estimate ({stats.scoredAnswers}/20)
-          </Text>
+          <>
+            <Text style={styles.lockedLine}>
+              Complete your first missions to unlock your readiness estimate.
+            </Text>
+            <Text style={styles.lockedHint}>{stats.scoredAnswers}/20 answers</Text>
+          </>
         )}
-        <View style={styles.breakdown}>
-          {breakdown.map((row) => (
-            <View key={row.label} style={styles.breakdownRow}>
-              <Text style={styles.breakdownLabel}>
-                {row.label} <Text style={styles.breakdownWeight}>({row.weight})</Text>
-              </Text>
-              <View style={styles.miniTrack}>
-                <View style={[styles.miniFill, { width: `${row.value * 100}%` }]} />
-              </View>
-            </View>
-          ))}
-        </View>
       </View>
 
       {stats.daysToTest !== null ? (
@@ -108,17 +101,9 @@ const makeStyles = (t: Theme) =>
     bandRow: { flexDirection: "row", alignItems: "center", gap: t.space.sm },
     provisional: { ...t.text(t.font.xs), color: t.colors.textMuted },
     lockedLine: { ...t.text(t.font.sm), color: t.colors.textMuted },
-    breakdown: { gap: t.space.sm },
-    breakdownRow: { gap: t.space.xs },
-    breakdownLabel: { ...t.text(t.font.xs), color: t.colors.text, fontWeight: "600" },
-    breakdownWeight: { color: t.colors.textMuted, fontWeight: "400" },
-    miniTrack: {
-      height: 6,
-      backgroundColor: t.colors.lockedBg,
-      borderRadius: t.radius.pill,
-      overflow: "hidden",
-    },
-    miniFill: { height: "100%", backgroundColor: t.colors.accent, borderRadius: t.radius.pill },
+    lockedHint: { ...t.text(t.font.xs), color: t.colors.textMuted },
+    breakdownLink: { alignSelf: "flex-start" },
+    breakdownLinkText: { ...t.text(t.font.sm), color: t.colors.accent, fontWeight: "600" },
     testLine: { ...t.text(t.font.sm), color: t.colors.text, paddingHorizontal: t.space.xs },
     sectionTitle: { ...t.text(t.font.sm), fontWeight: "700", color: t.colors.text },
     dots: { flexDirection: "row", gap: t.space.xs, flexWrap: "wrap" },

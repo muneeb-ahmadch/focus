@@ -10,8 +10,10 @@ import {
 import { getDb } from '@/db';
 import type { Db } from '@/db/adapter';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
-import { now } from '@/lib/clock';
+import { upsertMiss } from '@/db/repo/reviews';
+import { now, todayLocal } from '@/lib/clock';
 import { getMockPool, MOCK_BLUEPRINT } from '@/lib/mockPool';
+import { queryClient } from '@/lib/queryClient';
 
 export type MockPhase = 'idle' | 'running' | 'submit-confirm' | 'expired' | 'submitted';
 
@@ -40,6 +42,8 @@ interface MockState {
   flags: string[];
   score?: number;
   passed?: boolean;
+  wrongQuestionIds: string[];
+  savedConceptIds: string[];
   startMock(): void;
   answer(questionId: string, optionId: string): void;
   toggleFlag(questionId: string): void;
@@ -62,6 +66,8 @@ const initial = {
   flags: [] as string[],
   score: undefined as number | undefined,
   passed: undefined as boolean | undefined,
+  wrongQuestionIds: [] as string[],
+  savedConceptIds: [] as string[],
 };
 
 function parseRun(json: string | null): RunPayload | null {
@@ -135,7 +141,11 @@ export const useMockStore = create<MockState>((set, get) => {
     if (s.attemptId === undefined || !s.paper) return false;
     const db = getDb();
     const { questionById } = getMockPool();
+    const today = todayLocal();
     let correctCount = 0;
+    const wrongQuestionIds: string[] = [];
+    const savedConceptIds: string[] = [];
+    const seenConcepts = new Set<string>();
     for (const questionId of s.paper.questionIds) {
       const optionId = s.answers[questionId];
       if (optionId === undefined) continue;
@@ -149,7 +159,16 @@ export const useMockStore = create<MockState>((set, get) => {
         correct: isRight,
         confidence: 'sure',
       });
-      if (isRight) correctCount += 1;
+      if (isRight) {
+        correctCount += 1;
+      } else {
+        wrongQuestionIds.push(questionId);
+        if (!seenConcepts.has(question.conceptId)) {
+          seenConcepts.add(question.conceptId);
+          savedConceptIds.push(question.conceptId);
+          upsertMiss(db, question.conceptId, 'wrong', today);
+        }
+      }
     }
     const result = scoreMock(correctCount);
     const payload: RunPayload = {
@@ -161,7 +180,8 @@ export const useMockStore = create<MockState>((set, get) => {
       flags: s.flags,
     };
     finishAttempt(db, s.attemptId, status, correctCount, JSON.stringify(payload));
-    set({ score: correctCount, passed: result.passed });
+    set({ score: correctCount, passed: result.passed, wrongQuestionIds, savedConceptIds });
+    void queryClient.invalidateQueries();
     return true;
   }
 
@@ -234,7 +254,9 @@ export const useMockStore = create<MockState>((set, get) => {
 
     tick() {
       const s = get();
-      if (s.phase !== 'running') return;
+      // the deadline is live on the confirm screen too — sitting there must
+      // not hold the paper open past 57:00 (QA V8-Q2)
+      if (s.phase !== 'running' && s.phase !== 'submit-confirm') return;
       if (mockRemainingMs(s.startedAt, now().getTime()) > 0) return;
       if (finalize('auto_submitted')) set({ phase: 'expired' });
     },
@@ -281,6 +303,7 @@ export const useMockStore = create<MockState>((set, get) => {
       const s = get();
       if (s.attemptId !== undefined) finishAttempt(getDb(), s.attemptId, 'abandoned', null, null);
       set({ ...initial });
+      void queryClient.invalidateQueries();
     },
   };
 });

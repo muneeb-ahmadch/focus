@@ -124,19 +124,33 @@ let ok = true;
   ok = report('TOKEN COLOURS (apps/mobile)', violations) && ok;
 }
 
-// 6. MOCK STRICTNESS — the mock runner surface carries zero coaching/feedback
-//    vocabulary in its own string literals: no praise, no correctness reveal,
-//    no gamification (streak/XP/hints) anywhere inside the strict assessment.
+// 6. MOCK STRICTNESS — the PRE-SUBMIT mock surface carries zero coaching/
+//    feedback vocabulary in its own string literals: no praise, no correctness
+//    reveal, no gamification (streak/XP/hints) before the paper is submitted.
+//    Post-submit surfaces (results.tsx, mistakes.tsx) reveal correctness by
+//    design — product rule 2 bans feedback BEFORE submit, not after. The
+//    upsertMiss(..., 'wrong', ...) enum argument in mockStore is data, not copy.
 {
-  const files = [
+  const POST_SUBMIT = new Set(['results.tsx', 'mistakes.tsx']);
+  const allMock = [
     ...walk(join(ROOT, 'apps/mobile/app/mock')),
     ...walk(join(ROOT, 'apps/mobile/src/components/mock')),
     ...walk(join(ROOT, 'apps/mobile/src/stores')).filter((f) => f.endsWith('mockStore.ts')),
   ];
-  const violations = scan(
-    files,
-    /['"`][^'"`]*(correct|wrong|well done|great|nice|keep going|keep it up|streak|\bxp\b|hint|confetti)[^'"`]*['"`]/i,
-  );
+  const preSubmit = allMock.filter((f) => !POST_SUBMIT.has(f.split('/').pop()));
+  const postSubmit = allMock.filter((f) => POST_SUBMIT.has(f.split('/').pop()));
+  const violations = [
+    // pre-submit: no correctness reveal, no praise, no gamification
+    ...scan(
+      preSubmit,
+      /['"`][^'"`]*(correct|wrong|well done|great|nice|keep going|keep it up|streak|\bxp\b|hint|confetti)[^'"`]*['"`]/i,
+    ).filter((v) => !/upsertMiss\b/.test(v) && !v.includes("'wrong'")),
+    // post-submit: correctness reveal is the point, but praise/gamification stay banned
+    ...scan(
+      postSubmit,
+      /['"`][^'"`]*(well done|great|nice|keep going|keep it up|streak|\bxp\b|hint|confetti)[^'"`]*['"`]/i,
+    ),
+  ];
   ok = report('MOCK STRICTNESS (apps/mobile mock surface)', violations) && ok;
 }
 

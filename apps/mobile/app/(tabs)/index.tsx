@@ -70,11 +70,13 @@ export default function HomeScreen() {
           {stats.readiness.score !== null && stats.readiness.band !== null ? (
             <>
               <BandChip band={stats.readiness.band} />
-              <Text style={styles.provisional}>Provisional</Text>
+              {stats.readiness.provisional ? (
+                <Text style={styles.provisional}>Provisional</Text>
+              ) : null}
             </>
           ) : (
             <Text style={styles.lockedLine}>
-              Answer 20 questions to unlock your readiness estimate ({stats.scoredAnswers}/20)
+              Complete your first missions to unlock your readiness estimate.
             </Text>
           )}
         </View>

@@ -1,5 +1,6 @@
 import type { Db } from '@/db/adapter';
 import { getActiveDays, getRecentAccuracy, getScoredCount, getTotalXp } from '@/db/repo/activity';
+import { getMockScores } from '@/db/repo/attempts';
 import { getProfile, type UserProfile } from '@/db/repo/profile';
 import { getDue } from '@/db/repo/reviews';
 import { getAllRouteStates } from '@/db/repo/routes';
@@ -43,6 +44,7 @@ export function buildStats(db: Db): AppStats {
   const consistency = activeLast14 / Math.max(1, Math.min(14, daysSinceCreated));
 
   const inputs: ReadinessInputs = {
+    mockScores: getMockScores(db),
     scoredAnswers,
     routeCoverage: totalMissions === 0 ? 0 : completedMissions / totalMissions,
     dueReviews: dueCount,

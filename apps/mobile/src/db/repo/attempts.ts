@@ -38,6 +38,16 @@ export function finishAttempt(
   );
 }
 
+export function getMockScores(db: Db): number[] {
+  return db
+    .all<{ score: number }>(
+      `SELECT score FROM attempt
+       WHERE attempt_type = 'mock' AND status IN ('submitted','auto_submitted') AND score IS NOT NULL
+       ORDER BY started_at ASC`,
+    )
+    .map((r) => r.score);
+}
+
 export function recordAnswer(
   db: Db,
   attemptId: number,

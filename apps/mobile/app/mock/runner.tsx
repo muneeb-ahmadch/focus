@@ -1,4 +1,4 @@
-import { MOCK_TOTAL, mockRemainingMs } from '@focus/engine';
+import { mockRemainingMs } from '@focus/engine';
 import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -24,9 +24,8 @@ export default function MockRunnerScreen() {
   const index = useMockStore((s) => s.index);
   const answers = useMockStore((s) => s.answers);
   const flags = useMockStore((s) => s.flags);
-  const score = useMockStore((s) => s.score);
   const [, forceTick] = useState(0);
-  const doneGuardRef = useRef(false);
+  const resultsNavGuardRef = useRef(false);
 
   useEffect(() => {
     if (phase !== 'running' && phase !== 'submit-confirm') return;
@@ -37,33 +36,16 @@ export default function MockRunnerScreen() {
     return () => clearInterval(id);
   }, [phase]);
 
+  useEffect(() => {
+    if (phase !== 'expired' && phase !== 'submitted') return;
+    if (resultsNavGuardRef.current) return;
+    resultsNavGuardRef.current = true;
+    router.replace('/mock/results');
+  }, [phase]);
+
   if (phase === 'idle') return <View style={styles.screen} />;
 
-  if (phase === 'expired' || phase === 'submitted') {
-    const onDone = () => {
-      if (doneGuardRef.current) return;
-      doneGuardRef.current = true;
-      useMockStore.getState().discard();
-      router.replace('/(tabs)');
-    };
-    return (
-      <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
-        <View style={styles.resultBody}>
-          <Text style={styles.title}>{phase === 'expired' ? "Time's up" : 'Mock complete'}</Text>
-          {phase === 'expired' ? (
-            <Text style={styles.explainer}>Your answers were submitted automatically.</Text>
-          ) : null}
-          <Text style={styles.score}>
-            {score ?? 0} / {MOCK_TOTAL}
-          </Text>
-          {phase === 'submitted' ? <Text style={styles.explainer}>Pass mark: 43</Text> : null}
-        </View>
-        <View style={styles.footer}>
-          <PrimaryButton title="Done" onPress={onDone} />
-        </View>
-      </SafeAreaView>
-    );
-  }
+  if (phase === 'expired' || phase === 'submitted') return <View style={styles.screen} />;
 
   if (!paper) return <View style={styles.screen} />;
 
@@ -213,13 +195,6 @@ const makeStyles = (t: Theme) =>
     headerButtonText: { ...t.text(t.font.xs), color: t.colors.text, fontWeight: '600' },
     headerButtonTextActive: { color: t.colors.accent },
     body: { flex: 1, padding: t.space.lg, gap: t.space.lg },
-    resultBody: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingHorizontal: t.space.xl,
-      gap: t.space.md,
-    },
     videoFrame: {
       aspectRatio: 16 / 9,
       backgroundColor: t.colors.surface,
@@ -255,7 +230,4 @@ const makeStyles = (t: Theme) =>
     navButtonDisabled: { opacity: 0.4 },
     navButtonText: { ...t.text(t.font.md), color: t.colors.text, fontWeight: '600' },
     confirmLine: { ...t.text(t.font.lg), color: t.colors.text, textAlign: 'center' },
-    title: { ...t.text(t.font.xxl), fontWeight: '700', color: t.colors.text, textAlign: 'center' },
-    score: { ...t.text(t.font.xxl), fontWeight: '700', color: t.colors.text },
-    explainer: { ...t.text(t.font.md), color: t.colors.textMuted, textAlign: 'center' },
   });

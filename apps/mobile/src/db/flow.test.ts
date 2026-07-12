@@ -106,6 +106,7 @@ describe('core loop flow (data layer)', () => {
     expect(getScoredCount(db)).toBeLessThan(20);
     expect(
       computeReadiness({
+        mockScores: [],
         scoredAnswers: getScoredCount(db),
         routeCoverage: 0.2,
         dueReviews: 0,

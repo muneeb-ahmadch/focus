@@ -5,6 +5,7 @@ import { ROUTES } from '@/content';
 export interface PoolQuestion {
   id: string;
   conceptId: string;
+  routeId: string;
   prompt: string;
   options: Question['options'];
   video: boolean;
@@ -34,6 +35,7 @@ function buildPool(): BuiltPool {
             questionById.set(id, {
               id,
               conceptId: q.conceptId,
+              routeId: route.routeId,
               prompt: q.prompt,
               options: q.options,
               video: false,
@@ -50,6 +52,7 @@ function buildPool(): BuiltPool {
         questionById.set(id, {
           id,
           conceptId: step.conceptId,
+          routeId: route.routeId,
           prompt: step.question.prompt,
           options: step.question.options,
           video: false,

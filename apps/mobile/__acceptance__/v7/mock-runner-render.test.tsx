@@ -2,8 +2,8 @@
 // Slice v7 gate: the mock runner at the real component tree (R5 — walk ≥2
 // consecutive questions), plus MockStart/resume-prompt and the review grid.
 // The load-bearing assertion class: STRICT MODE — nothing the runner renders
-// before submit may reveal correctness or coach. Post-submit score display is
-// the only number allowed, and only on the submitted phase.
+// before submit may reveal correctness or coach. Since v8 the runner renders
+// no score at all: terminal phases hand off to /mock/results.
 import { cleanup, fireEvent, render, screen, act } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ReactNode } from 'react';
@@ -18,14 +18,20 @@ import { useMockStore } from '@/stores/mockStore';
 
 const START_MS = 1_780_000_000_000;
 
-const h = vi.hoisted(() => ({ db: null as unknown, nowMs: 0, push: vi.fn(), back: vi.fn() }));
+const h = vi.hoisted(() => ({
+  db: null as unknown,
+  nowMs: 0,
+  push: vi.fn(),
+  back: vi.fn(),
+  replace: vi.fn(),
+}));
 
 vi.mock('@/db', () => ({
   getDb: () => h.db as Db,
   initDb: async () => h.db as Db,
 }));
 vi.mock('expo-router', () => ({
-  router: { replace: () => {}, back: h.back, push: h.push },
+  router: { replace: h.replace, back: h.back, push: h.push },
   useLocalSearchParams: () => ({}),
   Stack: { Screen: () => null },
 }));
@@ -55,6 +61,7 @@ beforeEach(() => {
   h.nowMs = START_MS;
   h.push.mockClear();
   h.back.mockClear();
+  h.replace.mockClear();
   useMockStore.setState(useMockStore.getInitialState());
 });
 
@@ -136,8 +143,8 @@ describe('MockRunner strict question flow', () => {
   });
 });
 
-describe('submit confirm, expiry, and the post-submit screen', () => {
-  it('submit-confirm states the unanswered count; confirming lands on the score', () => {
+describe('submit confirm, expiry, and the results handoff (v8: no score inside the runner)', () => {
+  it('submit-confirm states the unanswered count; confirming hands off to /mock/results', () => {
     useMockStore.getState().startMock();
     const ids = useMockStore.getState().paper!.questionIds;
     const correct = q(ids[0]!).options.find((o) => o.correct)!;
@@ -152,10 +159,10 @@ describe('submit confirm, expiry, and the post-submit screen', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /submit/i }));
     expect(useMockStore.getState().phase).toBe('submitted');
-    screen.getByText(/1\s*\/\s*50/);
+    expect(JSON.stringify(h.replace.mock.calls)).toContain('/mock/results');
   });
 
-  it('expiry renders the time-expired screen, auto-submitted, no coaching', () => {
+  it('expiry auto-submits and hands off to /mock/results, no coaching en route', () => {
     useMockStore.getState().startMock();
     const { container } = render(<MockRunnerScreen />);
 
@@ -164,7 +171,7 @@ describe('submit confirm, expiry, and the post-submit screen', () => {
       useMockStore.getState().tick();
     });
 
-    screen.getByText(/time.?s up|time expired/i);
+    expect(JSON.stringify(h.replace.mock.calls)).toContain('/mock/results');
     expect(container.textContent).not.toMatch(COACHING);
     const row = db.get<{ status: string }>(`SELECT status FROM attempt WHERE attempt_type = 'mock'`);
     expect(row?.status).toBe('auto_submitted');
