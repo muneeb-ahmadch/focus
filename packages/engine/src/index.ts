@@ -5,3 +5,4 @@ export * from './checkpoint';
 export * from './streak';
 export * from './rehab';
 export * from './xp';
+export * from './mock';

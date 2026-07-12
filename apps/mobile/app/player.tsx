@@ -27,6 +27,16 @@ export default function PlayerRoute() {
   }, []);
 
   const missionId = params.missionId;
+  // A mount that names a mission owns the player: a session left active in the
+  // store (rehab/drill/other mission abandoned without the exit confirm) must
+  // not render under this URL. Abandon it (mission resume is persisted) and
+  // fall through to the requested mission's intro.
+  const hijacked = usePlayerStore(
+    (s) => s.active && !!missionId && !(s.mode === 'mission' && s.missionId === missionId),
+  );
+  useEffect(() => {
+    if (hijacked) usePlayerStore.getState().abandon();
+  }, [hijacked]);
   const mission = useMemo(() => (missionId ? getMission(missionId) : undefined), [missionId]);
   const resume = useMemo<ResumePayload | undefined>(() => {
     if (isDrill || !missionId) return undefined;
@@ -34,7 +44,7 @@ export default function PlayerRoute() {
     return state?.status === 'in_progress' ? parseResumePayload(state.resume_payload_json) : undefined;
   }, [isDrill, missionId]);
 
-  if (active) return <PlayerScreen />;
+  if (active && !hijacked) return <PlayerScreen />;
 
   if (!isDrill && !mission) {
     return (

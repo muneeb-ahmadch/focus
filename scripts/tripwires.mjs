@@ -124,6 +124,22 @@ let ok = true;
   ok = report('TOKEN COLOURS (apps/mobile)', violations) && ok;
 }
 
+// 6. MOCK STRICTNESS — the mock runner surface carries zero coaching/feedback
+//    vocabulary in its own string literals: no praise, no correctness reveal,
+//    no gamification (streak/XP/hints) anywhere inside the strict assessment.
+{
+  const files = [
+    ...walk(join(ROOT, 'apps/mobile/app/mock')),
+    ...walk(join(ROOT, 'apps/mobile/src/components/mock')),
+    ...walk(join(ROOT, 'apps/mobile/src/stores')).filter((f) => f.endsWith('mockStore.ts')),
+  ];
+  const violations = scan(
+    files,
+    /['"`][^'"`]*(correct|wrong|well done|great|nice|keep going|keep it up|streak|\bxp\b|hint|confetti)[^'"`]*['"`]/i,
+  );
+  ok = report('MOCK STRICTNESS (apps/mobile mock surface)', violations) && ok;
+}
+
 if (!ok) {
   console.error('\ntripwires failed — see violations above');
   process.exit(1);

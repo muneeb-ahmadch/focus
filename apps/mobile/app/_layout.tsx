@@ -44,6 +44,18 @@ function Gate() {
       <Stack.Screen name="route/[routeId]" options={{ title: "" }} />
       <Stack.Screen name="settings/accessibility" options={{ title: "Accessibility" }} />
       <Stack.Screen name="review-queue" options={{ title: "Review queue" }} />
+      <Stack.Screen
+        name="mock/index"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name="mock/runner"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name="mock/review"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
     </Stack>
   );
 }

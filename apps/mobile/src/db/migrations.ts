@@ -87,19 +87,46 @@ const V3 = `
 ALTER TABLE daily_activity ADD COLUMN xp INTEGER NOT NULL DEFAULT 0;
 `;
 
-export const MIGRATIONS: string[] = [V1, V2, V3];
+const V4 = `
+CREATE TABLE attempt_new (
+  attempt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  attempt_type TEXT NOT NULL CHECK (attempt_type IN ('lesson','drill','mock')),
+  content_id TEXT NOT NULL,
+  status TEXT NOT NULL CHECK (status IN ('in_progress','submitted','abandoned','auto_submitted')),
+  score REAL,
+  result_payload_json TEXT,
+  started_at TEXT NOT NULL,
+  completed_at TEXT
+);
+INSERT INTO attempt_new
+  (attempt_id, attempt_type, content_id, status, score, result_payload_json, started_at, completed_at)
+  SELECT attempt_id, attempt_type, content_id, status, score, result_payload_json, started_at, completed_at
+  FROM attempt;
+DROP TABLE attempt;
+ALTER TABLE attempt_new RENAME TO attempt;
+`;
+
+export const MIGRATIONS: string[] = [V1, V2, V3, V4];
 
 export function migrate(db: Db): void {
   const row = db.get<{ user_version: number }>('PRAGMA user_version');
   const current = row?.user_version ?? 0;
-  for (let v = current; v < MIGRATIONS.length; v++) {
-    const batch = MIGRATIONS[v];
-    db.transaction(() => db.exec(batch));
-    db.exec(`PRAGMA user_version = ${v + 1}`);
+  if (current < MIGRATIONS.length) {
+    // V4 rebuilds the attempt table, which answer_event references; SQLite cannot
+    // defer that FK check across a DROP, so enforcement is off for the rebuild and
+    // restored to its prior value after (foreign_keys is a no-op inside a transaction).
+    const fk = db.get<{ foreign_keys: number }>('PRAGMA foreign_keys')?.foreign_keys ?? 0;
+    db.exec('PRAGMA foreign_keys = OFF');
+    for (let v = current; v < MIGRATIONS.length; v++) {
+      const batch = MIGRATIONS[v];
+      db.transaction(() => db.exec(batch));
+      db.exec(`PRAGMA user_version = ${v + 1}`);
+    }
+    db.exec(`PRAGMA foreign_keys = ${fk ? 'ON' : 'OFF'}`);
   }
 
   const version = db.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0;
-  for (const requiredTable of ['user_profile', 'misconception']) {
+  for (const requiredTable of ['user_profile', 'misconception', 'attempt']) {
     const table = db.get<{ name: string }>(
       `SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?`,
       [requiredTable],
@@ -109,5 +136,14 @@ export function migrate(db: Db): void {
         `Database corrupt: user_version is ${version} but table '${requiredTable}' does not exist.`,
       );
     }
+  }
+  // table existence alone can't prove V4's rebuild ran (R4): verify the widened CHECK
+  const attemptSql = db.get<{ sql: string }>(
+    `SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'attempt'`,
+  );
+  if (!attemptSql?.sql.includes("'auto_submitted'")) {
+    throw new Error(
+      `Database corrupt: user_version is ${version} but the attempt table predates migration V4.`,
+    );
   }
 }

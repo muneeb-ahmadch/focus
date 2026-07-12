@@ -1,10 +1,12 @@
+import { computeStreak } from '@focus/engine';
+import { router } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 import { useCallback, useEffect, useState } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { getDb } from '@/db';
 import { getActivity, getActiveDays, getRecentAccuracy, getScoredCount } from '@/db/repo/activity';
 import { getAllReviewItems, getDue } from '@/db/repo/reviews';
-import { computeStreak } from '@focus/engine';
+import { MOCKS_ENABLED } from '@/flags';
 import { __getDayOffset, __setDayOffset, dayNumber, fromEpochMs, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 import { rescheduleAll, scheduleTestNotification } from '@/notifications/scheduler';
@@ -97,6 +99,11 @@ export function DevPanel() {
         >
           <Text style={styles.buttonText}>Test notif 10s</Text>
         </Pressable>
+        {MOCKS_ENABLED ? (
+          <Pressable style={styles.button} onPress={() => router.push('/mock')}>
+            <Text style={styles.buttonText}>Mock (dev)</Text>
+          </Pressable>
+        ) : null}
       </View>
 
       <Text style={styles.line}>due reviews: {due.length}</Text>

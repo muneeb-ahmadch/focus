@@ -1,0 +1,286 @@
+import { create } from 'zustand';
+import { z } from 'zod';
+import {
+  generateMock,
+  mockRemainingMs,
+  scoreMock,
+  type MockHistoryAttempt,
+  type MockPaper,
+} from '@focus/engine';
+import { getDb } from '@/db';
+import type { Db } from '@/db/adapter';
+import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
+import { now } from '@/lib/clock';
+import { getMockPool, MOCK_BLUEPRINT } from '@/lib/mockPool';
+
+export type MockPhase = 'idle' | 'running' | 'submit-confirm' | 'expired' | 'submitted';
+
+const runPayloadSchema = z.object({
+  questionIds: z.array(z.string()),
+  videoQuestionIds: z.array(z.string()),
+  exclusionWindow: z.number(),
+  startedAt: z.number(),
+  answers: z.record(z.string(), z.string()),
+  flags: z.array(z.string()),
+});
+type RunPayload = z.infer<typeof runPayloadSchema>;
+
+const historySchema = z.object({
+  questionIds: z.array(z.string()),
+  startedAt: z.number(),
+});
+
+interface MockState {
+  phase: MockPhase;
+  attemptId?: number;
+  paper?: MockPaper;
+  startedAt: number;
+  index: number;
+  answers: Record<string, string>;
+  flags: string[];
+  score?: number;
+  passed?: boolean;
+  startMock(): void;
+  answer(questionId: string, optionId: string): void;
+  toggleFlag(questionId: string): void;
+  goTo(i: number): void;
+  requestSubmit(): void;
+  cancelSubmit(): void;
+  confirmSubmit(): void;
+  tick(): void;
+  resumeMock(): 'resumed' | 'expired' | null;
+  discard(): void;
+}
+
+const initial = {
+  phase: 'idle' as MockPhase,
+  attemptId: undefined as number | undefined,
+  paper: undefined as MockPaper | undefined,
+  startedAt: 0,
+  index: 0,
+  answers: {} as Record<string, string>,
+  flags: [] as string[],
+  score: undefined as number | undefined,
+  passed: undefined as boolean | undefined,
+};
+
+function parseRun(json: string | null): RunPayload | null {
+  if (!json) return null;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(json);
+  } catch {
+    return null;
+  }
+  const result = runPayloadSchema.safeParse(parsed);
+  return result.success ? result.data : null;
+}
+
+function loadHistory(db: Db): MockHistoryAttempt[] {
+  const rows = db.all<{ result_payload_json: string | null }>(
+    `SELECT result_payload_json FROM attempt
+     WHERE attempt_type = 'mock' AND status IN ('submitted','auto_submitted')
+     ORDER BY started_at ASC`,
+  );
+  const history: MockHistoryAttempt[] = [];
+  for (const row of rows) {
+    if (!row.result_payload_json) continue;
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(row.result_payload_json);
+    } catch {
+      continue;
+    }
+    const result = historySchema.safeParse(parsed);
+    if (result.success) {
+      history.push({ questionIds: result.data.questionIds, startedAt: result.data.startedAt });
+    }
+  }
+  return history;
+}
+
+export function peekDanglingMock(): 'live' | 'expired' | null {
+  const row = getDb().get<{ result_payload_json: string | null }>(
+    `SELECT result_payload_json FROM attempt
+     WHERE attempt_type = 'mock' AND status = 'in_progress'
+     ORDER BY attempt_id DESC LIMIT 1`,
+  );
+  if (!row) return null;
+  const payload = parseRun(row.result_payload_json);
+  if (!payload) return null;
+  return mockRemainingMs(payload.startedAt, now().getTime()) > 0 ? 'live' : 'expired';
+}
+
+export const useMockStore = create<MockState>((set, get) => {
+  function persistRun(): void {
+    const s = get();
+    if (s.attemptId === undefined || !s.paper) return;
+    const payload: RunPayload = {
+      questionIds: s.paper.questionIds,
+      videoQuestionIds: s.paper.videoQuestionIds,
+      exclusionWindow: s.paper.exclusionWindow,
+      startedAt: s.startedAt,
+      answers: s.answers,
+      flags: s.flags,
+    };
+    getDb().run(
+      `UPDATE attempt SET result_payload_json = ? WHERE attempt_id = ? AND status = 'in_progress'`,
+      [JSON.stringify(payload), s.attemptId],
+    );
+  }
+
+  function finalize(status: 'submitted' | 'auto_submitted'): boolean {
+    const s = get();
+    if (s.phase !== 'running' && s.phase !== 'submit-confirm') return false;
+    if (s.attemptId === undefined || !s.paper) return false;
+    const db = getDb();
+    const { questionById } = getMockPool();
+    let correctCount = 0;
+    for (const questionId of s.paper.questionIds) {
+      const optionId = s.answers[questionId];
+      if (optionId === undefined) continue;
+      const question = questionById.get(questionId);
+      if (!question) continue;
+      const chosen = question.options.find((o) => o.id === optionId);
+      const isRight = chosen?.correct === true;
+      recordAnswer(db, s.attemptId, {
+        stepId: questionId,
+        conceptId: question.conceptId,
+        correct: isRight,
+        confidence: 'sure',
+      });
+      if (isRight) correctCount += 1;
+    }
+    const result = scoreMock(correctCount);
+    const payload: RunPayload = {
+      questionIds: s.paper.questionIds,
+      videoQuestionIds: s.paper.videoQuestionIds,
+      exclusionWindow: s.paper.exclusionWindow,
+      startedAt: s.startedAt,
+      answers: s.answers,
+      flags: s.flags,
+    };
+    finishAttempt(db, s.attemptId, status, correctCount, JSON.stringify(payload));
+    set({ score: correctCount, passed: result.passed });
+    return true;
+  }
+
+  return {
+    ...initial,
+
+    startMock() {
+      if (get().phase !== 'idle') return;
+      const db = getDb();
+      const { pool } = getMockPool();
+      const paper = generateMock(pool, loadHistory(db), MOCK_BLUEPRINT, Math.random);
+      // self-healing: no UI path leads here with a live mock, but a stray
+      // in_progress row (corrupt payload, tampering) must never accumulate
+      db.run(
+        `UPDATE attempt SET status = 'abandoned', completed_at = ?
+         WHERE attempt_type = 'mock' AND status = 'in_progress'`,
+        [now().toISOString()],
+      );
+      const attemptId = startAttempt(db, 'mock', 'mock');
+      const startedAt = now().getTime();
+      set({
+        ...initial,
+        phase: 'running',
+        attemptId,
+        paper,
+        startedAt,
+        index: 0,
+      });
+      persistRun();
+    },
+
+    answer(questionId, optionId) {
+      const s = get();
+      if (s.phase !== 'running') return;
+      set({ answers: { ...s.answers, [questionId]: optionId } });
+      persistRun();
+    },
+
+    toggleFlag(questionId) {
+      const s = get();
+      if (s.phase !== 'running') return;
+      const flags = s.flags.includes(questionId)
+        ? s.flags.filter((id) => id !== questionId)
+        : [...s.flags, questionId];
+      set({ flags });
+      persistRun();
+    },
+
+    goTo(i) {
+      const s = get();
+      if (s.phase !== 'running' || !s.paper) return;
+      if (i < 0 || i >= s.paper.questionIds.length) return;
+      set({ index: i });
+    },
+
+    requestSubmit() {
+      if (get().phase !== 'running') return;
+      set({ phase: 'submit-confirm' });
+    },
+
+    cancelSubmit() {
+      if (get().phase !== 'submit-confirm') return;
+      set({ phase: 'running' });
+    },
+
+    confirmSubmit() {
+      if (get().phase !== 'submit-confirm') return;
+      if (finalize('submitted')) set({ phase: 'submitted' });
+    },
+
+    tick() {
+      const s = get();
+      if (s.phase !== 'running') return;
+      if (mockRemainingMs(s.startedAt, now().getTime()) > 0) return;
+      if (finalize('auto_submitted')) set({ phase: 'expired' });
+    },
+
+    resumeMock() {
+      if (get().phase !== 'idle') return null;
+      const db = getDb();
+      const row = db.get<{ attempt_id: number; result_payload_json: string | null }>(
+        `SELECT attempt_id, result_payload_json FROM attempt
+         WHERE attempt_type = 'mock' AND status = 'in_progress'
+         ORDER BY attempt_id DESC LIMIT 1`,
+      );
+      if (!row) return null;
+      const payload = parseRun(row.result_payload_json);
+      if (!payload) {
+        finishAttempt(db, row.attempt_id, 'abandoned', null, null);
+        return null;
+      }
+      const paper: MockPaper = {
+        questionIds: payload.questionIds,
+        videoQuestionIds: payload.videoQuestionIds,
+        exclusionWindow: payload.exclusionWindow,
+      };
+      set({
+        ...initial,
+        phase: 'running',
+        attemptId: row.attempt_id,
+        paper,
+        startedAt: payload.startedAt,
+        answers: payload.answers,
+        flags: payload.flags,
+      });
+      if (mockRemainingMs(payload.startedAt, now().getTime()) <= 0) {
+        finalize('auto_submitted');
+        set({ phase: 'expired' });
+        return 'expired';
+      }
+      const firstUnanswered = payload.questionIds.findIndex((id) => payload.answers[id] === undefined);
+      set({ index: firstUnanswered === -1 ? 0 : firstUnanswered });
+      return 'resumed';
+    },
+
+    discard() {
+      const s = get();
+      if (s.attemptId !== undefined) finishAttempt(getDb(), s.attemptId, 'abandoned', null, null);
+      set({ ...initial });
+    },
+  };
+});

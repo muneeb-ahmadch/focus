@@ -2,12 +2,13 @@ import { now, todayLocal } from '@/lib/clock';
 import type { Db } from '../adapter';
 import { bumpActivity } from './activity';
 
-export type AttemptType = 'lesson' | 'drill';
-export type AttemptStatus = 'in_progress' | 'submitted' | 'abandoned';
+export type AttemptType = 'lesson' | 'drill' | 'mock';
+export type AttemptStatus = 'in_progress' | 'submitted' | 'abandoned' | 'auto_submitted';
 
 export function abandonStaleAttempts(db: Db): void {
   db.run(
-    `UPDATE attempt SET status = 'abandoned', completed_at = ? WHERE status = 'in_progress'`,
+    `UPDATE attempt SET status = 'abandoned', completed_at = ?
+     WHERE status = 'in_progress' AND attempt_type != 'mock'`,
     [now().toISOString()],
   );
 }
