@@ -106,7 +106,11 @@ DROP TABLE attempt;
 ALTER TABLE attempt_new RENAME TO attempt;
 `;
 
-export const MIGRATIONS: string[] = [V1, V2, V3, V4];
+const V5 = `
+ALTER TABLE daily_activity ADD COLUMN mocks_completed INTEGER NOT NULL DEFAULT 0;
+`;
+
+export const MIGRATIONS: string[] = [V1, V2, V3, V4, V5];
 
 export function migrate(db: Db): void {
   const row = db.get<{ user_version: number }>('PRAGMA user_version');
@@ -144,6 +148,14 @@ export function migrate(db: Db): void {
   if (!attemptSql?.sql.includes("'auto_submitted'")) {
     throw new Error(
       `Database corrupt: user_version is ${version} but the attempt table predates migration V4.`,
+    );
+  }
+  const dailyActivitySql = db.get<{ sql: string }>(
+    `SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'daily_activity'`,
+  );
+  if (!dailyActivitySql?.sql.includes('mocks_completed')) {
+    throw new Error(
+      `Database corrupt: user_version is ${version} but the daily_activity table predates migration V5.`,
     );
   }
 }

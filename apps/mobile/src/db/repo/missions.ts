@@ -17,6 +17,14 @@ export function getMissionState(db: Db, missionId: string): MissionState | undef
   return db.get<MissionState>('SELECT * FROM mission_state WHERE mission_id = ?', [missionId]);
 }
 
+export function getResumableMission(db: Db): MissionState | undefined {
+  return db.get<MissionState>(
+    `SELECT * FROM mission_state
+     WHERE status = 'in_progress' AND resume_payload_json IS NOT NULL
+     ORDER BY updated_at DESC LIMIT 1`,
+  );
+}
+
 export function getRouteMissionStates(db: Db, routeId: string): MissionState[] {
   return db.all<MissionState>(
     'SELECT * FROM mission_state WHERE route_id = ? ORDER BY mission_id',

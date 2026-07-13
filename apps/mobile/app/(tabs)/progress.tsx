@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { BandChip } from "@/components/BandChip";
 import { getDb } from "@/db";
 import { getActivity } from "@/db/repo/activity";
-import { buildStats } from "@/lib/stats";
+import { buildStats, testDateLine } from "@/lib/stats";
 import { type Theme } from "@/theme/tokens";
 import { useThemedStyles } from "@/theme/useTheme";
 
@@ -61,9 +61,7 @@ export default function ProgressScreen() {
       </View>
 
       {stats.daysToTest !== null ? (
-        <Text style={styles.testLine}>
-          Your test is in {stats.daysToTest} day{stats.daysToTest === 1 ? "" : "s"}
-        </Text>
+        <Text style={styles.testLine}>{testDateLine(stats.daysToTest)}</Text>
       ) : null}
 
       <View style={styles.card}>

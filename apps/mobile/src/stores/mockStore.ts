@@ -9,6 +9,7 @@ import {
 } from '@focus/engine';
 import { getDb } from '@/db';
 import type { Db } from '@/db/adapter';
+import { bumpActivity } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
 import { upsertMiss } from '@/db/repo/reviews';
 import { now, todayLocal } from '@/lib/clock';
@@ -180,6 +181,7 @@ export const useMockStore = create<MockState>((set, get) => {
       flags: s.flags,
     };
     finishAttempt(db, s.attemptId, status, correctCount, JSON.stringify(payload));
+    bumpActivity(db, today, 'mocks_completed');
     set({ score: correctCount, passed: result.passed, wrongQuestionIds, savedConceptIds });
     void queryClient.invalidateQueries();
     return true;

@@ -47,6 +47,12 @@ vi.mock('@/lib/clock', async (importOriginal) => {
 vi.mock('react-native-safe-area-context', () => ({
   SafeAreaView: ({ children }: { children?: import('react').ReactNode }) => <>{children}</>,
 }));
+// results.tsx now reaches playerStore (V8-D1 fix) whose import graph includes
+// the expo notifications scheduler — mocked like every other playerStore suite
+vi.mock('@/notifications/scheduler', () => ({
+  rescheduleAll: async () => {},
+  requestPermissionOnce: async () => {},
+}));
 
 // Phrase-matched, not bare words — real DVSA content contains "correct"/
 // "wrong"/"great" legitimately (same ruling as v7's runner sweep).
@@ -174,7 +180,10 @@ describe('MockResults', () => {
     expect(screen.queryByRole('button', { name: /review mistakes/i })).toBeNull();
   });
 
-  it('Fix them now leaves the mock and opens the review queue', () => {
+  // V8-D1 ruling (v9): the queue filters due-NOW while these items are due
+  // tomorrow — the CTA drills the saved concepts immediately instead. The full
+  // pin lives in __acceptance__/v9/fix-them-now.test.tsx.
+  it('Fix them now leaves the mock and opens the player on a fresh drill', () => {
     useMockStore.getState().startMock();
     const ids = useMockStore.getState().paper!.questionIds;
     useMockStore.getState().answer(ids[0]!, wrongOption(ids[0]!).id);
@@ -184,7 +193,7 @@ describe('MockResults', () => {
     render(<MockResultsScreen />);
     fireEvent.click(screen.getByRole('button', { name: /fix them now/i }));
     expect(JSON.stringify(h.push.mock.calls) + JSON.stringify(h.replace.mock.calls)).toContain(
-      '/review-queue',
+      '/player',
     );
     expect(useMockStore.getState().phase).toBe('idle');
   });

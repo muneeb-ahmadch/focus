@@ -16,6 +16,22 @@ export default function ProfileScreen() {
       <Pressable
         style={styles.row}
         accessibilityRole="button"
+        onPress={() => router.push("/settings/schedule")}
+      >
+        <Text style={styles.rowLabel}>Schedule</Text>
+        <Ionicons name="chevron-forward" size={20} color={t.colors.textMuted} />
+      </Pressable>
+      <Pressable
+        style={styles.row}
+        accessibilityRole="button"
+        onPress={() => router.push("/settings/test-date")}
+      >
+        <Text style={styles.rowLabel}>Test date</Text>
+        <Ionicons name="chevron-forward" size={20} color={t.colors.textMuted} />
+      </Pressable>
+      <Pressable
+        style={styles.row}
+        accessibilityRole="button"
         onPress={() => router.push("/settings/accessibility")}
       >
         <Text style={styles.rowLabel}>Accessibility</Text>

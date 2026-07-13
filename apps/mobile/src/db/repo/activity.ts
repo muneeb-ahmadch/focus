@@ -1,16 +1,22 @@
 import type { Db } from '../adapter';
 
-export type ActivityField = 'missions_completed' | 'reviews_cleared' | 'answers_scored';
+export type ActivityField = 'missions_completed' | 'reviews_cleared' | 'answers_scored' | 'mocks_completed';
 
 export interface DailyActivity {
   day: string;
   missions_completed: number;
   reviews_cleared: number;
   answers_scored: number;
+  mocks_completed: number;
   xp: number;
 }
 
-const FIELDS: readonly ActivityField[] = ['missions_completed', 'reviews_cleared', 'answers_scored'];
+const FIELDS: readonly ActivityField[] = [
+  'missions_completed',
+  'reviews_cleared',
+  'answers_scored',
+  'mocks_completed',
+];
 
 export function bumpActivity(db: Db, day: string, field: ActivityField): void {
   if (!FIELDS.includes(field)) return;
@@ -41,7 +47,7 @@ export function getActivity(db: Db): DailyActivity[] {
 export function getActiveDays(db: Db): string[] {
   return db
     .all<{ day: string }>(
-      'SELECT day FROM daily_activity WHERE missions_completed > 0 OR reviews_cleared > 0',
+      'SELECT day FROM daily_activity WHERE missions_completed > 0 OR reviews_cleared > 0 OR mocks_completed > 0',
     )
     .map((r) => r.day);
 }

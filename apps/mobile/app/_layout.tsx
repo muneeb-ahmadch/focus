@@ -43,6 +43,8 @@ function Gate() {
       />
       <Stack.Screen name="route/[routeId]" options={{ title: "" }} />
       <Stack.Screen name="settings/accessibility" options={{ title: "Accessibility" }} />
+      <Stack.Screen name="settings/schedule" options={{ title: "Schedule" }} />
+      <Stack.Screen name="settings/test-date" options={{ title: "Test date" }} />
       <Stack.Screen name="review-queue" options={{ title: "Review queue" }} />
       <Stack.Screen name="readiness" options={{ title: "Readiness" }} />
       <Stack.Screen

@@ -7,6 +7,7 @@ import { PrimaryButton } from '@/components/PrimaryButton';
 import { ROUTES } from '@/content';
 import { getMockPool } from '@/lib/mockPool';
 import { useMockStore } from '@/stores/mockStore';
+import { usePlayerStore } from '@/stores/playerStore';
 import { type Theme } from '@/theme/tokens';
 import { useThemedStyles } from '@/theme/useTheme';
 
@@ -47,8 +48,10 @@ export default function MockResultsScreen() {
   const onFixThemNow = () => {
     if (leaveGuardRef.current) return;
     leaveGuardRef.current = true;
+    const ids = useMockStore.getState().savedConceptIds;
     useMockStore.getState().discard();
-    router.replace('/review-queue');
+    usePlayerStore.getState().startDrill(ids);
+    router.replace('/player');
   };
 
   const onRebuildRoute = () => {

@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
-// Slice v5 gate: the retention hook. A next-day session (clock injection)
-// opens with due reviews BEFORE the new mission — Home's leading call to
-// action targets the review queue when reviews are due, and the mission CTA
-// leads only when nothing is due.
+// Slice v5 gate: the retention hook — due reviews SURFACE on Home the next
+// day and route to the review queue. Ordering was superseded by v9's daily
+// plan: light debt (≤10) sits after the mission, urgent debt (>10) leads
+// (pinned in __acceptance__/v9/daily-plan.test.tsx). What v5 still owns:
+// next-day reviews are never silently dropped from the plan.
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -14,7 +15,7 @@ import { createProfile } from '@/db/repo/profile';
 import { upsertMiss } from '@/db/repo/reviews';
 import { syncRoutesFromContent } from '@/db/repo/routes';
 import { openTestDb } from '@/db/testing/adapter.node';
-import { __setDayOffset, todayLocal } from '@/lib/clock';
+import { __setDayOffset, addDaysLocal, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 
 const h = vi.hoisted(() => ({
@@ -41,7 +42,7 @@ beforeEach(() => {
   db = openTestDb();
   migrate(db);
   syncRoutesFromContent(db, getRouteManifest());
-  createProfile(db, { testDate: '2026-08-05', dailyMinutesTarget: 10 });
+  createProfile(db, { testDate: addDaysLocal(todayLocal(), 30), dailyMinutesTarget: 10 });
   h.db = db;
   h.push.mockClear();
   queryClient.clear();
@@ -61,7 +62,7 @@ function renderHome() {
 }
 
 describe('next-day session opens with reviews first', () => {
-  it('with reviews due, the review CTA precedes the mission CTA and opens the review queue', async () => {
+  it('with a review due, the plan still surfaces it next day and it opens the review queue', async () => {
     const concept = getMission('r1-m1')!.steps.find((s) => s.type !== 'checkpoint')!.conceptId;
     upsertMiss(db, concept, 'wrong', todayLocal());
     __setDayOffset(1);
@@ -69,15 +70,11 @@ describe('next-day session opens with reviews first', () => {
     renderHome();
 
     const review = await screen.findByRole('button', { name: /clear 1 review/i });
-    const mission = screen.getByRole('button', { name: /mission/i });
-    expect(
-      review.compareDocumentPosition(mission) & Node.DOCUMENT_POSITION_FOLLOWING,
-      'review CTA must come before the mission CTA',
-    ).toBeTruthy();
+    screen.getByRole('button', { name: /mission/i });
 
     fireEvent.click(review);
     expect(h.push).toHaveBeenCalled();
-    expect(JSON.stringify(h.push.mock.calls[0])).toContain('review-queue');
+    expect(JSON.stringify(h.push.mock.calls)).toContain('review-queue');
   });
 
   it('with nothing due, there is no review CTA and the mission CTA leads', async () => {

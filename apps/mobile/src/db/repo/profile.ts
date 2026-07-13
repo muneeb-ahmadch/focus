@@ -70,3 +70,14 @@ export function updateProfileSettings(
   const values = entries.map(([, value]) => value);
   db.run(`UPDATE user_profile SET ${setClause} WHERE user_id = 'local'`, values);
 }
+
+export function updateSchedule(db: Db, p: { dailyMinutesTarget: number; studyDays: number[] }): void {
+  db.run(
+    `UPDATE user_profile SET daily_minutes_target = ?, study_days_json = ? WHERE user_id = 'local'`,
+    [p.dailyMinutesTarget, JSON.stringify(p.studyDays)],
+  );
+}
+
+export function updateTestDate(db: Db, testDate: string): void {
+  db.run(`UPDATE user_profile SET test_date = ? WHERE user_id = 'local'`, [testDate]);
+}

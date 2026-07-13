@@ -1,11 +1,20 @@
 import type { Db } from '@/db/adapter';
 import { getActiveDays, getRecentAccuracy, getScoredCount, getTotalXp } from '@/db/repo/activity';
 import { getMockScores } from '@/db/repo/attempts';
+import { getResumableMission } from '@/db/repo/missions';
 import { getProfile, type UserProfile } from '@/db/repo/profile';
 import { getDue } from '@/db/repo/reviews';
 import { getAllRouteStates } from '@/db/repo/routes';
-import { computeReadiness, computeStreak, type Readiness, type ReadinessInputs } from '@focus/engine';
+import {
+  buildDailyPlan,
+  computeReadiness,
+  computeStreak,
+  type PlanItem,
+  type Readiness,
+  type ReadinessInputs,
+} from '@focus/engine';
 import { addDaysLocal, dayNumber, diffDaysLocal, todayLocal } from '@/lib/clock';
+import { MOCKS_ENABLED } from '@/flags';
 
 export interface AppStats {
   today: string;
@@ -18,6 +27,15 @@ export interface AppStats {
   readiness: Readiness;
   daysToTest: number | null;
   activeDotsLast14: boolean[];
+  plan: PlanItem[];
+  resumeMissionId: string | null;
+}
+
+export function testDateLine(daysToTest: number): string {
+  if (daysToTest < 0) return 'Your test date has passed — set a new one in Profile';
+  if (daysToTest === 0) return 'Your test is today';
+  if (daysToTest === 1) return 'Your test is tomorrow';
+  return `Your test is in ${daysToTest} days`;
 }
 
 export function buildStats(db: Db): AppStats {
@@ -52,6 +70,21 @@ export function buildStats(db: Db): AppStats {
     consistency,
   };
 
+  const daysToTest = profile ? diffDaysLocal(today, profile.test_date) : null;
+  const resumable = getResumableMission(db);
+  const plan = buildDailyPlan({
+    hasResume: resumable !== undefined,
+    dueReviews: dueCount,
+    routes: routes.map((r) => ({
+      routeId: r.route_id,
+      mastery: r.mastery,
+      completedMissions: r.completed_missions,
+      totalMissions: r.total_missions,
+    })),
+    daysToTest: daysToTest ?? 999,
+    mocksAvailable: MOCKS_ENABLED,
+  });
+
   return {
     today,
     profile,
@@ -61,7 +94,9 @@ export function buildStats(db: Db): AppStats {
     xpTotal: getTotalXp(db),
     inputs,
     readiness: computeReadiness(inputs),
-    daysToTest: profile ? diffDaysLocal(today, profile.test_date) : null,
+    daysToTest,
     activeDotsLast14,
+    plan,
+    resumeMissionId: resumable?.mission_id ?? null,
   };
 }
