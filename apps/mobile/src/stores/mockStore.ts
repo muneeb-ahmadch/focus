@@ -17,6 +17,7 @@ import type { Db } from '@/db/adapter';
 import { bumpActivity } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
 import { upsertMiss } from '@/db/repo/reviews';
+import { flush, track } from '@/lib/analytics';
 import { now, todayLocal } from '@/lib/clock';
 import { getMockPool, MOCK_BLUEPRINT } from '@/lib/mockPool';
 import { queryClient } from '@/lib/queryClient';
@@ -214,6 +215,12 @@ export const useMockStore = create<MockState>((set, get) => {
     };
     finishAttempt(db, s.attemptId, status, correctCount, JSON.stringify(payload));
     if (s.runConfig.attemptType === 'mock') bumpActivity(db, today, 'mocks_completed');
+    track('mock_completed', {
+      kind: s.runConfig.attemptType === 'mock' ? 'real' : 'mini',
+      score: correctCount,
+      passed,
+    });
+    void flush();
     set({ score: correctCount, passed, wrongQuestionIds, savedConceptIds });
     void queryClient.invalidateQueries();
     return true;
@@ -239,6 +246,7 @@ export const useMockStore = create<MockState>((set, get) => {
         );
       }
       const attemptId = startAttempt(db, config.attemptType, config.contentId);
+      track('mock_started', { kind: config.attemptType === 'mock' ? 'real' : 'mini' });
       const startedAt = now().getTime();
       set({
         ...initial,

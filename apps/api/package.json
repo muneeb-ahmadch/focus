@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "uv run uvicorn app.main:app --reload"
+    "dev": "uv run uvicorn app.main:app --reload --no-proxy-headers",
+    "test": "uv run pytest -q"
   }
 }

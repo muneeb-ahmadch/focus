@@ -37,7 +37,9 @@ describe('migration V6 — attempt_type admits practice', () => {
          VALUES ('practice', 'topic:lights', 'in_progress', '2026-07-13T10:00:00.000Z')`,
       ),
     ).not.toThrow();
-    expect(db.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(6);
+    expect(
+      db.get<{ user_version: number }>('PRAGMA user_version')!.user_version,
+    ).toBeGreaterThanOrEqual(6);
   });
 
   it('every pre-existing attempt type still inserts', () => {
@@ -77,7 +79,9 @@ describe('migration V6 — attempt_type admits practice', () => {
     expect(row).toEqual({ attempt_id: attemptId, attempt_type: 'mock', score: 44 });
     const evt = v5.get<{ attempt_id: number }>('SELECT attempt_id FROM answer_event');
     expect(evt?.attempt_id).toBe(attemptId);
-    expect(v5.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(6);
+    expect(
+      v5.get<{ user_version: number }>('PRAGMA user_version')!.user_version,
+    ).toBeGreaterThanOrEqual(6);
     expect(() =>
       v5.run(
         `INSERT INTO attempt (attempt_type, content_id, status, started_at)
@@ -94,6 +98,8 @@ describe('migration V6 — attempt_type admits practice', () => {
 
   it('is idempotent', () => {
     expect(() => migrate(db)).not.toThrow();
-    expect(db.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(6);
+    expect(
+      db.get<{ user_version: number }>('PRAGMA user_version')!.user_version,
+    ).toBeGreaterThanOrEqual(6);
   });
 });

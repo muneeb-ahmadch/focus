@@ -73,6 +73,8 @@ export function DevPanel() {
   const streak = computeStreak(getActiveDays(db).map(dayNumber), dayNumber(today));
   const scoredCount = getScoredCount(db);
   const accuracy = getRecentAccuracy(db);
+  const analyticsQueueSize =
+    db.get<{ n: number }>('SELECT COUNT(*) AS n FROM analytics_event')?.n ?? 0;
 
   return (
     <View style={styles.panel}>
@@ -128,6 +130,7 @@ export function DevPanel() {
       <Text style={styles.line}>
         streak: {streak} · scored: {scoredCount} · recent accuracy: {(accuracy * 100).toFixed(0)}%
       </Text>
+      <Text style={styles.line}>analytics queue: {analyticsQueueSize}</Text>
 
       <Text style={styles.heading}>scheduled notifications ({scheduled.length})</Text>
       {scheduled.length === 0 ? <Text style={styles.line}>(none)</Text> : null}

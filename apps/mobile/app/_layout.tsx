@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AppState, useColorScheme } from "react-native";
 import { getDb, initDb } from "@/db";
 import { getProfile } from "@/db/repo/profile";
+import { bootAnalytics } from "@/lib/analytics";
 import { queryClient } from "@/lib/queryClient";
 import { initNarrationVoice } from "@/lib/speech";
 import { rescheduleAll } from "@/notifications/scheduler";
@@ -86,6 +87,7 @@ export default function RootLayout() {
   useEffect(() => {
     void initDb().then(() => {
       useSettingsStore.getState().hydrate();
+      bootAnalytics();
       setReady(true); // open + migrate + sync route content + settings before first render
     });
     void initNarrationVoice();

@@ -7,6 +7,7 @@ import { SettingRow } from "@/components/SettingRow";
 import { TestDatePicker } from "@/components/TestDatePicker";
 import { getDb } from "@/db";
 import { createProfile, getProfile } from "@/db/repo/profile";
+import { flush, track } from "@/lib/analytics";
 import { addDaysLocal, todayLocal } from "@/lib/clock";
 import { queryClient } from "@/lib/queryClient";
 import { useSettingsStore } from "@/stores/settingsStore";
@@ -47,6 +48,8 @@ export default function OnboardingScreen() {
       studyDays,
       accessibility: { autoPlayAudio, reduceMotion, highContrast, dyslexiaFont },
     });
+    track('onboarding_completed');
+    void flush();
     useSettingsStore.getState().hydrate();
     // seed the cache before navigating so the Gate doesn't bounce back here
     // while the invalidated profile query is still refetching

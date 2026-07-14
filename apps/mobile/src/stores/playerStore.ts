@@ -9,6 +9,7 @@ import { getTriggeredMisconception } from '@/db/repo/misconceptions';
 import { completeMission, ensureMissionRow, failCheckpoint, saveResume } from '@/db/repo/missions';
 import { applyGrade, clearItem, getDue, upsertMiss } from '@/db/repo/reviews';
 import { getRouteState, recomputeRoute } from '@/db/repo/routes';
+import { flush, track } from '@/lib/analytics';
 import { getMockPool } from '@/lib/mockPool';
 import {
   gradeCheckpoint,
@@ -159,6 +160,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
   let hintUsedForCard = false;
   let cardShownAtMs = 0;
   let slowForCurrentAnswer = false;
+  let practiceContentId = '';
 
   function presentCard(): void {
     cardShownAtMs = now().getTime();
@@ -228,6 +230,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     const newReviews = s.missedConcepts.length;
     void rescheduleAll(db);
     void queryClient.invalidateQueries();
+    track('mission_completed', { mission_id: missionId, score });
+    void flush();
     set({ ...initial });
     router.replace({
       pathname: '/mission-complete',
@@ -260,6 +264,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     if (info) recomputeRoute(db, routeId, info);
     void rescheduleAll(db);
     void queryClient.invalidateQueries();
+    track('checkpoint_failed', { mission_id: missionId, score });
+    void flush();
     set({ phase: 'failed' });
   }
 
@@ -285,6 +291,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     }
     void rescheduleAll(db);
     void queryClient.invalidateQueries();
+    track('drill_completed', { total, correct });
+    void flush();
     set({ phase: 'drill-summary', drillCorrect: correct });
   }
 
@@ -309,6 +317,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     }
     void rescheduleAll(db);
     void queryClient.invalidateQueries();
+    track('practice_completed', { content_id: practiceContentId, total, correct });
+    void flush();
     set({ phase: 'practice-summary', drillCorrect: correct });
   }
 
@@ -332,6 +342,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       finishAttempt(db, s.attemptId, 'submitted', correct / total, JSON.stringify({ answers: s.answers }));
     }
     void queryClient.invalidateQueries();
+    track('rehab_completed', { cleared: outcome.cleared });
+    void flush();
     set({ phase: 'rehab-summary', rehabCleared: outcome.cleared });
   }
 
@@ -385,6 +397,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
           return;
         }
       }
+      // reached only when there is no VALID resume — an undefined resume or a
+      // stale/corrupt one that fell through the guard above; both are genuine
+      // fresh starts and must count once (a valid resume returned above).
+      track('mission_started', { mission_id: missionId });
       set({
         ...initial,
         mode: 'mission',
@@ -493,6 +509,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       }
       const db = getDb();
       const attemptId = startAttempt(db, 'practice', contentLabel);
+      practiceContentId = contentLabel;
       set({
         ...initial,
         mode: 'practice',

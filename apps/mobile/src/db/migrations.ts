@@ -129,7 +129,16 @@ DROP TABLE attempt;
 ALTER TABLE attempt_new RENAME TO attempt;
 `;
 
-export const MIGRATIONS: string[] = [V1, V2, V3, V4, V5, V6];
+const V7 = `
+CREATE TABLE analytics_event (
+  event_id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  occurred_at TEXT NOT NULL,
+  props_json TEXT NOT NULL DEFAULT '{}'
+);
+`;
+
+export const MIGRATIONS: string[] = [V1, V2, V3, V4, V5, V6, V7];
 
 export function migrate(db: Db): void {
   const row = db.get<{ user_version: number }>('PRAGMA user_version');
@@ -181,6 +190,14 @@ export function migrate(db: Db): void {
   if (!attemptSql?.sql.includes("'practice'")) {
     throw new Error(
       `Database corrupt: user_version is ${version} but the attempt table predates migration V6 (missing 'practice').`,
+    );
+  }
+  const analyticsTable = db.get<{ name: string }>(
+    `SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'analytics_event'`,
+  );
+  if (!analyticsTable) {
+    throw new Error(
+      `Database corrupt: user_version is ${version} but table 'analytics_event' does not exist.`,
     );
   }
 }

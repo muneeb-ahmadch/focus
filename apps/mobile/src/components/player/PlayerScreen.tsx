@@ -48,8 +48,9 @@ export function PlayerScreen() {
   const onDismissDone = () => {
     if (interstitialActionRef.current) return;
     interstitialActionRef.current = true;
+    const wasPractice = store.phase === 'practice-summary';
     store.dismiss();
-    router.replace('/(tabs)');
+    router.replace(wasPractice ? '/(tabs)/practice' : '/(tabs)');
   };
 
   const onFixNow = () => {
