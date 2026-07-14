@@ -110,7 +110,26 @@ const V5 = `
 ALTER TABLE daily_activity ADD COLUMN mocks_completed INTEGER NOT NULL DEFAULT 0;
 `;
 
-export const MIGRATIONS: string[] = [V1, V2, V3, V4, V5];
+const V6 = `
+CREATE TABLE attempt_new (
+  attempt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  attempt_type TEXT NOT NULL CHECK (attempt_type IN ('lesson','drill','mock','practice')),
+  content_id TEXT NOT NULL,
+  status TEXT NOT NULL CHECK (status IN ('in_progress','submitted','abandoned','auto_submitted')),
+  score REAL,
+  result_payload_json TEXT,
+  started_at TEXT NOT NULL,
+  completed_at TEXT
+);
+INSERT INTO attempt_new
+  (attempt_id, attempt_type, content_id, status, score, result_payload_json, started_at, completed_at)
+  SELECT attempt_id, attempt_type, content_id, status, score, result_payload_json, started_at, completed_at
+  FROM attempt;
+DROP TABLE attempt;
+ALTER TABLE attempt_new RENAME TO attempt;
+`;
+
+export const MIGRATIONS: string[] = [V1, V2, V3, V4, V5, V6];
 
 export function migrate(db: Db): void {
   const row = db.get<{ user_version: number }>('PRAGMA user_version');
@@ -156,6 +175,12 @@ export function migrate(db: Db): void {
   if (!dailyActivitySql?.sql.includes('mocks_completed')) {
     throw new Error(
       `Database corrupt: user_version is ${version} but the daily_activity table predates migration V5.`,
+    );
+  }
+  // table existence alone can't prove V6's rebuild ran (R4): verify the widened CHECK
+  if (!attemptSql?.sql.includes("'practice'")) {
+    throw new Error(
+      `Database corrupt: user_version is ${version} but the attempt table predates migration V6 (missing 'practice').`,
     );
   }
 }

@@ -121,7 +121,7 @@ export function DevPanel() {
       {activity.map((row) => (
         <Text key={row.day} style={styles.mono}>
           {row.day} · missions {row.missions_completed} · reviews {row.reviews_cleared} · answers{' '}
-          {row.answers_scored}
+          {row.answers_scored} · mocks {row.mocks_completed}
         </Text>
       ))}
 

@@ -57,10 +57,13 @@ beforeEach(() => {
 });
 
 describe('migration V5', () => {
-  it('fresh install: daily_activity has mocks_completed, user_version is 5', () => {
+  it('fresh install: daily_activity has mocks_completed, user_version is at least 5', () => {
     const cols = db.all<{ name: string }>('PRAGMA table_info(daily_activity)').map((c) => c.name);
     expect(cols).toContain('mocks_completed');
-    expect(db.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(5);
+    // ≥, not =: later slices append migrations; only the head slice pins exactly
+    expect(
+      db.get<{ user_version: number }>('PRAGMA user_version')!.user_version,
+    ).toBeGreaterThanOrEqual(5);
   });
 
   it('upgrade from V4 preserves existing activity rows and defaults the new column to 0', () => {
@@ -71,7 +74,9 @@ describe('migration V5', () => {
       `SELECT missions_completed, xp, mocks_completed FROM daily_activity WHERE day = '2026-01-01'`,
     );
     expect(row).toEqual({ missions_completed: 2, xp: 60, mocks_completed: 0 });
-    expect(v4.get<{ user_version: number }>('PRAGMA user_version')?.user_version).toBe(5);
+    expect(
+      v4.get<{ user_version: number }>('PRAGMA user_version')!.user_version,
+    ).toBeGreaterThanOrEqual(5);
   });
 
   it('is idempotent: migrating an already-migrated db changes nothing', () => {

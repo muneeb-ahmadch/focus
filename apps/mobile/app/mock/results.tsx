@@ -1,4 +1,3 @@
-import { MOCK_PASS_MARK, MOCK_TOTAL } from '@focus/engine';
 import { router } from 'expo-router';
 import { useRef } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -34,11 +33,14 @@ export default function MockResultsScreen() {
   const wrongQuestionIds = useMockStore((s) => s.wrongQuestionIds);
   const savedConceptIds = useMockStore((s) => s.savedConceptIds);
   const answers = useMockStore((s) => s.answers);
+  const paper = useMockStore((s) => s.paper);
+  const runConfig = useMockStore((s) => s.runConfig);
   const leaveGuardRef = useRef(false);
 
-  if (phase !== 'submitted' && phase !== 'expired') return <View style={styles.screen} />;
+  if ((phase !== 'submitted' && phase !== 'expired') || !paper) return <View style={styles.screen} />;
 
-  const unanswered = MOCK_TOTAL - Object.keys(answers).length;
+  const total = paper.questionIds.length;
+  const unanswered = total - Object.keys(answers).length;
   const topRoute = topMistakeRoute(wrongQuestionIds);
   const rebuildRoute =
     topRoute && topRoute.count >= 3 ? ROUTES.find((r) => r.routeId === topRoute.routeId) : undefined;
@@ -76,9 +78,9 @@ export default function MockResultsScreen() {
           <Text style={styles.explainer}>Your answers were submitted automatically.</Text>
         ) : null}
         <Text style={styles.score}>
-          {score ?? 0} / {MOCK_TOTAL}
+          {score ?? 0} / {total}
         </Text>
-        <Text style={styles.passMark}>Pass mark: {MOCK_PASS_MARK}</Text>
+        <Text style={styles.passMark}>Pass mark: {runConfig.passMark}</Text>
         <Text style={passed ? styles.passLine : styles.failLine}>
           {passed ? 'Pass' : 'Below pass mark'}
         </Text>

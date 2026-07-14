@@ -1,50 +1,35 @@
-import { MOCK_DURATION_MS, MOCK_PASS_MARK, MOCK_TOTAL, MOCK_VIDEO_COUNT } from '@focus/engine';
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PrimaryButton } from '@/components/PrimaryButton';
-import { peekDanglingMock, useMockStore } from '@/stores/mockStore';
+import { MINI_MOCK_CONFIG, useMockStore } from '@/stores/mockStore';
 import { usePlayerStore } from '@/stores/playerStore';
 import { type Theme } from '@/theme/tokens';
 import { useThemedStyles } from '@/theme/useTheme';
 
-export default function MockStartScreen() {
+export default function MiniMockScreen() {
   const styles = useThemedStyles(makeStyles);
   const phase = useMockStore((s) => s.phase);
-  const attemptType = useMockStore((s) => s.runConfig.attemptType);
-  const [recheck, setRecheck] = useState(0);
+  const runConfig = useMockStore((s) => s.runConfig);
   const [unavailable, setUnavailable] = useState(false);
   const startGuardRef = useRef(false);
   const discardGuardRef = useRef(false);
 
-  // every return to this screen (fresh mount OR hardware-back into a stacked
-  // instance) must re-peek the DB and unburn the guards — V9-D1 was exactly
-  // this screen going stale against the live session
+  const live = phase === 'running' || phase === 'submit-confirm';
+  // only a mini mock is this screen's session; a live REAL paper must never be
+  // resumable-as-mini or discardable from here (QA V10-Q1)
+  const inSession = live && runConfig.contentId === 'mini-mock';
+  const realMockLive = live && runConfig.attemptType === 'mock';
+
+  // the guard unburns on REFOCUS only (returning from the runner), never on
+  // the variant flip itself — an immediate unburn would let a fast double-tap
+  // stack a second runner
   useFocusEffect(
     useCallback(() => {
       startGuardRef.current = false;
-      setRecheck((n) => n + 1);
     }, []),
   );
-
-  // only a REAL paper is this screen's session — a parked mini mock (practice)
-  // must never masquerade as a resumable mock test (QA V10-Q1)
-  const inSession =
-    (phase === 'running' || phase === 'submit-confirm') && attemptType === 'mock';
-
-  const dangling = useMemo(() => {
-    void recheck;
-    if (inSession) return 'live';
-    // an in-session expired/submitted phase has already handed off to the
-    // results/expired screens — that attempt row is no longer in_progress,
-    // so there is nothing left here for the peek to surface
-    if (phase === 'expired' || phase === 'submitted') return null;
-    return peekDanglingMock();
-  }, [inSession, phase, recheck]);
-
-  // no unburn on variant change: an immediate reset would let a fast
-  // double-tap push a second runner; refocus (above) is the unburn point
 
   const onStart = useCallback(() => {
     if (startGuardRef.current) return;
@@ -52,13 +37,8 @@ export default function MockStartScreen() {
     // keep the single-session world consistent: an in-memory lesson/practice
     // session can't survive the attempt sweep the next startAttempt performs
     if (usePlayerStore.getState().active) usePlayerStore.getState().abandon();
-    const store = useMockStore.getState();
-    // a parked practice paper (mini mock) is disposable — the real mock takes over
-    if (store.phase !== 'idle' && store.runConfig.attemptType === 'practice') {
-      store.discard();
-    }
     try {
-      useMockStore.getState().startMock();
+      useMockStore.getState().startMock(MINI_MOCK_CONFIG);
     } catch {
       startGuardRef.current = false;
       setUnavailable(true);
@@ -70,19 +50,13 @@ export default function MockStartScreen() {
   const onResume = useCallback(() => {
     if (startGuardRef.current) return;
     startGuardRef.current = true;
-    if (inSession) {
-      router.push('/mock/runner');
-      return;
-    }
-    useMockStore.getState().resumeMock();
     router.push('/mock/runner');
-  }, [inSession]);
+  }, []);
 
   const onDiscard = useCallback(() => {
     if (discardGuardRef.current) return;
     discardGuardRef.current = true;
-    useMockStore.getState().discardDangling();
-    setRecheck((n) => n + 1);
+    useMockStore.getState().discard();
     discardGuardRef.current = false;
   }, []);
 
@@ -98,12 +72,24 @@ export default function MockStartScreen() {
         <Text style={styles.closeText}>✕</Text>
       </Pressable>
 
-      {dangling === 'live' ? (
+      {realMockLive ? (
         <>
           <View style={styles.body}>
-            <Text style={styles.title}>Resume mock test</Text>
+            <Text style={styles.title}>Mock test in progress</Text>
             <Text style={styles.explainer}>
-              You left a mock test in progress. Resume it from where you stopped, or discard it
+              You have a full mock test in progress. Finish it before starting a mini mock.
+            </Text>
+          </View>
+          <View style={styles.footer}>
+            <PrimaryButton title="Resume" onPress={onResume} />
+          </View>
+        </>
+      ) : inSession ? (
+        <>
+          <View style={styles.body}>
+            <Text style={styles.title}>Resume mini mock</Text>
+            <Text style={styles.explainer}>
+              You left a mini mock in progress. Resume it from where you stopped, or discard it
               and start over.
             </Text>
           </View>
@@ -112,38 +98,27 @@ export default function MockStartScreen() {
             <PrimaryButton title="Discard" variant="secondary" onPress={onDiscard} />
           </View>
         </>
-      ) : dangling === 'expired' ? (
-        <>
-          <View style={styles.body}>
-            <Text style={styles.title}>Time ran out</Text>
-            <Text style={styles.explainer}>
-              Your mock test reached the 57-minute limit while you were away. The answers you
-              gave were submitted automatically.
-            </Text>
-          </View>
-          <View style={styles.footer}>
-            <PrimaryButton title="View result" onPress={onResume} />
-          </View>
-        </>
       ) : (
         <>
           <View style={styles.body}>
-            <Text style={styles.title}>Mock test</Text>
+            <Text style={styles.title}>Mini mock</Text>
             <View style={styles.metaRow}>
-              <Text style={styles.metaChip}>{MOCK_TOTAL} questions</Text>
-              <Text style={styles.metaChip}>{MOCK_DURATION_MS / 60_000} minutes</Text>
-              <Text style={styles.metaChip}>Pass mark {MOCK_PASS_MARK}</Text>
+              <Text style={styles.metaChip}>{MINI_MOCK_CONFIG.blueprint.total} questions</Text>
+              <Text style={styles.metaChip}>
+                {Math.round(MINI_MOCK_CONFIG.durationMs / 60_000)} minutes
+              </Text>
+              <Text style={styles.metaChip}>Pass mark {MINI_MOCK_CONFIG.passMark}</Text>
             </View>
             <Text style={styles.explainer}>
-              Includes {MOCK_VIDEO_COUNT} silent video questions. Answer every question in one
-              sitting — nothing is revealed until you submit.
+              A shorter timed paper drawn from the full question bank. No videos. Nothing is
+              revealed until you submit.
             </Text>
             {unavailable ? (
               <Text style={styles.error}>Not enough questions available yet.</Text>
             ) : null}
           </View>
           <View style={styles.footer}>
-            <PrimaryButton title="Start mock" onPress={onStart} />
+            <PrimaryButton title="Start mini mock" onPress={onStart} />
           </View>
         </>
       )}

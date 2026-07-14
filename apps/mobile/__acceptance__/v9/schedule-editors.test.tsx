@@ -141,6 +141,16 @@ describe('TestDateEditor', () => {
     fireEvent.click(screen.getByRole('button', { name: /save/i }));
 
     screen.getByText(/moved closer/i);
+    // v9 smoke nit: the sheet must speak human ("28 June 2026"), never raw ISO
+    const [y, m, d] = h.pickDate.split('-').map(Number);
+    const human = new Date(Date.UTC(y!, m! - 1, d!)).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    });
+    expect(screen.getByText(new RegExp(human))).toBeTruthy();
+    expect(screen.queryByText(new RegExp(h.pickDate))).toBeNull();
     expect(getProfile(db)!.test_date).toBe(addDaysLocal(TODAY, 30));
 
     fireEvent.click(screen.getByRole('button', { name: /update my plan/i }));

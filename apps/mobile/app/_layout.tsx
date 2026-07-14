@@ -45,6 +45,14 @@ function Gate() {
       <Stack.Screen name="settings/accessibility" options={{ title: "Accessibility" }} />
       <Stack.Screen name="settings/schedule" options={{ title: "Schedule" }} />
       <Stack.Screen name="settings/test-date" options={{ title: "Test date" }} />
+      <Stack.Screen
+        name="practice/config"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name="practice/mini-mock"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
       <Stack.Screen name="review-queue" options={{ title: "Review queue" }} />
       <Stack.Screen name="readiness" options={{ title: "Readiness" }} />
       <Stack.Screen

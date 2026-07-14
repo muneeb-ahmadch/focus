@@ -3,7 +3,12 @@ import { z } from 'zod';
 import {
   generateMock,
   mockRemainingMs,
-  scoreMock,
+  MINI_MOCK_BLUEPRINT,
+  MINI_MOCK_DURATION_MS,
+  MINI_MOCK_PASS_MARK,
+  MOCK_DURATION_MS,
+  MOCK_PASS_MARK,
+  type Blueprint,
   type MockHistoryAttempt,
   type MockPaper,
 } from '@focus/engine';
@@ -17,6 +22,30 @@ import { getMockPool, MOCK_BLUEPRINT } from '@/lib/mockPool';
 import { queryClient } from '@/lib/queryClient';
 
 export type MockPhase = 'idle' | 'running' | 'submit-confirm' | 'expired' | 'submitted';
+
+export interface MockRunConfig {
+  blueprint: Blueprint;
+  durationMs: number;
+  passMark: number;
+  attemptType: 'mock' | 'practice';
+  contentId: string;
+}
+
+export const REAL_MOCK_CONFIG: MockRunConfig = {
+  blueprint: MOCK_BLUEPRINT,
+  durationMs: MOCK_DURATION_MS,
+  passMark: MOCK_PASS_MARK,
+  attemptType: 'mock',
+  contentId: 'mock',
+};
+
+export const MINI_MOCK_CONFIG: MockRunConfig = {
+  blueprint: MINI_MOCK_BLUEPRINT,
+  durationMs: MINI_MOCK_DURATION_MS,
+  passMark: MINI_MOCK_PASS_MARK,
+  attemptType: 'practice',
+  contentId: 'mini-mock',
+};
 
 const runPayloadSchema = z.object({
   questionIds: z.array(z.string()),
@@ -35,6 +64,7 @@ const historySchema = z.object({
 
 interface MockState {
   phase: MockPhase;
+  runConfig: MockRunConfig;
   attemptId?: number;
   paper?: MockPaper;
   startedAt: number;
@@ -45,7 +75,7 @@ interface MockState {
   passed?: boolean;
   wrongQuestionIds: string[];
   savedConceptIds: string[];
-  startMock(): void;
+  startMock(config?: MockRunConfig): void;
   answer(questionId: string, optionId: string): void;
   toggleFlag(questionId: string): void;
   goTo(i: number): void;
@@ -55,10 +85,12 @@ interface MockState {
   tick(): void;
   resumeMock(): 'resumed' | 'expired' | null;
   discard(): void;
+  discardDangling(): void;
 }
 
 const initial = {
   phase: 'idle' as MockPhase,
+  runConfig: REAL_MOCK_CONFIG,
   attemptId: undefined as number | undefined,
   paper: undefined as MockPaper | undefined,
   startedAt: 0,
@@ -171,7 +203,7 @@ export const useMockStore = create<MockState>((set, get) => {
         }
       }
     }
-    const result = scoreMock(correctCount);
+    const passed = correctCount >= s.runConfig.passMark;
     const payload: RunPayload = {
       questionIds: s.paper.questionIds,
       videoQuestionIds: s.paper.videoQuestionIds,
@@ -181,8 +213,8 @@ export const useMockStore = create<MockState>((set, get) => {
       flags: s.flags,
     };
     finishAttempt(db, s.attemptId, status, correctCount, JSON.stringify(payload));
-    bumpActivity(db, today, 'mocks_completed');
-    set({ score: correctCount, passed: result.passed, wrongQuestionIds, savedConceptIds });
+    if (s.runConfig.attemptType === 'mock') bumpActivity(db, today, 'mocks_completed');
+    set({ score: correctCount, passed, wrongQuestionIds, savedConceptIds });
     void queryClient.invalidateQueries();
     return true;
   }
@@ -190,23 +222,28 @@ export const useMockStore = create<MockState>((set, get) => {
   return {
     ...initial,
 
-    startMock() {
+    startMock(config = REAL_MOCK_CONFIG) {
       if (get().phase !== 'idle') return;
       const db = getDb();
       const { pool } = getMockPool();
-      const paper = generateMock(pool, loadHistory(db), MOCK_BLUEPRINT, Math.random);
-      // self-healing: no UI path leads here with a live mock, but a stray
-      // in_progress row (corrupt payload, tampering) must never accumulate
-      db.run(
-        `UPDATE attempt SET status = 'abandoned', completed_at = ?
-         WHERE attempt_type = 'mock' AND status = 'in_progress'`,
-        [now().toISOString()],
-      );
-      const attemptId = startAttempt(db, 'mock', 'mock');
+      const history = config.attemptType === 'mock' ? loadHistory(db) : [];
+      const paper = generateMock(pool, history, config.blueprint, Math.random);
+      // self-healing: no UI path starts a REAL mock over a live one, but a stray
+      // in_progress row (corrupt payload, tampering) must never accumulate.
+      // A mini mock must NOT run this — it would destroy a resumable real paper.
+      if (config.attemptType === 'mock') {
+        db.run(
+          `UPDATE attempt SET status = 'abandoned', completed_at = ?
+           WHERE attempt_type = 'mock' AND status = 'in_progress'`,
+          [now().toISOString()],
+        );
+      }
+      const attemptId = startAttempt(db, config.attemptType, config.contentId);
       const startedAt = now().getTime();
       set({
         ...initial,
         phase: 'running',
+        runConfig: config,
         attemptId,
         paper,
         startedAt,
@@ -259,7 +296,7 @@ export const useMockStore = create<MockState>((set, get) => {
       // the deadline is live on the confirm screen too — sitting there must
       // not hold the paper open past 57:00 (QA V8-Q2)
       if (s.phase !== 'running' && s.phase !== 'submit-confirm') return;
-      if (mockRemainingMs(s.startedAt, now().getTime()) > 0) return;
+      if (mockRemainingMs(s.startedAt, now().getTime(), s.runConfig.durationMs) > 0) return;
       if (finalize('auto_submitted')) set({ phase: 'expired' });
     },
 
@@ -285,13 +322,14 @@ export const useMockStore = create<MockState>((set, get) => {
       set({
         ...initial,
         phase: 'running',
+        runConfig: REAL_MOCK_CONFIG,
         attemptId: row.attempt_id,
         paper,
         startedAt: payload.startedAt,
         answers: payload.answers,
         flags: payload.flags,
       });
-      if (mockRemainingMs(payload.startedAt, now().getTime()) <= 0) {
+      if (mockRemainingMs(payload.startedAt, now().getTime(), REAL_MOCK_CONFIG.durationMs) <= 0) {
         finalize('auto_submitted');
         set({ phase: 'expired' });
         return 'expired';
@@ -304,6 +342,17 @@ export const useMockStore = create<MockState>((set, get) => {
     discard() {
       const s = get();
       if (s.attemptId !== undefined) finishAttempt(getDb(), s.attemptId, 'abandoned', null, null);
+      set({ ...initial });
+      void queryClient.invalidateQueries();
+    },
+
+    discardDangling() {
+      const db = getDb();
+      db.run(
+        `UPDATE attempt SET status = 'abandoned', completed_at = ?
+         WHERE attempt_type = 'mock' AND status = 'in_progress'`,
+        [now().toISOString()],
+      );
       set({ ...initial });
       void queryClient.invalidateQueries();
     },

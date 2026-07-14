@@ -5,9 +5,11 @@ import type { Mission, Question, Step } from '@focus/shared';
 import { getDb } from '@/db';
 import { addXp, bumpActivity, getActiveDays } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
+import { getTriggeredMisconception } from '@/db/repo/misconceptions';
 import { completeMission, ensureMissionRow, failCheckpoint, saveResume } from '@/db/repo/missions';
 import { applyGrade, clearItem, getDue, upsertMiss } from '@/db/repo/reviews';
 import { getRouteState, recomputeRoute } from '@/db/repo/routes';
+import { getMockPool } from '@/lib/mockPool';
 import {
   gradeCheckpoint,
   computeStreak,
@@ -23,7 +25,7 @@ import { rescheduleAll } from '@/notifications/scheduler';
 
 export const SLOW_ANSWER_MS = 20_000;
 
-export type Mode = 'mission' | 'drill' | 'rehab';
+export type Mode = 'mission' | 'drill' | 'rehab' | 'practice';
 export type Phase =
   | 'card'
   | 'feedback'
@@ -31,6 +33,7 @@ export type Phase =
   | 'repair-intro'
   | 'drill-summary'
   | 'rehab-summary'
+  | 'practice-summary'
   | 'failed';
 
 export type PlayerCard =
@@ -79,6 +82,7 @@ interface PlayerState {
   startMission(missionId: string, resume?: ResumePayload): void;
   startDrill(conceptIds?: string[]): void;
   startRehab(conceptId: string): void;
+  startPractice(questionIds: string[], contentLabel: string): void;
   answer(input: string | string[]): void;
   confirmConfidence(c: 'sure' | 'unsure' | 'easy' | 'okay'): void;
   useHint(): void;
@@ -284,6 +288,30 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     set({ phase: 'drill-summary', drillCorrect: correct });
   }
 
+  function finishPractice(): void {
+    const s = get();
+    const db = getDb();
+    const today = todayLocal();
+    const correct = s.answers.filter((a) => a.correct).length;
+    const total = s.answers.length;
+    if (s.attemptId !== undefined) {
+      finishAttempt(
+        db,
+        s.attemptId,
+        'submitted',
+        total === 0 ? 0 : correct / total,
+        JSON.stringify({ answers: s.answers }),
+      );
+    }
+    addXp(db, today, drillXp(correct));
+    for (const route of getRouteManifest()) {
+      if (route.totalMissions > 0) recomputeRoute(db, route.routeId, route);
+    }
+    void rescheduleAll(db);
+    void queryClient.invalidateQueries();
+    set({ phase: 'practice-summary', drillCorrect: correct });
+  }
+
   function endRehab(): void {
     const s = get();
     const conceptId = s.rehabConceptId;
@@ -412,14 +440,29 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     startRehab(conceptId) {
       const recall = pickDrillQuestion(conceptId);
       if (!recall) return;
+      const db = getDb();
+      const triggered = getTriggeredMisconception(db, conceptId);
+      const recallCard: PlayerCard = triggered
+        ? {
+            kind: 'step',
+            stepId: `miscon:${triggered.misconception_id}`,
+            conceptId,
+            step: {
+              id: `miscon:${triggered.misconception_id}`,
+              conceptId,
+              sourceRef: triggered.source_ref,
+              type: 'misconception',
+              wrongBelief: triggered.wrong_belief,
+              question: recall.question,
+              repairNote: triggered.repair_note,
+            },
+          }
+        : { kind: 'drill-q', stepId: recall.stepId, conceptId, question: recall.question };
       const scenario = pickScenarioQuestion(conceptId);
-      const queue: PlayerCard[] = [
-        { kind: 'drill-q', stepId: recall.stepId, conceptId, question: recall.question },
-      ];
+      const queue: PlayerCard[] = [recallCard];
       if (scenario && scenario.stepId !== recall.stepId) {
         queue.push({ kind: 'drill-q', stepId: scenario.stepId, conceptId, question: scenario.question });
       }
-      const db = getDb();
       const attemptId = startAttempt(db, 'drill', `rehab:${conceptId}`);
       set({
         ...initial,
@@ -430,6 +473,33 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         phase: 'card',
         rehabConceptId: conceptId,
         rehabCleared: false,
+        active: true,
+      });
+      presentCard();
+    },
+
+    startPractice(questionIds, contentLabel) {
+      const { questionById } = getMockPool();
+      const queue: PlayerCard[] = [];
+      for (const id of questionIds) {
+        const q = questionById.get(id);
+        if (!q) continue;
+        queue.push({
+          kind: 'drill-q',
+          stepId: id,
+          conceptId: q.conceptId,
+          question: { prompt: q.prompt, options: q.options, explanation: q.explanation },
+        });
+      }
+      const db = getDb();
+      const attemptId = startAttempt(db, 'practice', contentLabel);
+      set({
+        ...initial,
+        mode: 'practice',
+        attemptId,
+        queue,
+        index: 0,
+        phase: 'card',
         active: true,
       });
       presentCard();
@@ -484,14 +554,21 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
           confidence: 'unsure',
           misconceptionId: option.misconceptionId,
         });
-        if (s.mode === 'mission') addMiss(card.conceptId, 'wrong');
+        if (s.mode === 'mission' || s.mode === 'practice') addMiss(card.conceptId, 'wrong');
         else if (s.mode === 'drill') applyGrade(getDb(), card.conceptId, 'wrong', todayLocal());
+      } else if (s.mode === 'practice') {
+        recordAndTrack({
+          stepId: card.stepId,
+          conceptId: card.conceptId,
+          correct: true,
+          confidence: 'sure',
+        });
       }
     },
 
     confirmConfidence(c) {
       const s = get();
-      if (s.phase !== 'feedback' || !s.lastAnswer?.correct) return;
+      if (s.phase !== 'feedback' || !s.lastAnswer?.correct || s.mode === 'practice') return;
       const card = s.queue[s.index];
       if (!card) return;
       const confidence = c === 'unsure' ? 'unsure' : 'sure';
@@ -562,6 +639,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
           finishDrill();
           return;
         }
+        if (s.mode === 'practice') {
+          finishPractice();
+          return;
+        }
         if (!s.inRepair) {
           const result = gradeCheckpoint(
             s.checkpointAnswers.map((a) => ({ conceptId: a.conceptId, correct: a.correct })),
@@ -614,7 +695,13 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
 
     dismiss() {
       const s = get();
-      if (s.phase !== 'drill-summary' && s.phase !== 'rehab-summary' && s.phase !== 'failed') return;
+      if (
+        s.phase !== 'drill-summary' &&
+        s.phase !== 'rehab-summary' &&
+        s.phase !== 'practice-summary' &&
+        s.phase !== 'failed'
+      )
+        return;
       set({ ...initial });
     },
   };

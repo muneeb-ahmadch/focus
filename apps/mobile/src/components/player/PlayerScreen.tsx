@@ -123,6 +123,21 @@ export function PlayerScreen() {
         <PrimaryButton title="Done" onPress={onDismissDone} />
       </View>
     );
+  } else if (store.phase === 'practice-summary') {
+    content = (
+      <View style={styles.interstitial}>
+        <Text style={styles.interTitle}>Session complete</Text>
+        <Text style={styles.interBody}>
+          {store.drillCorrect}/{store.queue.length} correct
+        </Text>
+        {store.missedConcepts.length > 0 ? (
+          <Text style={styles.interMuted}>
+            {store.missedConcepts.length} added to your review queue
+          </Text>
+        ) : null}
+        <PrimaryButton title="Done" onPress={onDismissDone} />
+      </View>
+    );
   } else if (store.phase === 'rehab-summary') {
     content = (
       <View style={styles.interstitial}>
@@ -180,7 +195,7 @@ export function PlayerScreen() {
         {store.phase === 'feedback' && store.lastAnswer ? (
           <View style={styles.feedbackArea}>
             <FeedbackBanner correct={store.lastAnswer.correct} explanation={explanationFor(card)} />
-            {store.lastAnswer.correct ? (
+            {store.lastAnswer.correct && store.mode !== 'practice' ? (
               <ConfidenceFooter mode={store.mode} onSelect={store.confirmConfidence} />
             ) : (
               <PrimaryButton title="Continue" onPress={store.advance} />
@@ -206,7 +221,11 @@ export function PlayerScreen() {
         <View style={styles.confirmOverlay}>
           <View style={styles.confirmCard}>
             <Text style={styles.confirmTitle}>
-              {store.mode === 'mission' ? 'Leave mission?' : 'Leave review?'}
+              {store.mode === 'mission'
+                ? 'Leave mission?'
+                : store.mode === 'practice'
+                  ? 'Leave practice?'
+                  : 'Leave review?'}
             </Text>
             {store.mode === 'mission' ? (
               <Text style={styles.confirmBody}>
@@ -251,6 +270,7 @@ const makeStyles = (t: Theme) =>
       textAlign: 'center',
     },
     interBody: { ...t.text(t.font.md), color: t.colors.textMuted, textAlign: 'center' },
+    interMuted: { ...t.text(t.font.sm), color: t.colors.textMuted, textAlign: 'center' },
     confirmOverlay: {
       ...StyleSheet.absoluteFillObject,
       backgroundColor: t.colors.overlay,

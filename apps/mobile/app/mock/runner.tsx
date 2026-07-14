@@ -24,6 +24,7 @@ export default function MockRunnerScreen() {
   const index = useMockStore((s) => s.index);
   const answers = useMockStore((s) => s.answers);
   const flags = useMockStore((s) => s.flags);
+  const runConfig = useMockStore((s) => s.runConfig);
   const [, forceTick] = useState(0);
   const resultsNavGuardRef = useRef(false);
 
@@ -52,7 +53,7 @@ export default function MockRunnerScreen() {
   const { questionById } = getMockPool();
   const questionId = paper.questionIds[index]!;
   const question = questionById.get(questionId)!;
-  const remaining = mockRemainingMs(startedAt, now().getTime());
+  const remaining = mockRemainingMs(startedAt, now().getTime(), runConfig.durationMs);
   const flagged = flags.includes(questionId);
   const answeredCount = paper.questionIds.filter((id) => answers[id] !== undefined).length;
   const unansweredCount = paper.questionIds.length - answeredCount;

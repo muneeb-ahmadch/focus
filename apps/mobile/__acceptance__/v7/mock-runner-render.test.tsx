@@ -32,6 +32,7 @@ vi.mock('@/db', () => ({
 }));
 vi.mock('expo-router', () => ({
   router: { replace: h.replace, back: h.back, push: h.push },
+  useFocusEffect: () => {},
   useLocalSearchParams: () => ({}),
   Stack: { Screen: () => null },
 }));
@@ -45,6 +46,10 @@ vi.mock('@/lib/clock', async (importOriginal) => {
 });
 vi.mock('react-native-safe-area-context', () => ({
   SafeAreaView: ({ children }: { children?: ReactNode }) => <>{children}</>,
+}));
+vi.mock('@/notifications/scheduler', () => ({
+  rescheduleAll: async () => {},
+  requestPermissionOnce: async () => {},
 }));
 
 // Bare words like "correct"/"wrong" appear in real DVSA question text, so the

@@ -12,9 +12,9 @@ export function exclusionWindow(poolSize: number): number {
   return Math.max(0, Math.min(3, Math.floor((poolSize - 50) / 50)));
 }
 
-export function mockRemainingMs(startedAt: number, now: number): number {
+export function mockRemainingMs(startedAt: number, now: number, durationMs = MOCK_DURATION_MS): number {
   // clamped both ends: a backward clock jump must never grant extra time
-  return Math.min(MOCK_DURATION_MS, Math.max(0, startedAt + MOCK_DURATION_MS - now));
+  return Math.min(durationMs, Math.max(0, startedAt + durationMs - now));
 }
 
 export function scoreMock(correct: number): { correct: number; passed: boolean } {

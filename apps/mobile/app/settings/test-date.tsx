@@ -6,7 +6,7 @@ import { PrimaryButton } from '@/components/PrimaryButton';
 import { TestDatePicker } from '@/components/TestDatePicker';
 import { getDb } from '@/db';
 import { getProfile, updateTestDate } from '@/db/repo/profile';
-import { addDaysLocal, todayLocal } from '@/lib/clock';
+import { addDaysLocal, formatHumanDay, todayLocal } from '@/lib/clock';
 import { queryClient } from '@/lib/queryClient';
 import { rescheduleAll } from '@/notifications/scheduler';
 import { type Theme } from '@/theme/tokens';
@@ -59,7 +59,7 @@ export default function TestDateEditorScreen() {
         <View style={styles.content}>
           <Text style={styles.headline}>Your test just moved closer</Text>
           <Text style={styles.body}>
-            Your daily plan and reminders will refocus around {confirmDate}.
+            Your daily plan and reminders will refocus around {formatHumanDay(confirmDate)}.
           </Text>
         </View>
         <View style={styles.footer}>

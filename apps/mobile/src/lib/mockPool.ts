@@ -8,6 +8,8 @@ export interface PoolQuestion {
   routeId: string;
   prompt: string;
   options: Question['options'];
+  // authored feedback — practice renders it; the strict mock never does
+  explanation: string;
   video: boolean;
   sign: boolean;
 }
@@ -38,6 +40,7 @@ function buildPool(): BuiltPool {
               routeId: route.routeId,
               prompt: q.prompt,
               options: q.options,
+              explanation: q.explanation,
               video: false,
               sign: false,
             });
@@ -55,6 +58,7 @@ function buildPool(): BuiltPool {
           routeId: route.routeId,
           prompt: step.question.prompt,
           options: step.question.options,
+          explanation: step.question.explanation,
           video: false,
           sign,
         });

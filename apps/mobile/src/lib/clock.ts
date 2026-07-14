@@ -34,3 +34,13 @@ export function dayFromNumber(n: number): string {
   const dt = new Date(n * 86_400_000);
   return `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth() + 1)}-${pad(dt.getUTCDate())}`;
 }
+
+export function formatHumanDay(isoDay: string): string {
+  const [y, m, d] = isoDay.split('-').map(Number);
+  return new Date(Date.UTC(y!, m! - 1, d!)).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
