@@ -57,6 +57,10 @@ export function PlayerScreen() {
     if (interstitialActionRef.current) return;
     interstitialActionRef.current = true;
     store.startDrill(store.missedConcepts);
+    // Re-enter the player without the mission URL params, so the route's hijack
+    // guard doesn't see a mission mismatch and abandon the just-seeded drill
+    // (V11-D1). Mirrors mission-complete / mock-results "Fix them now".
+    router.replace('/player');
   };
 
   const onExit = () => {

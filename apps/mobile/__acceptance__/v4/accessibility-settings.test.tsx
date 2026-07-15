@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
-// Slice v4 gate: AccessibilitySettings screen — four switches that reflect
-// user_profile on mount and persist every toggle to both the store and SQLite.
+// Slice v4 gate: AccessibilitySettings screen — the visual/motion switches
+// reflect user_profile on mount and persist every toggle to both the store and
+// SQLite. (Auto-play audio moved to its own AudioSettings screen in v13.)
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ReactNode } from 'react';
@@ -25,7 +26,7 @@ vi.mock('react-native-safe-area-context', () => ({
   SafeAreaView: ({ children }: { children?: ReactNode }) => <>{children}</>,
 }));
 
-const LABELS = ['Auto-play audio', 'Reduce motion', 'High contrast', 'Dyslexia-friendly text'];
+const LABELS = ['Reduce motion', 'High contrast', 'Dyslexia-friendly text'];
 
 let db: Db;
 
@@ -61,7 +62,7 @@ describe('AccessibilitySettings', () => {
     for (const label of LABELS) {
       screen.getByRole('switch', { name: label });
     }
-    expect(switchChecked('Auto-play audio')).toBe('true');
+    expect(screen.queryByRole('switch', { name: 'Auto-play audio' })).toBeNull();
     expect(switchChecked('Reduce motion')).toBe('true');
     expect(switchChecked('High contrast')).toBe('false');
     expect(switchChecked('Dyslexia-friendly text')).toBe('false');
@@ -75,11 +76,6 @@ describe('AccessibilitySettings', () => {
     expect(switchChecked('High contrast')).toBe('true');
     expect(useSettingsStore.getState().highContrast).toBe(true);
     expect(profileRow()?.high_contrast).toBe(1);
-
-    fireEvent.click(screen.getByRole('switch', { name: 'Auto-play audio' }));
-    expect(switchChecked('Auto-play audio')).toBe('false');
-    expect(useSettingsStore.getState().autoPlayAudio).toBe(false);
-    expect(profileRow()?.auto_play_audio).toBe(0);
 
     fireEvent.click(screen.getByRole('switch', { name: 'Dyslexia-friendly text' }));
     expect(switchChecked('Dyslexia-friendly text')).toBe('true');

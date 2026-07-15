@@ -12,6 +12,7 @@ export default defineConfig({
       'react-native': 'react-native-web',
       '@expo/vector-icons': path.resolve(__dirname, 'src/testing/vectorIconsStub.tsx'),
       'expo-crypto': path.resolve(__dirname, 'src/testing/expoCryptoStub.ts'),
+      'expo-constants': path.resolve(__dirname, 'src/testing/expoConstantsStub.ts'),
     },
   },
 });

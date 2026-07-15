@@ -7,7 +7,6 @@ import { useThemedStyles } from '@/theme/useTheme';
 
 export default function AccessibilitySettingsScreen() {
   const styles = useThemedStyles(makeStyles);
-  const autoPlayAudio = useSettingsStore((s) => s.autoPlayAudio);
   const reduceMotion = useSettingsStore((s) => s.reduceMotion);
   const highContrast = useSettingsStore((s) => s.highContrast);
   const dyslexiaFont = useSettingsStore((s) => s.dyslexiaFont);
@@ -16,14 +15,8 @@ export default function AccessibilitySettingsScreen() {
   return (
     <SafeAreaView style={styles.screen}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.intro}>Tune how lessons look and sound.</Text>
+        <Text style={styles.intro}>Tune how lessons look and feel.</Text>
 
-        <SettingRow
-          label="Auto-play audio"
-          description="Read each card aloud as it appears"
-          value={autoPlayAudio}
-          onToggle={(next) => setSetting('autoPlayAudio', next)}
-        />
         <SettingRow
           label="Reduce motion"
           description="Minimise animations"

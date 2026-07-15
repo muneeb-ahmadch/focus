@@ -3,6 +3,7 @@ import { router, Stack, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { AppState, useColorScheme } from "react-native";
+import { BootError } from "@/components/BootError";
 import { getDb, initDb } from "@/db";
 import { getProfile } from "@/db/repo/profile";
 import { bootAnalytics } from "@/lib/analytics";
@@ -46,6 +47,9 @@ function Gate() {
       <Stack.Screen name="settings/accessibility" options={{ title: "Accessibility" }} />
       <Stack.Screen name="settings/schedule" options={{ title: "Schedule" }} />
       <Stack.Screen name="settings/test-date" options={{ title: "Test date" }} />
+      <Stack.Screen name="settings/audio" options={{ title: "Audio" }} />
+      <Stack.Screen name="settings/reset" options={{ title: "Reset app" }} />
+      <Stack.Screen name="activity" options={{ title: "Activity" }} />
       <Stack.Screen
         name="practice/config"
         options={{ headerShown: false, gestureEnabled: false }}
@@ -82,21 +86,41 @@ function Gate() {
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
+  const [bootFailed, setBootFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const scheme = useColorScheme();
 
   useEffect(() => {
-    void initDb().then(() => {
-      useSettingsStore.getState().hydrate();
-      bootAnalytics();
-      setReady(true); // open + migrate + sync route content + settings before first render
-    });
+    let cancelled = false;
+    initDb()
+      .then(() => {
+        if (cancelled) return;
+        useSettingsStore.getState().hydrate();
+        bootAnalytics();
+        setReady(true); // open + migrate + sync route content + settings before first render
+      })
+      .catch(() => {
+        if (!cancelled) setBootFailed(true); // corrupt/locked DB: show recovery, not a blank splash
+      });
     void initNarrationVoice();
     const sub = AppState.addEventListener("change", (state) => {
       if (state === "active") void rescheduleAll(getDb());
     });
-    return () => sub.remove();
-  }, []);
+    return () => {
+      cancelled = true;
+      sub.remove();
+    };
+  }, [attempt]);
 
+  if (bootFailed)
+    return (
+      <BootError
+        onRetry={() => {
+          setBootFailed(false);
+          setAttempt((n) => n + 1);
+        }}
+      />
+    );
   if (!ready) return null;
   return (
     <QueryClientProvider client={queryClient}>
