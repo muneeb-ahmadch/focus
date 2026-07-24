@@ -56,10 +56,10 @@ let db: Db;
 
 function walkPracticeToSummary(): void {
   const ids = getPracticePool()
-    .filter((q) => q.topic === 'lights')
+    .filter((q) => q.topic === 'signs')
     .slice(0, 2)
     .map((q) => q.id);
-  usePlayerStore.getState().startPractice(ids, 'topic:lights');
+  usePlayerStore.getState().startPractice(ids, 'topic:signs');
   for (let i = 0; i < 50; i++) {
     const s = usePlayerStore.getState();
     if (s.phase === 'practice-summary') return;

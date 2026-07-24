@@ -13,7 +13,7 @@ import MockReviewGridScreen from '../../app/mock/review';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { openTestDb } from '@/db/testing/adapter.node';
-import { getMockPool } from '@/lib/mockPool';
+import { getMockPool, type PoolOption } from '@/lib/mockPool';
 import { useMockStore } from '@/stores/mockStore';
 
 const START_MS = 1_780_000_000_000;
@@ -79,24 +79,41 @@ function q(questionId: string) {
   return getMockPool().questionById.get(questionId)!;
 }
 
+// vB.3: the pool may contain a bank image-option question (no text options) or a stem-image
+// question (text options + an image). These text-walk assertions target text options only, and
+// navigate to a text question — the 50-question paper always has them — so they never depend on
+// where an image-option question happens to land.
+const textOptions = (questionId: string): (PoolOption & { text: string })[] =>
+  q(questionId).options.filter((o): o is PoolOption & { text: string } => o.text !== undefined);
+function consecutiveTextPairStart(ids: string[]): number {
+  for (let i = 0; i + 1 < ids.length; i++) {
+    if (textOptions(ids[i]!).length && textOptions(ids[i + 1]!).length) return i;
+  }
+  return 0;
+}
+
 describe('MockRunner strict question flow', () => {
   it('walks two consecutive questions: each renders its own options, answering reveals nothing', () => {
     useMockStore.getState().startMock();
     const ids = useMockStore.getState().paper!.questionIds;
+    const i0 = consecutiveTextPairStart(ids);
+    const i1 = i0 + 1;
+    useMockStore.getState().goTo(i0);
     const { container } = render(<MockRunnerScreen />);
 
-    screen.getByText(q(ids[0]!).prompt);
-    for (const option of q(ids[0]!).options) screen.getByText(option.text);
+    screen.getByText(q(ids[i0]!).prompt);
+    for (const option of textOptions(ids[i0]!)) screen.getByText(option.text);
 
-    fireEvent.click(screen.getByText(q(ids[0]!).options[0]!.text));
-    expect(useMockStore.getState().answers[ids[0]!]).toBe(q(ids[0]!).options[0]!.id);
+    const first = textOptions(ids[i0]!)[0]!;
+    fireEvent.click(screen.getByText(first.text));
+    expect(useMockStore.getState().answers[ids[i0]!]).toBe(first.id);
     expect(container.textContent).not.toMatch(COACHING);
 
     fireEvent.click(screen.getByRole('button', { name: /next/i }));
-    screen.getByText(q(ids[1]!).prompt);
-    for (const option of q(ids[1]!).options) screen.getByText(option.text);
-    const staleOptions = q(ids[0]!).options.filter(
-      (o) => !q(ids[1]!).options.some((n) => n.text === o.text),
+    screen.getByText(q(ids[i1]!).prompt);
+    for (const option of textOptions(ids[i1]!)) screen.getByText(option.text);
+    const staleOptions = textOptions(ids[i0]!).filter(
+      (o) => !q(ids[i1]!).options.some((n) => n.text === o.text),
     );
     for (const stale of staleOptions) expect(screen.queryByText(stale.text)).toBeNull();
     expect(container.textContent).not.toMatch(COACHING);
@@ -105,11 +122,14 @@ describe('MockRunner strict question flow', () => {
   it('changing an answer re-records it; the selection is visible but never graded', () => {
     useMockStore.getState().startMock();
     const ids = useMockStore.getState().paper!.questionIds;
+    const idx = ids.findIndex((id) => textOptions(id).length >= 2);
+    useMockStore.getState().goTo(idx);
     render(<MockRunnerScreen />);
 
-    fireEvent.click(screen.getByText(q(ids[0]!).options[0]!.text));
-    fireEvent.click(screen.getByText(q(ids[0]!).options[1]!.text));
-    expect(useMockStore.getState().answers[ids[0]!]).toBe(q(ids[0]!).options[1]!.id);
+    const opts = textOptions(ids[idx]!);
+    fireEvent.click(screen.getByText(opts[0]!.text));
+    fireEvent.click(screen.getByText(opts[1]!.text));
+    expect(useMockStore.getState().answers[ids[idx]!]).toBe(opts[1]!.id);
   });
 
   it('the countdown derives from the wall clock, not accumulated ticks', () => {
@@ -144,7 +164,7 @@ describe('MockRunner strict question flow', () => {
     render(<MockRunnerScreen />);
 
     screen.getByText(/silent video/i);
-    for (const option of q(videoId).options) screen.getByText(option.text);
+    for (const option of textOptions(videoId)) screen.getByText(option.text);
   });
 });
 

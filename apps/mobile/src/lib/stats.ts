@@ -9,11 +9,14 @@ import {
   buildDailyPlan,
   computeReadiness,
   computeStreak,
+  routeCoverageFromShares,
   type PlanItem,
   type Readiness,
   type ReadinessInputs,
 } from '@focus/engine';
 import { addDaysLocal, dayNumber, diffDaysLocal, todayLocal } from '@/lib/clock';
+import { getRouteBankShares } from '@/lib/mockPool';
+import { quickDrillAvailable } from '@/lib/quickDrill';
 import { MOCKS_ENABLED } from '@/flags';
 
 export interface AppStats {
@@ -46,8 +49,16 @@ export function buildStats(db: Db): AppStats {
   const dueCount = getDue(db, today).length;
 
   const routes = getAllRouteStates(db).filter((r) => r.total_missions > 0);
-  const totalMissions = routes.reduce((a, r) => a + r.total_missions, 0);
-  const completedMissions = routes.reduce((a, r) => a + r.completed_missions, 0);
+  const bankShares = getRouteBankShares();
+  // §4 P1-4: coverage is yield-weighted by each route's bank share, so finishing a
+  // bigger slice of the exam counts for more. The share distribution comes from the
+  // bank (app layer); the engine only combines share × completion (stays pure).
+  const routeCoverage = routeCoverageFromShares(
+    routes.map((r) => ({
+      bankShare: bankShares[r.route_id] ?? 0,
+      completion: r.total_missions === 0 ? 0 : r.completed_missions / r.total_missions,
+    })),
+  );
 
   const last14 = new Set(activeDays);
   let activeLast14 = 0;
@@ -64,7 +75,7 @@ export function buildStats(db: Db): AppStats {
   const inputs: ReadinessInputs = {
     mockScores: getMockScores(db),
     scoredAnswers,
-    routeCoverage: totalMissions === 0 ? 0 : completedMissions / totalMissions,
+    routeCoverage,
     dueReviews: dueCount,
     recentAccuracy: getRecentAccuracy(db),
     consistency,
@@ -83,6 +94,7 @@ export function buildStats(db: Db): AppStats {
     })),
     daysToTest: daysToTest ?? 999,
     mocksAvailable: MOCKS_ENABLED,
+    quickDrillAvailable: quickDrillAvailable(db),
   });
 
   return {

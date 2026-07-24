@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { getMission, getRouteManifest } from '@/content';
+import { checkpointConceptId, getMission, getRouteManifest } from '@/content';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { getActivity } from '@/db/repo/activity';
@@ -47,7 +47,7 @@ function checkpointConceptsOf(missionId: string): Set<string> {
   if (!mission) throw new Error(`missing mission ${missionId}`);
   const step = mission.steps.find((s) => s.type === 'checkpoint');
   if (step?.type !== 'checkpoint') throw new Error('mission has no checkpoint');
-  return new Set(step.questions.map((q) => q.conceptId));
+  return new Set(step.questions.map(checkpointConceptId));
 }
 
 // Plays r1-m1 with one correct-but-unsure teaching answer and exactly one wrong

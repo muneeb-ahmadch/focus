@@ -201,16 +201,23 @@ describe('MockResults', () => {
   it('3+ mistakes from one route offer Rebuild with that route named; 1 mistake does not', () => {
     useMockStore.getState().startMock();
     const ids = useMockStore.getState().paper!.questionIds;
-    for (const id of ids.slice(0, 4)) useMockStore.getState().answer(id, wrongOption(id).id);
+    // the biggest-represented route in the paper always has ≥3 questions to miss
+    const byRoute = new Map<string, string[]>();
+    for (const id of ids) {
+      const arr = byRoute.get(q(id).routeId) ?? [];
+      arr.push(id);
+      byRoute.set(q(id).routeId, arr);
+    }
+    const [routeId, routeQuestions] = [...byRoute.entries()].sort((a, b) => b[1].length - a[1].length)[0]!;
+    const routeTitle = ROUTES.find((r) => r.routeId === routeId)!.title;
+    for (const id of routeQuestions.slice(0, 3)) useMockStore.getState().answer(id, wrongOption(id).id);
     useMockStore.getState().requestSubmit();
     useMockStore.getState().confirmSubmit();
 
     render(<MockResultsScreen />);
-    screen.getByText(new RegExp(ROUTES[0]!.title));
+    screen.getByText(new RegExp(routeTitle));
     fireEvent.click(screen.getByRole('button', { name: /rebuild this route/i }));
-    expect(JSON.stringify(h.push.mock.calls) + JSON.stringify(h.replace.mock.calls)).toContain(
-      ROUTES[0]!.routeId,
-    );
+    expect(JSON.stringify(h.push.mock.calls) + JSON.stringify(h.replace.mock.calls)).toContain(routeId);
     expect(useMockStore.getState().phase).toBe('idle');
     cleanup();
 
@@ -242,7 +249,9 @@ describe('MistakeReview', () => {
   it('lists each wrong question with the chosen and correct answers, no coaching, no re-answering', () => {
     useMockStore.getState().startMock();
     const ids = useMockStore.getState().paper!.questionIds;
-    const wrongIds = [ids[0]!, ids[1]!];
+    // a bank image-option question (vB.3) has no text answers; review those two text questions
+    const textIds = ids.filter((id) => q(id).options.some((o) => o.text !== undefined));
+    const wrongIds = [textIds[0]!, textIds[1]!];
     for (const id of wrongIds) useMockStore.getState().answer(id, wrongOption(id).id);
     useMockStore.getState().requestSubmit();
     useMockStore.getState().confirmSubmit();
@@ -250,8 +259,8 @@ describe('MistakeReview', () => {
     const { container } = render(<MistakeReviewScreen />);
     for (const id of wrongIds) {
       screen.getByText(q(id).prompt);
-      screen.getAllByText(wrongOption(id).text);
-      screen.getAllByText(rightOption(id).text);
+      screen.getAllByText(wrongOption(id).text!);
+      screen.getAllByText(rightOption(id).text!);
     }
     screen.getAllByText(/your answer/i);
     screen.getAllByText(/correct answer/i);

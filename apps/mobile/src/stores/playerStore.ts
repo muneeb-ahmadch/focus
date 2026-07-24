@@ -1,16 +1,23 @@
 import { router } from 'expo-router';
 import { create } from 'zustand';
 import { getMission, getRouteManifest, pickDrillQuestion, pickScenarioQuestion } from '@/content';
-import type { Mission, Question, Step } from '@focus/shared';
+import type { Mission, Step } from '@focus/shared';
 import { getDb } from '@/db';
 import { addXp, bumpActivity, getActiveDays } from '@/db/repo/activity';
 import { finishAttempt, recordAnswer, startAttempt } from '@/db/repo/attempts';
 import { getTriggeredMisconception } from '@/db/repo/misconceptions';
-import { completeMission, ensureMissionRow, failCheckpoint, saveResume } from '@/db/repo/missions';
+import {
+  completeMission,
+  ensureMissionRow,
+  failCheckpoint,
+  getMissionState,
+  saveResume,
+} from '@/db/repo/missions';
 import { applyGrade, clearItem, getDue, upsertMiss } from '@/db/repo/reviews';
 import { getRouteState, recomputeRoute } from '@/db/repo/routes';
 import { flush, track } from '@/lib/analytics';
-import { getMockPool } from '@/lib/mockPool';
+import { getBankQuestionByConcept, getMockPool } from '@/lib/mockPool';
+import { QUICK_DRILL_SIZE, quickDrillConcepts } from '@/lib/quickDrill';
 import {
   gradeCheckpoint,
   computeStreak,
@@ -37,10 +44,28 @@ export type Phase =
   | 'practice-summary'
   | 'failed';
 
+// A rendered question at the player layer. It is a superset of the authored pack Question:
+// an option may be a bundled image (bank content, vB.3) instead of text, and a question may
+// carry a stem image. Pack questions simply never set the image fields, so they satisfy it.
+export interface PlayerOption {
+  id: string;
+  text?: string;
+  imageRef?: string;
+  altText?: string;
+  correct: boolean;
+  misconceptionId?: string;
+}
+export interface PlayerQuestion {
+  prompt: string;
+  options: PlayerOption[];
+  explanation: string;
+  stemImage?: string;
+}
+
 export type PlayerCard =
   | { kind: 'step'; stepId: string; conceptId: string; step: Step }
-  | { kind: 'checkpoint-q'; stepId: string; conceptId: string; question: Question }
-  | { kind: 'drill-q'; stepId: string; conceptId: string; question: Question };
+  | { kind: 'checkpoint-q'; stepId: string; conceptId: string; question: PlayerQuestion }
+  | { kind: 'drill-q'; stepId: string; conceptId: string; question: PlayerQuestion };
 
 export interface AnswerRecord {
   stepId: string;
@@ -82,6 +107,7 @@ interface PlayerState {
   rehabCleared: boolean;
   startMission(missionId: string, resume?: ResumePayload): void;
   startDrill(conceptIds?: string[]): void;
+  startQuickDrill(): void;
   startRehab(conceptId: string): void;
   startPractice(questionIds: string[], contentLabel: string): void;
   answer(input: string | string[]): void;
@@ -92,7 +118,7 @@ interface PlayerState {
   dismiss(): void;
 }
 
-function questionForCard(card: PlayerCard): Question | undefined {
+function questionForCard(card: PlayerCard): PlayerQuestion | undefined {
   if (card.kind === 'step') {
     return card.step.type === 'sequence' || card.step.type === 'checkpoint'
       ? undefined
@@ -101,17 +127,58 @@ function questionForCard(card: PlayerCard): Question | undefined {
   return card.question;
 }
 
+// Drill/rehab resolve a question for a concept from the authored pack first; a review item
+// that originated in a mock or practice session carries a bank concept the pack doesn't
+// know, so we fall back to the bank pool (one question per bank concept). Bank questions may
+// have image options / a stem image, so the result is a PlayerQuestion, not a pack Question.
+function drillQuestionFor(conceptId: string): { stepId: string; question: PlayerQuestion } | undefined {
+  const packQuestion = pickDrillQuestion(conceptId);
+  if (packQuestion) return { stepId: packQuestion.stepId, question: packQuestion.question };
+  const bankQuestion = getBankQuestionByConcept(conceptId);
+  if (!bankQuestion) return undefined;
+  return {
+    stepId: bankQuestion.id,
+    question: {
+      prompt: bankQuestion.prompt,
+      options: bankQuestion.options,
+      explanation: bankQuestion.explanation,
+      ...(bankQuestion.stemImage ? { stemImage: bankQuestion.stemImage } : {}),
+    },
+  };
+}
+
 function missionCards(mission: Mission): PlayerCard[] {
   const cards: PlayerCard[] = [];
   for (const step of mission.steps) {
     if (step.type === 'checkpoint') {
       step.questions.forEach((q, i) => {
-        cards.push({
-          kind: 'checkpoint-q',
-          stepId: `${step.id}#q${i}`,
-          conceptId: q.conceptId,
-          question: { prompt: q.prompt, options: q.options, explanation: q.explanation },
-        });
+        const stepId = `${step.id}#q${i}`;
+        if ('bankRef' in q) {
+          // Curated bankRef: resolve BANK-WIDE by concept, cross-topic (P0-1) against the
+          // bundled bank. The resolved question may carry a stem image / image options (vB.3),
+          // so it flows through the same PlayerQuestion superset every bank question uses. The
+          // tracked pack only ever stores the reference — never the licensed bank content.
+          const bank = getBankQuestionByConcept(q.bankRef);
+          if (!bank) return; // build-time validation guarantees resolution; skip defensively
+          cards.push({
+            kind: 'checkpoint-q',
+            stepId,
+            conceptId: q.bankRef,
+            question: {
+              prompt: bank.prompt,
+              options: bank.options,
+              explanation: bank.explanation,
+              ...(bank.stemImage ? { stemImage: bank.stemImage } : {}),
+            },
+          });
+        } else {
+          cards.push({
+            kind: 'checkpoint-q',
+            stepId,
+            conceptId: q.conceptId,
+            question: { prompt: q.prompt, options: q.options, explanation: q.explanation },
+          });
+        }
       });
     } else {
       cards.push({ kind: 'step', stepId: step.id, conceptId: step.conceptId, step });
@@ -213,13 +280,22 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
     const routeId = s.routeId;
     if (!missionId || !routeId) return;
     const today = todayLocal();
+    // Completion rewards are once-per-mission-ever. A replay re-runs the whole flow,
+    // but re-awarding completion XP or re-crediting missions_completed (which also
+    // feeds the day's streak credit via getActiveDays) would let a learner farm both
+    // by replaying a mission they already own. recomputeRoute stays idempotent
+    // (mastery derives from best_checkpoint_score), so it always runs.
+    const alreadyCompleted = getMissionState(db, missionId)?.status === 'completed';
+    // A completion reached by emptying the repair queue (checkpoint ≤3/5, then every
+    // requiz correct) is the forgiveness path: inRepair is still set at this point.
+    const repaired = s.inRepair;
     const streakBefore = computeStreak(getActiveDays(db).map(dayNumber), dayNumber(today));
     if (s.attemptId !== undefined) {
       finishAttempt(db, s.attemptId, 'submitted', score, JSON.stringify({ answers: s.answers }));
     }
     completeMission(db, missionId, score);
-    bumpActivity(db, today, 'missions_completed');
-    const xpEarned = missionXp(score);
+    if (!alreadyCompleted) bumpActivity(db, today, 'missions_completed');
+    const xpEarned = alreadyCompleted ? 0 : missionXp(score);
     addXp(db, today, xpEarned);
     const masteryBefore = getRouteState(db, routeId)?.mastery ?? 0;
     const info = routeInfo(routeId);
@@ -245,6 +321,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
         newReviews: String(newReviews),
         missed: s.missedConcepts.join(','),
         xp: String(xpEarned),
+        repaired: repaired ? '1' : '',
       },
     });
   }
@@ -421,7 +498,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       const queue: PlayerCard[] = [];
       if (conceptIds) {
         for (const conceptId of conceptIds) {
-          const dq = pickDrillQuestion(conceptId);
+          const dq = drillQuestionFor(conceptId);
           if (dq) {
             queue.push({ kind: 'drill-q', stepId: dq.stepId, conceptId, question: dq.question });
           }
@@ -429,7 +506,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       } else {
         const due = getDue(db, todayLocal()).slice(0, 10);
         for (const item of due) {
-          const dq = pickDrillQuestion(item.concept_id);
+          const dq = drillQuestionFor(item.concept_id);
           if (dq) {
             queue.push({
               kind: 'drill-q',
@@ -453,27 +530,48 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
       presentCard();
     },
 
+    // §4 P1-2: the interleaved cross-route quick-drill — a fresh drill over the
+    // taught concepts of completed missions (pool built in quickDrill.ts), capped
+    // at QUICK_DRILL_SIZE. A plain 'drill' attempt; scores XP and feeds accuracy
+    // like any drill, distinguished only by its 'quick-drill' content label.
+    startQuickDrill() {
+      const db = getDb();
+      const queue: PlayerCard[] = [];
+      for (const conceptId of quickDrillConcepts(db).slice(0, QUICK_DRILL_SIZE)) {
+        const dq = drillQuestionFor(conceptId);
+        if (dq) queue.push({ kind: 'drill-q', stepId: dq.stepId, conceptId, question: dq.question });
+      }
+      const attemptId = startAttempt(db, 'drill', 'quick-drill');
+      set({ ...initial, mode: 'drill', attemptId, queue, index: 0, phase: 'card', active: true });
+      presentCard();
+    },
+
     startRehab(conceptId) {
-      const recall = pickDrillQuestion(conceptId);
+      const recall = drillQuestionFor(conceptId);
       if (!recall) return;
       const db = getDb();
       const triggered = getTriggeredMisconception(db, conceptId);
-      const recallCard: PlayerCard = triggered
-        ? {
-            kind: 'step',
-            stepId: `miscon:${triggered.misconception_id}`,
-            conceptId,
-            step: {
-              id: `miscon:${triggered.misconception_id}`,
+      // A misconception is only ever triggered for an authored (pack) concept, so its recall
+      // is a pack Question; the misconception Step requires exactly that. Bank concepts have no
+      // authored misconception, so they always take the drill-q branch (image options allowed).
+      const packRecall = triggered ? pickDrillQuestion(conceptId) : undefined;
+      const recallCard: PlayerCard =
+        triggered && packRecall
+          ? {
+              kind: 'step',
+              stepId: `miscon:${triggered.misconception_id}`,
               conceptId,
-              sourceRef: triggered.source_ref,
-              type: 'misconception',
-              wrongBelief: triggered.wrong_belief,
-              question: recall.question,
-              repairNote: triggered.repair_note,
-            },
-          }
-        : { kind: 'drill-q', stepId: recall.stepId, conceptId, question: recall.question };
+              step: {
+                id: `miscon:${triggered.misconception_id}`,
+                conceptId,
+                sourceRef: triggered.source_ref,
+                type: 'misconception',
+                wrongBelief: triggered.wrong_belief,
+                question: packRecall.question,
+                repairNote: triggered.repair_note,
+              },
+            }
+          : { kind: 'drill-q', stepId: recall.stepId, conceptId, question: recall.question };
       const scenario = pickScenarioQuestion(conceptId);
       const queue: PlayerCard[] = [recallCard];
       if (scenario && scenario.stepId !== recall.stepId) {
@@ -504,7 +602,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => {
           kind: 'drill-q',
           stepId: id,
           conceptId: q.conceptId,
-          question: { prompt: q.prompt, options: q.options, explanation: q.explanation },
+          question: {
+            prompt: q.prompt,
+            options: q.options,
+            explanation: q.explanation,
+            ...(q.stemImage ? { stemImage: q.stemImage } : {}),
+          },
         });
       }
       const db = getDb();

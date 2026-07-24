@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, relative, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -89,23 +90,26 @@ let ok = true;
   ok = report('ESCAPE HATCHES', violations) && ok;
 }
 
-// 4. CONTENT PACK BOUNDARY — app code imports no raw content JSON, only the CLI-built pack;
-//    no raw content JSON files live inside the app tree.
+// 4. CONTENT PACK BOUNDARY — app code imports no raw content JSON, only the CLI-built
+//    artifacts (the public pack and the licensed, git-excluded bank); no other raw content
+//    JSON files live inside the app tree.
 {
+  const ALLOWED_IMPORTS = ['generated/pack.json', 'generated/bank.json'];
+  const ALLOWED_FILES = [join('generated', 'pack.json'), join('generated', 'bank.json')];
   const files = [...walk(join(ROOT, 'apps/mobile/src')), ...walk(join(ROOT, 'apps/mobile/app'))];
   const violations = [];
   for (const file of files) {
     const lines = readFileSync(file, 'utf8').split('\n');
     lines.forEach((line, i) => {
       const match = /(?:from\s+|require\(\s*)['"]([^'"]+\.json)['"]/.exec(line);
-      if (match && !match[1].endsWith('generated/pack.json')) {
+      if (match && !ALLOWED_IMPORTS.some((a) => match[1].endsWith(a))) {
         violations.push(`${relative(ROOT, file)}:${i + 1} — raw JSON import "${match[1]}"`);
       }
     });
   }
   const contentDir = join(ROOT, 'apps/mobile/src/content');
   for (const f of walk(contentDir, ['.json'])) {
-    if (relative(contentDir, f) !== join('generated', 'pack.json')) {
+    if (!ALLOWED_FILES.includes(relative(contentDir, f))) {
       violations.push(`${relative(ROOT, f)} — raw content JSON inside the app tree`);
     }
   }
@@ -152,6 +156,19 @@ let ok = true;
     ),
   ];
   ok = report('MOCK STRICTNESS (apps/mobile mock surface)', violations) && ok;
+}
+
+// 7. LICENSED CONTENT BOUNDARY — the generated bank and bundled media are produced
+//    locally from source material that is never committed, and are git-excluded. Any
+//    accidental `git add -f` of them fails the gate. Patterns stay generic on purpose.
+{
+  const tracked = execSync('git ls-files', { cwd: ROOT, encoding: 'utf8' }).split('\n');
+  const banned =
+    /^(content\/bank\/|apps\/mobile\/assets\/bank\/|apps\/mobile\/assets\/clips\/|apps\/mobile\/src\/content\/generated\/bank\.json$)/;
+  const violations = tracked
+    .filter((f) => f && banned.test(f))
+    .map((f) => `${f} — generated/bundled artifact must not be tracked`);
+  ok = report('LICENSED CONTENT BOUNDARY', violations) && ok;
 }
 
 if (!ok) {

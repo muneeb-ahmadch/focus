@@ -1,8 +1,13 @@
-// Slice v9 gate: the daily plan is a deterministic priority chain —
-// resume > review debt >10 > weakest incomplete route > light reviews >
-// exam-proximity mock escalation (<14d), collapsing to resume/reviews/mock
-// only inside the final-days window (<3d). Every rule pair is ordered here;
-// the engine never invents an item the inputs can't justify.
+// Slice v9 gate (extended vB.5 §4 P1-2, vB close-out): the daily plan is a
+// deterministic priority chain — resume > review debt >10 > cross-route
+// quick-drill > weakest incomplete route > light reviews > exam-proximity mock
+// escalation (<14d), collapsing to resume/reviews/mock only inside the final-days
+// window (<3d). The interleaved quick-drill (drawn from completed missions, gated
+// by quickDrillAvailable) sits before new content in normal mode, is excluded in
+// final days, and — per the vB ruling — appears ONLY when the review queue is
+// empty, so due reviews (the real retrieval work) always take precedence over it.
+// Every rule pair is ordered here; the engine never invents an item the inputs
+// can't justify.
 import { describe, expect, it } from 'vitest';
 import {
   buildDailyPlan,
@@ -25,6 +30,7 @@ const base = (over: Partial<PlanInputs> = {}): PlanInputs => ({
   routes: routes(),
   daysToTest: 30,
   mocksAvailable: false,
+  quickDrillAvailable: false,
   ...over,
 });
 
@@ -89,6 +95,84 @@ describe('priority pairs (normal mode)', () => {
       base({ hasResume: true, dueReviews: 12, daysToTest: 5, mocksAvailable: true }),
     );
     expect(kinds(plan)).toEqual(['resume', 'reviews', 'mission', 'mock']);
+  });
+});
+
+describe('interleaved cross-route quick-drill (§4 P1-2)', () => {
+  it('when available, one drill is interleaved right before new content', () => {
+    const plan = buildDailyPlan(base({ quickDrillAvailable: true }));
+    expect(kinds(plan)).toEqual(['drill', 'mission']);
+  });
+
+  it('unavailable (no completed missions to draw from) → no drill item', () => {
+    const plan = buildDailyPlan(base({ quickDrillAvailable: false }));
+    expect(kinds(plan)).toEqual(['mission']);
+  });
+
+  it('urgent reviews suppress the drill entirely (reviews are the retrieval work)', () => {
+    const plan = buildDailyPlan(base({ quickDrillAvailable: true, dueReviews: 12 }));
+    expect(kinds(plan)).toEqual(['reviews', 'mission']);
+  });
+
+  it('resume still leads; the drill follows, before the mission', () => {
+    const plan = buildDailyPlan(base({ quickDrillAvailable: true, hasResume: true }));
+    expect(kinds(plan)).toEqual(['resume', 'drill', 'mission']);
+  });
+
+  it('even a single light review suppresses the drill; reviews stay after the mission', () => {
+    const plan = buildDailyPlan(base({ quickDrillAvailable: true, dueReviews: 3 }));
+    expect(kinds(plan)).toEqual(['mission', 'reviews']);
+  });
+
+  it('the drill returns the moment the review queue is empty', () => {
+    const plan = buildDailyPlan(base({ quickDrillAvailable: true, dueReviews: 0 }));
+    expect(kinds(plan)).toEqual(['drill', 'mission']);
+  });
+
+  it('full normal-mode chain with reviews due: resume, urgent reviews, mission, mock (no drill)', () => {
+    const plan = buildDailyPlan(
+      base({
+        quickDrillAvailable: true,
+        hasResume: true,
+        dueReviews: 12,
+        daysToTest: 10,
+        mocksAvailable: true,
+      }),
+    );
+    expect(kinds(plan)).toEqual(['resume', 'reviews', 'mission', 'mock']);
+  });
+
+  it('full normal-mode chain with an empty queue: resume, drill, mission, mock', () => {
+    const plan = buildDailyPlan(
+      base({
+        quickDrillAvailable: true,
+        hasResume: true,
+        dueReviews: 0,
+        daysToTest: 10,
+        mocksAvailable: true,
+      }),
+    );
+    expect(kinds(plan)).toEqual(['resume', 'drill', 'mission', 'mock']);
+  });
+
+  it('every route complete → the drill still runs as retention practice, no mission', () => {
+    const done = [{ routeId: 'route-1', mastery: 0.9, completedMissions: 5, totalMissions: 5 }];
+    const plan = buildDailyPlan(base({ routes: done, quickDrillAvailable: true }));
+    expect(kinds(plan)).toEqual(['drill']);
+  });
+
+  it('final days (<3): no drill even when available — reviews and mock only', () => {
+    const plan = buildDailyPlan(
+      base({ quickDrillAvailable: true, daysToTest: 2, dueReviews: 4, mocksAvailable: true }),
+    );
+    expect(kinds(plan)).toEqual(['reviews', 'mock']);
+  });
+
+  it('final days with an open mission: resume leads, the drill is still excluded', () => {
+    const plan = buildDailyPlan(
+      base({ quickDrillAvailable: true, hasResume: true, daysToTest: 1, mocksAvailable: true }),
+    );
+    expect(kinds(plan)).toEqual(['resume', 'mock']);
   });
 });
 

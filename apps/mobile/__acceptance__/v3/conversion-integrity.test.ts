@@ -21,6 +21,9 @@ const byText = (a: DistilledOption, b: DistilledOption): number =>
   a.text < b.text ? -1 : a.text > b.text ? 1 : 0;
 
 function distillQuestion(q: Question | CheckpointQuestion): Record<string, unknown> {
+  // A curated bankRef checkpoint question distills to just its reference. Route 1 is fully
+  // authored (no bankRefs), so this branch never fires for the snapshot — the pin stays intact.
+  if ('bankRef' in q) return { bankRef: q.bankRef };
   const options: DistilledOption[] = q.options
     .map((o) => ({
       text: o.text,

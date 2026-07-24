@@ -44,6 +44,7 @@ describe('narration hygiene', () => {
       for (const step of mission.steps) {
         if (step.type !== 'checkpoint') continue;
         step.questions.forEach((q, i) => {
+          if ('bankRef' in q) return; // Route 1 is authored; bankRef cards resolve from the bank
           expect(
             cardNarration({
               kind: 'checkpoint-q',

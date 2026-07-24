@@ -1,5 +1,11 @@
 import type { RouteContentInfo } from '@/db/repo/routes';
-import { ContentPackSchema, type Mission, type MisconceptionEntry, type Question } from '@focus/shared';
+import {
+  checkpointConceptId,
+  ContentPackSchema,
+  type Mission,
+  type MisconceptionEntry,
+  type Question,
+} from '@focus/shared';
 import rawPack from './generated/pack.json';
 
 const parsedPack = ContentPackSchema.safeParse(rawPack);
@@ -52,7 +58,7 @@ function buildConceptIndex(): Map<string, ConceptInfo> {
     for (const step of mission.steps) {
       if (step.type === 'checkpoint') {
         step.questions.forEach((q, i) => {
-          entry(q.conceptId, mission.routeId).questions.push({
+          entry(checkpointConceptId(q), mission.routeId).questions.push({
             missionId: mission.missionId,
             stepId: step.id,
             checkpointIndex: i,
@@ -83,8 +89,10 @@ export function pickDrillQuestion(conceptId: string): DrillQuestion | undefined 
   for (const mission of MISSIONS) {
     for (const step of mission.steps) {
       if (step.type !== 'checkpoint') continue;
-      const q = step.questions.find((cq) => cq.conceptId === conceptId);
-      if (q) {
+      for (const q of step.questions) {
+        // bankRef checkpoint questions carry no authored content — a bank concept resolves via
+        // the bank fallback in the store, never here (this stays pack-pure).
+        if ('bankRef' in q || q.conceptId !== conceptId) continue;
         return {
           conceptId,
           missionId: mission.missionId,
@@ -155,3 +163,4 @@ export function getRouteManifest(): RouteContentInfo[] {
 }
 
 export type { Mission, Step, Question, MisconceptionEntry } from '@focus/shared';
+export { checkpointConceptId } from '@focus/shared';

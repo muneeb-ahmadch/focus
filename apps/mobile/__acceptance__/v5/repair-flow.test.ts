@@ -4,7 +4,7 @@
 // the re-quiz lands on CheckpointFailed with the missed concepts intact so
 // its CTA can seed a drill from exactly those concepts.
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { getMission, getRouteManifest } from '@/content';
+import { checkpointConceptId, getMission, getRouteManifest } from '@/content';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { getMissionState } from '@/db/repo/missions';
@@ -42,7 +42,7 @@ function checkpointConcepts(missionId: string): string[] {
   if (!mission) throw new Error(`no mission ${missionId}`);
   const checkpoint = mission.steps.find((s) => s.type === 'checkpoint');
   if (!checkpoint || checkpoint.type !== 'checkpoint') throw new Error('no checkpoint');
-  return checkpoint.questions.map((q) => q.conceptId);
+  return checkpoint.questions.map(checkpointConceptId);
 }
 
 function failPlan(missConcepts: Set<string>): PlayPlan {

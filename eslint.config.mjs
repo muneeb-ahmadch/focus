@@ -9,6 +9,7 @@ export default tseslint.config(
       '**/.expo/**',
       '**/.turbo/**',
       'apps/api/**',
+      'apps/mobile/assets/**',
       '**/*.config.*',
     ],
   },

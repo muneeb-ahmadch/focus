@@ -1,4 +1,4 @@
-export type PlanItemKind = 'resume' | 'reviews' | 'mission' | 'mock';
+export type PlanItemKind = 'resume' | 'reviews' | 'drill' | 'mission' | 'mock';
 export interface PlanItem { kind: PlanItemKind; routeId?: string }
 export interface PlanRoute {
   routeId: string;
@@ -12,6 +12,10 @@ export interface PlanInputs {
   routes: PlanRoute[];
   daysToTest: number;
   mocksAvailable: boolean;
+  // CURRICULUM §4 P1-2: a cross-route retrieval drill is available when the app
+  // can build one from completed missions (enough questions across routes). The
+  // app owns that check and the pool; the engine only slots the item.
+  quickDrillAvailable: boolean;
 }
 
 export const PLAN_REVIEW_URGENT = 10;
@@ -40,6 +44,13 @@ export function buildDailyPlan(i: PlanInputs): PlanItem[] {
   }
 
   if (i.dueReviews > PLAN_REVIEW_URGENT) plan.push({ kind: 'reviews' });
+
+  // Interleaved cross-route retrieval, before new content (§4 P1-2): keeps
+  // earlier routes alive while later ones are learned, and feeds recent_accuracy
+  // a mixed signal instead of a same-topic streak. It appears ONLY when the review
+  // queue is empty (vB ruling): due spaced-repetition reviews are the real retrieval
+  // work and take precedence, so the quick-drill never competes with them.
+  if (i.quickDrillAvailable && i.dueReviews === 0) plan.push({ kind: 'drill' });
 
   const missionRoute = pickMissionRoute(i.routes);
   if (missionRoute) plan.push({ kind: 'mission', routeId: missionRoute.routeId });

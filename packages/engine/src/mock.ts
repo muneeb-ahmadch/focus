@@ -4,12 +4,36 @@ export const MOCK_VIDEO_COUNT = 3;
 export const MOCK_DURATION_MS = 3_420_000;
 
 export interface MockPoolQuestion { id: string; routeId: string; video: boolean; sign: boolean }
-export interface Blueprint { total: number; videoCount: number; minSigns: number }
+export interface Blueprint {
+  total: number;
+  videoCount: number;
+  minSigns: number;
+  // Optional per-route soft minimums for the non-video questions, so a paper's topic
+  // spread mirrors the bank instead of a lucky draw. Best-effort: a route short of its
+  // quota contributes all it has and the deficit fills elsewhere — never a throw.
+  routeQuota?: Record<string, number>;
+}
 export interface MockHistoryAttempt { questionIds: readonly string[]; startedAt: number }
 export interface MockPaper { questionIds: string[]; videoQuestionIds: string[]; exclusionWindow: number }
 
 export function exclusionWindow(poolSize: number): number {
   return Math.max(0, Math.min(3, Math.floor((poolSize - 50) / 50)));
+}
+
+// Distribute a non-video question budget across routes by their share of the non-video
+// pool (floor). The remainder (from flooring) is filled at random by generateMock, so the
+// paper always reaches `total`. Video questions never count toward a route's share.
+export function routeQuotaFromShares(
+  pool: readonly MockPoolQuestion[],
+  budget: number,
+): Record<string, number> {
+  const counts = new Map<string, number>();
+  for (const q of pool) if (!q.video) counts.set(q.routeId, (counts.get(q.routeId) ?? 0) + 1);
+  const total = [...counts.values()].reduce((a, b) => a + b, 0);
+  const quota: Record<string, number> = {};
+  if (total === 0) return quota;
+  for (const [routeId, count] of counts) quota[routeId] = Math.floor((count / total) * budget);
+  return quota;
 }
 
 export function mockRemainingMs(startedAt: number, now: number, durationMs = MOCK_DURATION_MS): number {
@@ -69,11 +93,30 @@ export function generateMock(
   if (miss) throw new Error(`mock blueprint unfillable at window 0: not enough ${miss}`);
 
   const videos = shuffle(rng, eligible.filter((q) => q.video)).slice(0, bp.videoCount);
-  const chosenSigns = shuffle(rng, eligible.filter((q) => q.sign && !q.video)).slice(0, bp.minSigns);
-  const signIds = new Set(chosenSigns.map((q) => q.id));
-  const fillers = shuffle(rng, eligible.filter((q) => !q.video && !signIds.has(q.id)))
-    .slice(0, bp.total - bp.videoCount - bp.minSigns);
 
-  const questionIds = shuffle(rng, [...videos, ...chosenSigns, ...fillers]).map((q) => q.id);
+  // Reserve the non-video questions in priority order — signs floor, then per-route soft
+  // quotas, then random fill — capped at the non-video budget so the paper is exactly
+  // `total`. Each reservation adds min(want, available), so a short route never throws.
+  const budget = bp.total - bp.videoCount;
+  const nonVideo = shuffle(rng, eligible.filter((q) => !q.video));
+  const selected = new Map<string, MockPoolQuestion>();
+  const reserve = (want: number, matches: (q: MockPoolQuestion) => boolean): void => {
+    let have = [...selected.values()].filter(matches).length;
+    for (const q of nonVideo) {
+      if (have >= want || selected.size >= budget) break;
+      if (matches(q) && !selected.has(q.id)) {
+        selected.set(q.id, q);
+        have += 1;
+      }
+    }
+  };
+
+  reserve(bp.minSigns, (q) => q.sign);
+  for (const [routeId, want] of Object.entries(bp.routeQuota ?? {})) {
+    reserve(want, (q) => q.routeId === routeId);
+  }
+  reserve(budget, () => true);
+
+  const questionIds = shuffle(rng, [...videos, ...selected.values()]).map((q) => q.id);
   return { questionIds, videoQuestionIds: videos.map((q) => q.id), exclusionWindow: window };
 }

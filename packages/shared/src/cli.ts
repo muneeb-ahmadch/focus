@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildPack } from './build';
+import { bankBuild, checkAppBank, checkBank, checkPackBankRefs, runIngest } from './ingest-run';
 import { validateContent, type RawContentInput, type ValidationReport } from './validate';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -129,6 +130,9 @@ function cmdCheck(): void {
     process.exit(1);
   }
   console.log('pack up to date');
+  checkBank();
+  checkAppBank();
+  checkPackBankRefs();
 }
 
 const command = process.argv[2];
@@ -142,7 +146,15 @@ switch (command) {
   case 'check':
     cmdCheck();
     break;
+  case 'ingest':
+    runIngest();
+    break;
+  case 'bank-build':
+    bankBuild();
+    break;
   default:
-    console.error(`error: unknown command "${command ?? ''}" (expected validate | build | check)`);
+    console.error(
+      `error: unknown command "${command ?? ''}" (expected validate | build | check | ingest | bank-build)`,
+    );
     process.exit(1);
 }

@@ -61,6 +61,9 @@ export function planNotifications(db: Db, today: string): PlannedNotification[] 
       routes,
       daysToTest: d,
       mocksAvailable: MOCKS_ENABLED,
+      // the interleaved quick-drill is a warm-up, never a notification nudge —
+      // notification copy is driven by missions/reviews/mocks/streak only.
+      quickDrillAvailable: false,
     });
     if (plan.length === 0) continue;
 

@@ -215,7 +215,7 @@ describe('seeded rehab behaviour', () => {
             : undefined
           : card.question;
       const correct = question!.options.find((o) => o.correct)!;
-      fireEvent.click(screen.getByText(correct.text));
+      fireEvent.click(screen.getByText(correct.text!));
       if (i === 0 && queue[0]!.kind === 'step') {
         expect(screen.getByText(seedable.repairNote)).toBeTruthy();
       }

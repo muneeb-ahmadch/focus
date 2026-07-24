@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validateContent, type ValidationReport } from '../src';
+import { Step, validateContent, type ValidationReport } from '../src';
 import { goodContent, goodMission, type RawContent } from './fixtures';
 
 const expectError = (
@@ -352,5 +352,36 @@ describe('validateContent — warnings (never errors)', () => {
       where: 'm.t.five',
       message: 'misconception "m.t.five" is never referenced',
     });
+  });
+});
+
+// vB.3: a sign_meaning step may reference a real bundled sign image; the abstract
+// SignShape stays the fallback. The imageRef must survive parse so it reaches the pack.
+describe('sign_meaning optional imageRef', () => {
+  const signStep = {
+    id: 'r1-m1-s3',
+    type: 'sign_meaning' as const,
+    conceptId: 'c.t.charlie',
+    sourceRef: 'KYTS-1',
+    sign: { shape: 'warning-triangle' as const, imageRef: 'AB2036.gif' },
+    question: {
+      prompt: 'What does this sign mean?',
+      options: [
+        { id: 'a', text: 'Charlie ahead', correct: true },
+        { id: 'b', text: 'No charlie ever', correct: false },
+      ],
+      explanation: 'It warns of charlie ahead.',
+    },
+  };
+
+  it('preserves an authored imageRef on the sign', () => {
+    const parsed = Step.parse(signStep);
+    expect(parsed.type === 'sign_meaning' && parsed.sign.imageRef).toBe('AB2036.gif');
+  });
+
+  it('imageRef is optional — a shape-only sign stays valid', () => {
+    const parsed = Step.parse({ ...signStep, sign: { shape: signStep.sign.shape } });
+    expect(parsed.type).toBe('sign_meaning');
+    expect(parsed.type === 'sign_meaning' && parsed.sign.imageRef).toBeUndefined();
   });
 });

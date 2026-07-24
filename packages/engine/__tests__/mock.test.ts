@@ -12,6 +12,7 @@ import {
   exclusionWindow,
   generateMock,
   mockRemainingMs,
+  routeQuotaFromShares,
   scoreMock,
   MOCK_DURATION_MS,
   MOCK_PASS_MARK,
@@ -153,6 +154,132 @@ describe('exclusion window application and relaxation', () => {
     const paper = generateMock(pool, [attempt(all, 1000)], BP, lcg(8));
     expect(paper.questionIds).toHaveLength(50);
     expect(paper.exclusionWindow).toBe(0);
+  });
+});
+
+// vB.2: the real bank is 731 car (non-video) + 27 video = 758. Non-video route shares
+// match the ingested distribution; route-2 questions are the road-sign questions.
+const REAL_NON_VIDEO: Record<string, number> = {
+  'route-1': 63,
+  'route-2': 112,
+  'route-3': 156,
+  'route-4': 67,
+  'route-5': 57,
+  'route-6': 91,
+  'route-7': 185,
+};
+
+function realShapePool(): MockPoolQuestion[] {
+  const pool: MockPoolQuestion[] = [];
+  let n = 0;
+  for (const [routeId, count] of Object.entries(REAL_NON_VIDEO)) {
+    for (let i = 0; i < count; i++) {
+      pool.push({ id: `c${n++}`, routeId, video: false, sign: routeId === 'route-2' });
+    }
+  }
+  for (let i = 0; i < 27; i++) pool.push({ id: `v${i}`, routeId: 'route-3', video: true, sign: false });
+  return pool;
+}
+
+describe('routeQuotaFromShares — proportional floor by non-video route share', () => {
+  it('distributes a 47-question budget across the real route shares by floor', () => {
+    const quota = routeQuotaFromShares(realShapePool(), 47);
+    expect(quota).toEqual({
+      'route-1': 4,
+      'route-2': 7,
+      'route-3': 10,
+      'route-4': 4,
+      'route-5': 3,
+      'route-6': 5,
+      'route-7': 11,
+    });
+    const sum = Object.values(quota).reduce((a, b) => a + b, 0);
+    expect(sum).toBeLessThanOrEqual(47);
+  });
+
+  it('ignores video questions and never exceeds a route’s available non-video count', () => {
+    const pool = realShapePool();
+    const quota = routeQuotaFromShares(pool, 47);
+    for (const [routeId, want] of Object.entries(quota)) {
+      expect(want).toBeLessThanOrEqual(REAL_NON_VIDEO[routeId]!);
+    }
+    expect(quota['route-3']).toBeLessThan(REAL_NON_VIDEO['route-3']!); // 27 videos not counted
+  });
+});
+
+describe('generateMock — per-route quotas (real pool size)', () => {
+  const quota = routeQuotaFromShares(realShapePool(), 47);
+  const BP_REAL: Blueprint = { total: 50, videoCount: 3, minSigns: 4, routeQuota: quota };
+
+  it('exclusion window is 3 at the real pool size', () => {
+    expect(exclusionWindow(758)).toBe(3);
+  });
+
+  it('every seeded paper honours the quota per route, 50/3-video/≥minSigns, window 3', () => {
+    const pool = realShapePool();
+    const byId = new Map(pool.map((q) => [q.id, q]));
+    for (let seed = 1; seed <= 200; seed++) {
+      const paper = generateMock(pool, [], BP_REAL, lcg(seed));
+      expect(paper.questionIds).toHaveLength(50);
+      expect(new Set(paper.questionIds).size).toBe(50);
+      expect(paper.exclusionWindow).toBe(3);
+
+      const chosen = paper.questionIds.map((id) => byId.get(id)!);
+      const nonVideo = chosen.filter((q) => !q.video);
+      expect(chosen.filter((q) => q.video)).toHaveLength(3);
+      expect(nonVideo.filter((q) => q.sign).length).toBeGreaterThanOrEqual(BP_REAL.minSigns);
+      for (const [routeId, want] of Object.entries(quota)) {
+        const got = nonVideo.filter((q) => q.routeId === routeId).length;
+        expect(got, `route ${routeId} seed ${seed}`).toBeGreaterThanOrEqual(want);
+      }
+    }
+  });
+
+  it('is deterministic for the same seed', () => {
+    const pool = realShapePool();
+    const a = generateMock(pool, [], BP_REAL, lcg(7));
+    const b = generateMock(pool, [], BP_REAL, lcg(7));
+    expect(a.questionIds).toEqual(b.questionIds);
+  });
+});
+
+describe('generateMock — quotas are soft (best-effort, never throw)', () => {
+  it('a route with fewer non-video questions than its quota gets all it has; the rest fills elsewhere', () => {
+    // route-5 has only 1 non-video question but the quota asks for 3.
+    const pool: MockPoolQuestion[] = [];
+    let n = 0;
+    const counts: Record<string, number> = {
+      'route-1': 20,
+      'route-2': 20,
+      'route-5': 1,
+      'route-7': 20,
+    };
+    for (const [routeId, count] of Object.entries(counts)) {
+      for (let i = 0; i < count; i++) {
+        pool.push({ id: `c${n++}`, routeId, video: false, sign: routeId === 'route-2' });
+      }
+    }
+    for (let i = 0; i < 5; i++) pool.push({ id: `v${i}`, routeId: 'route-1', video: true, sign: false });
+
+    const bp: Blueprint = {
+      total: 50,
+      videoCount: 3,
+      minSigns: 4,
+      routeQuota: { 'route-1': 10, 'route-2': 10, 'route-5': 3, 'route-7': 10 },
+    };
+    const paper = generateMock(pool, [], bp, lcg(3));
+    const byId = new Map(pool.map((q) => [q.id, q]));
+    const nonVideo = paper.questionIds.map((id) => byId.get(id)!).filter((q) => !q.video);
+    expect(paper.questionIds).toHaveLength(50);
+    // route-5 contributes its one and only non-video question, not three
+    expect(nonVideo.filter((q) => q.routeId === 'route-5')).toHaveLength(1);
+  });
+
+  it('a blueprint with no routeQuota behaves exactly as before (backward compatible)', () => {
+    const pool = makePool({ size: 200, videos: 6, signs: 12 });
+    const paper = generateMock(pool, [], BP, lcg(11));
+    expect(paper.questionIds).toHaveLength(50);
+    expect(paper.videoQuestionIds).toHaveLength(3);
   });
 });
 

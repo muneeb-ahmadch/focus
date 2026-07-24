@@ -37,11 +37,13 @@ export default function MistakeReviewScreen() {
               <Text style={styles.prompt}>{question.prompt}</Text>
               <View style={styles.answerBlock}>
                 <Text style={styles.answerLabel}>Your answer</Text>
-                <Text style={styles.wrongAnswer}>{chosen?.text ?? '—'}</Text>
+                <Text style={styles.wrongAnswer}>{chosen?.text ?? chosen?.altText ?? '—'}</Text>
               </View>
               <View style={styles.answerBlock}>
                 <Text style={styles.answerLabel}>Correct answer</Text>
-                <Text style={styles.rightAnswer}>{correctOption?.text ?? '—'}</Text>
+                <Text style={styles.rightAnswer}>
+                  {correctOption?.text ?? correctOption?.altText ?? '—'}
+                </Text>
               </View>
             </View>
           );

@@ -9,6 +9,7 @@
     "dev": "turbo dev",
     "typecheck": "turbo typecheck",
     "content": "tsx packages/shared/src/cli.ts",
+    "reencode-clips": "node scripts/reencode-clips.mjs",
     "gate": "turbo typecheck lint test && node scripts/tripwires.mjs && pnpm content check"
   },
   "devDependencies": {

@@ -40,9 +40,13 @@ export function ensureMissionRow(db: Db, missionId: string, routeId: string): vo
 }
 
 export function saveResume(db: Db, missionId: string, stepIndex: number, payloadJson: string): void {
+  // Completion is monotonic (see failCheckpoint): replaying a completed mission
+  // saves resume state but must not flip its status back to in_progress, otherwise
+  // the once-per-mission completion rewards can't tell a replay from a first pass.
   db.run(
     `UPDATE mission_state
-     SET status = 'in_progress', current_step_index = ?, resume_payload_json = ?, updated_at = ?
+     SET status = CASE WHEN status = 'completed' THEN 'completed' ELSE 'in_progress' END,
+         current_step_index = ?, resume_payload_json = ?, updated_at = ?
      WHERE mission_id = ?`,
     [stepIndex, payloadJson, now().toISOString(), missionId],
   );
@@ -62,9 +66,12 @@ export function completeMission(db: Db, missionId: string, score: number): void 
 }
 
 export function failCheckpoint(db: Db, missionId: string, score: number): void {
+  // Completion is monotonic: once a mission is completed, failing a later replay's
+  // checkpoint must not downgrade it back to failed_checkpoint (best_checkpoint_score
+  // is already MAX-guarded; status gets the same protection).
   db.run(
     `UPDATE mission_state
-     SET status = 'failed_checkpoint',
+     SET status = CASE WHEN status = 'completed' THEN 'completed' ELSE 'failed_checkpoint' END,
          best_checkpoint_score = MAX(COALESCE(best_checkpoint_score, 0), ?),
          current_step_index = 0,
          resume_payload_json = NULL,

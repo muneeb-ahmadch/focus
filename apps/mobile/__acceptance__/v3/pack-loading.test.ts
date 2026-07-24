@@ -3,6 +3,7 @@ import {
   MISSIONS,
   ROUTES,
   MISCONCEPTIONS,
+  checkpointConceptId,
   getMission,
   conceptIndex,
   getRouteManifest,
@@ -14,8 +15,9 @@ type AnyQuestion = { prompt: string; options: { id: string; correct: boolean; mi
 function allQuestions(m: Mission): AnyQuestion[] {
   const out: AnyQuestion[] = [];
   for (const step of m.steps) {
-    if (step.type === 'checkpoint') out.push(...step.questions);
-    else if (step.type !== 'sequence') out.push(step.question);
+    if (step.type === 'checkpoint') {
+      for (const q of step.questions) if (!('bankRef' in q)) out.push(q);
+    } else if (step.type !== 'sequence') out.push(step.question);
   }
   return out;
 }
@@ -70,11 +72,12 @@ describe('content loads from the generated pack', () => {
       for (const step of m.steps) {
         if (step.type !== 'checkpoint') continue;
         for (const q of step.questions) {
-          const info = conceptIndex.get(q.conceptId);
-          expect(info, `${m.missionId}: ${q.conceptId}`).toBeDefined();
+          const concept = checkpointConceptId(q);
+          const info = conceptIndex.get(concept);
+          expect(info, `${m.missionId}: ${concept}`).toBeDefined();
           expect(
             info!.teachingStepIds.length,
-            `${m.missionId}: ${q.conceptId} has no teaching step`,
+            `${m.missionId}: ${concept} has no teaching step`,
           ).toBeGreaterThanOrEqual(1);
         }
       }

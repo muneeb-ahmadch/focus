@@ -7,7 +7,13 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ReactNode } from 'react';
-import { MISSIONS, getRouteManifest, pickDrillQuestion, pickScenarioQuestion } from '@/content';
+import {
+  checkpointConceptId,
+  MISSIONS,
+  getRouteManifest,
+  pickDrillQuestion,
+  pickScenarioQuestion,
+} from '@/content';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { createProfile } from '@/db/repo/profile';
@@ -60,7 +66,9 @@ function ladderConcept(): string {
       if (step.type !== 'scene_decision' && step.type !== 'hazard_cue') continue;
       const hasCheckpointQ = MISSIONS.some((m) =>
         m.steps.some(
-          (s) => s.type === 'checkpoint' && s.questions.some((q) => q.conceptId === step.conceptId),
+          (s) =>
+            s.type === 'checkpoint' &&
+            s.questions.some((q) => checkpointConceptId(q) === step.conceptId),
         ),
       );
       if (hasCheckpointQ) return step.conceptId;
@@ -175,7 +183,7 @@ describe('rehab ladder (render walk — R5)', () => {
       const card = s.queue[s.index];
       if (!card || card.kind === 'step') throw new Error('expected question card');
       const correct = card.question.options.find((o) => o.correct)!;
-      fireEvent.click(screen.getByText(correct.text));
+      fireEvent.click(screen.getByText(correct.text!));
       fireEvent.click(screen.getByRole('button', { name: 'I was sure' }));
     }
 
@@ -194,7 +202,7 @@ describe('rehab ladder (render walk — R5)', () => {
     const card = s.queue[s.index];
     if (!card || card.kind === 'step') throw new Error('expected question card');
     const wrong = card.question.options.find((o) => !o.correct)!;
-    fireEvent.click(screen.getByText(wrong.text));
+    fireEvent.click(screen.getByText(wrong.text!));
     fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
 
     expect(usePlayerStore.getState().phase).toBe('rehab-summary');
