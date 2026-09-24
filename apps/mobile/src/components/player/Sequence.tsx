@@ -37,26 +37,23 @@ export function Sequence(props: {
         {props.step.items.map((item) => {
           const position = picked.indexOf(item.id);
           return (
-            <Pressable
-              key={item.id}
-              onPress={() => toggle(item.id)}
-              disabled={props.answered}
-              accessibilityRole="button"
-              accessibilityLabel={item.text}
-              style={({ pressed }) => [
-                styles.row,
-                position >= 0 && styles.rowPicked,
-                pressed && styles.pressed,
-              ]}
-            >
-              <View style={[styles.chip, position >= 0 && styles.chipFilled]}>
-                <Text style={[styles.chipText, position >= 0 && styles.chipTextFilled]}>
-                  {position >= 0 ? String(position + 1) : ''}
-                </Text>
-              </View>
-              <Text style={styles.text}>{item.text}</Text>
+            <View key={item.id} style={[styles.row, position >= 0 && styles.rowPicked]}>
+              <Pressable
+                onPress={() => toggle(item.id)}
+                disabled={props.answered}
+                accessibilityRole="button"
+                accessibilityLabel={item.text}
+                style={({ pressed }) => [styles.item, pressed && styles.pressed]}
+              >
+                <View style={[styles.chip, position >= 0 && styles.chipFilled]}>
+                  <Text style={[styles.chipText, position >= 0 && styles.chipTextFilled]}>
+                    {position >= 0 ? String(position + 1) : ''}
+                  </Text>
+                </View>
+                <Text style={styles.text}>{item.text}</Text>
+              </Pressable>
               <AudioButton text={item.text} small />
-            </Pressable>
+            </View>
           );
         })}
       </View>
@@ -79,8 +76,16 @@ const makeStyles = (t: Theme) =>
       borderWidth: 2,
       borderColor: t.colors.border,
       borderRadius: t.radius.control,
+      paddingRight: t.space.md,
+    },
+    item: {
+      flex: 1,
+      alignSelf: 'stretch',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: t.space.sm,
       paddingVertical: t.space.md,
-      paddingHorizontal: t.space.md,
+      paddingLeft: t.space.md,
     },
     rowPicked: { borderColor: t.colors.accent },
     pressed: { opacity: 0.7 },
