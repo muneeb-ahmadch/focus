@@ -42,7 +42,7 @@
       "title": "The lanes to your right",
       "body": "Lanes to the right are for overtaking. When you're past, move back left — without cutting in front of the vehicle you've just overtaken.",
       "question": {
-        "prompt": "When would you use the right-hand lane of a three-lane motorway?",
+        "prompt": "On a three-lane motorway, what's the right-hand lane there for?",
         "options": [
           {
             "id": "a",
@@ -166,7 +166,7 @@
       "title": "Towing on the motorway",
       "body": "Towing a caravan or trailer drops your limit to 60 mph on motorways and dual carriageways — even where the cars around you can do 70.",
       "question": {
-        "prompt": "What's the speed limit for a car towing a trailer on a motorway?",
+        "prompt": "You're towing a caravan on the motorway. What's your top speed?",
         "options": [
           {
             "id": "a",
@@ -195,22 +195,22 @@
       "sourceRef": "HC-264",
       "wrongBelief": "The left-hand lane of a motorway is really for lorries and slow vehicles.",
       "question": {
-        "prompt": "Which vehicles should use the left-hand lane of a three-lane motorway?",
+        "prompt": "You're driving a small car at 70 mph and nothing's ahead. Which lane is yours?",
         "options": [
           {
             "id": "a",
-            "text": "Only lorries and other slow vehicles",
+            "text": "Not the left — that's for lorries and slow vehicles",
             "correct": false,
             "misconceptionId": "m.motorway.left-lane-slow-only"
           },
           {
             "id": "b",
-            "text": "Any vehicle that isn't overtaking",
+            "text": "The left-hand lane",
             "correct": true
           },
           {
             "id": "c",
-            "text": "Only vehicles about to leave at the next exit",
+            "text": "The middle lane, until you're near your exit",
             "correct": false
           }
         ],

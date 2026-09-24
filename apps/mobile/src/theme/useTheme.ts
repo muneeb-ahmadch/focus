@@ -4,7 +4,7 @@ import { useSettingsStore } from '@/stores/settingsStore';
 import { getTheme, type Theme } from './tokens';
 
 export function useTheme(): Theme {
-  const scheme = useColorScheme() ?? 'light';
+  const scheme = useColorScheme() === 'dark' ? 'dark' : 'light';
   const highContrast = useSettingsStore((s) => s.highContrast);
   const dyslexiaFont = useSettingsStore((s) => s.dyslexiaFont);
   return getTheme({ scheme, highContrast, dyslexiaFont });

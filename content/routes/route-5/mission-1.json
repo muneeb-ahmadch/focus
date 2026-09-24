@@ -58,7 +58,7 @@
       "title": "Settle in before you overtake",
       "body": "Once you've joined, stay in the left-hand lane long enough to get used to the speed of the traffic before you think about overtaking.",
       "question": {
-        "prompt": "What should you do straight after joining a motorway?",
+        "prompt": "You've just merged from the slip road. What's your next move?",
         "options": [
           {
             "id": "a",
@@ -94,7 +94,7 @@
         "body": "National speed limit for a car: 70 mph."
       },
       "question": {
-        "prompt": "What's the national speed limit for a car on a motorway?",
+        "prompt": "You pass a national speed limit sign as you join the motorway. How fast may your car go?",
         "options": [
           {
             "id": "a",

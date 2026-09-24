@@ -42,7 +42,7 @@
       "title": "Tyre tread: the legal limit",
       "body": "Car tyres need at least 1.6 mm of tread across the central three-quarters, all the way round — with no deep cuts or bulges.",
       "question": {
-        "prompt": "What's the legal minimum tread depth for car tyres?",
+        "prompt": "You're checking your tyres. How much tread must they have, at the least?",
         "options": [
           {
             "id": "a",

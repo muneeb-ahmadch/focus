@@ -138,7 +138,7 @@
         "body": "The person is deaf as well as blind. Your horn tells them nothing at all."
       },
       "question": {
-        "prompt": "A pedestrian carries a white stick with a red band. What does it mean?",
+        "prompt": "A pedestrian's white stick has a red band round it. What does that tell you?",
         "options": [
           {
             "id": "a",

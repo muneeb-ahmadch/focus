@@ -108,7 +108,7 @@
       "title": "Skids have a driver",
       "body": "A skid is caused by braking, steering or accelerating too harshly for the grip that's there. The weather only sets the limit.",
       "question": {
-        "prompt": "What's the main cause of skidding?",
+        "prompt": "A car skids on a wet bend. What's most likely to blame?",
         "options": [
           {
             "id": "a",

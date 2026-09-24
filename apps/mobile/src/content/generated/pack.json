@@ -5176,21 +5176,21 @@
                   {
                     "correct": false,
                     "id": "a",
-                    "text": "The speed limit on the road"
+                    "text": "A lower speed limit on that road"
                   },
                   {
                     "correct": true,
                     "id": "b",
-                    "text": "The condition of the tyres"
+                    "text": "Worn or badly inflated tyres"
                   },
                   {
                     "correct": false,
                     "id": "c",
                     "misconceptionId": "m.stopping.tyres-legal-is-fine",
-                    "text": "Nothing, as long as the tyres are still road-legal"
+                    "text": "Nothing, if both sets of tyres are legal"
                   }
                 ],
-                "prompt": "Which of these affects your vehicle's stopping distance?"
+                "prompt": "Two identical cars brake hard from the same speed. What could make one stop much later?"
               },
               "sourceRef": "HC-126",
               "title": "Four small patches",
@@ -5405,7 +5405,7 @@
                     "text": "The road surface"
                   }
                 ],
-                "prompt": "What's the main cause of skidding?"
+                "prompt": "A car skids on a wet bend. What's most likely to blame?"
               },
               "sourceRef": "HC-119",
               "title": "Skids have a driver",
@@ -5588,7 +5588,7 @@
                     "text": "You drive worse but you know you're doing it"
                   }
                 ],
-                "prompt": "How does drinking alcohol affect your driving?"
+                "prompt": "You've had a drink or two. What's the effect behind the wheel?"
               },
               "sourceRef": "HC-95",
               "title": "It takes the judgement first",
@@ -5835,7 +5835,7 @@
                     "text": "Whenever the traffic ahead is queuing slowly"
                   }
                 ],
-                "prompt": "When may you enter a box junction?"
+                "prompt": "Traffic is queuing on the far side of a yellow box junction. When can you drive into the box?"
               },
               "sourceRef": "HC-174",
               "title": "Keep the box clear",
@@ -6336,7 +6336,7 @@
                     "text": "Red, straight away"
                   }
                 ],
-                "prompt": "Which colour follows the green signal at a puffin crossing?"
+                "prompt": "At a puffin crossing, what comes straight after the green light?"
               },
               "sourceRef": "HC-199",
               "type": "contrast"
@@ -6581,7 +6581,7 @@
                     "text": "As soon as the road widens to three lanes"
                   }
                 ],
-                "prompt": "When should you use the right-hand lane of a three-lane dual carriageway?"
+                "prompt": "You're on a dual carriageway. What's the lane on the right there for?"
               },
               "sourceRef": "HC-137",
               "title": "The right-hand lane",
@@ -6611,7 +6611,7 @@
                     "text": "Nowhere — overtaking is banned in one-way streets"
                   }
                 ],
-                "prompt": "Where may you overtake on a one-way street?"
+                "prompt": "You're in a one-way street. Which side may you pass slower traffic on?"
               },
               "sourceRef": "HC-143",
               "title": "One-way streets",
@@ -6677,7 +6677,7 @@
                     "text": "Never, at any time of day"
                   }
                 ],
-                "prompt": "When may you drive a car in a bus lane?"
+                "prompt": "A bus lane runs alongside you and there's no bus in it. When can you use it?"
               },
               "sourceRef": "HC-141",
               "title": "Bus lanes",
@@ -7111,7 +7111,7 @@
                     "text": "Stay in the left-hand lane for a while"
                   }
                 ],
-                "prompt": "What should you do straight after joining a motorway?"
+                "prompt": "You've just merged from the slip road. What's your next move?"
               },
               "sourceRef": "HC-259",
               "title": "Settle in before you overtake",
@@ -7148,7 +7148,7 @@
                     "text": "There isn't one — you choose a safe speed"
                   }
                 ],
-                "prompt": "What's the national speed limit for a car on a motorway?"
+                "prompt": "You pass a national speed limit sign as you join the motorway. How fast may your car go?"
               },
               "sourceRef": "HC-124",
               "type": "contrast"
@@ -7327,7 +7327,7 @@
                     "text": "When you're overtaking"
                   }
                 ],
-                "prompt": "When would you use the right-hand lane of a three-lane motorway?"
+                "prompt": "On a three-lane motorway, what's the right-hand lane there for?"
               },
               "sourceRef": "HC-267",
               "title": "The lanes to your right",
@@ -7451,7 +7451,7 @@
                     "text": "60 mph"
                   }
                 ],
-                "prompt": "What's the speed limit for a car towing a trailer on a motorway?"
+                "prompt": "You're towing a caravan on the motorway. What's your top speed?"
               },
               "sourceRef": "HC-124",
               "title": "Towing on the motorway",
@@ -7467,20 +7467,20 @@
                     "correct": false,
                     "id": "a",
                     "misconceptionId": "m.motorway.left-lane-slow-only",
-                    "text": "Only lorries and other slow vehicles"
+                    "text": "Not the left — that's for lorries and slow vehicles"
                   },
                   {
                     "correct": true,
                     "id": "b",
-                    "text": "Any vehicle that isn't overtaking"
+                    "text": "The left-hand lane"
                   },
                   {
                     "correct": false,
                     "id": "c",
-                    "text": "Only vehicles about to leave at the next exit"
+                    "text": "The middle lane, until you're near your exit"
                   }
                 ],
-                "prompt": "Which vehicles should use the left-hand lane of a three-lane motorway?"
+                "prompt": "You're driving a small car at 70 mph and nothing's ahead. Which lane is yours?"
               },
               "repairNote": "The left-hand lane is everyone's lane. Use the others only to overtake, then move back.",
               "sourceRef": "HC-264",
@@ -8129,7 +8129,7 @@
                     "text": "Keep to the lower speed limit"
                   }
                 ],
-                "prompt": "What should you do when approaching roadworks on a motorway?"
+                "prompt": "Signs warn of roadworks ahead on the motorway. What should you do?"
               },
               "sourceRef": "HC-288",
               "type": "contrast"
@@ -8410,7 +8410,7 @@
                     "text": "They're deaf and blind"
                   }
                 ],
-                "prompt": "A pedestrian carries a white stick with a red band. What does it mean?"
+                "prompt": "A pedestrian's white stick has a red band round it. What does that tell you?"
               },
               "sourceRef": "HC-207",
               "type": "contrast"
@@ -8547,20 +8547,20 @@
                     "correct": false,
                     "id": "a",
                     "misconceptionId": "m.vru.patrol-is-advisory",
-                    "text": "By giving you an arm signal from the kerb"
+                    "text": "An arm, raised from the kerb"
                   },
                   {
                     "correct": true,
                     "id": "b",
-                    "text": "By displaying a 'stop' sign"
+                    "text": "A 'stop' sign"
                   },
                   {
                     "correct": false,
                     "id": "c",
-                    "text": "By showing a red light on a pole"
+                    "text": "A red light on a pole"
                   }
                 ],
-                "prompt": "How does a school crossing patrol tell you to stop?"
+                "prompt": "A school crossing patrol steps out ahead of you. What will they hold up?"
               },
               "sourceRef": "HC-210",
               "title": "School crossing patrol",
@@ -8831,7 +8831,7 @@
                     "text": "Anywhere — a car is the thing you're really looking for"
                   }
                 ],
-                "prompt": "Where should you take particular care to look for riders?"
+                "prompt": "Where are you most likely to miss a motorcyclist or cyclist?"
               },
               "sourceRef": "HC-211",
               "title": "Where bikes go missing",
@@ -8907,7 +8907,7 @@
                     "correct": false,
                     "id": "a",
                     "misconceptionId": "m.vru.shoulder-look-means-balance",
-                    "text": "It helps them balance through the turn"
+                    "text": "To help them balance through the turn"
                   },
                   {
                     "correct": true,
@@ -8920,7 +8920,7 @@
                     "text": "Motorcycles aren't fitted with mirrors"
                   }
                 ],
-                "prompt": "Why do riders often look over their right shoulder before turning right?"
+                "prompt": "The rider ahead glances over their right shoulder just before a right turn. Why?"
               },
               "sourceRef": "HC-212",
               "title": "Reading a rider's shoulder check",
@@ -8935,21 +8935,21 @@
                   {
                     "correct": true,
                     "id": "a",
-                    "text": "So the rider can be seen more easily"
+                    "text": "So you can see the rider more easily"
                   },
                   {
                     "correct": false,
                     "id": "b",
                     "misconceptionId": "m.vru.lights-make-them-obvious",
-                    "text": "It means the rider is inviting you to go first"
+                    "text": "The rider is inviting you to go first"
                   },
                   {
                     "correct": false,
                     "id": "c",
-                    "text": "It improves how far the rider can see ahead"
+                    "text": "To help the rider see further ahead"
                   }
                 ],
-                "prompt": "Why do motorcyclists ride on dipped headlights in daylight?"
+                "prompt": "A motorbike comes towards you in bright sunshine with its headlight on. Why?"
               },
               "repairNote": "Headlights and bright kit make a rider easier to see — they don't make one impossible to miss. Look for the bike itself.",
               "sourceRef": "HC-86",
@@ -9524,7 +9524,7 @@
                     "text": "Third party, fire and theft"
                   }
                 ],
-                "prompt": "What's the legal minimum insurance to drive on public roads?"
+                "prompt": "You're choosing car insurance. What's the least cover the law allows?"
               },
               "sourceRef": "HC-annex3",
               "title": "The legal minimum",
@@ -9577,20 +9577,20 @@
                     "correct": false,
                     "id": "a",
                     "misconceptionId": "m.docs.v5c-only-on-sale",
-                    "text": "Only when you sell the car"
+                    "text": "Nothing — you only update it when you sell the car"
                   },
                   {
                     "correct": true,
                     "id": "b",
-                    "text": "When you move house"
+                    "text": "Tell DVLA your new address"
                   },
                   {
                     "correct": false,
                     "id": "c",
-                    "text": "Each time you renew your insurance"
+                    "text": "Wait until your insurance is due for renewal"
                   }
                 ],
-                "prompt": "When should you update your vehicle registration certificate (V5C)?"
+                "prompt": "You've just moved to a new address. What must you do with your V5C?"
               },
               "sourceRef": "HC-annex3",
               "title": "The registered keeper",
@@ -9770,7 +9770,7 @@
                     "text": "1.6 mm"
                   }
                 ],
-                "prompt": "What's the legal minimum tread depth for car tyres?"
+                "prompt": "You're checking your tyres. How much tread must they have, at the least?"
               },
               "sourceRef": "HC-annex6",
               "title": "Tyre tread: the legal limit",
@@ -10015,7 +10015,7 @@
                     "text": "Nothing about tyres — pressure only affects grip"
                   }
                 ],
-                "prompt": "What's most likely to waste fuel?"
+                "prompt": "Which of these makes your car burn more fuel?"
               },
               "sourceRef": "DVSA-DES-s17",
               "title": "Soft tyres cost money",
@@ -10111,7 +10111,7 @@
                     "text": "Drive short trips in a low gear"
                   }
                 ],
-                "prompt": "How can you reduce the harm your car does to the environment?"
+                "prompt": "Which habit does the environment the most good?"
               },
               "sourceRef": "DVSA-DES-s17",
               "title": "Short trips, cold engine",
@@ -10314,21 +10314,21 @@
                   {
                     "correct": true,
                     "id": "a",
-                    "text": "It will make the car less stable"
+                    "text": "Less stable, especially on bends"
                   },
                   {
                     "correct": false,
                     "id": "b",
                     "misconceptionId": "m.load.weight-adds-grip",
-                    "text": "It will improve grip by pressing the tyres down"
+                    "text": "Grippier — the weight presses the tyres down"
                   },
                   {
                     "correct": false,
                     "id": "c",
-                    "text": "It makes no difference, if it's tied on"
+                    "text": "No different, as long as it's tied on"
                   }
                 ],
-                "prompt": "How will a heavy load on your roof rack affect the car?"
+                "prompt": "You've loaded heavy bags onto the roof rack. How will the car feel?"
               },
               "sourceRef": "HC-98",
               "type": "contrast"
@@ -10356,7 +10356,7 @@
                     "text": "The hire company, if it's a hire van"
                   }
                 ],
-                "prompt": "Who's responsible for making sure a vehicle isn't overloaded?"
+                "prompt": "You're driving a hire van that someone else loaded. If it's overloaded, who answers for it?"
               },
               "repairNote": "The driver is responsible. Check the load and the vehicle's limits before you set off.",
               "sourceRef": "HC-98",
@@ -10402,21 +10402,21 @@
                   {
                     "correct": true,
                     "id": "a",
-                    "text": "With heavy items over the axles"
+                    "text": "Over the axles"
                   },
                   {
                     "correct": false,
                     "id": "b",
                     "misconceptionId": "m.load.heavy-at-back",
-                    "text": "With heavy items right at the back, away from the car"
+                    "text": "Right at the back, away from the car"
                   },
                   {
                     "correct": false,
                     "id": "c",
-                    "text": "With the heaviest items on top, holding the rest down"
+                    "text": "On top, holding the rest down"
                   }
                 ],
-                "prompt": "How should you load a trailer?"
+                "prompt": "You're packing a trailer for a trip. Where do the heaviest things go?"
               },
               "sourceRef": "HC-98",
               "title": "Loading a trailer",
@@ -10775,12 +10775,12 @@
                     "correct": false,
                     "id": "a",
                     "misconceptionId": "m.firstaid.move-to-comfort",
-                    "text": "Straight away, into a more comfortable position"
+                    "text": "Yes — straight away, into a more comfortable position"
                   },
                   {
                     "correct": false,
                     "id": "b",
-                    "text": "As soon as someone else can help lift"
+                    "text": "Yes, as soon as someone can help you lift"
                   },
                   {
                     "correct": true,
@@ -10788,7 +10788,7 @@
                     "text": "Only if they're in further danger"
                   }
                 ],
-                "prompt": "A casualty is unconscious but breathing. When should you move them?"
+                "prompt": "The casualty you're helping is unconscious but breathing. Should you move them?"
               },
               "sourceRef": "HC-annex7",
               "title": "Leave them where they are",
@@ -10884,7 +10884,7 @@
                     "text": "Only the emergency services"
                   }
                 ],
-                "prompt": "Who can use a public access defibrillator (AED)?"
+                "prompt": "Someone collapses near a public defibrillator. Who's allowed to use it?"
               },
               "sourceRef": "DVSA-DES-s16",
               "title": "Public defibrillators",
