@@ -101,5 +101,22 @@
   "HC-278": { "title": "Highway Code rule 278" },
   "HC-283": { "title": "Highway Code rule 283" },
   "HC-288": { "title": "Highway Code rule 288" },
-  "HC-290": { "title": "Highway Code rule 290" }
+  "HC-290": { "title": "Highway Code rule 290" },
+  "HC-annex3": { "title": "Highway Code Annex 3: Motor vehicle documentation and learner driver requirements" },
+  "HC-penalties": { "title": "Highway Code: Penalties" },
+  "HC-90": { "title": "Highway Code rule 90" },
+  "HC-97": { "title": "Highway Code rule 97" },
+  "HC-98": { "title": "Highway Code rule 98" },
+  "HC-99": { "title": "Highway Code rule 99" },
+  "HC-100": { "title": "Highway Code rule 100" },
+  "HC-101": { "title": "Highway Code rule 101" },
+  "HC-123": { "title": "Highway Code rule 123" },
+  "HC-150": { "title": "Highway Code rule 150" },
+  "HC-239": { "title": "Highway Code rule 239" },
+  "HC-276": { "title": "Highway Code rule 276" },
+  "HC-286": { "title": "Highway Code rule 286" },
+  "HC-annex6": { "title": "Highway Code Annex 6: Vehicle maintenance, safety and security" },
+  "HC-annex7": { "title": "Highway Code Annex 7: First aid on the road" },
+  "DVSA-DES-s16": { "title": "The Official DVSA Guide to Driving – the essential skills: section 16, Incidents, accidents and emergencies" },
+  "DVSA-DES-s17": { "title": "The Official DVSA Guide to Driving – the essential skills: section 17, Driving and the environment" }
 }

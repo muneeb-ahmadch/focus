@@ -31,6 +31,7 @@ const AUTHORED: Record<string, number> = {
   'route-4': 5,
   'route-5': 5,
   'route-6': 5,
+  'route-7': 6,
 };
 
 const expectedMissionIds = Object.entries(AUTHORED)

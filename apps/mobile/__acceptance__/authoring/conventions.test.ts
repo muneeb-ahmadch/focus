@@ -51,6 +51,14 @@ const ARCS: Record<string, Record<string, string>> = {
     'r6-m4': 'Cyclists, riders & animals',
     'r6-m5': 'Large vehicles & learners',
   },
+  'route-7': {
+    'r7-m1': 'Paperwork',
+    'r7-m2': 'Roadworthy',
+    'r7-m3': 'Greener driving',
+    'r7-m4': 'Loads, towing & passengers',
+    'r7-m5': 'When things go wrong',
+    'r7-m6': 'First aid at the scene',
+  },
 };
 
 const pipelineRoutes = ROUTES.filter((r) => r.routeId !== 'route-1' && r.missions.length > 0).map(

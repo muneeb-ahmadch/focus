@@ -1321,5 +1321,285 @@
     "wrongBelief": "You can stay in an outside lane until the countdown markers, then move across.",
     "repairNote": "Move into the left-hand lane well before your exit — the first sign is a mile out.",
     "sourceRef": "HC-273"
+  },
+  {
+    "misconceptionId": "m.docs.car-insured-anyone-drives",
+    "conceptId": "c.docs.insured-to-drive",
+    "wrongBelief": "If a car is insured, anyone can drive it.",
+    "repairNote": "Insurance covers named drivers. Check you're covered, on their policy or your own, before you drive.",
+    "sourceRef": "HC-annex3"
+  },
+  {
+    "misconceptionId": "m.docs.comprehensive-required",
+    "conceptId": "c.docs.third-party",
+    "wrongBelief": "The law says you must have fully comprehensive insurance.",
+    "repairNote": "The legal minimum is third-party cover. Comprehensive also covers your own car, but it's a choice.",
+    "sourceRef": "HC-annex3"
+  },
+  {
+    "misconceptionId": "m.docs.mot-grace-period",
+    "conceptId": "c.docs.mot-rules",
+    "wrongBelief": "There's a grace period after your MOT runs out when you can still drive.",
+    "repairNote": "There isn't. Without a valid MOT you may only drive to a booked MOT appointment.",
+    "sourceRef": "HC-annex3"
+  },
+  {
+    "misconceptionId": "m.docs.v5c-only-on-sale",
+    "conceptId": "c.docs.keeper-v5c",
+    "wrongBelief": "You only need to update your V5C when you sell the car.",
+    "repairNote": "Tell DVLA whenever your details change, such as a new address or a new name.",
+    "sourceRef": "HC-annex3"
+  },
+  {
+    "misconceptionId": "m.docs.must-carry-documents",
+    "conceptId": "c.docs.produce-7-days",
+    "wrongBelief": "It's an offence not to carry your driving documents with you.",
+    "repairNote": "You don't have to carry them, but you may be asked to show them at a police station within 7 days.",
+    "sourceRef": "HC-annex3"
+  },
+  {
+    "misconceptionId": "m.docs.doctor-tells-dvla",
+    "conceptId": "c.docs.health-dvla",
+    "wrongBelief": "Your doctor tells DVLA if a medical condition affects your driving.",
+    "repairNote": "It's your legal duty as the driver to tell DVLA yourself.",
+    "sourceRef": "HC-90"
+  },
+  {
+    "misconceptionId": "m.docs.new-driver-12-points",
+    "conceptId": "c.docs.new-driver-points",
+    "wrongBelief": "New drivers have the same 12-point limit as everyone else.",
+    "repairNote": "Within 2 years of passing, 6 points revokes your licence and you must pass both tests again.",
+    "sourceRef": "HC-penalties"
+  },
+  {
+    "misconceptionId": "m.vehicle.light-ignore-if-fine",
+    "conceptId": "c.vehicle.warning-light",
+    "wrongBelief": "A dashboard warning light doesn't matter while the car still seems to drive normally.",
+    "repairNote": "A warning light can mean the car is unsafe. Check it out as soon as you safely can.",
+    "sourceRef": "HC-annex6"
+  },
+  {
+    "misconceptionId": "m.vehicle.any-tread-legal",
+    "conceptId": "c.vehicle.tread-legal",
+    "wrongBelief": "Any amount of tread is legal as long as the tyre isn't completely bald.",
+    "repairNote": "Car tyres need at least 1.6 mm of tread across the central three-quarters, all the way round.",
+    "sourceRef": "HC-annex6"
+  },
+  {
+    "misconceptionId": "m.vehicle.check-pressure-warm",
+    "conceptId": "c.vehicle.pressures-cold",
+    "wrongBelief": "Tyre pressures are most accurate after a drive, once the tyres have warmed up.",
+    "repairNote": "Check them cold. Warm tyres give a higher reading.",
+    "sourceRef": "HC-annex6"
+  },
+  {
+    "misconceptionId": "m.vehicle.pull-is-camber",
+    "conceptId": "c.vehicle.brakes-pull",
+    "wrongBelief": "A car pulling to one side when you brake is just the camber of the road.",
+    "repairNote": "Pulling to one side under braking usually means a brake fault. Get it checked.",
+    "sourceRef": "HC-annex6"
+  },
+  {
+    "misconceptionId": "m.vehicle.head-restraint-comfort",
+    "conceptId": "c.vehicle.head-restraint",
+    "wrongBelief": "A head restraint is only there for comfort, like a headrest.",
+    "repairNote": "It's safety equipment: set properly, it cuts the risk of neck injury in a crash.",
+    "sourceRef": "HC-97"
+  },
+  {
+    "misconceptionId": "m.vehicle.adas-self-driving",
+    "conceptId": "c.vehicle.adas-support",
+    "wrongBelief": "With driver-assist systems switched on, the car is doing the driving.",
+    "repairNote": "Driver-assist systems support you. You must stay alert and in control at all times.",
+    "sourceRef": "HC-150"
+  },
+  {
+    "misconceptionId": "m.vehicle.quick-stop-leave-running",
+    "conceptId": "c.vehicle.lock-and-key",
+    "wrongBelief": "For a quick stop, it's fine to leave the engine running.",
+    "repairNote": "Switch off, take the key and lock the car, even if you'll only be a minute.",
+    "sourceRef": "HC-239"
+  },
+  {
+    "misconceptionId": "m.eco.quick-is-efficient",
+    "conceptId": "c.eco.smooth-driving",
+    "wrongBelief": "Accelerating hard and braking late gets you there using less fuel.",
+    "repairNote": "Harsh acceleration and late braking waste fuel. Smooth, planned driving saves about 15%.",
+    "sourceRef": "DVSA-DES-s17"
+  },
+  {
+    "misconceptionId": "m.eco.pressure-only-safety",
+    "conceptId": "c.eco.tyre-pressure-fuel",
+    "wrongBelief": "Tyre pressure only affects grip, not how much fuel you use.",
+    "repairNote": "Under-inflated tyres increase drag, so the engine burns more fuel.",
+    "sourceRef": "DVSA-DES-s17"
+  },
+  {
+    "misconceptionId": "m.eco.top-gear-free",
+    "conceptId": "c.eco.speed-cost",
+    "wrongBelief": "In top gear, driving faster doesn't use any more fuel.",
+    "repairNote": "At 70 mph you use about 15% more fuel than at 50 mph over the same distance.",
+    "sourceRef": "DVSA-DES-s17"
+  },
+  {
+    "misconceptionId": "m.eco.idling-cheaper",
+    "conceptId": "c.eco.engine-off-waiting",
+    "wrongBelief": "Restarting the engine uses more fuel than leaving it running while you wait.",
+    "repairNote": "If you'll be stationary for a while, switch the engine off.",
+    "sourceRef": "HC-123"
+  },
+  {
+    "misconceptionId": "m.eco.idle-to-warm",
+    "conceptId": "c.eco.short-journeys",
+    "wrongBelief": "Letting the engine idle to warm up before you drive is kinder to the environment.",
+    "repairNote": "Idling just burns fuel. An engine warms up fastest when you drive off gently.",
+    "sourceRef": "DVSA-DES-s17"
+  },
+  {
+    "misconceptionId": "m.eco.oil-down-drain",
+    "conceptId": "c.eco.dispose-oil",
+    "wrongBelief": "A little old engine oil down the drain, washed through with water, does no harm.",
+    "repairNote": "Oil in drains pollutes rivers and harms wildlife, and it's illegal. Take it to a local authority site.",
+    "sourceRef": "DVSA-DES-s17"
+  },
+  {
+    "misconceptionId": "m.load.age-not-height",
+    "conceptId": "c.load.child-restraint",
+    "wrongBelief": "Once a child is old enough, an adult seat belt is all they need, whatever their height.",
+    "repairNote": "Children need a child restraint until they're 12 or 1.35 metres tall, whichever comes first.",
+    "sourceRef": "HC-99"
+  },
+  {
+    "misconceptionId": "m.load.parents-responsible",
+    "conceptId": "c.load.driver-responsible-under-14",
+    "wrongBelief": "Making sure children wear seat belts is their parents' job, even when you're driving.",
+    "repairNote": "As the driver, you're legally responsible for every passenger under 14.",
+    "sourceRef": "HC-100"
+  },
+  {
+    "misconceptionId": "m.load.airbag-distance-ok",
+    "conceptId": "c.load.airbag-baby-seat",
+    "wrongBelief": "A rear-facing baby seat is safe in front of an airbag if the seat is pushed well back.",
+    "repairNote": "Never fit one in front of an active airbag. Deactivate the airbag or use the back seat.",
+    "sourceRef": "HC-101"
+  },
+  {
+    "misconceptionId": "m.load.weight-adds-grip",
+    "conceptId": "c.load.roof-stability",
+    "wrongBelief": "A heavy load on the roof improves grip by pressing the tyres down.",
+    "repairNote": "Weight up high makes the car less stable, especially on bends and in wind.",
+    "sourceRef": "HC-98"
+  },
+  {
+    "misconceptionId": "m.load.loader-responsible",
+    "conceptId": "c.load.driver-overload",
+    "wrongBelief": "If a vehicle is overloaded, it's the fault of whoever loaded it.",
+    "repairNote": "The driver is responsible for making sure the vehicle isn't overloaded.",
+    "sourceRef": "HC-98"
+  },
+  {
+    "misconceptionId": "m.load.accelerate-out-of-snake",
+    "conceptId": "c.load.trailer-snaking",
+    "wrongBelief": "If a trailer starts to snake, a burst of speed will pull it straight.",
+    "repairNote": "Ease off the accelerator and let your speed fall gently. Don't brake or steer harshly.",
+    "sourceRef": "HC-98"
+  },
+  {
+    "misconceptionId": "m.load.heavy-at-back",
+    "conceptId": "c.load.trailer-weight-axle",
+    "wrongBelief": "Heavy items should go at the very back of a trailer, away from the car.",
+    "repairNote": "Spread the load evenly, with the heaviest items over the axle.",
+    "sourceRef": "HC-98"
+  },
+  {
+    "misconceptionId": "m.incident.minor-no-stop",
+    "conceptId": "c.incident.stop-at-scene",
+    "wrongBelief": "If the damage is only minor, you don't need to stop.",
+    "repairNote": "You must stop after any collision that causes damage or injury, however small.",
+    "sourceRef": "HC-286"
+  },
+  {
+    "misconceptionId": "m.incident.insurer-only",
+    "conceptId": "c.incident.share-details",
+    "wrongBelief": "After a collision you only need to swap insurance details.",
+    "repairNote": "Give your name, address and registration number. If you can't, tell the police within 24 hours.",
+    "sourceRef": "HC-286"
+  },
+  {
+    "misconceptionId": "m.incident.triangle-close",
+    "conceptId": "c.incident.warning-triangle",
+    "wrongBelief": "A warning triangle works best placed right behind your car.",
+    "repairNote": "Put it at least 45 metres behind on a normal road so drivers have time to react. Never use one on a motorway.",
+    "sourceRef": "HC-276"
+  },
+  {
+    "misconceptionId": "m.incident.tunnel-stay-in-car",
+    "conceptId": "c.incident.tunnel-breakdown",
+    "wrongBelief": "If you break down in a tunnel, stay locked in your car until help arrives.",
+    "repairNote": "Switch on your hazard lights, then go to an emergency point and call for help.",
+    "sourceRef": "DVSA-DES-s16"
+  },
+  {
+    "misconceptionId": "m.incident.fire-stop-instantly",
+    "conceptId": "c.incident.tunnel-fire",
+    "wrongBelief": "If your car catches fire in a tunnel, stop at once wherever you are.",
+    "repairNote": "If you can safely drive it out of the tunnel, do. Smoke is the biggest danger in there.",
+    "sourceRef": "DVSA-DES-s16"
+  },
+  {
+    "misconceptionId": "m.incident.fuel-smell-normal",
+    "conceptId": "c.incident.fuel-smell",
+    "wrongBelief": "A smell of fuel from your car is normal and nothing to worry about.",
+    "repairNote": "A strong fuel smell can mean a leak and a fire risk. Stop safely and check it out.",
+    "sourceRef": "HC-annex6"
+  },
+  {
+    "misconceptionId": "m.firstaid.rush-in",
+    "conceptId": "c.firstaid.danger-first",
+    "wrongBelief": "At a crash, the most important thing is reaching the casualty as fast as you can.",
+    "repairNote": "Check for danger first. If you're hurt too, nobody gets help.",
+    "sourceRef": "HC-annex7"
+  },
+  {
+    "misconceptionId": "m.firstaid.move-to-comfort",
+    "conceptId": "c.firstaid.dont-move",
+    "wrongBelief": "An injured person should be moved into a more comfortable position.",
+    "repairNote": "Don't move a casualty unless they're in further danger. They may have injuries you can't see.",
+    "sourceRef": "HC-annex7"
+  },
+  {
+    "misconceptionId": "m.firstaid.remove-helmet",
+    "conceptId": "c.firstaid.helmet",
+    "wrongBelief": "Take an injured rider's helmet off straight away so they can breathe.",
+    "repairNote": "Leave it on unless it's essential to remove it.",
+    "sourceRef": "HC-annex7"
+  },
+  {
+    "misconceptionId": "m.firstaid.cpr-gentle",
+    "conceptId": "c.firstaid.cpr-depth",
+    "wrongBelief": "Chest compressions should be gentle so you don't hurt the casualty.",
+    "repairNote": "Press hard and fast: 5–6 cm on an adult, about twice a second.",
+    "sourceRef": "HC-annex7"
+  },
+  {
+    "misconceptionId": "m.firstaid.aed-trained-only",
+    "conceptId": "c.firstaid.aed",
+    "wrongBelief": "Only trained first aiders are allowed to use a defibrillator.",
+    "repairNote": "Anyone can use a public AED. It gives spoken and visual instructions.",
+    "sourceRef": "DVSA-DES-s16"
+  },
+  {
+    "misconceptionId": "m.firstaid.let-it-bleed",
+    "conceptId": "c.firstaid.bleeding",
+    "wrongBelief": "A bleeding wound should be left to bleed for a while to clean it.",
+    "repairNote": "Apply firm pressure over the wound to slow the bleeding.",
+    "sourceRef": "HC-annex7"
+  },
+  {
+    "misconceptionId": "m.firstaid.shock-drink",
+    "conceptId": "c.firstaid.shock",
+    "wrongBelief": "Someone in shock after a crash should be given a hot, sweet drink.",
+    "repairNote": "Keep them warm and reassure them. Don't give them anything to eat or drink.",
+    "sourceRef": "HC-annex7"
   }
 ]

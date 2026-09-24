@@ -50,6 +50,146 @@
       "wrongBelief": "Someone waiting at a zebra crossing can be ignored until they step out."
     },
     {
+      "conceptId": "c.docs.insured-to-drive",
+      "misconceptionId": "m.docs.car-insured-anyone-drives",
+      "repairNote": "Insurance covers named drivers. Check you're covered, on their policy or your own, before you drive.",
+      "sourceRef": "HC-annex3",
+      "wrongBelief": "If a car is insured, anyone can drive it."
+    },
+    {
+      "conceptId": "c.docs.third-party",
+      "misconceptionId": "m.docs.comprehensive-required",
+      "repairNote": "The legal minimum is third-party cover. Comprehensive also covers your own car, but it's a choice.",
+      "sourceRef": "HC-annex3",
+      "wrongBelief": "The law says you must have fully comprehensive insurance."
+    },
+    {
+      "conceptId": "c.docs.health-dvla",
+      "misconceptionId": "m.docs.doctor-tells-dvla",
+      "repairNote": "It's your legal duty as the driver to tell DVLA yourself.",
+      "sourceRef": "HC-90",
+      "wrongBelief": "Your doctor tells DVLA if a medical condition affects your driving."
+    },
+    {
+      "conceptId": "c.docs.mot-rules",
+      "misconceptionId": "m.docs.mot-grace-period",
+      "repairNote": "There isn't. Without a valid MOT you may only drive to a booked MOT appointment.",
+      "sourceRef": "HC-annex3",
+      "wrongBelief": "There's a grace period after your MOT runs out when you can still drive."
+    },
+    {
+      "conceptId": "c.docs.produce-7-days",
+      "misconceptionId": "m.docs.must-carry-documents",
+      "repairNote": "You don't have to carry them, but you may be asked to show them at a police station within 7 days.",
+      "sourceRef": "HC-annex3",
+      "wrongBelief": "It's an offence not to carry your driving documents with you."
+    },
+    {
+      "conceptId": "c.docs.new-driver-points",
+      "misconceptionId": "m.docs.new-driver-12-points",
+      "repairNote": "Within 2 years of passing, 6 points revokes your licence and you must pass both tests again.",
+      "sourceRef": "HC-penalties",
+      "wrongBelief": "New drivers have the same 12-point limit as everyone else."
+    },
+    {
+      "conceptId": "c.docs.keeper-v5c",
+      "misconceptionId": "m.docs.v5c-only-on-sale",
+      "repairNote": "Tell DVLA whenever your details change, such as a new address or a new name.",
+      "sourceRef": "HC-annex3",
+      "wrongBelief": "You only need to update your V5C when you sell the car."
+    },
+    {
+      "conceptId": "c.eco.short-journeys",
+      "misconceptionId": "m.eco.idle-to-warm",
+      "repairNote": "Idling just burns fuel. An engine warms up fastest when you drive off gently.",
+      "sourceRef": "DVSA-DES-s17",
+      "wrongBelief": "Letting the engine idle to warm up before you drive is kinder to the environment."
+    },
+    {
+      "conceptId": "c.eco.engine-off-waiting",
+      "misconceptionId": "m.eco.idling-cheaper",
+      "repairNote": "If you'll be stationary for a while, switch the engine off.",
+      "sourceRef": "HC-123",
+      "wrongBelief": "Restarting the engine uses more fuel than leaving it running while you wait."
+    },
+    {
+      "conceptId": "c.eco.dispose-oil",
+      "misconceptionId": "m.eco.oil-down-drain",
+      "repairNote": "Oil in drains pollutes rivers and harms wildlife, and it's illegal. Take it to a local authority site.",
+      "sourceRef": "DVSA-DES-s17",
+      "wrongBelief": "A little old engine oil down the drain, washed through with water, does no harm."
+    },
+    {
+      "conceptId": "c.eco.tyre-pressure-fuel",
+      "misconceptionId": "m.eco.pressure-only-safety",
+      "repairNote": "Under-inflated tyres increase drag, so the engine burns more fuel.",
+      "sourceRef": "DVSA-DES-s17",
+      "wrongBelief": "Tyre pressure only affects grip, not how much fuel you use."
+    },
+    {
+      "conceptId": "c.eco.smooth-driving",
+      "misconceptionId": "m.eco.quick-is-efficient",
+      "repairNote": "Harsh acceleration and late braking waste fuel. Smooth, planned driving saves about 15%.",
+      "sourceRef": "DVSA-DES-s17",
+      "wrongBelief": "Accelerating hard and braking late gets you there using less fuel."
+    },
+    {
+      "conceptId": "c.eco.speed-cost",
+      "misconceptionId": "m.eco.top-gear-free",
+      "repairNote": "At 70 mph you use about 15% more fuel than at 50 mph over the same distance.",
+      "sourceRef": "DVSA-DES-s17",
+      "wrongBelief": "In top gear, driving faster doesn't use any more fuel."
+    },
+    {
+      "conceptId": "c.firstaid.aed",
+      "misconceptionId": "m.firstaid.aed-trained-only",
+      "repairNote": "Anyone can use a public AED. It gives spoken and visual instructions.",
+      "sourceRef": "DVSA-DES-s16",
+      "wrongBelief": "Only trained first aiders are allowed to use a defibrillator."
+    },
+    {
+      "conceptId": "c.firstaid.cpr-depth",
+      "misconceptionId": "m.firstaid.cpr-gentle",
+      "repairNote": "Press hard and fast: 5–6 cm on an adult, about twice a second.",
+      "sourceRef": "HC-annex7",
+      "wrongBelief": "Chest compressions should be gentle so you don't hurt the casualty."
+    },
+    {
+      "conceptId": "c.firstaid.bleeding",
+      "misconceptionId": "m.firstaid.let-it-bleed",
+      "repairNote": "Apply firm pressure over the wound to slow the bleeding.",
+      "sourceRef": "HC-annex7",
+      "wrongBelief": "A bleeding wound should be left to bleed for a while to clean it."
+    },
+    {
+      "conceptId": "c.firstaid.dont-move",
+      "misconceptionId": "m.firstaid.move-to-comfort",
+      "repairNote": "Don't move a casualty unless they're in further danger. They may have injuries you can't see.",
+      "sourceRef": "HC-annex7",
+      "wrongBelief": "An injured person should be moved into a more comfortable position."
+    },
+    {
+      "conceptId": "c.firstaid.helmet",
+      "misconceptionId": "m.firstaid.remove-helmet",
+      "repairNote": "Leave it on unless it's essential to remove it.",
+      "sourceRef": "HC-annex7",
+      "wrongBelief": "Take an injured rider's helmet off straight away so they can breathe."
+    },
+    {
+      "conceptId": "c.firstaid.danger-first",
+      "misconceptionId": "m.firstaid.rush-in",
+      "repairNote": "Check for danger first. If you're hurt too, nobody gets help.",
+      "sourceRef": "HC-annex7",
+      "wrongBelief": "At a crash, the most important thing is reaching the casualty as fast as you can."
+    },
+    {
+      "conceptId": "c.firstaid.shock",
+      "misconceptionId": "m.firstaid.shock-drink",
+      "repairNote": "Keep them warm and reassure them. Don't give them anything to eat or drink.",
+      "sourceRef": "HC-annex7",
+      "wrongBelief": "Someone in shock after a crash should be given a hot, sweet drink."
+    },
+    {
       "conceptId": "c.hazard.engine-braking",
       "misconceptionId": "m.handling.brakes-only-slow-you",
       "repairNote": "A lower gear brings engine braking — it slows you, settles the car and saves the brakes.",
@@ -209,6 +349,48 @@
       "repairNote": "Scan far ahead, close in and behind — the hazard that catches you out is the one you never looked at.",
       "sourceRef": "HC-160",
       "wrongBelief": "Watching the vehicle in front closely is all the observation you need."
+    },
+    {
+      "conceptId": "c.incident.tunnel-fire",
+      "misconceptionId": "m.incident.fire-stop-instantly",
+      "repairNote": "If you can safely drive it out of the tunnel, do. Smoke is the biggest danger in there.",
+      "sourceRef": "DVSA-DES-s16",
+      "wrongBelief": "If your car catches fire in a tunnel, stop at once wherever you are."
+    },
+    {
+      "conceptId": "c.incident.fuel-smell",
+      "misconceptionId": "m.incident.fuel-smell-normal",
+      "repairNote": "A strong fuel smell can mean a leak and a fire risk. Stop safely and check it out.",
+      "sourceRef": "HC-annex6",
+      "wrongBelief": "A smell of fuel from your car is normal and nothing to worry about."
+    },
+    {
+      "conceptId": "c.incident.share-details",
+      "misconceptionId": "m.incident.insurer-only",
+      "repairNote": "Give your name, address and registration number. If you can't, tell the police within 24 hours.",
+      "sourceRef": "HC-286",
+      "wrongBelief": "After a collision you only need to swap insurance details."
+    },
+    {
+      "conceptId": "c.incident.stop-at-scene",
+      "misconceptionId": "m.incident.minor-no-stop",
+      "repairNote": "You must stop after any collision that causes damage or injury, however small.",
+      "sourceRef": "HC-286",
+      "wrongBelief": "If the damage is only minor, you don't need to stop."
+    },
+    {
+      "conceptId": "c.incident.warning-triangle",
+      "misconceptionId": "m.incident.triangle-close",
+      "repairNote": "Put it at least 45 metres behind on a normal road so drivers have time to react. Never use one on a motorway.",
+      "sourceRef": "HC-276",
+      "wrongBelief": "A warning triangle works best placed right behind your car."
+    },
+    {
+      "conceptId": "c.incident.tunnel-breakdown",
+      "misconceptionId": "m.incident.tunnel-stay-in-car",
+      "repairNote": "Switch on your hazard lights, then go to an emergency point and call for help.",
+      "sourceRef": "DVSA-DES-s16",
+      "wrongBelief": "If you break down in a tunnel, stay locked in your car until help arrives."
     },
     {
       "conceptId": "c.junction.unmarked-crossroads",
@@ -405,6 +587,55 @@
       "repairNote": "Built-up areas at night call for dipped headlights — seen without dazzling.",
       "sourceRef": "HC-115",
       "wrongBelief": "Driving through a lit town centre at night, sidelights only are enough."
+    },
+    {
+      "conceptId": "c.load.trailer-snaking",
+      "misconceptionId": "m.load.accelerate-out-of-snake",
+      "repairNote": "Ease off the accelerator and let your speed fall gently. Don't brake or steer harshly.",
+      "sourceRef": "HC-98",
+      "wrongBelief": "If a trailer starts to snake, a burst of speed will pull it straight."
+    },
+    {
+      "conceptId": "c.load.child-restraint",
+      "misconceptionId": "m.load.age-not-height",
+      "repairNote": "Children need a child restraint until they're 12 or 1.35 metres tall, whichever comes first.",
+      "sourceRef": "HC-99",
+      "wrongBelief": "Once a child is old enough, an adult seat belt is all they need, whatever their height."
+    },
+    {
+      "conceptId": "c.load.airbag-baby-seat",
+      "misconceptionId": "m.load.airbag-distance-ok",
+      "repairNote": "Never fit one in front of an active airbag. Deactivate the airbag or use the back seat.",
+      "sourceRef": "HC-101",
+      "wrongBelief": "A rear-facing baby seat is safe in front of an airbag if the seat is pushed well back."
+    },
+    {
+      "conceptId": "c.load.trailer-weight-axle",
+      "misconceptionId": "m.load.heavy-at-back",
+      "repairNote": "Spread the load evenly, with the heaviest items over the axle.",
+      "sourceRef": "HC-98",
+      "wrongBelief": "Heavy items should go at the very back of a trailer, away from the car."
+    },
+    {
+      "conceptId": "c.load.driver-overload",
+      "misconceptionId": "m.load.loader-responsible",
+      "repairNote": "The driver is responsible for making sure the vehicle isn't overloaded.",
+      "sourceRef": "HC-98",
+      "wrongBelief": "If a vehicle is overloaded, it's the fault of whoever loaded it."
+    },
+    {
+      "conceptId": "c.load.driver-responsible-under-14",
+      "misconceptionId": "m.load.parents-responsible",
+      "repairNote": "As the driver, you're legally responsible for every passenger under 14.",
+      "sourceRef": "HC-100",
+      "wrongBelief": "Making sure children wear seat belts is their parents' job, even when you're driving."
+    },
+    {
+      "conceptId": "c.load.roof-stability",
+      "misconceptionId": "m.load.weight-adds-grip",
+      "repairNote": "Weight up high makes the car less stable, especially on bends and in wind.",
+      "sourceRef": "HC-98",
+      "wrongBelief": "A heavy load on the roof improves grip by pressing the tyres down."
     },
     {
       "conceptId": "c.markings.box-junction",
@@ -1091,6 +1322,55 @@
       "repairNote": "Wet roads at least double stopping distances — leave at least four seconds.",
       "sourceRef": "HC-126",
       "wrongBelief": "In the wet, a two-second gap — the same as on a dry road — is enough."
+    },
+    {
+      "conceptId": "c.vehicle.adas-support",
+      "misconceptionId": "m.vehicle.adas-self-driving",
+      "repairNote": "Driver-assist systems support you. You must stay alert and in control at all times.",
+      "sourceRef": "HC-150",
+      "wrongBelief": "With driver-assist systems switched on, the car is doing the driving."
+    },
+    {
+      "conceptId": "c.vehicle.tread-legal",
+      "misconceptionId": "m.vehicle.any-tread-legal",
+      "repairNote": "Car tyres need at least 1.6 mm of tread across the central three-quarters, all the way round.",
+      "sourceRef": "HC-annex6",
+      "wrongBelief": "Any amount of tread is legal as long as the tyre isn't completely bald."
+    },
+    {
+      "conceptId": "c.vehicle.pressures-cold",
+      "misconceptionId": "m.vehicle.check-pressure-warm",
+      "repairNote": "Check them cold. Warm tyres give a higher reading.",
+      "sourceRef": "HC-annex6",
+      "wrongBelief": "Tyre pressures are most accurate after a drive, once the tyres have warmed up."
+    },
+    {
+      "conceptId": "c.vehicle.head-restraint",
+      "misconceptionId": "m.vehicle.head-restraint-comfort",
+      "repairNote": "It's safety equipment: set properly, it cuts the risk of neck injury in a crash.",
+      "sourceRef": "HC-97",
+      "wrongBelief": "A head restraint is only there for comfort, like a headrest."
+    },
+    {
+      "conceptId": "c.vehicle.warning-light",
+      "misconceptionId": "m.vehicle.light-ignore-if-fine",
+      "repairNote": "A warning light can mean the car is unsafe. Check it out as soon as you safely can.",
+      "sourceRef": "HC-annex6",
+      "wrongBelief": "A dashboard warning light doesn't matter while the car still seems to drive normally."
+    },
+    {
+      "conceptId": "c.vehicle.brakes-pull",
+      "misconceptionId": "m.vehicle.pull-is-camber",
+      "repairNote": "Pulling to one side under braking usually means a brake fault. Get it checked.",
+      "sourceRef": "HC-annex6",
+      "wrongBelief": "A car pulling to one side when you brake is just the camber of the road."
+    },
+    {
+      "conceptId": "c.vehicle.lock-and-key",
+      "misconceptionId": "m.vehicle.quick-stop-leave-running",
+      "repairNote": "Switch off, take the key and lock the car, even if you'll only be a minute.",
+      "sourceRef": "HC-239",
+      "wrongBelief": "For a quick stop, it's fine to leave the engine running."
     },
     {
       "conceptId": "c.vru.bike-between-parked-cars",
@@ -9184,12 +9464,1535 @@
       "title": "Vulnerable Road Users"
     },
     {
-      "missions": [],
+      "missions": [
+        {
+          "estimatedMinutes": 6,
+          "missionId": "r7-m1",
+          "reviewStatus": "draft",
+          "routeId": "route-7",
+          "steps": [
+            {
+              "conceptId": "c.docs.insured-to-drive",
+              "id": "r7-m1-s1",
+              "question": {
+                "explanation": "Insurance covers named drivers, not the car itself. Check you're covered on their policy or your own before you drive.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.docs.car-insured-anyone-drives",
+                    "text": "Nothing — their insurance covers anyone who drives it"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "That the car is insured for you to drive"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "That it has enough fuel to get you home"
+                  }
+                ],
+                "prompt": "What must you check before you drive it?"
+              },
+              "scene": "You've just passed your test. A friend offers to let you drive their car home after a party.",
+              "sourceRef": "HC-annex3",
+              "type": "scene_decision"
+            },
+            {
+              "body": "By law you need at least third-party insurance. It pays for damage and injury you cause to others — not for your own car.",
+              "conceptId": "c.docs.third-party",
+              "id": "r7-m1-s2",
+              "question": {
+                "explanation": "Comprehensive cover also pays for your own car, but it's a choice. Third party is the minimum the law requires.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Third party only"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.docs.comprehensive-required",
+                    "text": "Fully comprehensive"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Third party, fire and theft"
+                  }
+                ],
+                "prompt": "What's the legal minimum insurance to drive on public roads?"
+              },
+              "sourceRef": "HC-annex3",
+              "title": "The legal minimum",
+              "type": "rule_card"
+            },
+            {
+              "a": {
+                "body": "Illegal to drive, and it may invalidate your insurance.",
+                "label": "No valid MOT"
+              },
+              "b": {
+                "body": "Allowed if it's booked in advance and the car is otherwise roadworthy.",
+                "label": "Driving to a booked MOT"
+              },
+              "conceptId": "c.docs.mot-rules",
+              "id": "r7-m1-s3",
+              "question": {
+                "explanation": "There's no grace period. Book the test before the old certificate runs out.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.docs.mot-grace-period",
+                    "text": "For a month after it runs out, as a grace period"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "On short local journeys only"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "When driving to a booked MOT appointment"
+                  }
+                ],
+                "prompt": "Your car needs an MOT. When may you drive it without a current certificate?"
+              },
+              "sourceRef": "HC-annex3",
+              "type": "contrast"
+            },
+            {
+              "body": "The keeper named on the V5C must keep it up to date. Tell DVLA when you move house, change your name or sell the car.",
+              "conceptId": "c.docs.keeper-v5c",
+              "id": "r7-m1-s4",
+              "question": {
+                "explanation": "DVLA uses the V5C to reach you — for tax reminders, and for fines. An old address doesn't excuse you.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.docs.v5c-only-on-sale",
+                    "text": "Only when you sell the car"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "When you move house"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Each time you renew your insurance"
+                  }
+                ],
+                "prompt": "When should you update your vehicle registration certificate (V5C)?"
+              },
+              "sourceRef": "HC-annex3",
+              "title": "The registered keeper",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.docs.produce-7-days",
+              "id": "r7-m1-s5",
+              "question": {
+                "explanation": "You don't have to carry your documents, but you must be able to produce them when asked.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "You may be asked to show it at a police station within 7 days"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.docs.must-carry-documents",
+                    "text": "You're committing an offence by not carrying it"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Nothing — the police can't ask to see it"
+                  }
+                ],
+                "prompt": "What happens now?"
+              },
+              "scene": "A police officer stops you and asks to see your insurance certificate. It's at home in a drawer.",
+              "sourceRef": "HC-annex3",
+              "type": "scene_decision"
+            },
+            {
+              "body": "You must tell DVLA about any medical condition that could affect your driving — it's your duty, not your doctor's.",
+              "conceptId": "c.docs.health-dvla",
+              "id": "r7-m1-s6",
+              "question": {
+                "explanation": "Some conditions, and some treatments, affect your fitness to drive. Telling DVLA is the law.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.docs.doctor-tells-dvla",
+                    "text": "Only if your doctor says you must stop driving"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Whenever you change your insurer"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "When a health condition could affect your driving"
+                  }
+                ],
+                "prompt": "When must you contact DVLA?"
+              },
+              "sourceRef": "HC-90",
+              "title": "Your health and DVLA",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.docs.new-driver-points",
+              "id": "r7-m1-s7",
+              "question": {
+                "explanation": "The rule covers your first two years after passing. Points from before you passed can count too.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.docs.new-driver-12-points",
+                    "text": "Nothing yet — the limit is 12 points"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Your licence is revoked — you retake theory and practical tests"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "You must go on a speed awareness course"
+                  }
+                ],
+                "prompt": "You passed your test a year ago. What happens if you reach 6 penalty points?"
+              },
+              "repairNote": "Within 2 years of passing, 6 points revokes your licence. You go back to a provisional and must pass both tests again.",
+              "sourceRef": "HC-penalties",
+              "type": "misconception",
+              "wrongBelief": "New drivers have the same 12-point limit as everyone else."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r7-m1-s8",
+              "questions": [
+                {
+                  "bankRef": "c.docs.insured-to-drive"
+                },
+                {
+                  "bankRef": "c.docs.third-party"
+                },
+                {
+                  "bankRef": "c.docs.mot-rules"
+                },
+                {
+                  "bankRef": "c.docs.health-dvla"
+                },
+                {
+                  "bankRef": "c.docs.new-driver-points"
+                }
+              ],
+              "sourceRef": "HC-annex3",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Paperwork"
+        },
+        {
+          "estimatedMinutes": 6,
+          "missionId": "r7-m2",
+          "reviewStatus": "draft",
+          "routeId": "route-7",
+          "steps": [
+            {
+              "conceptId": "c.vehicle.warning-light",
+              "id": "r7-m2-s1",
+              "question": {
+                "explanation": "A warning light can mean the car isn't safe to drive. Pull over safely and check the handbook — get help if you're unsure.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.vehicle.light-ignore-if-fine",
+                    "text": "Ignore it while the car still seems to drive normally"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Check out the problem as soon as you safely can"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Stop at once, wherever you are"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "You're driving along when a red warning light you don't recognise comes on on the dashboard.",
+              "sourceRef": "HC-annex6",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Car tyres need at least 1.6 mm of tread across the central three-quarters, all the way round — with no deep cuts or bulges.",
+              "conceptId": "c.vehicle.tread-legal",
+              "id": "r7-m2-s2",
+              "question": {
+                "explanation": "1.6 mm is the legal floor, not a safe target. Grip in the wet falls away well before then.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "1 mm"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.vehicle.any-tread-legal",
+                    "text": "Any tread is legal as long as the tyre isn't bald"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "1.6 mm"
+                  }
+                ],
+                "prompt": "What's the legal minimum tread depth for car tyres?"
+              },
+              "sourceRef": "HC-annex6",
+              "title": "Tyre tread: the legal limit",
+              "type": "rule_card"
+            },
+            {
+              "a": {
+                "body": "Longer stopping distances, poorer handling and more fuel used.",
+                "label": "Under-inflated"
+              },
+              "b": {
+                "body": "Driving warms tyres and raises the reading. Check before you set off.",
+                "label": "Checked cold"
+              },
+              "conceptId": "c.vehicle.pressures-cold",
+              "id": "r7-m2-s3",
+              "question": {
+                "explanation": "Compare the cold reading with the figure in the handbook, and adjust it for a heavy load if the handbook says so.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "When the tyres are cold"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.vehicle.check-pressure-warm",
+                    "text": "After a long drive, once the tyres have warmed up"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Only when the car is serviced"
+                  }
+                ],
+                "prompt": "When should you check your tyre pressures?"
+              },
+              "sourceRef": "HC-annex6",
+              "type": "contrast"
+            },
+            {
+              "conceptId": "c.vehicle.brakes-pull",
+              "id": "r7-m2-s4",
+              "question": {
+                "explanation": "Brakes pulling to one side usually means a fault. It can make you swerve in an emergency stop.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.vehicle.pull-is-camber",
+                    "text": "Nothing — it's just the camber of the road"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Pump the brakes to even them out"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Have the brakes checked as soon as possible"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "Every time you brake, the car pulls towards the left.",
+              "sourceRef": "HC-annex6",
+              "type": "scene_decision"
+            },
+            {
+              "body": "A properly adjusted head restraint cuts the risk of neck injury in a crash. Set it before you drive, close to the back of your head.",
+              "conceptId": "c.vehicle.head-restraint",
+              "id": "r7-m2-s5",
+              "question": {
+                "explanation": "In a crash your head is thrown forwards, then back. A well-set restraint stops it snapping backwards.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.vehicle.head-restraint-comfort",
+                    "text": "To make long journeys more comfortable"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "To help you avoid neck injury"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "To stop you nodding off at the wheel"
+                  }
+                ],
+                "prompt": "What's the main reason to adjust your head restraint properly?"
+              },
+              "sourceRef": "HC-97",
+              "title": "Set your head restraint",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.vehicle.adas-support",
+              "id": "r7-m2-s6",
+              "question": {
+                "explanation": "Driver-assist systems are there to make driving safer. They can't see everything, so you stay responsible.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "You are — the systems only help"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.vehicle.adas-self-driving",
+                    "text": "The car, while the systems are switched on"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "The systems, until they sound a warning"
+                  }
+                ],
+                "prompt": "Your car has lane-keep assist and adaptive cruise control switched on. Who's in control?"
+              },
+              "repairNote": "Driver-assist systems support you. You must stay alert and in control of the car at all times.",
+              "sourceRef": "HC-150",
+              "type": "misconception",
+              "wrongBelief": "With driver-assist systems switched on, the car is doing the driving."
+            },
+            {
+              "conceptId": "c.vehicle.lock-and-key",
+              "id": "r7-m2-s7",
+              "question": {
+                "explanation": "Cars are stolen in seconds. Leaving the key in can also invalidate your insurance.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.vehicle.quick-stop-leave-running",
+                    "text": "Leave the engine running — you'll be straight back"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Switch off, take the key and lock it"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Leave the key in so you can keep an eye on it"
+                  }
+                ],
+                "prompt": "What should you do with the car?"
+              },
+              "scene": "You're popping into a shop for two minutes. You've parked right outside the door.",
+              "sourceRef": "HC-239",
+              "type": "scene_decision"
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r7-m2-s8",
+              "questions": [
+                {
+                  "bankRef": "c.vehicle.warning-light"
+                },
+                {
+                  "bankRef": "c.vehicle.tread-legal"
+                },
+                {
+                  "bankRef": "c.vehicle.pressures-cold"
+                },
+                {
+                  "bankRef": "c.vehicle.brakes-pull"
+                },
+                {
+                  "bankRef": "c.vehicle.adas-support"
+                }
+              ],
+              "sourceRef": "HC-annex6",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Roadworthy"
+        },
+        {
+          "estimatedMinutes": 6,
+          "missionId": "r7-m3",
+          "reviewStatus": "draft",
+          "routeId": "route-7",
+          "steps": [
+            {
+              "conceptId": "c.eco.smooth-driving",
+              "id": "r7-m3-s1",
+              "question": {
+                "explanation": "Harsh acceleration and braking waste fuel and wear the car. Smooth driving can save about 15%.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.eco.quick-is-efficient",
+                    "text": "Saving fuel — you spend less time on the road"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Nothing — modern engines use the same either way"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Using far more fuel than driving smoothly"
+                  }
+                ],
+                "prompt": "What's this doing to your fuel use?"
+              },
+              "scene": "In stop-start town traffic, you accelerate hard into every gap and brake late for every queue.",
+              "sourceRef": "DVSA-DES-s17",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Under-inflated tyres drag on the road, so the engine works harder and burns more fuel. Check your pressures regularly.",
+              "conceptId": "c.eco.tyre-pressure-fuel",
+              "id": "r7-m3-s2",
+              "question": {
+                "explanation": "Correct pressures save fuel, make the tyres last longer and keep your stopping distance as short as it can be.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Under-inflated tyres"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Tyres at the pressure in the handbook"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "misconceptionId": "m.eco.pressure-only-safety",
+                    "text": "Nothing about tyres — pressure only affects grip"
+                  }
+                ],
+                "prompt": "What's most likely to waste fuel?"
+              },
+              "sourceRef": "DVSA-DES-s17",
+              "title": "Soft tyres cost money",
+              "type": "rule_card"
+            },
+            {
+              "a": {
+                "body": "Lower revs and less air resistance — an economical way to cover the miles.",
+                "label": "Steady 50 mph"
+              },
+              "b": {
+                "body": "Uses about 15% more fuel than 50 mph over the same distance.",
+                "label": "Steady 70 mph"
+              },
+              "conceptId": "c.eco.speed-cost",
+              "id": "r7-m3-s3",
+              "question": {
+                "explanation": "Air resistance climbs steeply with speed. The faster you go, the harder the engine has to work.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.eco.top-gear-free",
+                    "text": "None, as long as you're in top gear"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "About 15% more"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "About 75% more"
+                  }
+                ],
+                "prompt": "How much more fuel will you use at 70 mph than at 50 mph?"
+              },
+              "sourceRef": "DVSA-DES-s17",
+              "type": "contrast"
+            },
+            {
+              "conceptId": "c.eco.engine-off-waiting",
+              "id": "r7-m3-s4",
+              "question": {
+                "explanation": "An idling engine burns fuel and pollutes for nothing. You mustn't leave it running unnecessarily while parked.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.eco.idling-cheaper",
+                    "text": "Keep it idling — restarting burns more fuel"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Rev it now and then to keep the battery charged"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Switch off the engine"
+                  }
+                ],
+                "prompt": "You've stopped at the roadside to wait several minutes for a friend. What should you do?"
+              },
+              "repairNote": "If you'll be stationary for a while, switch off. Leaving an engine running unnecessarily while parked is against the rules.",
+              "sourceRef": "HC-123",
+              "type": "misconception",
+              "wrongBelief": "Restarting the engine uses more fuel than leaving it running while you wait."
+            },
+            {
+              "body": "A cold engine runs inefficiently and pollutes more. For short trips, walking or cycling is cleaner — and often quicker.",
+              "conceptId": "c.eco.short-journeys",
+              "id": "r7-m3-s5",
+              "question": {
+                "explanation": "An engine only runs cleanly once it's warm. On a short trip it barely gets there.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.eco.idle-to-warm",
+                    "text": "Warm the engine up by idling before you set off"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Avoid making lots of short journeys"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Drive short trips in a low gear"
+                  }
+                ],
+                "prompt": "How can you reduce the harm your car does to the environment?"
+              },
+              "sourceRef": "DVSA-DES-s17",
+              "title": "Short trips, cold engine",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.eco.anticipate",
+              "id": "r7-m3-s6",
+              "question": {
+                "explanation": "Looking well ahead lets you slow gently — often without stopping at all. Late, hard braking throws that energy away.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Ease off early, stay in gear and let the car slow"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.eco.quick-is-efficient",
+                    "text": "Keep your speed up, then brake firmly at the line"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Speed up in case they change back to green"
+                  }
+                ],
+                "prompt": "What's the greenest way to deal with it?"
+              },
+              "scene": "You're doing 40 mph when the traffic lights far ahead turn red.",
+              "sourceRef": "DVSA-DES-s17",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Used engine oil and old batteries are hazardous. Never pour oil down a drain — take both to a local authority disposal site.",
+              "conceptId": "c.eco.dispose-oil",
+              "id": "r7-m3-s7",
+              "question": {
+                "explanation": "Oil poured down a drain pollutes rivers and harms wildlife. It's also illegal.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.eco.oil-down-drain",
+                    "text": "Pour it down a drain with plenty of water"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Take it to a local authority site"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Put it in your household bin"
+                  }
+                ],
+                "prompt": "You've changed your own engine oil. What should you do with the old oil?"
+              },
+              "sourceRef": "DVSA-DES-s17",
+              "title": "Old oil and batteries",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r7-m3-s8",
+              "questions": [
+                {
+                  "bankRef": "c.eco.smooth-driving"
+                },
+                {
+                  "bankRef": "c.eco.tyre-pressure-fuel"
+                },
+                {
+                  "bankRef": "c.eco.speed-cost"
+                },
+                {
+                  "bankRef": "c.eco.engine-off-waiting"
+                },
+                {
+                  "bankRef": "c.eco.short-journeys"
+                }
+              ],
+              "sourceRef": "DVSA-DES-s17",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Greener driving"
+        },
+        {
+          "estimatedMinutes": 7,
+          "missionId": "r7-m4",
+          "reviewStatus": "draft",
+          "routeId": "route-7",
+          "steps": [
+            {
+              "conceptId": "c.load.child-restraint",
+              "id": "r7-m4-s1",
+              "question": {
+                "explanation": "Children need a child restraint until they're 12 or 1.35 metres tall, whichever comes first.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "A suitable child restraint"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.load.age-not-height",
+                    "text": "An adult seat belt — at 11 they're old enough"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Nothing extra, as long as they sit in the back"
+                  }
+                ],
+                "prompt": "What must be in place?"
+              },
+              "scene": "You're giving a friend's 11-year-old a lift. They're small for their age, well under 1.35 metres, and want the front seat.",
+              "sourceRef": "HC-99",
+              "type": "scene_decision"
+            },
+            {
+              "body": "As the driver, you're legally responsible for making sure every passenger under 14 wears a seat belt or the right child restraint.",
+              "conceptId": "c.load.driver-responsible-under-14",
+              "id": "r7-m4-s2",
+              "question": {
+                "explanation": "Passengers aged 14 and over are responsible for themselves. Under 14, it's on you.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.load.parents-responsible",
+                    "text": "Their parents, even though they're not in the car"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "The children themselves"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "You, the driver"
+                  }
+                ],
+                "prompt": "You're driving a neighbour's children, both under 14. Who must make sure they're belted in?"
+              },
+              "sourceRef": "HC-100",
+              "title": "Children are your job",
+              "type": "rule_card"
+            },
+            {
+              "body": "Never fit a rear-facing baby seat in front of an active airbag. Deactivate the airbag first, or put the seat in the back.",
+              "conceptId": "c.load.airbag-baby-seat",
+              "id": "r7-m4-s3",
+              "question": {
+                "explanation": "An airbag inflates with enough force to cause serious injury to a baby in a rear-facing seat.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Deactivate the airbag"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.load.airbag-distance-ok",
+                    "text": "Push the passenger seat as far back as it goes"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Nothing — the airbag will protect the baby"
+                  }
+                ],
+                "prompt": "The front passenger seat has an airbag. What must you do before fitting a rear-facing baby seat there?"
+              },
+              "sourceRef": "HC-101",
+              "title": "Baby seats and airbags",
+              "type": "rule_card"
+            },
+            {
+              "a": {
+                "body": "Raises the centre of gravity. The car is less stable, especially on bends and in wind.",
+                "label": "Heavy load on the roof"
+              },
+              "b": {
+                "body": "Strapped down with suitable restraints — ideally in a purpose-made roof box.",
+                "label": "Load secured"
+              },
+              "conceptId": "c.load.roof-stability",
+              "id": "r7-m4-s4",
+              "question": {
+                "explanation": "Weight high up makes the car lean and sway. Keep heavy items low, inside the car where you can.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "It will make the car less stable"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.load.weight-adds-grip",
+                    "text": "It will improve grip by pressing the tyres down"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "It makes no difference, if it's tied on"
+                  }
+                ],
+                "prompt": "How will a heavy load on your roof rack affect the car?"
+              },
+              "sourceRef": "HC-98",
+              "type": "contrast"
+            },
+            {
+              "conceptId": "c.load.driver-overload",
+              "id": "r7-m4-s5",
+              "question": {
+                "explanation": "An overloaded vehicle steers and brakes badly. The law holds the person driving it responsible.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.load.loader-responsible",
+                    "text": "Whoever put the load on it"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "The driver"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "The hire company, if it's a hire van"
+                  }
+                ],
+                "prompt": "Who's responsible for making sure a vehicle isn't overloaded?"
+              },
+              "repairNote": "The driver is responsible. Check the load and the vehicle's limits before you set off.",
+              "sourceRef": "HC-98",
+              "type": "misconception",
+              "wrongBelief": "If a vehicle is overloaded, it's the fault of whoever loaded it."
+            },
+            {
+              "conceptId": "c.load.trailer-snaking",
+              "id": "r7-m4-s6",
+              "question": {
+                "explanation": "Snaking gets worse with speed. Easing off gently lets the caravan settle; harsh braking or steering can make it worse.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "Brake hard to stop it quickly"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.load.accelerate-out-of-snake",
+                    "text": "Accelerate to pull the caravan straight"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Ease off the accelerator and let your speed fall"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "You're towing a caravan on a windy dual carriageway. A lorry overtakes and the caravan starts swinging from side to side.",
+              "sourceRef": "HC-98",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Spread the weight evenly, with the heaviest items over the trailer's axle. It cuts the risk of the trailer swerving or snaking.",
+              "conceptId": "c.load.trailer-weight-axle",
+              "id": "r7-m4-s7",
+              "question": {
+                "explanation": "Weight in the wrong place upsets the balance of the car and trailer together, and makes snaking far more likely.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "With heavy items over the axles"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.load.heavy-at-back",
+                    "text": "With heavy items right at the back, away from the car"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "With the heaviest items on top, holding the rest down"
+                  }
+                ],
+                "prompt": "How should you load a trailer?"
+              },
+              "sourceRef": "HC-98",
+              "title": "Loading a trailer",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r7-m4-s8",
+              "questions": [
+                {
+                  "bankRef": "c.load.child-restraint"
+                },
+                {
+                  "bankRef": "c.load.driver-responsible-under-14"
+                },
+                {
+                  "bankRef": "c.load.airbag-baby-seat"
+                },
+                {
+                  "bankRef": "c.load.roof-stability"
+                },
+                {
+                  "bankRef": "c.load.trailer-snaking"
+                }
+              ],
+              "sourceRef": "HC-98",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Loads, towing & passengers"
+        },
+        {
+          "estimatedMinutes": 7,
+          "missionId": "r7-m5",
+          "reviewStatus": "draft",
+          "routeId": "route-7",
+          "steps": [
+            {
+              "conceptId": "c.incident.stop-at-scene",
+              "id": "r7-m5-s1",
+              "question": {
+                "explanation": "If you're involved in a collision that causes damage or injury, you must stop. It doesn't matter how small it is.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Stop"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.incident.minor-no-stop",
+                    "text": "Drive on — it's only minor damage"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Come back later and leave a note"
+                  }
+                ],
+                "prompt": "What must you do first?"
+              },
+              "scene": "Squeezing past in a narrow street, you clip another car's wing mirror. Nobody seems to have noticed.",
+              "sourceRef": "HC-286",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Give your name, address and registration number to anyone who reasonably asks. If you can't, report it to the police within 24 hours.",
+              "conceptId": "c.incident.share-details",
+              "id": "r7-m5-s2",
+              "question": {
+                "explanation": "The other driver needs to know who you are and which vehicle was involved. Note their details too.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.incident.insurer-only",
+                    "text": "Only your insurance company's details"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Your name, address and vehicle registration number"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Nothing, if the police aren't called"
+                  }
+                ],
+                "prompt": "What should you share after a collision that damages another car?"
+              },
+              "sourceRef": "HC-286",
+              "title": "After a collision",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.incident.scene-first-steps",
+              "correctOrder": [
+                "i1",
+                "i2",
+                "i3",
+                "i4"
+              ],
+              "explanation": "Stop the crash getting worse first, then get help coming, then look after the people.",
+              "id": "r7-m5-s3",
+              "items": [
+                {
+                  "id": "i1",
+                  "text": "Warn other traffic — switch on your hazard lights"
+                },
+                {
+                  "id": "i2",
+                  "text": "Get engines switched off and make sure no one smokes"
+                },
+                {
+                  "id": "i3",
+                  "text": "Call the emergency services"
+                },
+                {
+                  "id": "i4",
+                  "text": "Help the injured, without moving them unless you must"
+                }
+              ],
+              "prompt": "You're first to arrive at a crash on a busy road. Put what you do in order.",
+              "sourceRef": "HC-283",
+              "title": "First at a crash",
+              "type": "sequence"
+            },
+            {
+              "conceptId": "c.incident.warning-triangle",
+              "id": "r7-m5-s4",
+              "question": {
+                "explanation": "45 metres gives drivers time to react. Never use a warning triangle on a motorway.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.incident.triangle-close",
+                    "text": "Right behind the car, where it's easy to see"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "At least 45 metres"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "About 10 metres"
+                  }
+                ],
+                "prompt": "How far behind the car should you put it?"
+              },
+              "scene": "You've broken down on an ordinary two-way road. There's a warning triangle in the boot.",
+              "sourceRef": "HC-276",
+              "type": "hazard_cue"
+            },
+            {
+              "conceptId": "c.incident.tunnel-breakdown",
+              "id": "r7-m5-s5",
+              "question": {
+                "explanation": "A stopped car in a tunnel is a serious danger. Use the emergency point to call for help straight away.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.incident.tunnel-stay-in-car",
+                    "text": "Stay in the car with the doors locked until help arrives"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Keep trying to restart it until it goes"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Switch on your hazard lights, then go and call for help"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "Your car breaks down in a long road tunnel.",
+              "sourceRef": "DVSA-DES-s16",
+              "type": "scene_decision"
+            },
+            {
+              "a": {
+                "body": "Drive the car out of the tunnel if you can do it safely.",
+                "label": "Fire, and you can drive"
+              },
+              "b": {
+                "body": "Pull over, switch off, get everyone out and go to an emergency point.",
+                "label": "Fire, and you can't"
+              },
+              "conceptId": "c.incident.tunnel-fire",
+              "id": "r7-m5-s6",
+              "question": {
+                "explanation": "The biggest danger in a tunnel is smoke. Getting the car out, if you safely can, keeps it out of everyone's air.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.incident.fire-stop-instantly",
+                    "text": "Stop immediately, wherever you are"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Drive it out of the tunnel if it's safe to do so"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Open the bonnet to find the fire"
+                  }
+                ],
+                "prompt": "Your car catches fire in a tunnel. What should you do?"
+              },
+              "sourceRef": "DVSA-DES-s16",
+              "type": "contrast"
+            },
+            {
+              "conceptId": "c.incident.fuel-smell",
+              "id": "r7-m5-s7",
+              "question": {
+                "explanation": "Leaking fuel is a serious fire risk. Get it checked before you go on.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.incident.fuel-smell-normal",
+                    "text": "Carry on and fill up at the next garage"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Stop safely and find out where it's coming from"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Open the windows and keep driving"
+                  }
+                ],
+                "prompt": "You notice a strong smell of fuel while you're driving. What should you do?"
+              },
+              "repairNote": "A strong fuel smell can mean a leak and a fire risk. Stop safely and check it out.",
+              "sourceRef": "HC-annex6",
+              "type": "misconception",
+              "wrongBelief": "A smell of fuel from your car is normal and nothing to worry about."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r7-m5-s8",
+              "questions": [
+                {
+                  "bankRef": "c.incident.stop-at-scene"
+                },
+                {
+                  "bankRef": "c.incident.share-details"
+                },
+                {
+                  "bankRef": "c.incident.scene-first-steps"
+                },
+                {
+                  "bankRef": "c.incident.warning-triangle"
+                },
+                {
+                  "bankRef": "c.incident.tunnel-fire"
+                }
+              ],
+              "sourceRef": "HC-286",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "When things go wrong"
+        },
+        {
+          "estimatedMinutes": 8,
+          "missionId": "r7-m6",
+          "reviewStatus": "draft",
+          "routeId": "route-7",
+          "steps": [
+            {
+              "conceptId": "c.firstaid.danger-first",
+              "id": "r7-m6-s1",
+              "question": {
+                "explanation": "If you get hurt too, there are two casualties and no helper. Make the scene safe before you go in.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.firstaid.rush-in",
+                    "text": "Run straight to the casualty"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Check it's safe to approach"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Drag them onto the pavement"
+                  }
+                ],
+                "prompt": "What should you do first?"
+              },
+              "scene": "You arrive at a crash. Someone is lying still in the road, and traffic is still moving past.",
+              "sourceRef": "HC-annex7",
+              "type": "scene_decision"
+            },
+            {
+              "conceptId": "c.firstaid.dr-abc",
+              "correctOrder": [
+                "i1",
+                "i2",
+                "i3",
+                "i4"
+              ],
+              "explanation": "Then C: if they're not breathing normally, start chest compressions.",
+              "id": "r7-m6-s2",
+              "items": [
+                {
+                  "id": "i1",
+                  "text": "Danger — make sure it's safe"
+                },
+                {
+                  "id": "i2",
+                  "text": "Response — try to get a response"
+                },
+                {
+                  "id": "i3",
+                  "text": "Airway — make sure it's open"
+                },
+                {
+                  "id": "i4",
+                  "text": "Breathing — check it's normal"
+                }
+              ],
+              "prompt": "Put the first checks on an unconscious casualty in order.",
+              "sourceRef": "HC-annex7",
+              "title": "DR ABC",
+              "type": "sequence"
+            },
+            {
+              "body": "Don't move a casualty unless they're in further danger, such as from traffic or fire. They may have injuries you can't see.",
+              "conceptId": "c.firstaid.dont-move",
+              "id": "r7-m6-s3",
+              "question": {
+                "explanation": "Moving someone with a neck or back injury can make it much worse.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.firstaid.move-to-comfort",
+                    "text": "Straight away, into a more comfortable position"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "As soon as someone else can help lift"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Only if they're in further danger"
+                  }
+                ],
+                "prompt": "A casualty is unconscious but breathing. When should you move them?"
+              },
+              "sourceRef": "HC-annex7",
+              "title": "Leave them where they are",
+              "type": "rule_card"
+            },
+            {
+              "body": "Leave an injured motorcyclist's helmet on unless it's essential to remove it — for example, to keep their airway open.",
+              "conceptId": "c.firstaid.helmet",
+              "id": "r7-m6-s4",
+              "question": {
+                "explanation": "Pulling off a helmet can move the head and neck. Leave it to the paramedics unless there's no other way.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Only when it's essential"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.firstaid.remove-helmet",
+                    "text": "Straight away, to help them breathe"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Once they've been moved to the kerb"
+                  }
+                ],
+                "prompt": "A motorcyclist is injured after a crash. When should their helmet be removed?"
+              },
+              "sourceRef": "HC-annex7",
+              "title": "A rider's helmet",
+              "type": "rule_card"
+            },
+            {
+              "a": {
+                "body": "Two hands on the centre of the chest. Press 5–6 cm, about twice a second.",
+                "label": "Adult CPR"
+              },
+              "b": {
+                "body": "One hand may be enough. Press 4–5 cm, at the same rate.",
+                "label": "Child CPR"
+              },
+              "conceptId": "c.firstaid.cpr-depth",
+              "id": "r7-m6-s5",
+              "question": {
+                "explanation": "Compressions must be hard and fast to keep blood moving. Don't stop unless they start breathing or help takes over.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.firstaid.cpr-gentle",
+                    "text": "Just 1–2 cm, so you don't hurt them"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "5 to 6 centimetres"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "As far as you possibly can"
+                  }
+                ],
+                "prompt": "How far should you press down when giving CPR to an adult?"
+              },
+              "sourceRef": "HC-annex7",
+              "type": "contrast"
+            },
+            {
+              "body": "Anyone can use a public defibrillator (AED). It talks you through every step, and the 999 operator can tell you where the nearest one is.",
+              "conceptId": "c.firstaid.aed",
+              "id": "r7-m6-s6",
+              "question": {
+                "explanation": "An AED won't shock someone who doesn't need it. If someone else is there, send them for one while you do CPR.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.firstaid.aed-trained-only",
+                    "text": "Only trained first aiders"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Anyone"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Only the emergency services"
+                  }
+                ],
+                "prompt": "Who can use a public access defibrillator (AED)?"
+              },
+              "sourceRef": "DVSA-DES-s16",
+              "title": "Public defibrillators",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.firstaid.bleeding",
+              "id": "r7-m6-s7",
+              "question": {
+                "explanation": "Firm pressure slows the bleeding. Protect yourself from their blood if you can, and keep the pressure on until help arrives.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.firstaid.let-it-bleed",
+                    "text": "Let it bleed freely first to clean the wound"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Give them a drink to replace lost fluid"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Apply firm pressure over the wound"
+                  }
+                ],
+                "prompt": "How could you help?"
+              },
+              "scene": "A pedestrian has a deep cut to their leg and is bleeding heavily. The leg isn't broken and there's nothing in the wound.",
+              "sourceRef": "HC-annex7",
+              "type": "scene_decision"
+            },
+            {
+              "conceptId": "c.firstaid.shock",
+              "id": "r7-m6-s8",
+              "question": {
+                "explanation": "Shock can be serious and isn't always obvious. Stay with them and watch for changes until help arrives.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Reassure them confidently and keep them warm"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.firstaid.shock-drink",
+                    "text": "Give them a hot, sweet drink"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Walk them around to calm them down"
+                  }
+                ],
+                "prompt": "A driver seems to be in shock after a crash. How can you help?"
+              },
+              "repairNote": "Keep them warm and reassure them. Don't give them anything to eat or drink.",
+              "sourceRef": "HC-annex7",
+              "type": "misconception",
+              "wrongBelief": "Someone in shock after a crash should be given a hot, sweet drink."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r7-m6-s9",
+              "questions": [
+                {
+                  "bankRef": "c.firstaid.danger-first"
+                },
+                {
+                  "bankRef": "c.firstaid.dr-abc"
+                },
+                {
+                  "bankRef": "c.firstaid.cpr-depth"
+                },
+                {
+                  "bankRef": "c.firstaid.bleeding"
+                },
+                {
+                  "bankRef": "c.firstaid.shock"
+                }
+              ],
+              "sourceRef": "HC-annex7",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "First aid at the scene"
+        }
+      ],
       "routeId": "route-7",
       "title": "Vehicle & Documents"
     }
   ],
   "sourceRefs": {
+    "DVSA-DES-s16": {
+      "title": "The Official DVSA Guide to Driving – the essential skills: section 16, Incidents, accidents and emergencies"
+    },
+    "DVSA-DES-s17": {
+      "title": "The Official DVSA Guide to Driving – the essential skills: section 17, Driving and the environment"
+    },
+    "HC-100": {
+      "title": "Highway Code rule 100"
+    },
+    "HC-101": {
+      "title": "Highway Code rule 101"
+    },
     "HC-105": {
       "title": "Highway Code rule 105"
     },
@@ -9216,6 +11019,9 @@
     },
     "HC-122": {
       "title": "Highway Code rule 122"
+    },
+    "HC-123": {
+      "title": "Highway Code rule 123"
     },
     "HC-124": {
       "title": "Highway Code rule 124"
@@ -9264,6 +11070,9 @@
     },
     "HC-148": {
       "title": "Highway Code rule 148"
+    },
+    "HC-150": {
+      "title": "Highway Code rule 150"
     },
     "HC-160": {
       "title": "Highway Code rule 160"
@@ -9394,6 +11203,9 @@
     "HC-238": {
       "title": "Highway Code rule 238"
     },
+    "HC-239": {
+      "title": "Highway Code rule 239"
+    },
     "HC-253": {
       "title": "Highway Code rule 253"
     },
@@ -9427,6 +11239,9 @@
     "HC-273": {
       "title": "Highway Code rule 273"
     },
+    "HC-276": {
+      "title": "Highway Code rule 276"
+    },
     "HC-277": {
       "title": "Highway Code rule 277"
     },
@@ -9435,6 +11250,9 @@
     },
     "HC-283": {
       "title": "Highway Code rule 283"
+    },
+    "HC-286": {
+      "title": "Highway Code rule 286"
     },
     "HC-288": {
       "title": "Highway Code rule 288"
@@ -9454,6 +11272,9 @@
     "HC-86": {
       "title": "Highway Code rule 86"
     },
+    "HC-90": {
+      "title": "Highway Code rule 90"
+    },
     "HC-91": {
       "title": "Highway Code rule 91"
     },
@@ -9466,6 +11287,15 @@
     "HC-96": {
       "title": "Highway Code rule 96"
     },
+    "HC-97": {
+      "title": "Highway Code rule 97"
+    },
+    "HC-98": {
+      "title": "Highway Code rule 98"
+    },
+    "HC-99": {
+      "title": "Highway Code rule 99"
+    },
     "HC-H1": {
       "title": "Highway Code rule H1"
     },
@@ -9474,6 +11304,18 @@
     },
     "HC-H3": {
       "title": "Highway Code rule H3"
+    },
+    "HC-annex3": {
+      "title": "Highway Code Annex 3: Motor vehicle documentation and learner driver requirements"
+    },
+    "HC-annex6": {
+      "title": "Highway Code Annex 6: Vehicle maintenance, safety and security"
+    },
+    "HC-annex7": {
+      "title": "Highway Code Annex 7: First aid on the road"
+    },
+    "HC-penalties": {
+      "title": "Highway Code: Penalties"
     },
     "KYTS-circles": {
       "title": "Know Your Traffic Signs — circular signs"

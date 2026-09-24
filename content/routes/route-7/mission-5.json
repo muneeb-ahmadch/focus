@@ -1,0 +1,221 @@
+{
+  "missionId": "r7-m5",
+  "routeId": "route-7",
+  "title": "When things go wrong",
+  "estimatedMinutes": 7,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r7-m5-s1",
+      "type": "scene_decision",
+      "conceptId": "c.incident.stop-at-scene",
+      "sourceRef": "HC-286",
+      "scene": "Squeezing past in a narrow street, you clip another car's wing mirror. Nobody seems to have noticed.",
+      "question": {
+        "prompt": "What must you do first?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Drive on — it's only minor damage",
+            "correct": false,
+            "misconceptionId": "m.incident.minor-no-stop"
+          },
+          {
+            "id": "c",
+            "text": "Come back later and leave a note",
+            "correct": false
+          }
+        ],
+        "explanation": "If you're involved in a collision that causes damage or injury, you must stop. It doesn't matter how small it is."
+      }
+    },
+    {
+      "id": "r7-m5-s2",
+      "type": "rule_card",
+      "conceptId": "c.incident.share-details",
+      "sourceRef": "HC-286",
+      "title": "After a collision",
+      "body": "Give your name, address and registration number to anyone who reasonably asks. If you can't, report it to the police within 24 hours.",
+      "question": {
+        "prompt": "What should you share after a collision that damages another car?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only your insurance company's details",
+            "correct": false,
+            "misconceptionId": "m.incident.insurer-only"
+          },
+          {
+            "id": "b",
+            "text": "Your name, address and vehicle registration number",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Nothing, if the police aren't called",
+            "correct": false
+          }
+        ],
+        "explanation": "The other driver needs to know who you are and which vehicle was involved. Note their details too."
+      }
+    },
+    {
+      "id": "r7-m5-s3",
+      "type": "sequence",
+      "conceptId": "c.incident.scene-first-steps",
+      "sourceRef": "HC-283",
+      "title": "First at a crash",
+      "prompt": "You're first to arrive at a crash on a busy road. Put what you do in order.",
+      "items": [
+        { "id": "i1", "text": "Warn other traffic — switch on your hazard lights" },
+        { "id": "i2", "text": "Get engines switched off and make sure no one smokes" },
+        { "id": "i3", "text": "Call the emergency services" },
+        { "id": "i4", "text": "Help the injured, without moving them unless you must" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "Stop the crash getting worse first, then get help coming, then look after the people."
+    },
+    {
+      "id": "r7-m5-s4",
+      "type": "hazard_cue",
+      "conceptId": "c.incident.warning-triangle",
+      "sourceRef": "HC-276",
+      "scene": "You've broken down on an ordinary two-way road. There's a warning triangle in the boot.",
+      "question": {
+        "prompt": "How far behind the car should you put it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Right behind the car, where it's easy to see",
+            "correct": false,
+            "misconceptionId": "m.incident.triangle-close"
+          },
+          {
+            "id": "b",
+            "text": "At least 45 metres",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "About 10 metres",
+            "correct": false
+          }
+        ],
+        "explanation": "45 metres gives drivers time to react. Never use a warning triangle on a motorway."
+      }
+    },
+    {
+      "id": "r7-m5-s5",
+      "type": "scene_decision",
+      "conceptId": "c.incident.tunnel-breakdown",
+      "sourceRef": "DVSA-DES-s16",
+      "scene": "Your car breaks down in a long road tunnel.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay in the car with the doors locked until help arrives",
+            "correct": false,
+            "misconceptionId": "m.incident.tunnel-stay-in-car"
+          },
+          {
+            "id": "b",
+            "text": "Keep trying to restart it until it goes",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Switch on your hazard lights, then go and call for help",
+            "correct": true
+          }
+        ],
+        "explanation": "A stopped car in a tunnel is a serious danger. Use the emergency point to call for help straight away."
+      }
+    },
+    {
+      "id": "r7-m5-s6",
+      "type": "contrast",
+      "conceptId": "c.incident.tunnel-fire",
+      "sourceRef": "DVSA-DES-s16",
+      "a": {
+        "label": "Fire, and you can drive",
+        "body": "Drive the car out of the tunnel if you can do it safely."
+      },
+      "b": {
+        "label": "Fire, and you can't",
+        "body": "Pull over, switch off, get everyone out and go to an emergency point."
+      },
+      "question": {
+        "prompt": "Your car catches fire in a tunnel. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop immediately, wherever you are",
+            "correct": false,
+            "misconceptionId": "m.incident.fire-stop-instantly"
+          },
+          {
+            "id": "b",
+            "text": "Drive it out of the tunnel if it's safe to do so",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Open the bonnet to find the fire",
+            "correct": false
+          }
+        ],
+        "explanation": "The biggest danger in a tunnel is smoke. Getting the car out, if you safely can, keeps it out of everyone's air."
+      }
+    },
+    {
+      "id": "r7-m5-s7",
+      "type": "misconception",
+      "conceptId": "c.incident.fuel-smell",
+      "sourceRef": "HC-annex6",
+      "wrongBelief": "A smell of fuel from your car is normal and nothing to worry about.",
+      "question": {
+        "prompt": "You notice a strong smell of fuel while you're driving. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Carry on and fill up at the next garage",
+            "correct": false,
+            "misconceptionId": "m.incident.fuel-smell-normal"
+          },
+          {
+            "id": "b",
+            "text": "Stop safely and find out where it's coming from",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Open the windows and keep driving",
+            "correct": false
+          }
+        ],
+        "explanation": "Leaking fuel is a serious fire risk. Get it checked before you go on."
+      },
+      "repairNote": "A strong fuel smell can mean a leak and a fire risk. Stop safely and check it out."
+    },
+    {
+      "id": "r7-m5-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-286",
+      "questions": [
+        { "bankRef": "c.incident.stop-at-scene" },
+        { "bankRef": "c.incident.share-details" },
+        { "bankRef": "c.incident.scene-first-steps" },
+        { "bankRef": "c.incident.warning-triangle" },
+        { "bankRef": "c.incident.tunnel-fire" }
+      ]
+    }
+  ]
+}

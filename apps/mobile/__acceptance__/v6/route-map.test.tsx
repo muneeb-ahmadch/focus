@@ -57,10 +57,14 @@ describe('Learn route map', () => {
     const routeOne = await screen.findByRole('button', { name: /route 1/i });
     expect(routeOne.textContent).toContain('missions');
 
+    // queryAll, not getAll: once every route is authored there are no coming-soon rows at all.
     const emptyRoutes = ROUTES.filter((r) => r.missions.length === 0);
-    expect(screen.getAllByText('Coming soon')).toHaveLength(emptyRoutes.length);
+    expect(screen.queryAllByText('Coming soon')).toHaveLength(emptyRoutes.length);
     for (const route of emptyRoutes) {
       expect(screen.queryByRole('button', { name: new RegExp(route.title, 'i') })).toBeNull();
+    }
+    for (const route of ROUTES.filter((r) => r.missions.length > 0)) {
+      expect(screen.getByRole('button', { name: new RegExp(route.title, 'i') })).toBeTruthy();
     }
   });
 
