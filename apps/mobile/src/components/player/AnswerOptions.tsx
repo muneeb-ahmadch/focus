@@ -40,35 +40,38 @@ export function AnswerOptions(props: {
         // an image option is audible via its authored altText (rule 8)
         const label = option.text ?? option.altText ?? '';
         return (
-          <Pressable
+          <View
             key={option.id}
-            disabled={disabled}
-            accessibilityRole="button"
-            accessibilityLabel={label}
-            accessibilityState={{ disabled }}
-            aria-disabled={disabled}
-            onPress={() => props.onAnswer(option.id)}
-            style={({ pressed }) => [
+            style={[
               styles.row,
-              pressed && styles.pressed,
               showCorrect && styles.correct,
               showWrong && styles.wrong,
               isHinted && styles.hinted,
             ]}
           >
-            {option.imageRef ? (
-              <Image
-                source={bankAsset(option.imageRef)}
-                accessibilityRole="image"
-                accessibilityLabel={option.altText}
-                resizeMode="contain"
-                style={styles.image}
-              />
-            ) : (
-              <Text style={styles.text}>{option.text}</Text>
-            )}
+            <Pressable
+              disabled={disabled}
+              accessibilityRole="button"
+              accessibilityLabel={label}
+              accessibilityState={{ disabled }}
+              aria-disabled={disabled}
+              onPress={() => props.onAnswer(option.id)}
+              style={({ pressed }) => [styles.option, pressed && styles.pressed]}
+            >
+              {option.imageRef ? (
+                <Image
+                  source={bankAsset(option.imageRef)}
+                  accessibilityRole="image"
+                  accessibilityLabel={option.altText}
+                  resizeMode="contain"
+                  style={styles.image}
+                />
+              ) : (
+                <Text style={styles.text}>{option.text}</Text>
+              )}
+            </Pressable>
             <AudioButton text={label} small />
-          </Pressable>
+          </View>
         );
       })}
     </View>
@@ -81,14 +84,20 @@ const makeStyles = (t: Theme) =>
     row: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
       backgroundColor: t.colors.surface,
       borderWidth: 2,
       borderColor: t.colors.border,
       borderRadius: t.radius.control,
-      paddingVertical: t.space.md,
-      paddingHorizontal: t.space.lg,
+      paddingRight: t.space.lg,
       gap: t.space.sm,
+    },
+    option: {
+      flex: 1,
+      alignSelf: 'stretch',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: t.space.md,
+      paddingLeft: t.space.lg,
     },
     pressed: { opacity: 0.7 },
     correct: { borderColor: t.colors.success, backgroundColor: t.colors.successSoft },
