@@ -1,0 +1,234 @@
+{
+  "missionId": "r5-m5",
+  "routeId": "route-5",
+  "title": "Exits & roadworks",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r5-m5-s1",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.missed-exit",
+      "sourceRef": "HC-263",
+      "scene": "You're in the left-hand lane when you realise the exit you wanted has just gone past.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Carry on to the next exit",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Stop on the hard shoulder and reverse back carefully",
+            "correct": false,
+            "misconceptionId": "m.motorway.reverse-on-shoulder"
+          },
+          {
+            "id": "c",
+            "text": "Turn back through a gap in the central reservation",
+            "correct": false
+          }
+        ],
+        "explanation": "You must never reverse, cross the central reservation or drive against the traffic on a motorway."
+      }
+    },
+    {
+      "id": "r5-m5-s2",
+      "type": "rule_card",
+      "conceptId": "c.motorway.exit-early-left",
+      "sourceRef": "HC-273",
+      "title": "Plan your exit",
+      "body": "The first sign for an exit comes a mile before it, and another at half a mile. Get into the left-hand lane in good time.",
+      "question": {
+        "prompt": "Which lane should you be in well before your exit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The middle lane",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Any lane — you can cut across at the last moment",
+            "correct": false,
+            "misconceptionId": "m.lanes.late-lane-change"
+          },
+          {
+            "id": "c",
+            "text": "The left-hand lane",
+            "correct": true
+          }
+        ],
+        "explanation": "At 70 mph a mile goes by in under a minute. Move left early so you're never cutting across lanes."
+      }
+    },
+    {
+      "id": "r5-m5-s3",
+      "type": "sign_meaning",
+      "conceptId": "c.motorway.countdown-markers",
+      "sourceRef": "KYTS-motorway",
+      "sign": { "shape": "info-rect", "glyph": "///" },
+      "question": {
+        "prompt": "Posts with three, then two, then one diagonal bar stand beside the left lane. What are they counting down to?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The next emergency telephone",
+            "correct": false,
+            "misconceptionId": "m.motorway.countdown-to-phone"
+          },
+          {
+            "id": "b",
+            "text": "The start of the exit slip road",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "A police speed check",
+            "correct": false
+          }
+        ],
+        "explanation": "Each bar is 100 yards: 300, 200, then 100 yards to the start of the slip road. By now you should already be in the left lane."
+      }
+    },
+    {
+      "id": "r5-m5-s4",
+      "type": "contrast",
+      "conceptId": "c.motorway.roadworks-limit",
+      "sourceRef": "HC-288",
+      "a": {
+        "label": "Limit in a red ring",
+        "body": "Mandatory. At roadworks it's often enforced by cameras — slow down in good time."
+      },
+      "b": {
+        "label": "Through the works",
+        "body": "Keep your distance and stay in your lane. Workers and their vehicles may be close by."
+      },
+      "question": {
+        "prompt": "What should you do when approaching roadworks on a motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Speed up to get through the works quickly",
+            "correct": false,
+            "misconceptionId": "m.motorway.rush-roadworks"
+          },
+          {
+            "id": "b",
+            "text": "Move onto the hard shoulder to get past",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Keep to the lower speed limit",
+            "correct": true
+          }
+        ],
+        "explanation": "Lower limits at roadworks are the law, not a suggestion. Slow down before you reach them, not at the camera."
+      }
+    },
+    {
+      "id": "r5-m5-s5",
+      "type": "hazard_cue",
+      "conceptId": "c.motorway.contraflow-gap",
+      "sourceRef": "HC-290",
+      "scene": "You're in a contraflow. Only a line of cones separates you from oncoming traffic, and the queue ahead keeps stopping.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep a good distance from the vehicle ahead",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Stay close to the car in front to keep the queue short",
+            "correct": false,
+            "misconceptionId": "m.motorway.close-up-queue"
+          },
+          {
+            "id": "c",
+            "text": "Switch to whichever lane is moving faster",
+            "correct": false
+          }
+        ],
+        "explanation": "Lanes are narrow and there's no barrier to oncoming traffic. A good gap gives you room if the queue stops suddenly."
+      }
+    },
+    {
+      "id": "r5-m5-s6",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.studs-which-lane",
+      "sourceRef": "HC-132",
+      "scene": "It's dark and pouring with rain on a three-lane motorway. You can see red studs on your left and white studs on your right.",
+      "question": {
+        "prompt": "Which lane are you in?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The right-hand lane, next to the central reservation",
+            "correct": false,
+            "misconceptionId": "m.markings.red-studs-centre"
+          },
+          {
+            "id": "b",
+            "text": "The middle lane",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The left-hand lane",
+            "correct": true
+          }
+        ],
+        "explanation": "Red studs mark the edge next to the hard shoulder; white ones divide the lanes. Red on your left means you're in the left lane."
+      }
+    },
+    {
+      "id": "r5-m5-s7",
+      "type": "misconception",
+      "conceptId": "c.motorway.exit-early-left",
+      "sourceRef": "HC-273",
+      "wrongBelief": "You can stay in an outside lane until the countdown markers, then move across.",
+      "question": {
+        "prompt": "You're in the right-hand lane and pass the one-mile sign for your exit. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay put until the countdown markers, then cut across",
+            "correct": false,
+            "misconceptionId": "m.motorway.cut-across-at-markers"
+          },
+          {
+            "id": "b",
+            "text": "Start moving left in good time",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Slow down in the right-hand lane until a gap appears",
+            "correct": false
+          }
+        ],
+        "explanation": "Cutting across lanes at the last moment forces others to brake. Work your way left one lane at a time, in good time."
+      },
+      "repairNote": "Plan ahead: move into the left-hand lane well before the exit — the first sign is a mile out."
+    },
+    {
+      "id": "r5-m5-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-273",
+      "questions": [
+        { "bankRef": "c.motorway.missed-exit" },
+        { "bankRef": "c.motorway.exit-early-left" },
+        { "bankRef": "c.motorway.countdown-markers" },
+        { "bankRef": "c.motorway.roadworks-limit" },
+        { "bankRef": "c.motorway.contraflow-gap" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "missionId": "r5-m3",
+  "routeId": "route-5",
+  "title": "Smart motorways & red X",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r5-m3-s1",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.redx-not-beyond",
+      "sourceRef": "HC-258",
+      "scene": "You're in the left-hand lane. A red X lights up on the gantry above your lane. The lanes to your right show a 50 mph limit.",
+      "question": {
+        "prompt": "What must you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Carry on — it warns that the lane closes further ahead",
+            "correct": false,
+            "misconceptionId": "m.motorway.redx-advisory"
+          },
+          {
+            "id": "b",
+            "text": "Stop under the gantry and wait",
+            "correct": false,
+            "misconceptionId": "m.signs.gantry-applies-to-all"
+          },
+          {
+            "id": "c",
+            "text": "Move into an open lane when it's safe, before the gantry",
+            "correct": true
+          }
+        ],
+        "explanation": "The red X closes your lane from that gantry. The other lanes are still open, so move over and keep to their limit."
+      }
+    },
+    {
+      "id": "r5-m3-s2",
+      "type": "rule_card",
+      "conceptId": "c.motorway.redx-not-beyond",
+      "sourceRef": "HC-258",
+      "title": "Red X: the lane is closed",
+      "body": "A red X above a lane means you MUST NOT drive past it in that lane. It isn't advice — there may be a crash, a breakdown or people ahead.",
+      "question": {
+        "prompt": "What does a red X above a motorway lane mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You must not drive in that lane beyond the sign",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Slow down — the lane may close later on",
+            "correct": false,
+            "misconceptionId": "m.motorway.redx-advisory"
+          },
+          {
+            "id": "c",
+            "text": "The lane is kept for emergency vehicles, but you may use it",
+            "correct": false
+          }
+        ],
+        "explanation": "Red X signals are enforced by cameras. Driving under one puts you in the path of whatever closed the lane."
+      }
+    },
+    {
+      "id": "r5-m3-s3",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.redx-all-lanes",
+      "sourceRef": "HC-258",
+      "scene": "Every lane on the gantry ahead suddenly shows a red X, with red lamps flashing.",
+      "question": {
+        "prompt": "What must you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Leave at the next exit",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Stop and wait — don't change lanes or drive on",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Carry on slowly along the hard shoulder",
+            "correct": false,
+            "misconceptionId": "m.motorway.redx-use-shoulder"
+          }
+        ],
+        "explanation": "A red X over every lane closes the whole carriageway at that point. Stop and wait for the signals to change."
+      }
+    },
+    {
+      "id": "r5-m3-s4",
+      "type": "contrast",
+      "conceptId": "c.motorway.hard-shoulder-signals",
+      "sourceRef": "HC-269",
+      "a": {
+        "label": "Red X over hard shoulder",
+        "body": "It's shut as a running lane. Use it only for an emergency or a breakdown."
+      },
+      "b": {
+        "label": "Speed limit over hard shoulder",
+        "body": "It's open as a running lane. Keep to the limit and look out for broken-down vehicles."
+      },
+      "question": {
+        "prompt": "A speed limit is shown above the hard shoulder. What does it mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You may stop there if you need a rest",
+            "correct": false,
+            "misconceptionId": "m.hazard.hard-shoulder-rest"
+          },
+          {
+            "id": "b",
+            "text": "You may drive in it as a normal lane",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Keep out of it — it's for emergencies only",
+            "correct": false
+          }
+        ],
+        "explanation": "On some motorways the hard shoulder opens as a lane at busy times. The signal above it tells you which it is right now."
+      }
+    },
+    {
+      "id": "r5-m3-s5",
+      "type": "rule_card",
+      "conceptId": "c.motorway.variable-limits",
+      "sourceRef": "HC-261",
+      "title": "Limits that change",
+      "body": "A speed limit in a red ring on a gantry is mandatory. It changes with the traffic to keep everyone moving steadily and cut stop-start bunching.",
+      "question": {
+        "prompt": "Why do some motorways use variable speed limits?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To suggest a comfortable speed — they're only advice",
+            "correct": false,
+            "misconceptionId": "m.motorway.gantry-limit-advisory"
+          },
+          {
+            "id": "b",
+            "text": "To reduce bunching and keep traffic flowing",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "To let traffic go faster when roads are quiet",
+            "correct": false
+          }
+        ],
+        "explanation": "A steady 50 mph moves more traffic than racing to 70 and braking to a stop. Cameras often enforce the limit."
+      }
+    },
+    {
+      "id": "r5-m3-s6",
+      "type": "hazard_cue",
+      "conceptId": "c.motorway.gantry-early",
+      "sourceRef": "KYTS-motorway",
+      "scene": "You're in the right-hand lane. The gantry ahead shows an arrow pointing left and a 50 limit. The road beyond looks completely clear.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move left in good time and slow to 50 mph",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Carry on until you can see what the problem is",
+            "correct": false,
+            "misconceptionId": "m.motorway.no-visible-reason"
+          },
+          {
+            "id": "c",
+            "text": "Use the hard shoulder to get past the hazard",
+            "correct": false
+          }
+        ],
+        "explanation": "Gantry signs warn of queues and hazards you can't see yet. Obey them even when the road looks clear."
+      }
+    },
+    {
+      "id": "r5-m3-s7",
+      "type": "misconception",
+      "conceptId": "c.motorway.redx-not-beyond",
+      "sourceRef": "HC-258",
+      "wrongBelief": "A red X is just an early warning that the lane closes somewhere ahead.",
+      "question": {
+        "prompt": "A red X shows above your lane, but the cars ahead in it keep going. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Follow them — if they're carrying on, the lane can't be closed yet",
+            "correct": false,
+            "misconceptionId": "m.motorway.redx-advisory"
+          },
+          {
+            "id": "b",
+            "text": "Move to an open lane — you must not pass the red X in this one",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Put your hazard lights on and stay in the lane",
+            "correct": false
+          }
+        ],
+        "explanation": "Other drivers breaking the rule doesn't make it safe. The lane is closed from the gantry, whatever they do."
+      },
+      "repairNote": "The lane is closed now, not later. You must not drive past a red X in that lane."
+    },
+    {
+      "id": "r5-m3-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-258",
+      "questions": [
+        { "bankRef": "c.motorway.redx-not-beyond" },
+        { "bankRef": "c.motorway.redx-all-lanes" },
+        { "bankRef": "c.motorway.hard-shoulder-signals" },
+        { "bankRef": "c.motorway.variable-limits" },
+        { "bankRef": "c.motorway.gantry-early" }
+      ]
+    }
+  ]
+}

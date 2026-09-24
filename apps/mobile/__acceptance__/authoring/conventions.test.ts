@@ -37,6 +37,13 @@ const ARCS: Record<string, Record<string, string>> = {
     'r4-m4': 'Lanes & one-way streets',
     'r4-m5': 'Level crossings',
   },
+  'route-5': {
+    'r5-m1': 'Joining the motorway',
+    'r5-m2': 'Lanes & overtaking',
+    'r5-m3': 'Smart motorways & red X',
+    'r5-m4': 'Breakdowns & the hard shoulder',
+    'r5-m5': 'Exits & roadworks',
+  },
   'route-6': {
     'r6-m1': 'People on foot',
     'r6-m2': 'Children & school runs',

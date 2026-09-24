@@ -1146,5 +1146,180 @@
     "wrongBelief": "Staying close behind a hesitant learner encourages them to get on with it.",
     "repairNote": "Pressure makes mistakes more likely. Hang back and give them time and room.",
     "sourceRef": "HC-217"
+  },
+  {
+    "misconceptionId": "m.motorway.stop-at-slip-end",
+    "conceptId": "c.motorway.join-match-speed",
+    "wrongBelief": "If the motorway is busy, stop at the end of the slip road and wait for a gap.",
+    "repairNote": "Use the slip road to match the speed of traffic in the left-hand lane, then filter into a safe gap.",
+    "sourceRef": "HC-259"
+  },
+  {
+    "misconceptionId": "m.motorway.overtake-after-joining",
+    "conceptId": "c.motorway.settle-left",
+    "wrongBelief": "Once you've joined a motorway, move straight out so you're not stuck behind lorries.",
+    "repairNote": "Stay in the left-hand lane long enough to get used to the speed of the traffic before overtaking.",
+    "sourceRef": "HC-259"
+  },
+  {
+    "misconceptionId": "m.motorway.watch-car-ahead-only",
+    "conceptId": "c.motorway.look-further-ahead",
+    "wrongBelief": "On a fast road, watching the car right in front of you is enough.",
+    "repairNote": "Look much further ahead than on other roads — at 70 mph hazards reach you far sooner.",
+    "sourceRef": "HC-254"
+  },
+  {
+    "misconceptionId": "m.motorway.any-road-legal",
+    "conceptId": "c.motorway.who-may-use",
+    "wrongBelief": "Any vehicle that's legal on the road is allowed on a motorway.",
+    "repairNote": "Pedestrians, cyclists, horse riders, motorcycles under 50 cc and mobility scooters are among those banned.",
+    "sourceRef": "HC-253"
+  },
+  {
+    "misconceptionId": "m.motorway.middle-lane-cruise",
+    "conceptId": "c.motorway.keep-left",
+    "wrongBelief": "On a three-lane motorway, the middle lane is the normal lane to cruise in.",
+    "repairNote": "Keep to the left-hand lane unless you're overtaking — whatever speed you're doing.",
+    "sourceRef": "HC-264"
+  },
+  {
+    "misconceptionId": "m.motorway.left-lane-slow-only",
+    "conceptId": "c.motorway.keep-left",
+    "wrongBelief": "The left-hand lane of a motorway is really for lorries and slow vehicles.",
+    "repairNote": "The left-hand lane is everyone's lane. Use the others only to overtake, then move back.",
+    "sourceRef": "HC-264"
+  },
+  {
+    "misconceptionId": "m.motorway.undertake-if-clear",
+    "conceptId": "c.motorway.no-left-overtake",
+    "wrongBelief": "You may overtake on the left on a motorway whenever the left-hand lane is clear.",
+    "repairNote": "Only overtake on the right. In slow queues you may keep going if the lane to your right is slower.",
+    "sourceRef": "HC-268"
+  },
+  {
+    "misconceptionId": "m.motorway.joiners-not-my-problem",
+    "conceptId": "c.motorway.joining-traffic",
+    "wrongBelief": "Traffic joining from a slip road must fit in around you, so you just hold your speed.",
+    "repairNote": "Joiners must give way, but help where you can: adjust your speed or move out a lane if it's safe.",
+    "sourceRef": "HC-259"
+  },
+  {
+    "misconceptionId": "m.motorway.hazard-lights-breakdown-only",
+    "conceptId": "c.motorway.hazard-lights-warning",
+    "wrongBelief": "Hazard warning lights are only for when you've broken down.",
+    "repairNote": "On a motorway or dual carriageway you may use them briefly to warn drivers behind of a hazard ahead.",
+    "sourceRef": "HC-116"
+  },
+  {
+    "misconceptionId": "m.motorway.towing-70",
+    "conceptId": "c.motorway.towing-limit",
+    "wrongBelief": "A car towing a trailer can do 70 mph on a motorway like any other car.",
+    "repairNote": "Towing a caravan or trailer, your limit is 60 mph on motorways and dual carriageways.",
+    "sourceRef": "HC-124"
+  },
+  {
+    "misconceptionId": "m.motorway.redx-advisory",
+    "conceptId": "c.motorway.redx-not-beyond",
+    "wrongBelief": "A red X just warns you that the lane is closing somewhere ahead.",
+    "repairNote": "The lane is closed now, not later. You must not drive past a red X in that lane.",
+    "sourceRef": "HC-258"
+  },
+  {
+    "misconceptionId": "m.motorway.redx-use-shoulder",
+    "conceptId": "c.motorway.redx-all-lanes",
+    "wrongBelief": "If every lane shows a red X, you can carry on slowly along the hard shoulder.",
+    "repairNote": "A red X over every lane means stop and wait. Don't change lanes or use the hard shoulder.",
+    "sourceRef": "HC-258"
+  },
+  {
+    "misconceptionId": "m.motorway.gantry-limit-advisory",
+    "conceptId": "c.motorway.variable-limits",
+    "wrongBelief": "Speed limits shown on motorway gantries are only advice.",
+    "repairNote": "A limit in a red ring is mandatory, and it's often enforced by cameras.",
+    "sourceRef": "HC-261"
+  },
+  {
+    "misconceptionId": "m.motorway.no-visible-reason",
+    "conceptId": "c.motorway.gantry-early",
+    "wrongBelief": "If you can't see a problem ahead, you don't need to obey the gantry signs yet.",
+    "repairNote": "Obey them anyway — they warn of queues and hazards you can't see yet.",
+    "sourceRef": "KYTS-motorway"
+  },
+  {
+    "misconceptionId": "m.motorway.quick-repair-ok",
+    "conceptId": "c.motorway.puncture-no-repair",
+    "wrongBelief": "A quick, simple repair on the hard shoulder is fine if you're careful.",
+    "repairNote": "Don't attempt even simple repairs on the hard shoulder. Get clear of the car and phone for help.",
+    "sourceRef": "HC-277"
+  },
+  {
+    "misconceptionId": "m.motorway.mobile-traces-you",
+    "conceptId": "c.motorway.emergency-phone",
+    "wrongBelief": "Calling from a mobile is just as good — the emergency services can always trace you.",
+    "repairNote": "An emergency phone tells them exactly where you are. On a mobile, give the number on the nearest marker post.",
+    "sourceRef": "HC-283"
+  },
+  {
+    "misconceptionId": "m.motorway.back-to-traffic",
+    "conceptId": "c.motorway.face-traffic",
+    "wrongBelief": "On a roadside emergency phone, face away from the traffic so it doesn't distract you.",
+    "repairNote": "Face the oncoming traffic so you can see what's coming, including the draught from a lorry.",
+    "sourceRef": "HC-277"
+  },
+  {
+    "misconceptionId": "m.motorway.wait-in-car",
+    "conceptId": "c.motorway.wait-away",
+    "wrongBelief": "After breaking down on the hard shoulder, the safest place to wait is in your car.",
+    "repairNote": "Wait well away from the carriageway and hard shoulder — behind the barrier if there is one.",
+    "sourceRef": "HC-277"
+  },
+  {
+    "misconceptionId": "m.motorway.stand-behind-car",
+    "conceptId": "c.motorway.live-lane-stop",
+    "wrongBelief": "If you break down in a live lane, stand behind your car to warn other traffic.",
+    "repairNote": "Hazard lights on. Get well clear only if it's safe — otherwise stay in, seatbelt on, and call 999.",
+    "sourceRef": "HC-277"
+  },
+  {
+    "misconceptionId": "m.motorway.shoulder-rejoin",
+    "conceptId": "c.motorway.rejoin-build-speed",
+    "wrongBelief": "Once your car is fixed, pull straight out and build up speed in the left-hand lane.",
+    "repairNote": "Build up speed on the hard shoulder first, then signal and merge into a safe gap. Watch for vehicles stopped ahead.",
+    "sourceRef": "HC-278"
+  },
+  {
+    "misconceptionId": "m.motorway.reverse-on-shoulder",
+    "conceptId": "c.motorway.missed-exit",
+    "wrongBelief": "If you miss your exit, you can reverse carefully back along the hard shoulder.",
+    "repairNote": "You must never reverse on a motorway. Carry on to the next exit.",
+    "sourceRef": "HC-263"
+  },
+  {
+    "misconceptionId": "m.motorway.countdown-to-phone",
+    "conceptId": "c.motorway.countdown-markers",
+    "wrongBelief": "The striped countdown posts show the distance to the next emergency phone.",
+    "repairNote": "They count down 300, 200 and 100 yards to the start of the exit slip road.",
+    "sourceRef": "KYTS-motorway"
+  },
+  {
+    "misconceptionId": "m.motorway.rush-roadworks",
+    "conceptId": "c.motorway.roadworks-limit",
+    "wrongBelief": "At motorway roadworks it's safer to speed up and get through quickly.",
+    "repairNote": "Keep to the lower limit — it's mandatory and often enforced by cameras.",
+    "sourceRef": "HC-288"
+  },
+  {
+    "misconceptionId": "m.motorway.close-up-queue",
+    "conceptId": "c.motorway.contraflow-gap",
+    "wrongBelief": "In a slow contraflow, staying close to the car ahead keeps the queue moving.",
+    "repairNote": "Keep a good gap. Lanes are narrow and there may be no barrier between you and oncoming traffic.",
+    "sourceRef": "HC-290"
+  },
+  {
+    "misconceptionId": "m.motorway.cut-across-at-markers",
+    "conceptId": "c.motorway.exit-early-left",
+    "wrongBelief": "You can stay in an outside lane until the countdown markers, then move across.",
+    "repairNote": "Move into the left-hand lane well before your exit — the first sign is a mile out.",
+    "sourceRef": "HC-273"
   }
 ]

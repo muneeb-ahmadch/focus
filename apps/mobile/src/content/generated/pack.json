@@ -456,6 +456,181 @@
       "wrongBelief": "Double white lines are only advisory, so you may cross them freely."
     },
     {
+      "conceptId": "c.motorway.who-may-use",
+      "misconceptionId": "m.motorway.any-road-legal",
+      "repairNote": "Pedestrians, cyclists, horse riders, motorcycles under 50 cc and mobility scooters are among those banned.",
+      "sourceRef": "HC-253",
+      "wrongBelief": "Any vehicle that's legal on the road is allowed on a motorway."
+    },
+    {
+      "conceptId": "c.motorway.face-traffic",
+      "misconceptionId": "m.motorway.back-to-traffic",
+      "repairNote": "Face the oncoming traffic so you can see what's coming, including the draught from a lorry.",
+      "sourceRef": "HC-277",
+      "wrongBelief": "On a roadside emergency phone, face away from the traffic so it doesn't distract you."
+    },
+    {
+      "conceptId": "c.motorway.contraflow-gap",
+      "misconceptionId": "m.motorway.close-up-queue",
+      "repairNote": "Keep a good gap. Lanes are narrow and there may be no barrier between you and oncoming traffic.",
+      "sourceRef": "HC-290",
+      "wrongBelief": "In a slow contraflow, staying close to the car ahead keeps the queue moving."
+    },
+    {
+      "conceptId": "c.motorway.countdown-markers",
+      "misconceptionId": "m.motorway.countdown-to-phone",
+      "repairNote": "They count down 300, 200 and 100 yards to the start of the exit slip road.",
+      "sourceRef": "KYTS-motorway",
+      "wrongBelief": "The striped countdown posts show the distance to the next emergency phone."
+    },
+    {
+      "conceptId": "c.motorway.exit-early-left",
+      "misconceptionId": "m.motorway.cut-across-at-markers",
+      "repairNote": "Move into the left-hand lane well before your exit — the first sign is a mile out.",
+      "sourceRef": "HC-273",
+      "wrongBelief": "You can stay in an outside lane until the countdown markers, then move across."
+    },
+    {
+      "conceptId": "c.motorway.variable-limits",
+      "misconceptionId": "m.motorway.gantry-limit-advisory",
+      "repairNote": "A limit in a red ring is mandatory, and it's often enforced by cameras.",
+      "sourceRef": "HC-261",
+      "wrongBelief": "Speed limits shown on motorway gantries are only advice."
+    },
+    {
+      "conceptId": "c.motorway.hazard-lights-warning",
+      "misconceptionId": "m.motorway.hazard-lights-breakdown-only",
+      "repairNote": "On a motorway or dual carriageway you may use them briefly to warn drivers behind of a hazard ahead.",
+      "sourceRef": "HC-116",
+      "wrongBelief": "Hazard warning lights are only for when you've broken down."
+    },
+    {
+      "conceptId": "c.motorway.joining-traffic",
+      "misconceptionId": "m.motorway.joiners-not-my-problem",
+      "repairNote": "Joiners must give way, but help where you can: adjust your speed or move out a lane if it's safe.",
+      "sourceRef": "HC-259",
+      "wrongBelief": "Traffic joining from a slip road must fit in around you, so you just hold your speed."
+    },
+    {
+      "conceptId": "c.motorway.keep-left",
+      "misconceptionId": "m.motorway.left-lane-slow-only",
+      "repairNote": "The left-hand lane is everyone's lane. Use the others only to overtake, then move back.",
+      "sourceRef": "HC-264",
+      "wrongBelief": "The left-hand lane of a motorway is really for lorries and slow vehicles."
+    },
+    {
+      "conceptId": "c.motorway.keep-left",
+      "misconceptionId": "m.motorway.middle-lane-cruise",
+      "repairNote": "Keep to the left-hand lane unless you're overtaking — whatever speed you're doing.",
+      "sourceRef": "HC-264",
+      "wrongBelief": "On a three-lane motorway, the middle lane is the normal lane to cruise in."
+    },
+    {
+      "conceptId": "c.motorway.emergency-phone",
+      "misconceptionId": "m.motorway.mobile-traces-you",
+      "repairNote": "An emergency phone tells them exactly where you are. On a mobile, give the number on the nearest marker post.",
+      "sourceRef": "HC-283",
+      "wrongBelief": "Calling from a mobile is just as good — the emergency services can always trace you."
+    },
+    {
+      "conceptId": "c.motorway.gantry-early",
+      "misconceptionId": "m.motorway.no-visible-reason",
+      "repairNote": "Obey them anyway — they warn of queues and hazards you can't see yet.",
+      "sourceRef": "KYTS-motorway",
+      "wrongBelief": "If you can't see a problem ahead, you don't need to obey the gantry signs yet."
+    },
+    {
+      "conceptId": "c.motorway.settle-left",
+      "misconceptionId": "m.motorway.overtake-after-joining",
+      "repairNote": "Stay in the left-hand lane long enough to get used to the speed of the traffic before overtaking.",
+      "sourceRef": "HC-259",
+      "wrongBelief": "Once you've joined a motorway, move straight out so you're not stuck behind lorries."
+    },
+    {
+      "conceptId": "c.motorway.puncture-no-repair",
+      "misconceptionId": "m.motorway.quick-repair-ok",
+      "repairNote": "Don't attempt even simple repairs on the hard shoulder. Get clear of the car and phone for help.",
+      "sourceRef": "HC-277",
+      "wrongBelief": "A quick, simple repair on the hard shoulder is fine if you're careful."
+    },
+    {
+      "conceptId": "c.motorway.redx-not-beyond",
+      "misconceptionId": "m.motorway.redx-advisory",
+      "repairNote": "The lane is closed now, not later. You must not drive past a red X in that lane.",
+      "sourceRef": "HC-258",
+      "wrongBelief": "A red X just warns you that the lane is closing somewhere ahead."
+    },
+    {
+      "conceptId": "c.motorway.redx-all-lanes",
+      "misconceptionId": "m.motorway.redx-use-shoulder",
+      "repairNote": "A red X over every lane means stop and wait. Don't change lanes or use the hard shoulder.",
+      "sourceRef": "HC-258",
+      "wrongBelief": "If every lane shows a red X, you can carry on slowly along the hard shoulder."
+    },
+    {
+      "conceptId": "c.motorway.missed-exit",
+      "misconceptionId": "m.motorway.reverse-on-shoulder",
+      "repairNote": "You must never reverse on a motorway. Carry on to the next exit.",
+      "sourceRef": "HC-263",
+      "wrongBelief": "If you miss your exit, you can reverse carefully back along the hard shoulder."
+    },
+    {
+      "conceptId": "c.motorway.roadworks-limit",
+      "misconceptionId": "m.motorway.rush-roadworks",
+      "repairNote": "Keep to the lower limit — it's mandatory and often enforced by cameras.",
+      "sourceRef": "HC-288",
+      "wrongBelief": "At motorway roadworks it's safer to speed up and get through quickly."
+    },
+    {
+      "conceptId": "c.motorway.rejoin-build-speed",
+      "misconceptionId": "m.motorway.shoulder-rejoin",
+      "repairNote": "Build up speed on the hard shoulder first, then signal and merge into a safe gap. Watch for vehicles stopped ahead.",
+      "sourceRef": "HC-278",
+      "wrongBelief": "Once your car is fixed, pull straight out and build up speed in the left-hand lane."
+    },
+    {
+      "conceptId": "c.motorway.live-lane-stop",
+      "misconceptionId": "m.motorway.stand-behind-car",
+      "repairNote": "Hazard lights on. Get well clear only if it's safe — otherwise stay in, seatbelt on, and call 999.",
+      "sourceRef": "HC-277",
+      "wrongBelief": "If you break down in a live lane, stand behind your car to warn other traffic."
+    },
+    {
+      "conceptId": "c.motorway.join-match-speed",
+      "misconceptionId": "m.motorway.stop-at-slip-end",
+      "repairNote": "Use the slip road to match the speed of traffic in the left-hand lane, then filter into a safe gap.",
+      "sourceRef": "HC-259",
+      "wrongBelief": "If the motorway is busy, stop at the end of the slip road and wait for a gap."
+    },
+    {
+      "conceptId": "c.motorway.towing-limit",
+      "misconceptionId": "m.motorway.towing-70",
+      "repairNote": "Towing a caravan or trailer, your limit is 60 mph on motorways and dual carriageways.",
+      "sourceRef": "HC-124",
+      "wrongBelief": "A car towing a trailer can do 70 mph on a motorway like any other car."
+    },
+    {
+      "conceptId": "c.motorway.no-left-overtake",
+      "misconceptionId": "m.motorway.undertake-if-clear",
+      "repairNote": "Only overtake on the right. In slow queues you may keep going if the lane to your right is slower.",
+      "sourceRef": "HC-268",
+      "wrongBelief": "You may overtake on the left on a motorway whenever the left-hand lane is clear."
+    },
+    {
+      "conceptId": "c.motorway.wait-away",
+      "misconceptionId": "m.motorway.wait-in-car",
+      "repairNote": "Wait well away from the carriageway and hard shoulder — behind the barrier if there is one.",
+      "sourceRef": "HC-277",
+      "wrongBelief": "After breaking down on the hard shoulder, the safest place to wait is in your car."
+    },
+    {
+      "conceptId": "c.motorway.look-further-ahead",
+      "misconceptionId": "m.motorway.watch-car-ahead-only",
+      "repairNote": "Look much further ahead than on other roads — at 70 mph hazards reach you far sooner.",
+      "sourceRef": "HC-254",
+      "wrongBelief": "On a fast road, watching the car right in front of you is enough."
+    },
+    {
       "conceptId": "c.rail.first-warning",
       "misconceptionId": "m.rail.amber-hurry",
       "repairNote": "Amber is the first warning of a train. Stop, unless you've already crossed the white line.",
@@ -6563,7 +6738,1237 @@
       "title": "Junctions"
     },
     {
-      "missions": [],
+      "missions": [
+        {
+          "estimatedMinutes": 6,
+          "missionId": "r5-m1",
+          "reviewStatus": "draft",
+          "routeId": "route-5",
+          "steps": [
+            {
+              "conceptId": "c.motorway.join-match-speed",
+              "id": "r5-m1-s1",
+              "question": {
+                "explanation": "Traffic on the motorway has priority. The slip road is there so you can reach its speed and slot in without making anyone brake.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.stop-at-slip-end",
+                    "text": "Stop at the end of the slip road and wait for a big gap"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Match your speed to the left lane and filter into a safe gap"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Carry on along the hard shoulder until a gap appears"
+                  }
+                ],
+                "prompt": "How should you join?"
+              },
+              "scene": "You're on a slip road joining a busy motorway. The left-hand lane is full of traffic doing about 60 mph.",
+              "sourceRef": "HC-259",
+              "type": "scene_decision"
+            },
+            {
+              "conceptId": "c.motorway.join-match-speed",
+              "correctOrder": [
+                "i1",
+                "i2",
+                "i3",
+                "i4"
+              ],
+              "explanation": "Look, match, merge, settle. Never force your way in — adjust your speed until the gap is safe.",
+              "id": "r5-m1-s2",
+              "items": [
+                {
+                  "id": "i1",
+                  "text": "Look early at the traffic already in the left-hand lane"
+                },
+                {
+                  "id": "i2",
+                  "text": "Use the slip road to match that traffic's speed"
+                },
+                {
+                  "id": "i3",
+                  "text": "Merge into a safe gap in the left-hand lane"
+                },
+                {
+                  "id": "i4",
+                  "text": "Stay in the left-hand lane while you get used to the speed"
+                }
+              ],
+              "prompt": "Put joining a motorway in order, from the start of the slip road.",
+              "sourceRef": "HC-259",
+              "title": "Joining, step by step",
+              "type": "sequence"
+            },
+            {
+              "body": "Once you've joined, stay in the left-hand lane long enough to get used to the speed of the traffic before you think about overtaking.",
+              "conceptId": "c.motorway.settle-left",
+              "id": "r5-m1-s3",
+              "question": {
+                "explanation": "Motorway speeds feel different at first. Give yourself time in the left lane to judge them before you change lanes.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.overtake-after-joining",
+                    "text": "Move out a lane so you're not stuck behind lorries"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Readjust your mirrors for motorway driving"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Stay in the left-hand lane for a while"
+                  }
+                ],
+                "prompt": "What should you do straight after joining a motorway?"
+              },
+              "sourceRef": "HC-259",
+              "title": "Settle in before you overtake",
+              "type": "rule_card"
+            },
+            {
+              "a": {
+                "body": "National speed limit for a car: 60 mph.",
+                "label": "Single carriageway"
+              },
+              "b": {
+                "body": "National speed limit for a car: 70 mph.",
+                "label": "Dual carriageway or motorway"
+              },
+              "conceptId": "c.motorway.speed-limit",
+              "id": "r5-m1-s4",
+              "question": {
+                "explanation": "70 mph on motorways and dual carriageways, 60 mph on single carriageways — unless signs show a lower limit.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "60 mph, the same as any open road"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "70 mph"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "misconceptionId": "m.speed.nsl-means-no-limit",
+                    "text": "There isn't one — you choose a safe speed"
+                  }
+                ],
+                "prompt": "What's the national speed limit for a car on a motorway?"
+              },
+              "sourceRef": "HC-124",
+              "type": "contrast"
+            },
+            {
+              "conceptId": "c.motorway.look-further-ahead",
+              "id": "r5-m1-s5",
+              "question": {
+                "explanation": "At motorway speed a hazard reaches you far sooner. Looking well ahead gives you time to react to it.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Much further ahead than you'd look on slower roads"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.watch-car-ahead-only",
+                    "text": "On the car right in front — that's the one you could hit"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "On your speedometer, to hold exactly 70"
+                  }
+                ],
+                "prompt": "Where should most of your attention be?"
+              },
+              "scene": "You're cruising at 70 mph in light traffic. Everything around you looks calm and steady.",
+              "sourceRef": "HC-254",
+              "type": "hazard_cue"
+            },
+            {
+              "body": "Leave at least a two-second gap to the vehicle ahead — at least double that on a wet road. At motorway speed, that gap is your only thinking time.",
+              "conceptId": "c.motorway.separation",
+              "id": "r5-m1-s6",
+              "question": {
+                "explanation": "Stopping distances at least double in the wet, so your gap must at least double too.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.stopping.wet-same-as-dry",
+                    "text": "Two seconds, the same as on a dry road"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Whatever gap the traffic around you is leaving"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "At least four seconds"
+                  }
+                ],
+                "prompt": "It's raining hard on the motorway. What gap should you leave?"
+              },
+              "sourceRef": "HC-126",
+              "title": "Your gap at 70 mph",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.motorway.who-may-use",
+              "id": "r5-m1-s7",
+              "question": {
+                "explanation": "Motorways are for fast traffic. Slow or vulnerable users are kept off them.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "A double-deck bus"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.any-road-legal",
+                    "text": "None of them — if it's road legal, it can go on"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "A powered mobility scooter"
+                  }
+                ],
+                "prompt": "Which of these must not use a motorway?"
+              },
+              "repairNote": "Pedestrians, cyclists, horse riders, motorcycles under 50 cc and mobility scooters are among those banned.",
+              "sourceRef": "HC-253",
+              "type": "misconception",
+              "wrongBelief": "Any vehicle that's legal on the road is allowed on a motorway."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r5-m1-s8",
+              "questions": [
+                {
+                  "bankRef": "c.motorway.join-match-speed"
+                },
+                {
+                  "bankRef": "c.motorway.settle-left"
+                },
+                {
+                  "bankRef": "c.motorway.speed-limit"
+                },
+                {
+                  "bankRef": "c.motorway.look-further-ahead"
+                },
+                {
+                  "bankRef": "c.motorway.who-may-use"
+                }
+              ],
+              "sourceRef": "HC-259",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Joining the motorway"
+        },
+        {
+          "estimatedMinutes": 6,
+          "missionId": "r5-m2",
+          "reviewStatus": "draft",
+          "routeId": "route-5",
+          "steps": [
+            {
+              "conceptId": "c.motorway.keep-left",
+              "id": "r5-m2-s1",
+              "question": {
+                "explanation": "You've finished overtaking, so move back left. Sitting in the middle lane holds up everyone behind you.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.middle-lane-cruise",
+                    "text": "The middle lane — it's the normal cruising lane"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "The left-hand lane"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Whichever lane you're in — stay put until your exit"
+                  }
+                ],
+                "prompt": "Which lane should you be in now?"
+              },
+              "scene": "On a three-lane motorway you've just passed a lorry in the middle lane. The left-hand lane ahead is empty for as far as you can see.",
+              "sourceRef": "HC-264",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Lanes to the right are for overtaking. When you're past, move back left — without cutting in front of the vehicle you've just overtaken.",
+              "conceptId": "c.motorway.right-lane-overtaking",
+              "id": "r5-m2-s2",
+              "question": {
+                "explanation": "There's no fast lane. The lanes to your right exist so you can pass — then you move back left.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.lanes.right-is-fast-lane",
+                    "text": "When you're travelling at 70 mph"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "When you're turning right at the next junction"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "When you're overtaking"
+                  }
+                ],
+                "prompt": "When would you use the right-hand lane of a three-lane motorway?"
+              },
+              "sourceRef": "HC-267",
+              "title": "The lanes to your right",
+              "type": "rule_card"
+            },
+            {
+              "a": {
+                "body": "Never overtake on the left. Pass slower vehicles only on their right.",
+                "label": "Traffic flowing freely"
+              },
+              "b": {
+                "body": "If the queue to your right is moving more slowly than yours, you may keep going past it in your lane.",
+                "label": "Slow-moving queues"
+              },
+              "conceptId": "c.motorway.no-left-overtake",
+              "id": "r5-m2-s3",
+              "question": {
+                "explanation": "Drivers don't expect to be passed on the left. The only exception is queuing traffic moving at different speeds.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.undertake-if-clear",
+                    "text": "Whenever the lane to the left is clear"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "In queues, when traffic to your right is moving more slowly"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "When the driver ahead won't move over"
+                  }
+                ],
+                "prompt": "When may you pass traffic on its left on a motorway?"
+              },
+              "sourceRef": "HC-268",
+              "type": "contrast"
+            },
+            {
+              "conceptId": "c.motorway.joining-traffic",
+              "id": "r5-m2-s4",
+              "question": {
+                "explanation": "Joining traffic must give way, but you can make it easier. Planning ahead keeps the whole flow moving.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.joiners-not-my-problem",
+                    "text": "Hold your speed — they have to give way to you"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Speed up so they have to join behind you"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Adjust your speed, or move out a lane if it's safe"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "You're in the left-hand lane approaching a junction. Several cars are speeding up the slip road to join just ahead of you.",
+              "sourceRef": "HC-259",
+              "type": "hazard_cue"
+            },
+            {
+              "conceptId": "c.motorway.hazard-lights-warning",
+              "id": "r5-m2-s5",
+              "question": {
+                "explanation": "On a motorway or dual carriageway you may use hazard lights briefly to warn of a hazard ahead. Switch them off once you've been seen.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Briefly switch on your hazard warning lights"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.hazard-lights-breakdown-only",
+                    "text": "You can't — hazard lights are only for breakdowns"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Flash your headlights"
+                  }
+                ],
+                "prompt": "How can you warn the drivers behind you?"
+              },
+              "scene": "The traffic ahead brakes hard to a stop around a bend. Fast traffic is coming up behind you.",
+              "sourceRef": "HC-116",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Towing a caravan or trailer drops your limit to 60 mph on motorways and dual carriageways — even where the cars around you can do 70.",
+              "conceptId": "c.motorway.towing-limit",
+              "id": "r5-m2-s6",
+              "question": {
+                "explanation": "A trailer makes your vehicle longer, heavier and less stable, so the limit is lower.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "50 mph"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.towing-70",
+                    "text": "70 mph, the same as any other car"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "60 mph"
+                  }
+                ],
+                "prompt": "What's the speed limit for a car towing a trailer on a motorway?"
+              },
+              "sourceRef": "HC-124",
+              "title": "Towing on the motorway",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.motorway.keep-left",
+              "id": "r5-m2-s7",
+              "question": {
+                "explanation": "Keep left unless you're overtaking — whatever you're driving and however fast you're going.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.left-lane-slow-only",
+                    "text": "Only lorries and other slow vehicles"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Any vehicle that isn't overtaking"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Only vehicles about to leave at the next exit"
+                  }
+                ],
+                "prompt": "Which vehicles should use the left-hand lane of a three-lane motorway?"
+              },
+              "repairNote": "The left-hand lane is everyone's lane. Use the others only to overtake, then move back.",
+              "sourceRef": "HC-264",
+              "type": "misconception",
+              "wrongBelief": "The left-hand lane of a motorway is really for lorries and slow vehicles."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r5-m2-s8",
+              "questions": [
+                {
+                  "bankRef": "c.motorway.keep-left"
+                },
+                {
+                  "bankRef": "c.motorway.right-lane-overtaking"
+                },
+                {
+                  "bankRef": "c.motorway.no-left-overtake"
+                },
+                {
+                  "bankRef": "c.motorway.joining-traffic"
+                },
+                {
+                  "bankRef": "c.motorway.hazard-lights-warning"
+                }
+              ],
+              "sourceRef": "HC-264",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Lanes & overtaking"
+        },
+        {
+          "estimatedMinutes": 6,
+          "missionId": "r5-m3",
+          "reviewStatus": "draft",
+          "routeId": "route-5",
+          "steps": [
+            {
+              "conceptId": "c.motorway.redx-not-beyond",
+              "id": "r5-m3-s1",
+              "question": {
+                "explanation": "The red X closes your lane from that gantry. The other lanes are still open, so move over and keep to their limit.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.redx-advisory",
+                    "text": "Carry on — it warns that the lane closes further ahead"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.signs.gantry-applies-to-all",
+                    "text": "Stop under the gantry and wait"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Move into an open lane when it's safe, before the gantry"
+                  }
+                ],
+                "prompt": "What must you do?"
+              },
+              "scene": "You're in the left-hand lane. A red X lights up on the gantry above your lane. The lanes to your right show a 50 mph limit.",
+              "sourceRef": "HC-258",
+              "type": "scene_decision"
+            },
+            {
+              "body": "A red X above a lane means you MUST NOT drive past it in that lane. It isn't advice — there may be a crash, a breakdown or people ahead.",
+              "conceptId": "c.motorway.redx-not-beyond",
+              "id": "r5-m3-s2",
+              "question": {
+                "explanation": "Red X signals are enforced by cameras. Driving under one puts you in the path of whatever closed the lane.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "You must not drive in that lane beyond the sign"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.redx-advisory",
+                    "text": "Slow down — the lane may close later on"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "The lane is kept for emergency vehicles, but you may use it"
+                  }
+                ],
+                "prompt": "What does a red X above a motorway lane mean?"
+              },
+              "sourceRef": "HC-258",
+              "title": "Red X: the lane is closed",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.motorway.redx-all-lanes",
+              "id": "r5-m3-s3",
+              "question": {
+                "explanation": "A red X over every lane closes the whole carriageway at that point. Stop and wait for the signals to change.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "Leave at the next exit"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Stop and wait — don't change lanes or drive on"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "misconceptionId": "m.motorway.redx-use-shoulder",
+                    "text": "Carry on slowly along the hard shoulder"
+                  }
+                ],
+                "prompt": "What must you do?"
+              },
+              "scene": "Every lane on the gantry ahead suddenly shows a red X, with red lamps flashing.",
+              "sourceRef": "HC-258",
+              "type": "scene_decision"
+            },
+            {
+              "a": {
+                "body": "It's shut as a running lane. Use it only for an emergency or a breakdown.",
+                "label": "Red X over hard shoulder"
+              },
+              "b": {
+                "body": "It's open as a running lane. Keep to the limit and look out for broken-down vehicles.",
+                "label": "Speed limit over hard shoulder"
+              },
+              "conceptId": "c.motorway.hard-shoulder-signals",
+              "id": "r5-m3-s4",
+              "question": {
+                "explanation": "On some motorways the hard shoulder opens as a lane at busy times. The signal above it tells you which it is right now.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.hazard.hard-shoulder-rest",
+                    "text": "You may stop there if you need a rest"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "You may drive in it as a normal lane"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Keep out of it — it's for emergencies only"
+                  }
+                ],
+                "prompt": "A speed limit is shown above the hard shoulder. What does it mean?"
+              },
+              "sourceRef": "HC-269",
+              "type": "contrast"
+            },
+            {
+              "body": "A speed limit in a red ring on a gantry is mandatory. It changes with the traffic to keep everyone moving steadily and cut stop-start bunching.",
+              "conceptId": "c.motorway.variable-limits",
+              "id": "r5-m3-s5",
+              "question": {
+                "explanation": "A steady 50 mph moves more traffic than racing to 70 and braking to a stop. Cameras often enforce the limit.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.gantry-limit-advisory",
+                    "text": "To suggest a comfortable speed — they're only advice"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "To reduce bunching and keep traffic flowing"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "To let traffic go faster when roads are quiet"
+                  }
+                ],
+                "prompt": "Why do some motorways use variable speed limits?"
+              },
+              "sourceRef": "HC-261",
+              "title": "Limits that change",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.motorway.gantry-early",
+              "id": "r5-m3-s6",
+              "question": {
+                "explanation": "Gantry signs warn of queues and hazards you can't see yet. Obey them even when the road looks clear.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Move left in good time and slow to 50 mph"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.no-visible-reason",
+                    "text": "Carry on until you can see what the problem is"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Use the hard shoulder to get past the hazard"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "You're in the right-hand lane. The gantry ahead shows an arrow pointing left and a 50 limit. The road beyond looks completely clear.",
+              "sourceRef": "KYTS-motorway",
+              "type": "hazard_cue"
+            },
+            {
+              "conceptId": "c.motorway.redx-not-beyond",
+              "id": "r5-m3-s7",
+              "question": {
+                "explanation": "Other drivers breaking the rule doesn't make it safe. The lane is closed from the gantry, whatever they do.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.redx-advisory",
+                    "text": "Follow them — if they're carrying on, the lane can't be closed yet"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Move to an open lane — you must not pass the red X in this one"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Put your hazard lights on and stay in the lane"
+                  }
+                ],
+                "prompt": "A red X shows above your lane, but the cars ahead in it keep going. What should you do?"
+              },
+              "repairNote": "The lane is closed now, not later. You must not drive past a red X in that lane.",
+              "sourceRef": "HC-258",
+              "type": "misconception",
+              "wrongBelief": "A red X is just an early warning that the lane closes somewhere ahead."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r5-m3-s8",
+              "questions": [
+                {
+                  "bankRef": "c.motorway.redx-not-beyond"
+                },
+                {
+                  "bankRef": "c.motorway.redx-all-lanes"
+                },
+                {
+                  "bankRef": "c.motorway.hard-shoulder-signals"
+                },
+                {
+                  "bankRef": "c.motorway.variable-limits"
+                },
+                {
+                  "bankRef": "c.motorway.gantry-early"
+                }
+              ],
+              "sourceRef": "HC-258",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Smart motorways & red X"
+        },
+        {
+          "estimatedMinutes": 7,
+          "missionId": "r5-m4",
+          "reviewStatus": "draft",
+          "routeId": "route-5",
+          "steps": [
+            {
+              "conceptId": "c.motorway.puncture-no-repair",
+              "id": "r5-m4-s1",
+              "question": {
+                "explanation": "Traffic passes the hard shoulder at 70 mph, a metre or two away. Don't try even a simple repair there.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "Wave down another driver to help"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.quick-repair-ok",
+                    "text": "Change the wheel quickly and carefully"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Get clear of the car and phone for help"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "You get a puncture on the motorway and stop safely on the hard shoulder. There's a spare wheel in the boot and you know how to fit it.",
+              "sourceRef": "HC-277",
+              "type": "scene_decision"
+            },
+            {
+              "conceptId": "c.motorway.hard-shoulder-procedure",
+              "correctOrder": [
+                "i1",
+                "i2",
+                "i3",
+                "i4"
+              ],
+              "explanation": "Left doors keep you out of the traffic. Once you're clear of the car, stay clear of it.",
+              "id": "r5-m4-s2",
+              "items": [
+                {
+                  "id": "i1",
+                  "text": "Pull onto the hard shoulder and stop as far left as you can"
+                },
+                {
+                  "id": "i2",
+                  "text": "Switch on your hazard warning lights"
+                },
+                {
+                  "id": "i3",
+                  "text": "Get everyone out through the left-hand doors"
+                },
+                {
+                  "id": "i4",
+                  "text": "Wait behind the barrier, well away from the traffic"
+                }
+              ],
+              "prompt": "Your car is failing and you can't reach an exit or services. Put what you do in order.",
+              "sourceRef": "HC-277",
+              "title": "Breaking down on a motorway",
+              "type": "sequence"
+            },
+            {
+              "body": "An emergency roadside phone tells the control centre exactly where you are. Arrows on the marker posts point you to the nearest one.",
+              "conceptId": "c.motorway.emergency-phone",
+              "id": "r5-m4-s3",
+              "question": {
+                "explanation": "If you do use a mobile, read the location number off the nearest marker post so help can find you.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "It lets the emergency services find you easily"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.mobile-traces-you",
+                    "text": "It doesn't matter — they can always trace a mobile"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "It puts you through to a local garage"
+                  }
+                ],
+                "prompt": "Why is an emergency roadside phone better than your mobile?"
+              },
+              "sourceRef": "HC-283",
+              "title": "Emergency phone or mobile?",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.motorway.face-traffic",
+              "id": "r5-m4-s4",
+              "question": {
+                "explanation": "Facing the traffic, you see a lorry coming and can brace for its draught, which could knock you off balance.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.back-to-traffic",
+                    "text": "Away from the traffic, so it doesn't distract you"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Towards the oncoming traffic"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Towards your car, so you can watch it"
+                  }
+                ],
+                "prompt": "Which way should you face?"
+              },
+              "scene": "You're using an emergency phone beside the hard shoulder. Lorries are thundering past just a few metres away.",
+              "sourceRef": "HC-277",
+              "type": "hazard_cue"
+            },
+            {
+              "conceptId": "c.motorway.wait-away",
+              "id": "r5-m4-s5",
+              "question": {
+                "explanation": "Vehicles do crash into cars on the hard shoulder. Being well clear of it, and of the traffic, is what keeps you safe.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.wait-in-car",
+                    "text": "In the car with your seatbelt on — it's warmer"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "At the back of the car, ready to wave the truck down"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Well away from the carriageway, behind the barrier"
+                  }
+                ],
+                "prompt": "Where's the safest place to wait?"
+              },
+              "scene": "You've called for help from the hard shoulder. Recovery could take an hour, and it's cold and raining.",
+              "sourceRef": "HC-277",
+              "type": "scene_decision"
+            },
+            {
+              "body": "Hazard lights on. Get out and well clear only if it's safe — otherwise stay in with your seatbelt on and call 999. Never stand near the car.",
+              "conceptId": "c.motorway.live-lane-stop",
+              "id": "r5-m4-s6",
+              "question": {
+                "explanation": "Hazard lights warn traffic behind. Don't try repairs, and don't put anything on the carriageway to warn others.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.stand-behind-car",
+                    "text": "Stand behind the car to warn oncoming drivers"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Switch on your hazard warning lights"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Try to fix the fault quickly"
+                  }
+                ],
+                "prompt": "You break down and can't get onto the hard shoulder. What should you do?"
+              },
+              "sourceRef": "HC-277",
+              "title": "Stopped in a live lane",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.motorway.rejoin-build-speed",
+              "id": "r5-m4-s7",
+              "question": {
+                "explanation": "Pulling out slowly into 70 mph traffic forces drivers to brake hard. Get up to speed first.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.shoulder-rejoin",
+                    "text": "Pull out into the left lane, then speed up"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Wait until a driver flashes you out"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Build up speed on the hard shoulder, then move into a safe gap"
+                  }
+                ],
+                "prompt": "Your car's been repaired on the hard shoulder. How should you rejoin the motorway?"
+              },
+              "repairNote": "Build up speed on the hard shoulder first, then signal and merge into a safe gap. Watch for vehicles stopped ahead of you.",
+              "sourceRef": "HC-278",
+              "type": "misconception",
+              "wrongBelief": "Once your car is fixed, pull straight out and build up speed in the left-hand lane."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r5-m4-s8",
+              "questions": [
+                {
+                  "bankRef": "c.motorway.puncture-no-repair"
+                },
+                {
+                  "bankRef": "c.motorway.emergency-phone"
+                },
+                {
+                  "bankRef": "c.motorway.face-traffic"
+                },
+                {
+                  "bankRef": "c.motorway.wait-away"
+                },
+                {
+                  "bankRef": "c.motorway.rejoin-build-speed"
+                }
+              ],
+              "sourceRef": "HC-277",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Breakdowns & the hard shoulder"
+        },
+        {
+          "estimatedMinutes": 6,
+          "missionId": "r5-m5",
+          "reviewStatus": "draft",
+          "routeId": "route-5",
+          "steps": [
+            {
+              "conceptId": "c.motorway.missed-exit",
+              "id": "r5-m5-s1",
+              "question": {
+                "explanation": "You must never reverse, cross the central reservation or drive against the traffic on a motorway.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Carry on to the next exit"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.reverse-on-shoulder",
+                    "text": "Stop on the hard shoulder and reverse back carefully"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Turn back through a gap in the central reservation"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "You're in the left-hand lane when you realise the exit you wanted has just gone past.",
+              "sourceRef": "HC-263",
+              "type": "scene_decision"
+            },
+            {
+              "body": "The first sign for an exit comes a mile before it, and another at half a mile. Get into the left-hand lane in good time.",
+              "conceptId": "c.motorway.exit-early-left",
+              "id": "r5-m5-s2",
+              "question": {
+                "explanation": "At 70 mph a mile goes by in under a minute. Move left early so you're never cutting across lanes.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "text": "The middle lane"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.lanes.late-lane-change",
+                    "text": "Any lane — you can cut across at the last moment"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "The left-hand lane"
+                  }
+                ],
+                "prompt": "Which lane should you be in well before your exit?"
+              },
+              "sourceRef": "HC-273",
+              "title": "Plan your exit",
+              "type": "rule_card"
+            },
+            {
+              "conceptId": "c.motorway.countdown-markers",
+              "id": "r5-m5-s3",
+              "question": {
+                "explanation": "Each bar is 100 yards: 300, 200, then 100 yards to the start of the slip road. By now you should already be in the left lane.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.countdown-to-phone",
+                    "text": "The next emergency telephone"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "The start of the exit slip road"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "A police speed check"
+                  }
+                ],
+                "prompt": "Posts with three, then two, then one diagonal bar stand beside the left lane. What are they counting down to?"
+              },
+              "sign": {
+                "glyph": "///",
+                "shape": "info-rect"
+              },
+              "sourceRef": "KYTS-motorway",
+              "type": "sign_meaning"
+            },
+            {
+              "a": {
+                "body": "Mandatory. At roadworks it's often enforced by cameras — slow down in good time.",
+                "label": "Limit in a red ring"
+              },
+              "b": {
+                "body": "Keep your distance and stay in your lane. Workers and their vehicles may be close by.",
+                "label": "Through the works"
+              },
+              "conceptId": "c.motorway.roadworks-limit",
+              "id": "r5-m5-s4",
+              "question": {
+                "explanation": "Lower limits at roadworks are the law, not a suggestion. Slow down before you reach them, not at the camera.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.rush-roadworks",
+                    "text": "Speed up to get through the works quickly"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "Move onto the hard shoulder to get past"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "Keep to the lower speed limit"
+                  }
+                ],
+                "prompt": "What should you do when approaching roadworks on a motorway?"
+              },
+              "sourceRef": "HC-288",
+              "type": "contrast"
+            },
+            {
+              "conceptId": "c.motorway.contraflow-gap",
+              "id": "r5-m5-s5",
+              "question": {
+                "explanation": "Lanes are narrow and there's no barrier to oncoming traffic. A good gap gives you room if the queue stops suddenly.",
+                "options": [
+                  {
+                    "correct": true,
+                    "id": "a",
+                    "text": "Keep a good distance from the vehicle ahead"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "misconceptionId": "m.motorway.close-up-queue",
+                    "text": "Stay close to the car in front to keep the queue short"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Switch to whichever lane is moving faster"
+                  }
+                ],
+                "prompt": "What should you do?"
+              },
+              "scene": "You're in a contraflow. Only a line of cones separates you from oncoming traffic, and the queue ahead keeps stopping.",
+              "sourceRef": "HC-290",
+              "type": "hazard_cue"
+            },
+            {
+              "conceptId": "c.motorway.studs-which-lane",
+              "id": "r5-m5-s6",
+              "question": {
+                "explanation": "Red studs mark the edge next to the hard shoulder; white ones divide the lanes. Red on your left means you're in the left lane.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.markings.red-studs-centre",
+                    "text": "The right-hand lane, next to the central reservation"
+                  },
+                  {
+                    "correct": false,
+                    "id": "b",
+                    "text": "The middle lane"
+                  },
+                  {
+                    "correct": true,
+                    "id": "c",
+                    "text": "The left-hand lane"
+                  }
+                ],
+                "prompt": "Which lane are you in?"
+              },
+              "scene": "It's dark and pouring with rain on a three-lane motorway. You can see red studs on your left and white studs on your right.",
+              "sourceRef": "HC-132",
+              "type": "scene_decision"
+            },
+            {
+              "conceptId": "c.motorway.exit-early-left",
+              "id": "r5-m5-s7",
+              "question": {
+                "explanation": "Cutting across lanes at the last moment forces others to brake. Work your way left one lane at a time, in good time.",
+                "options": [
+                  {
+                    "correct": false,
+                    "id": "a",
+                    "misconceptionId": "m.motorway.cut-across-at-markers",
+                    "text": "Stay put until the countdown markers, then cut across"
+                  },
+                  {
+                    "correct": true,
+                    "id": "b",
+                    "text": "Start moving left in good time"
+                  },
+                  {
+                    "correct": false,
+                    "id": "c",
+                    "text": "Slow down in the right-hand lane until a gap appears"
+                  }
+                ],
+                "prompt": "You're in the right-hand lane and pass the one-mile sign for your exit. What should you do?"
+              },
+              "repairNote": "Plan ahead: move into the left-hand lane well before the exit — the first sign is a mile out.",
+              "sourceRef": "HC-273",
+              "type": "misconception",
+              "wrongBelief": "You can stay in an outside lane until the countdown markers, then move across."
+            },
+            {
+              "conceptId": "c.checkpoint",
+              "id": "r5-m5-s8",
+              "questions": [
+                {
+                  "bankRef": "c.motorway.missed-exit"
+                },
+                {
+                  "bankRef": "c.motorway.exit-early-left"
+                },
+                {
+                  "bankRef": "c.motorway.countdown-markers"
+                },
+                {
+                  "bankRef": "c.motorway.roadworks-limit"
+                },
+                {
+                  "bankRef": "c.motorway.contraflow-gap"
+                }
+              ],
+              "sourceRef": "HC-273",
+              "type": "checkpoint"
+            }
+          ],
+          "title": "Exits & roadworks"
+        }
+      ],
       "routeId": "route-5",
       "title": "Motorways"
     },
@@ -7800,6 +9205,9 @@
     "HC-115": {
       "title": "Highway Code rule 115"
     },
+    "HC-116": {
+      "title": "Highway Code rule 116"
+    },
     "HC-119": {
       "title": "Highway Code rule 119"
     },
@@ -7985,6 +9393,54 @@
     },
     "HC-238": {
       "title": "Highway Code rule 238"
+    },
+    "HC-253": {
+      "title": "Highway Code rule 253"
+    },
+    "HC-254": {
+      "title": "Highway Code rule 254"
+    },
+    "HC-258": {
+      "title": "Highway Code rule 258"
+    },
+    "HC-259": {
+      "title": "Highway Code rule 259"
+    },
+    "HC-261": {
+      "title": "Highway Code rule 261"
+    },
+    "HC-263": {
+      "title": "Highway Code rule 263"
+    },
+    "HC-264": {
+      "title": "Highway Code rule 264"
+    },
+    "HC-267": {
+      "title": "Highway Code rule 267"
+    },
+    "HC-268": {
+      "title": "Highway Code rule 268"
+    },
+    "HC-269": {
+      "title": "Highway Code rule 269"
+    },
+    "HC-273": {
+      "title": "Highway Code rule 273"
+    },
+    "HC-277": {
+      "title": "Highway Code rule 277"
+    },
+    "HC-278": {
+      "title": "Highway Code rule 278"
+    },
+    "HC-283": {
+      "title": "Highway Code rule 283"
+    },
+    "HC-288": {
+      "title": "Highway Code rule 288"
+    },
+    "HC-290": {
+      "title": "Highway Code rule 290"
     },
     "HC-291": {
       "title": "Highway Code rule 291"

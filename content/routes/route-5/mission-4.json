@@ -1,0 +1,215 @@
+{
+  "missionId": "r5-m4",
+  "routeId": "route-5",
+  "title": "Breakdowns & the hard shoulder",
+  "estimatedMinutes": 7,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r5-m4-s1",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.puncture-no-repair",
+      "sourceRef": "HC-277",
+      "scene": "You get a puncture on the motorway and stop safely on the hard shoulder. There's a spare wheel in the boot and you know how to fit it.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wave down another driver to help",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Change the wheel quickly and carefully",
+            "correct": false,
+            "misconceptionId": "m.motorway.quick-repair-ok"
+          },
+          {
+            "id": "c",
+            "text": "Get clear of the car and phone for help",
+            "correct": true
+          }
+        ],
+        "explanation": "Traffic passes the hard shoulder at 70 mph, a metre or two away. Don't try even a simple repair there."
+      }
+    },
+    {
+      "id": "r5-m4-s2",
+      "type": "sequence",
+      "conceptId": "c.motorway.hard-shoulder-procedure",
+      "sourceRef": "HC-277",
+      "title": "Breaking down on a motorway",
+      "prompt": "Your car is failing and you can't reach an exit or services. Put what you do in order.",
+      "items": [
+        { "id": "i1", "text": "Pull onto the hard shoulder and stop as far left as you can" },
+        { "id": "i2", "text": "Switch on your hazard warning lights" },
+        { "id": "i3", "text": "Get everyone out through the left-hand doors" },
+        { "id": "i4", "text": "Wait behind the barrier, well away from the traffic" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "Left doors keep you out of the traffic. Once you're clear of the car, stay clear of it."
+    },
+    {
+      "id": "r5-m4-s3",
+      "type": "rule_card",
+      "conceptId": "c.motorway.emergency-phone",
+      "sourceRef": "HC-283",
+      "title": "Emergency phone or mobile?",
+      "body": "An emergency roadside phone tells the control centre exactly where you are. Arrows on the marker posts point you to the nearest one.",
+      "question": {
+        "prompt": "Why is an emergency roadside phone better than your mobile?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It lets the emergency services find you easily",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It doesn't matter — they can always trace a mobile",
+            "correct": false,
+            "misconceptionId": "m.motorway.mobile-traces-you"
+          },
+          {
+            "id": "c",
+            "text": "It puts you through to a local garage",
+            "correct": false
+          }
+        ],
+        "explanation": "If you do use a mobile, read the location number off the nearest marker post so help can find you."
+      }
+    },
+    {
+      "id": "r5-m4-s4",
+      "type": "hazard_cue",
+      "conceptId": "c.motorway.face-traffic",
+      "sourceRef": "HC-277",
+      "scene": "You're using an emergency phone beside the hard shoulder. Lorries are thundering past just a few metres away.",
+      "question": {
+        "prompt": "Which way should you face?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Away from the traffic, so it doesn't distract you",
+            "correct": false,
+            "misconceptionId": "m.motorway.back-to-traffic"
+          },
+          {
+            "id": "b",
+            "text": "Towards the oncoming traffic",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Towards your car, so you can watch it",
+            "correct": false
+          }
+        ],
+        "explanation": "Facing the traffic, you see a lorry coming and can brace for its draught, which could knock you off balance."
+      }
+    },
+    {
+      "id": "r5-m4-s5",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.wait-away",
+      "sourceRef": "HC-277",
+      "scene": "You've called for help from the hard shoulder. Recovery could take an hour, and it's cold and raining.",
+      "question": {
+        "prompt": "Where's the safest place to wait?",
+        "options": [
+          {
+            "id": "a",
+            "text": "In the car with your seatbelt on — it's warmer",
+            "correct": false,
+            "misconceptionId": "m.motorway.wait-in-car"
+          },
+          {
+            "id": "b",
+            "text": "At the back of the car, ready to wave the truck down",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Well away from the carriageway, behind the barrier",
+            "correct": true
+          }
+        ],
+        "explanation": "Vehicles do crash into cars on the hard shoulder. Being well clear of it, and of the traffic, is what keeps you safe."
+      }
+    },
+    {
+      "id": "r5-m4-s6",
+      "type": "rule_card",
+      "conceptId": "c.motorway.live-lane-stop",
+      "sourceRef": "HC-277",
+      "title": "Stopped in a live lane",
+      "body": "Hazard lights on. Get out and well clear only if it's safe — otherwise stay in with your seatbelt on and call 999. Never stand near the car.",
+      "question": {
+        "prompt": "You break down and can't get onto the hard shoulder. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stand behind the car to warn oncoming drivers",
+            "correct": false,
+            "misconceptionId": "m.motorway.stand-behind-car"
+          },
+          {
+            "id": "b",
+            "text": "Switch on your hazard warning lights",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Try to fix the fault quickly",
+            "correct": false
+          }
+        ],
+        "explanation": "Hazard lights warn traffic behind. Don't try repairs, and don't put anything on the carriageway to warn others."
+      }
+    },
+    {
+      "id": "r5-m4-s7",
+      "type": "misconception",
+      "conceptId": "c.motorway.rejoin-build-speed",
+      "sourceRef": "HC-278",
+      "wrongBelief": "Once your car is fixed, pull straight out and build up speed in the left-hand lane.",
+      "question": {
+        "prompt": "Your car's been repaired on the hard shoulder. How should you rejoin the motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pull out into the left lane, then speed up",
+            "correct": false,
+            "misconceptionId": "m.motorway.shoulder-rejoin"
+          },
+          {
+            "id": "b",
+            "text": "Wait until a driver flashes you out",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Build up speed on the hard shoulder, then move into a safe gap",
+            "correct": true
+          }
+        ],
+        "explanation": "Pulling out slowly into 70 mph traffic forces drivers to brake hard. Get up to speed first."
+      },
+      "repairNote": "Build up speed on the hard shoulder first, then signal and merge into a safe gap. Watch for vehicles stopped ahead of you."
+    },
+    {
+      "id": "r5-m4-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-277",
+      "questions": [
+        { "bankRef": "c.motorway.puncture-no-repair" },
+        { "bankRef": "c.motorway.emergency-phone" },
+        { "bankRef": "c.motorway.face-traffic" },
+        { "bankRef": "c.motorway.wait-away" },
+        { "bankRef": "c.motorway.rejoin-build-speed" }
+      ]
+    }
+  ]
+}

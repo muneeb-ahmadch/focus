@@ -29,6 +29,7 @@ const AUTHORED: Record<string, number> = {
   'route-2': 5,
   'route-3': 5,
   'route-4': 5,
+  'route-5': 5,
   'route-6': 5,
 };
 
