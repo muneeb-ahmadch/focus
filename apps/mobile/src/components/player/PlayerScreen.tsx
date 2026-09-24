@@ -277,7 +277,7 @@ const makeStyles = (t: Theme) =>
     interBody: { ...t.text(t.font.md), color: t.colors.textMuted, textAlign: 'center' },
     interMuted: { ...t.text(t.font.sm), color: t.colors.textMuted, textAlign: 'center' },
     confirmOverlay: {
-      ...StyleSheet.absoluteFillObject,
+      ...StyleSheet.absoluteFill,
       backgroundColor: t.colors.overlay,
       justifyContent: 'center',
       padding: t.space.xl,
