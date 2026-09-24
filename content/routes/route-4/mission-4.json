@@ -42,7 +42,7 @@
       "title": "The right-hand lane",
       "body": "On a dual carriageway the right-hand lane is for overtaking or turning right. Move back to the left once you're past.",
       "question": {
-        "prompt": "When should you use the right-hand lane of a three-lane dual carriageway?",
+        "prompt": "You're on a dual carriageway. What's the lane on the right there for?",
         "options": [
           {
             "id": "a",
@@ -72,7 +72,7 @@
       "title": "One-way streets",
       "body": "In a one-way street every vehicle is going the same way, so you may pass on the right or on the left.",
       "question": {
-        "prompt": "Where may you overtake on a one-way street?",
+        "prompt": "You're in a one-way street. Which side may you pass slower traffic on?",
         "options": [
           {
             "id": "a",
@@ -138,7 +138,7 @@
       "title": "Bus lanes",
       "body": "The sign at the start of a bus lane shows who may use it and when. Outside those times, other traffic may use it too.",
       "question": {
-        "prompt": "When may you drive a car in a bus lane?",
+        "prompt": "A bus lane runs alongside you and there's no bus in it. When can you use it?",
         "options": [
           {
             "id": "a",

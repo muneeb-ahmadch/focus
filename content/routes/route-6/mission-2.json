@@ -43,22 +43,22 @@
       "title": "School crossing patrol",
       "body": "A patrol steps into the road holding a 'stop' sign. You must stop, and stay stopped until they and the children are clear of the road.",
       "question": {
-        "prompt": "How does a school crossing patrol tell you to stop?",
+        "prompt": "A school crossing patrol steps out ahead of you. What will they hold up?",
         "options": [
           {
             "id": "a",
-            "text": "By giving you an arm signal from the kerb",
+            "text": "An arm, raised from the kerb",
             "correct": false,
             "misconceptionId": "m.vru.patrol-is-advisory"
           },
           {
             "id": "b",
-            "text": "By displaying a 'stop' sign",
+            "text": "A 'stop' sign",
             "correct": true
           },
           {
             "id": "c",
-            "text": "By showing a red light on a pole",
+            "text": "A red light on a pole",
             "correct": false
           }
         ],

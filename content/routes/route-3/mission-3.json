@@ -124,21 +124,21 @@
       "title": "Four small patches",
       "body": "Your tyres are the only thing touching the road. Their tread and pressure change how far you need to stop.",
       "question": {
-        "prompt": "Which of these affects your vehicle's stopping distance?",
+        "prompt": "Two identical cars brake hard from the same speed. What could make one stop much later?",
         "options": [
           {
             "id": "a",
-            "text": "The speed limit on the road",
+            "text": "A lower speed limit on that road",
             "correct": false
           },
           {
             "id": "b",
-            "text": "The condition of the tyres",
+            "text": "Worn or badly inflated tyres",
             "correct": true
           },
           {
             "id": "c",
-            "text": "Nothing, as long as the tyres are still road-legal",
+            "text": "Nothing, if both sets of tyres are legal",
             "correct": false,
             "misconceptionId": "m.stopping.tyres-legal-is-fine"
           }

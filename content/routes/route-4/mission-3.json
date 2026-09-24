@@ -48,7 +48,7 @@
         "body": "Sensors watch the crossing and hold the red. Steady amber follows green, as at normal lights."
       },
       "question": {
-        "prompt": "Which colour follows the green signal at a puffin crossing?",
+        "prompt": "At a puffin crossing, what comes straight after the green light?",
         "options": [
           {
             "id": "a",

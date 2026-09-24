@@ -43,7 +43,7 @@
       "title": "Keep the box clear",
       "body": "Enter a yellow box junction only when your exit road is clear, so you can drive straight across without stopping in it.",
       "question": {
-        "prompt": "When may you enter a box junction?",
+        "prompt": "Traffic is queuing on the far side of a yellow box junction. When can you drive into the box?",
         "options": [
           {
             "id": "a",

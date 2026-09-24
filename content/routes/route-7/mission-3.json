@@ -42,7 +42,7 @@
       "title": "Soft tyres cost money",
       "body": "Under-inflated tyres drag on the road, so the engine works harder and burns more fuel. Check your pressures regularly.",
       "question": {
-        "prompt": "What's most likely to waste fuel?",
+        "prompt": "Which of these makes your car burn more fuel?",
         "options": [
           {
             "id": "a",
@@ -138,7 +138,7 @@
       "title": "Short trips, cold engine",
       "body": "A cold engine runs inefficiently and pollutes more. For short trips, walking or cycling is cleaner — and often quicker.",
       "question": {
-        "prompt": "How can you reduce the harm your car does to the environment?",
+        "prompt": "Which habit does the environment the most good?",
         "options": [
           {
             "id": "a",

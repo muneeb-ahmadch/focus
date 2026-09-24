@@ -42,7 +42,7 @@
       "title": "It takes the judgement first",
       "body": "Alcohol slows reactions, blunts your sense of danger and reduces your ability to judge speed — while making you feel more confident.",
       "question": {
-        "prompt": "How does drinking alcohol affect your driving?",
+        "prompt": "You've had a drink or two. What's the effect behind the wheel?",
         "options": [
           {
             "id": "a",

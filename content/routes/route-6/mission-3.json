@@ -71,7 +71,7 @@
       "title": "Where bikes go missing",
       "body": "Junctions are where motorcyclists and cyclists are hardest to see: small, often masked by traffic, and arriving faster than you expect.",
       "question": {
-        "prompt": "Where should you take particular care to look for riders?",
+        "prompt": "Where are you most likely to miss a motorcyclist or cyclist?",
         "options": [
           {
             "id": "a",
@@ -160,11 +160,11 @@
       "title": "Reading a rider's shoulder check",
       "body": "A rider glancing back over their right shoulder is checking their blind area. It usually means they're about to change direction.",
       "question": {
-        "prompt": "Why do riders often look over their right shoulder before turning right?",
+        "prompt": "The rider ahead glances over their right shoulder just before a right turn. Why?",
         "options": [
           {
             "id": "a",
-            "text": "It helps them balance through the turn",
+            "text": "To help them balance through the turn",
             "correct": false,
             "misconceptionId": "m.vru.shoulder-look-means-balance"
           },
@@ -189,22 +189,22 @@
       "sourceRef": "HC-86",
       "wrongBelief": "A bike with its headlight on in daylight is impossible to miss.",
       "question": {
-        "prompt": "Why do motorcyclists ride on dipped headlights in daylight?",
+        "prompt": "A motorbike comes towards you in bright sunshine with its headlight on. Why?",
         "options": [
           {
             "id": "a",
-            "text": "So the rider can be seen more easily",
+            "text": "So you can see the rider more easily",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It means the rider is inviting you to go first",
+            "text": "The rider is inviting you to go first",
             "correct": false,
             "misconceptionId": "m.vru.lights-make-them-obvious"
           },
           {
             "id": "c",
-            "text": "It improves how far the rider can see ahead",
+            "text": "To help the rider see further ahead",
             "correct": false
           }
         ],

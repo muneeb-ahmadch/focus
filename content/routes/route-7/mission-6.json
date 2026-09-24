@@ -58,17 +58,17 @@
       "title": "Leave them where they are",
       "body": "Don't move a casualty unless they're in further danger, such as from traffic or fire. They may have injuries you can't see.",
       "question": {
-        "prompt": "A casualty is unconscious but breathing. When should you move them?",
+        "prompt": "The casualty you're helping is unconscious but breathing. Should you move them?",
         "options": [
           {
             "id": "a",
-            "text": "Straight away, into a more comfortable position",
+            "text": "Yes — straight away, into a more comfortable position",
             "correct": false,
             "misconceptionId": "m.firstaid.move-to-comfort"
           },
           {
             "id": "b",
-            "text": "As soon as someone else can help lift",
+            "text": "Yes, as soon as someone can help you lift",
             "correct": false
           },
           {
@@ -154,7 +154,7 @@
       "title": "Public defibrillators",
       "body": "Anyone can use a public defibrillator (AED). It talks you through every step, and the 999 operator can tell you where the nearest one is.",
       "question": {
-        "prompt": "Who can use a public access defibrillator (AED)?",
+        "prompt": "Someone collapses near a public defibrillator. Who's allowed to use it?",
         "options": [
           {
             "id": "a",

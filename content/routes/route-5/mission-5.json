@@ -107,7 +107,7 @@
         "body": "Keep your distance and stay in your lane. Workers and their vehicles may be close by."
       },
       "question": {
-        "prompt": "What should you do when approaching roadworks on a motorway?",
+        "prompt": "Signs warn of roadworks ahead on the motorway. What should you do?",
         "options": [
           {
             "id": "a",

@@ -42,7 +42,7 @@
       "title": "The legal minimum",
       "body": "By law you need at least third-party insurance. It pays for damage and injury you cause to others — not for your own car.",
       "question": {
-        "prompt": "What's the legal minimum insurance to drive on public roads?",
+        "prompt": "You're choosing car insurance. What's the least cover the law allows?",
         "options": [
           {
             "id": "a",
@@ -108,22 +108,22 @@
       "title": "The registered keeper",
       "body": "The keeper named on the V5C must keep it up to date. Tell DVLA when you move house, change your name or sell the car.",
       "question": {
-        "prompt": "When should you update your vehicle registration certificate (V5C)?",
+        "prompt": "You've just moved to a new address. What must you do with your V5C?",
         "options": [
           {
             "id": "a",
-            "text": "Only when you sell the car",
+            "text": "Nothing — you only update it when you sell the car",
             "correct": false,
             "misconceptionId": "m.docs.v5c-only-on-sale"
           },
           {
             "id": "b",
-            "text": "When you move house",
+            "text": "Tell DVLA your new address",
             "correct": true
           },
           {
             "id": "c",
-            "text": "Each time you renew your insurance",
+            "text": "Wait until your insurance is due for renewal",
             "correct": false
           }
         ],

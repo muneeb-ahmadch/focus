@@ -108,22 +108,22 @@
         "body": "Strapped down with suitable restraints — ideally in a purpose-made roof box."
       },
       "question": {
-        "prompt": "How will a heavy load on your roof rack affect the car?",
+        "prompt": "You've loaded heavy bags onto the roof rack. How will the car feel?",
         "options": [
           {
             "id": "a",
-            "text": "It will make the car less stable",
+            "text": "Less stable, especially on bends",
             "correct": true
           },
           {
             "id": "b",
-            "text": "It will improve grip by pressing the tyres down",
+            "text": "Grippier — the weight presses the tyres down",
             "correct": false,
             "misconceptionId": "m.load.weight-adds-grip"
           },
           {
             "id": "c",
-            "text": "It makes no difference, if it's tied on",
+            "text": "No different, as long as it's tied on",
             "correct": false
           }
         ],
@@ -137,7 +137,7 @@
       "sourceRef": "HC-98",
       "wrongBelief": "If a vehicle is overloaded, it's the fault of whoever loaded it.",
       "question": {
-        "prompt": "Who's responsible for making sure a vehicle isn't overloaded?",
+        "prompt": "You're driving a hire van that someone else loaded. If it's overloaded, who answers for it?",
         "options": [
           {
             "id": "a",
@@ -197,22 +197,22 @@
       "title": "Loading a trailer",
       "body": "Spread the weight evenly, with the heaviest items over the trailer's axle. It cuts the risk of the trailer swerving or snaking.",
       "question": {
-        "prompt": "How should you load a trailer?",
+        "prompt": "You're packing a trailer for a trip. Where do the heaviest things go?",
         "options": [
           {
             "id": "a",
-            "text": "With heavy items over the axles",
+            "text": "Over the axles",
             "correct": true
           },
           {
             "id": "b",
-            "text": "With heavy items right at the back, away from the car",
+            "text": "Right at the back, away from the car",
             "correct": false,
             "misconceptionId": "m.load.heavy-at-back"
           },
           {
             "id": "c",
-            "text": "With the heaviest items on top, holding the rest down",
+            "text": "On top, holding the rest down",
             "correct": false
           }
         ],
