@@ -1,0 +1,222 @@
+{
+  "missionId": "r5-m1",
+  "routeId": "route-5",
+  "title": "Joining the motorway",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r5-m1-s1",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.join-match-speed",
+      "sourceRef": "HC-259",
+      "scene": "You're on a slip road joining a busy motorway. The left-hand lane is full of traffic doing about 60 mph.",
+      "question": {
+        "prompt": "How should you join?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop at the end of the slip road and wait for a big gap",
+            "correct": false,
+            "misconceptionId": "m.motorway.stop-at-slip-end"
+          },
+          {
+            "id": "b",
+            "text": "Match your speed to the left lane and filter into a safe gap",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Carry on along the hard shoulder until a gap appears",
+            "correct": false
+          }
+        ],
+        "explanation": "Traffic on the motorway has priority. The slip road is there so you can reach its speed and slot in without making anyone brake."
+      }
+    },
+    {
+      "id": "r5-m1-s2",
+      "type": "sequence",
+      "conceptId": "c.motorway.join-match-speed",
+      "sourceRef": "HC-259",
+      "title": "Joining, step by step",
+      "prompt": "Put joining a motorway in order, from the start of the slip road.",
+      "items": [
+        { "id": "i1", "text": "Look early at the traffic already in the left-hand lane" },
+        { "id": "i2", "text": "Use the slip road to match that traffic's speed" },
+        { "id": "i3", "text": "Merge into a safe gap in the left-hand lane" },
+        { "id": "i4", "text": "Stay in the left-hand lane while you get used to the speed" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "Look, match, merge, settle. Never force your way in — adjust your speed until the gap is safe."
+    },
+    {
+      "id": "r5-m1-s3",
+      "type": "rule_card",
+      "conceptId": "c.motorway.settle-left",
+      "sourceRef": "HC-259",
+      "title": "Settle in before you overtake",
+      "body": "Once you've joined, stay in the left-hand lane long enough to get used to the speed of the traffic before you think about overtaking.",
+      "question": {
+        "prompt": "What should you do straight after joining a motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move out a lane so you're not stuck behind lorries",
+            "correct": false,
+            "misconceptionId": "m.motorway.overtake-after-joining"
+          },
+          {
+            "id": "b",
+            "text": "Readjust your mirrors for motorway driving",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Stay in the left-hand lane for a while",
+            "correct": true
+          }
+        ],
+        "explanation": "Motorway speeds feel different at first. Give yourself time in the left lane to judge them before you change lanes."
+      }
+    },
+    {
+      "id": "r5-m1-s4",
+      "type": "contrast",
+      "conceptId": "c.motorway.speed-limit",
+      "sourceRef": "HC-124",
+      "a": {
+        "label": "Single carriageway",
+        "body": "National speed limit for a car: 60 mph."
+      },
+      "b": {
+        "label": "Dual carriageway or motorway",
+        "body": "National speed limit for a car: 70 mph."
+      },
+      "question": {
+        "prompt": "What's the national speed limit for a car on a motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "60 mph, the same as any open road",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "70 mph",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "There isn't one — you choose a safe speed",
+            "correct": false,
+            "misconceptionId": "m.speed.nsl-means-no-limit"
+          }
+        ],
+        "explanation": "70 mph on motorways and dual carriageways, 60 mph on single carriageways — unless signs show a lower limit."
+      }
+    },
+    {
+      "id": "r5-m1-s5",
+      "type": "hazard_cue",
+      "conceptId": "c.motorway.look-further-ahead",
+      "sourceRef": "HC-254",
+      "scene": "You're cruising at 70 mph in light traffic. Everything around you looks calm and steady.",
+      "question": {
+        "prompt": "Where should most of your attention be?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Much further ahead than you'd look on slower roads",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "On the car right in front — that's the one you could hit",
+            "correct": false,
+            "misconceptionId": "m.motorway.watch-car-ahead-only"
+          },
+          {
+            "id": "c",
+            "text": "On your speedometer, to hold exactly 70",
+            "correct": false
+          }
+        ],
+        "explanation": "At motorway speed a hazard reaches you far sooner. Looking well ahead gives you time to react to it."
+      }
+    },
+    {
+      "id": "r5-m1-s6",
+      "type": "rule_card",
+      "conceptId": "c.motorway.separation",
+      "sourceRef": "HC-126",
+      "title": "Your gap at 70 mph",
+      "body": "Leave at least a two-second gap to the vehicle ahead — at least double that on a wet road. At motorway speed, that gap is your only thinking time.",
+      "question": {
+        "prompt": "It's raining hard on the motorway. What gap should you leave?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two seconds, the same as on a dry road",
+            "correct": false,
+            "misconceptionId": "m.stopping.wet-same-as-dry"
+          },
+          {
+            "id": "b",
+            "text": "Whatever gap the traffic around you is leaving",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "At least four seconds",
+            "correct": true
+          }
+        ],
+        "explanation": "Stopping distances at least double in the wet, so your gap must at least double too."
+      }
+    },
+    {
+      "id": "r5-m1-s7",
+      "type": "misconception",
+      "conceptId": "c.motorway.who-may-use",
+      "sourceRef": "HC-253",
+      "wrongBelief": "Any vehicle that's legal on the road is allowed on a motorway.",
+      "question": {
+        "prompt": "Which of these must not use a motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A double-deck bus",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "None of them — if it's road legal, it can go on",
+            "correct": false,
+            "misconceptionId": "m.motorway.any-road-legal"
+          },
+          {
+            "id": "c",
+            "text": "A powered mobility scooter",
+            "correct": true
+          }
+        ],
+        "explanation": "Motorways are for fast traffic. Slow or vulnerable users are kept off them."
+      },
+      "repairNote": "Pedestrians, cyclists, horse riders, motorcycles under 50 cc and mobility scooters are among those banned."
+    },
+    {
+      "id": "r5-m1-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-259",
+      "questions": [
+        { "bankRef": "c.motorway.join-match-speed" },
+        { "bankRef": "c.motorway.settle-left" },
+        { "bankRef": "c.motorway.speed-limit" },
+        { "bankRef": "c.motorway.look-further-ahead" },
+        { "bankRef": "c.motorway.who-may-use" }
+      ]
+    }
+  ]
+}

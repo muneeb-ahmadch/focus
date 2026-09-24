@@ -35,10 +35,24 @@ const QuestionShape = {
 export const Question = z.object(QuestionShape).superRefine(questionRules);
 export type Question = z.infer<typeof Question>;
 
-const CheckpointQuestion = z
+const AuthoredCheckpointQuestion = z
   .object({ ...QuestionShape, conceptId: ConceptId, sourceRef: SourceRef })
   .superRefine(questionRules);
+
+// A curated reference into the official bank, resolved BANK-WIDE by concept, cross-topic
+// (locked decision P0-1) at build time and again at runtime. The reference carries no licensed
+// content — only the concept id — so the tracked pack never embeds a bank question; resolution
+// happens against the bundled (git-excluded) bank. `.strict()` keeps a bankRef question a pure
+// reference: it may not smuggle inline authored fields.
+const BankRefCheckpointQuestion = z.object({ bankRef: ConceptId }).strict();
+
+const CheckpointQuestion = z.union([BankRefCheckpointQuestion, AuthoredCheckpointQuestion]);
 export type CheckpointQuestion = z.infer<typeof CheckpointQuestion>;
+
+// The concept a checkpoint question tests — whether authored inline or curated from the bank.
+export function checkpointConceptId(q: CheckpointQuestion): string {
+  return 'bankRef' in q ? q.bankRef : q.conceptId;
+}
 
 const StepBase = {
   id: z.string(),
@@ -77,6 +91,9 @@ const SignMeaningStep = z.object({
     shape: SignShape,
     glyph: z.string().max(4).optional(),
     label: z.string().max(30).optional(),
+    // Optional reference to a real bundled sign image; when present the player renders it,
+    // otherwise the abstract SignShape is the fallback (vB.3).
+    imageRef: z.string().min(1).optional(),
   }),
   question: Question,
 });

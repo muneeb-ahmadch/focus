@@ -1,0 +1,236 @@
+{
+  "missionId": "r2-m5",
+  "routeId": "route-2",
+  "title": "Signs in context",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r2-m5-s1",
+      "type": "scene_decision",
+      "conceptId": "c.signs.context-stop-line",
+      "sourceRef": "KYTS-order",
+      "scene": "You're emerging from a side road. There's a STOP sign and a solid white line across your lane, and the main road looks empty.",
+      "question": {
+        "prompt": "What must you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Slow right down and roll out if it's clear",
+            "correct": false,
+            "misconceptionId": "m.signs.stop-sign-if-clear"
+          },
+          {
+            "id": "b",
+            "text": "Stop at the line every time, then look and emerge",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Stop only if you can see traffic coming",
+            "correct": false
+          }
+        ],
+        "explanation": "A STOP sign is used where your view is restricted. You must stop at the line — the traffic you can't see is the point."
+      }
+    },
+    {
+      "id": "r2-m5-s2",
+      "type": "rule_card",
+      "conceptId": "c.signs.context-octagon-obscured",
+      "sourceRef": "KYTS-shapes",
+      "title": "The one octagon",
+      "body": "STOP is the only octagonal sign. Its shape alone identifies it, so it still works when snow or dirt hides the face.",
+      "question": {
+        "prompt": "Snow has covered the face of an eight-sided sign ahead. What is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A stop sign — no other sign is that shape",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Impossible to tell until you can read the face",
+            "correct": false,
+            "misconceptionId": "m.signs.covered-sign-unreadable"
+          },
+          {
+            "id": "c",
+            "text": "A give-way sign — they're the odd-shaped ones",
+            "correct": false
+          }
+        ],
+        "explanation": "Sign shapes carry meaning on their own. The octagon is reserved for STOP so it survives snow, dirt and a bad angle."
+      }
+    },
+    {
+      "id": "r2-m5-s3",
+      "type": "contrast",
+      "conceptId": "c.signs.context-give-way-line",
+      "sourceRef": "KYTS-markings",
+      "a": {
+        "label": "Solid stop line",
+        "body": "With a STOP sign: you must stop completely at the line, every time."
+      },
+      "b": {
+        "label": "Broken give-way line",
+        "body": "At a give-way or roundabout entry: give way to traffic from the right, stop only if you must."
+      },
+      "question": {
+        "prompt": "What does the broken line across a roundabout entry mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop at the line whether or not it's clear",
+            "correct": false,
+            "misconceptionId": "m.signs.broken-line-must-stop"
+          },
+          {
+            "id": "b",
+            "text": "Give way to traffic coming from your right",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "You have priority onto the roundabout",
+            "correct": false
+          }
+        ],
+        "explanation": "The line type tells you the rule: solid means stop, broken means give way. Stay behind it until it's safe to emerge."
+      }
+    },
+    {
+      "id": "r2-m5-s4",
+      "type": "rule_card",
+      "conceptId": "c.signs.context-hazard-line",
+      "sourceRef": "KYTS-markings",
+      "title": "Hazard warning line",
+      "body": "When the centre-line marks become longer than the gaps, it's a hazard warning line. Something is coming up — don't start an overtake.",
+      "question": {
+        "prompt": "The centre line ahead changes to long marks with short gaps. This means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "An ordinary lane marking",
+            "correct": false,
+            "misconceptionId": "m.signs.hazard-line-lane-divider"
+          },
+          {
+            "id": "b",
+            "text": "A hazard ahead — look well ahead, don't overtake",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "A bus lane starts here",
+            "correct": false
+          }
+        ],
+        "explanation": "Long marks, short gaps = hazard warning line. It flags an unspecified hazard, so it's the wrong place to overtake or turn."
+      }
+    },
+    {
+      "id": "r2-m5-s5",
+      "type": "rule_card",
+      "conceptId": "c.signs.context-zigzag",
+      "sourceRef": "KYTS-markings",
+      "title": "Zigzags at a crossing",
+      "body": "White zigzags mark the approach to and exit from a pedestrian crossing. No parking at any time, and no overtaking the lead vehicle.",
+      "question": {
+        "prompt": "What do the white zigzag lines at a crossing mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No parking at any time",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Parking allowed for a short drop-off",
+            "correct": false,
+            "misconceptionId": "m.signs.zigzag-short-stop-ok"
+          },
+          {
+            "id": "c",
+            "text": "Sound your horn before the crossing",
+            "correct": false
+          }
+        ],
+        "explanation": "Parking on zigzags hides pedestrians from approaching drivers — that's why it's banned, along with overtaking there."
+      }
+    },
+    {
+      "id": "r2-m5-s6",
+      "type": "scene_decision",
+      "conceptId": "c.signs.context-lights-failed",
+      "sourceRef": "KYTS-signals",
+      "scene": "You reach a busy crossroads and the traffic lights are dead — no light showing in any direction.",
+      "question": {
+        "prompt": "Who has priority?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Traffic on the main road keeps priority",
+            "correct": false,
+            "misconceptionId": "m.signs.failed-lights-main-road"
+          },
+          {
+            "id": "b",
+            "text": "Nobody — treat it as an unmarked crossroads",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Traffic going straight ahead",
+            "correct": false
+          }
+        ],
+        "explanation": "With the lights out, no one has priority. Approach ready to stop and expect others to assume the right of way."
+      }
+    },
+    {
+      "id": "r2-m5-s7",
+      "type": "misconception",
+      "conceptId": "c.signs.context-officer-overrides",
+      "sourceRef": "HC-105",
+      "wrongBelief": "Signs and traffic lights always outrank a person directing traffic.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's right — only the lights are legally binding",
+            "correct": false,
+            "misconceptionId": "m.signs.officer-below-signs"
+          },
+          {
+            "id": "b",
+            "text": "You must obey a police officer or warden directing traffic",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Their signals apply only to buses and lorries",
+            "correct": false
+          }
+        ],
+        "explanation": "When an officer, traffic officer or warden directs traffic, their signals take over — obey them, whatever the lights show."
+      },
+      "repairNote": "A police officer, traffic officer, traffic warden or school crossing patrol overrides the signs and lights — you must obey them."
+    },
+    {
+      "id": "r2-m5-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "KYTS-markings",
+      "questions": [
+        { "bankRef": "c.signs.context-stop-line" },
+        { "bankRef": "c.signs.context-octagon-obscured" },
+        { "bankRef": "c.signs.context-give-way-line" },
+        { "bankRef": "c.signs.context-zigzag" },
+        { "bankRef": "c.signs.context-officer-overrides" }
+      ]
+    }
+  ]
+}

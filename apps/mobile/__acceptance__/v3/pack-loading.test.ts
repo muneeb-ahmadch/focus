@@ -3,6 +3,7 @@ import {
   MISSIONS,
   ROUTES,
   MISCONCEPTIONS,
+  checkpointConceptId,
   getMission,
   conceptIndex,
   getRouteManifest,
@@ -14,35 +15,52 @@ type AnyQuestion = { prompt: string; options: { id: string; correct: boolean; mi
 function allQuestions(m: Mission): AnyQuestion[] {
   const out: AnyQuestion[] = [];
   for (const step of m.steps) {
-    if (step.type === 'checkpoint') out.push(...step.questions);
-    else if (step.type !== 'sequence') out.push(step.question);
+    if (step.type === 'checkpoint') {
+      for (const q of step.questions) if (!('bankRef' in q)) out.push(q);
+    } else if (step.type !== 'sequence') out.push(step.question);
   }
   return out;
 }
 
+// Missions authored so far, per route. Bump the count when a mission lands; a route absent here
+// must still be empty in the pack. Mission ids follow r<N>-m<1..count>.
+const AUTHORED: Record<string, number> = {
+  'route-1': 5,
+  'route-2': 5,
+  'route-3': 5,
+  'route-4': 5,
+  'route-5': 5,
+  'route-6': 5,
+  'route-7': 6,
+};
+
+const expectedMissionIds = Object.entries(AUTHORED)
+  .flatMap(([routeId, count]) =>
+    Array.from({ length: count }, (_, i) => `r${routeId.split('-')[1]}-m${i + 1}`),
+  )
+  .sort();
+
 describe('content loads from the generated pack', () => {
-  it('all five Route 1 missions load with their ids', () => {
-    expect(MISSIONS.map((m) => m.missionId).sort()).toEqual([
-      'r1-m1',
-      'r1-m2',
-      'r1-m3',
-      'r1-m4',
-      'r1-m5',
-    ]);
-    for (const id of ['r1-m1', 'r1-m2', 'r1-m3', 'r1-m4', 'r1-m5']) {
+  it('all authored missions load with their ids', () => {
+    expect(MISSIONS.map((m) => m.missionId).sort()).toEqual(expectedMissionIds);
+    for (const id of expectedMissionIds) {
       expect(getMission(id)?.missionId).toBe(id);
     }
   });
 
-  it('all seven routes exist; route-1 carries the missions, the rest are empty', () => {
+  it('all seven routes exist; authored routes carry their mission count, the rest are empty', () => {
     expect(ROUTES).toHaveLength(7);
     expect(ROUTES[0]!.routeId).toBe('route-1');
     expect(ROUTES[0]!.title).toBe('Road Basics');
-    expect(ROUTES[0]!.missions).toHaveLength(5);
-    for (const route of ROUTES.slice(1)) expect(route.missions).toHaveLength(0);
     const manifest = getRouteManifest();
     expect(manifest).toHaveLength(7);
-    expect(manifest.find((r) => r.routeId === 'route-1')?.totalMissions).toBe(5);
+    for (const route of ROUTES) {
+      const expected = AUTHORED[route.routeId] ?? 0;
+      expect(route.missions, route.routeId).toHaveLength(expected);
+      expect(manifest.find((r) => r.routeId === route.routeId)?.totalMissions, route.routeId).toBe(
+        expected,
+      );
+    }
   });
 
   it('missions remain reviewStatus draft until human fact-check', () => {
@@ -70,11 +88,12 @@ describe('content loads from the generated pack', () => {
       for (const step of m.steps) {
         if (step.type !== 'checkpoint') continue;
         for (const q of step.questions) {
-          const info = conceptIndex.get(q.conceptId);
-          expect(info, `${m.missionId}: ${q.conceptId}`).toBeDefined();
+          const concept = checkpointConceptId(q);
+          const info = conceptIndex.get(concept);
+          expect(info, `${m.missionId}: ${concept}`).toBeDefined();
           expect(
             info!.teachingStepIds.length,
-            `${m.missionId}: ${q.conceptId} has no teaching step`,
+            `${m.missionId}: ${concept} has no teaching step`,
           ).toBeGreaterThanOrEqual(1);
         }
       }

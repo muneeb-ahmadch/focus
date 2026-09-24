@@ -8,6 +8,7 @@ import { getRouteMissions } from "@/content";
 import { getDb } from "@/db";
 import { getMissionState } from "@/db/repo/missions";
 import { buildStats, testDateLine } from "@/lib/stats";
+import { usePlayerStore } from "@/stores/playerStore";
 import { type Theme } from "@/theme/tokens";
 import { useThemedStyles } from "@/theme/useTheme";
 import type { PlanItem } from "@focus/engine";
@@ -128,6 +129,20 @@ export default function HomeScreen() {
                   title={`Clear ${stats.dueCount} review${stats.dueCount === 1 ? "" : "s"}`}
                   onPress={() => router.push("/review-queue")}
                 />
+              );
+            }
+            if (item.kind === "drill") {
+              return (
+                <View key={i} style={styles.missionItem}>
+                  <Text style={styles.subLabel}>Mixed review from earlier missions</Text>
+                  <PrimaryButton
+                    title="Quick drill"
+                    onPress={() => {
+                      usePlayerStore.getState().startQuickDrill();
+                      router.push("/player");
+                    }}
+                  />
+                </View>
               );
             }
             if (item.kind === "mission") {

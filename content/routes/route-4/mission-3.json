@@ -1,0 +1,242 @@
+{
+  "missionId": "r4-m3",
+  "routeId": "route-4",
+  "title": "Crossings & pedestrian priority",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r4-m3-s1",
+      "type": "scene_decision",
+      "conceptId": "c.crossings.pelican-flashing-amber",
+      "sourceRef": "HC-196",
+      "scene": "You're stopped at a pelican crossing. The red light changes to flashing amber, and one person is still walking across.",
+      "question": {
+        "prompt": "What must you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move off — flashing amber means go",
+            "correct": false,
+            "misconceptionId": "m.crossings.flashing-amber-go"
+          },
+          {
+            "id": "b",
+            "text": "Give way until they're clear, then go if nobody else is crossing",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Sound your horn to hurry them along",
+            "correct": false
+          }
+        ],
+        "explanation": "Flashing amber means give way to anyone on the crossing. You move off only once it's clear."
+      }
+    },
+    {
+      "id": "r4-m3-s2",
+      "type": "contrast",
+      "conceptId": "c.crossings.puffin-no-flashing",
+      "sourceRef": "HC-199",
+      "a": {
+        "label": "Pelican",
+        "body": "Has a flashing amber phase: give way to anyone still on the crossing, then go."
+      },
+      "b": {
+        "label": "Puffin",
+        "body": "Sensors watch the crossing and hold the red. Steady amber follows green, as at normal lights."
+      },
+      "question": {
+        "prompt": "Which colour follows the green signal at a puffin crossing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Flashing amber, the same as a pelican",
+            "correct": false,
+            "misconceptionId": "m.crossings.puffin-flashes"
+          },
+          {
+            "id": "b",
+            "text": "Steady amber",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Red, straight away",
+            "correct": false
+          }
+        ],
+        "explanation": "A puffin holds its red while people are still crossing, so it never needs a flashing-amber phase."
+      }
+    },
+    {
+      "id": "r4-m3-s3",
+      "type": "contrast",
+      "conceptId": "c.crossings.toucan",
+      "sourceRef": "HC-199",
+      "a": {
+        "label": "Pelican & puffin",
+        "body": "For people on foot. A cyclist has to get off and push across."
+      },
+      "b": {
+        "label": "Toucan",
+        "body": "A wider crossing shared by people and cyclists — cyclists may ride straight across."
+      },
+      "question": {
+        "prompt": "Which crossing may cyclists ride across without getting off?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A toucan crossing",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "A puffin crossing",
+            "correct": false,
+            "misconceptionId": "m.crossings.cyclists-ride-any"
+          },
+          {
+            "id": "c",
+            "text": "A pelican crossing",
+            "correct": false
+          }
+        ],
+        "explanation": "Two can cross a toucan. Expect bikes arriving much faster than walking pace, from either side."
+      }
+    },
+    {
+      "id": "r4-m3-s4",
+      "type": "rule_card",
+      "conceptId": "c.crossings.zebra-waiting",
+      "sourceRef": "HC-195",
+      "title": "Someone waiting at a zebra",
+      "body": "A zebra has no lights to protect it. Slow down and be ready to stop as soon as you see someone waiting to cross.",
+      "question": {
+        "prompt": "Someone is waiting at the kerb of a zebra crossing. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Be ready to slow down and stop to let them cross",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Carry on — they don't count until they've stepped out",
+            "correct": false,
+            "misconceptionId": "m.crossings.zebra-only-when-stepped"
+          },
+          {
+            "id": "c",
+            "text": "Stop only if they raise a hand to you",
+            "correct": false
+          }
+        ],
+        "explanation": "Once someone is on a zebra you MUST give way — and you should give way to anyone waiting to cross."
+      }
+    },
+    {
+      "id": "r4-m3-s5",
+      "type": "misconception",
+      "conceptId": "c.crossings.never-wave",
+      "sourceRef": "HC-195",
+      "wrongBelief": "Waving a pedestrian across a crossing is the polite thing to do.",
+      "question": {
+        "prompt": "Why should you never wave someone across?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's fine, as long as you've checked your mirrors first",
+            "correct": false,
+            "misconceptionId": "m.crossings.waving-is-polite"
+          },
+          {
+            "id": "b",
+            "text": "Another vehicle may be coming that you can't see or stop",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Pedestrians aren't allowed to accept signals from drivers",
+            "correct": false
+          }
+        ],
+        "explanation": "Your wave can send someone into the path of a vehicle overtaking you. Wait, and let them decide when to go."
+      },
+      "repairNote": "Never wave or flash anyone across. Wait quietly — they, not you, can judge the whole road."
+    },
+    {
+      "id": "r4-m3-s6",
+      "type": "rule_card",
+      "conceptId": "c.crossings.no-overtaking",
+      "sourceRef": "HC-191",
+      "title": "Never overtake at a crossing",
+      "body": "On the zigzag approach you must not overtake the vehicle nearest the crossing, or one that has stopped to let people cross.",
+      "question": {
+        "prompt": "The car ahead has stopped to let someone cross. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wait behind it — you must not overtake at a crossing",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Pass it if the crossing looks clear from where you are",
+            "correct": false,
+            "misconceptionId": "m.crossings.overtake-if-clear"
+          },
+          {
+            "id": "c",
+            "text": "Sound your horn so the driver moves on",
+            "correct": false
+          }
+        ],
+        "explanation": "You can't see what the stopped driver can see. Overtaking there is how people on crossings get hit."
+      }
+    },
+    {
+      "id": "r4-m3-s7",
+      "type": "hazard_cue",
+      "conceptId": "c.crossings.keep-clear",
+      "sourceRef": "HC-192",
+      "scene": "Traffic ahead is queuing. If you move up with it you'll end up stopped right on a pedestrian crossing.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move up anyway, to keep the queue tight",
+            "correct": false,
+            "misconceptionId": "m.crossings.queue-onto-crossing"
+          },
+          {
+            "id": "b",
+            "text": "Stop before the crossing and leave it clear",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Use the zigzags to get past the queue",
+            "correct": false
+          }
+        ],
+        "explanation": "Never queue onto a crossing. Anyone trying to use it would have to step out into the traffic beside you."
+      }
+    },
+    {
+      "id": "r4-m3-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-196",
+      "questions": [
+        { "bankRef": "c.crossings.pelican-flashing-amber" },
+        { "bankRef": "c.crossings.puffin-no-flashing" },
+        { "bankRef": "c.crossings.toucan" },
+        { "bankRef": "c.crossings.zebra-waiting" },
+        { "bankRef": "c.crossings.never-wave" }
+      ]
+    }
+  ]
+}

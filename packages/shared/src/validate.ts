@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  checkpointConceptId,
   MisconceptionEntry,
   MissionSchema,
   RouteMeta,
@@ -89,16 +90,23 @@ interface QuestionSite {
   options: { correct: boolean; misconceptionId?: string }[];
   sourceRef?: string;
   conceptId?: string;
+  // A curated bankRef checkpoint question: no authored options/sourceRef to validate here (the
+  // resolved bank question owns those); its concept is the bankRef.
+  isBankRef?: boolean;
 }
 
 function questionSitesForStep(step: Step): QuestionSite[] {
   if (step.type === 'checkpoint') {
-    return step.questions.map((q, i) => ({
-      where: `${step.id}#q${i}`,
-      options: q.options,
-      sourceRef: q.sourceRef,
-      conceptId: q.conceptId,
-    }));
+    return step.questions.map((q, i) =>
+      'bankRef' in q
+        ? { where: `${step.id}#q${i}`, options: [], conceptId: q.bankRef, isBankRef: true }
+        : {
+            where: `${step.id}#q${i}`,
+            options: q.options,
+            sourceRef: q.sourceRef,
+            conceptId: q.conceptId,
+          },
+    );
   }
   if (step.type === 'sequence') return [];
   return [{ where: step.id, options: step.question.options }];
@@ -215,11 +223,12 @@ export function validateContent(input: RawContentInput): ValidationReport {
     );
     if (checkpointStep) {
       checkpointStep.questions.forEach((q, i) => {
-        if (!taughtConcepts.has(q.conceptId)) {
+        const concept = checkpointConceptId(q);
+        if (!taughtConcepts.has(concept)) {
           errors.push({
             file,
             where: `${checkpointStep.id}#q${i}`,
-            message: `checkpoint concept "${q.conceptId}" is not taught by any step in this mission`,
+            message: `checkpoint concept "${concept}" is not taught by any step in this mission`,
           });
         }
       });
@@ -251,12 +260,14 @@ export function validateContent(input: RawContentInput): ValidationReport {
     }
 
     for (const site of sites) {
+      if (site.isBankRef) continue; // no authored options to tag; the bank owns the distractors
       if (!site.options.some((o) => !o.correct && o.misconceptionId)) {
         warnings.push({ file, where: site.where, message: 'no misconception-tagged distractor' });
       }
     }
 
-    if (sites.length >= 3 && sites.every((s) => s.options[0]?.correct === true)) {
+    const authoredSites = sites.filter((s) => !s.isBankRef);
+    if (authoredSites.length >= 3 && authoredSites.every((s) => s.options[0]?.correct === true)) {
       warnings.push({
         file,
         where: mission.missionId,

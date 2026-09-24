@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import type { Question } from '@focus/shared';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { bankAsset } from '@/content/bankAssets';
+import type { PlayerQuestion } from '@/stores/playerStore';
 import { type Theme } from '@/theme/tokens';
 import { useThemedStyles } from '@/theme/useTheme';
 import { AudioButton } from './AudioButton';
@@ -20,7 +21,7 @@ function shuffle<T>(input: T[]): T[] {
 }
 
 export function AnswerOptions(props: {
-  question: Question;
+  question: PlayerQuestion;
   answered: boolean;
   selectedId?: string;
   hintOptionId?: string;
@@ -36,12 +37,14 @@ export function AnswerOptions(props: {
         const showWrong = isSelected && !option.correct;
         const isHinted = props.hintOptionId === option.id;
         const disabled = props.answered || isHinted;
+        // an image option is audible via its authored altText (rule 8)
+        const label = option.text ?? option.altText ?? '';
         return (
           <Pressable
             key={option.id}
             disabled={disabled}
             accessibilityRole="button"
-            accessibilityLabel={option.text}
+            accessibilityLabel={label}
             accessibilityState={{ disabled }}
             aria-disabled={disabled}
             onPress={() => props.onAnswer(option.id)}
@@ -53,8 +56,18 @@ export function AnswerOptions(props: {
               isHinted && styles.hinted,
             ]}
           >
-            <Text style={styles.text}>{option.text}</Text>
-            <AudioButton text={option.text} small />
+            {option.imageRef ? (
+              <Image
+                source={bankAsset(option.imageRef)}
+                accessibilityRole="image"
+                accessibilityLabel={option.altText}
+                resizeMode="contain"
+                style={styles.image}
+              />
+            ) : (
+              <Text style={styles.text}>{option.text}</Text>
+            )}
+            <AudioButton text={label} small />
           </Pressable>
         );
       })}
@@ -82,4 +95,5 @@ const makeStyles = (t: Theme) =>
     wrong: { borderColor: t.colors.danger, backgroundColor: t.colors.dangerSoft },
     hinted: { backgroundColor: t.colors.lockedBg, opacity: 0.5 },
     text: { flex: 1, ...t.text(t.font.sm), color: t.colors.text },
+    image: { flex: 1, height: 96, alignSelf: 'stretch' },
   });

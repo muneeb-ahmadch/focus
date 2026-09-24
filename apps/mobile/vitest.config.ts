@@ -8,6 +8,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      // Must precede the general '@' alias: the real loaders require() git-excluded
+      // generated artifacts; tests use synthetic fixtures instead.
+      '@/content/bank': path.resolve(__dirname, 'src/testing/bankFixture.ts'),
+      '@/content/bankAssets': path.resolve(__dirname, 'src/testing/bankAssetsFixture.ts'),
       '@': path.resolve(__dirname, 'src'),
       'react-native': 'react-native-web',
       '@expo/vector-icons': path.resolve(__dirname, 'src/testing/vectorIconsStub.tsx'),

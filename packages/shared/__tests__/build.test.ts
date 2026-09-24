@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { buildPack, serializePack, ContentPackSchema, ContentValidationError } from '../src';
+import {
+  buildPack,
+  buildBank,
+  selectAppBank,
+  serializePack,
+  BankFile,
+  ContentPackSchema,
+  ContentValidationError,
+} from '../src';
 import { goodContent, secondMission } from './fixtures';
 
 const twoMissionContent = () => {
@@ -69,6 +77,77 @@ describe('buildPack — round-trip', () => {
     expect(misconceptionIds).toEqual([...misconceptionIds].sort());
     expect(misconceptionIds).toContain('m.t.one');
     expect(Object.keys(pack.sourceRefs)).toContain('KYTS-1');
+  });
+});
+
+describe('buildBank — app-facing pool bank', () => {
+  const validCar = {
+    item: 'AB1001',
+    topic: 'alertness',
+    routeId: 'route-1',
+    conceptId: 'c.alertness.ab1001',
+    prompt: 'A valid car question',
+    options: [
+      { id: 'a', text: 'right', correct: true },
+      { id: 'b', text: 'wrong', correct: false },
+    ],
+    explanation: 'Because.',
+    sourceRefs: ['HC-r1'],
+    niExempt: false,
+  };
+  // Image option with no altText — the vB.1 alt-text-pending shape (invalid until vB.3).
+  const pendingCar = {
+    ...validCar,
+    item: 'AB1002',
+    conceptId: 'c.alertness.ab1002',
+    options: [
+      { id: 'a', imageRef: 'sign.gif', correct: true },
+      { id: 'b', text: 'wrong', correct: false },
+    ],
+  };
+  const validVmc = {
+    item: 'VM9001-1',
+    topic: 'Video scene',
+    routeId: 'route-3',
+    conceptId: 'c.video.vm9001-1',
+    prompt: 'A valid video question',
+    options: [
+      { id: 'a', text: 'right', correct: true },
+      { id: 'b', text: 'wrong', correct: false },
+    ],
+    explanation: 'Because.',
+    sourceRefs: ['HC-r1'],
+    niExempt: false,
+    clipId: 'vm9001',
+  };
+  const carFile = { bankFormat: 1, source: 'x', questions: [validCar, pendingCar] };
+  const vmcFile = { bankFormat: 1, source: 'x', questions: [validVmc] };
+
+  it('keeps pool-eligible questions and drops the ones that fail BankQuestion parse', () => {
+    const bank = selectAppBank(carFile, vmcFile);
+    const items = bank.questions.map((q) => q.item);
+    expect(items).toContain('AB1001');
+    expect(items).toContain('VM9001-1');
+    expect(items).not.toContain('AB1002'); // image option awaiting alt-text
+  });
+
+  it('merges car then video questions; video questions keep their clipId', () => {
+    const bank = selectAppBank(carFile, vmcFile);
+    expect(bank.bankFormat).toBe(1);
+    expect(bank.questions.filter((q) => q.clipId).map((q) => q.clipId)).toEqual(['vm9001']);
+  });
+
+  it('is deterministic, canonical (key-sorted, trailing newline), and round-trips under BankFile', () => {
+    const bytes = buildBank(carFile, vmcFile);
+    expect(buildBank(carFile, vmcFile)).toBe(bytes);
+    expect(bytes.endsWith('\n')).toBe(true);
+    assertCanonicalKeys(JSON.parse(bytes), '$');
+    const parsed = BankFile.parse(JSON.parse(bytes));
+    expect(parsed.questions.map((q) => q.item)).toEqual(['AB1001', 'VM9001-1']);
+  });
+
+  it('tolerates a malformed file object (no questions array) as empty', () => {
+    expect(selectAppBank({}, undefined).questions).toEqual([]);
   });
 });
 

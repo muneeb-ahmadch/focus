@@ -1,0 +1,222 @@
+{
+  "missionId": "r3-m4",
+  "routeId": "route-3",
+  "title": "Skids & control",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r3-m4-s1",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.coasting",
+      "sourceRef": "HC-122",
+      "scene": "A long, straight descent. You're tempted to slip into neutral and let the car roll down to save a bit of fuel.",
+      "question": {
+        "prompt": "What happens if you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nothing — it saves fuel and does no harm",
+            "correct": false,
+            "misconceptionId": "m.handling.coasting-saves"
+          },
+          {
+            "id": "b",
+            "text": "You lose control — no engine braking, less steering",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The car steers more precisely without drive",
+            "correct": false
+          }
+        ],
+        "explanation": "Coasting means the engine can't drive the wheels — no engine braking, and less stability through a bend."
+      }
+    },
+    {
+      "id": "r3-m4-s2",
+      "type": "rule_card",
+      "conceptId": "c.hazard.engine-braking",
+      "sourceRef": "HC-160",
+      "title": "The engine is a brake",
+      "body": "Change down a gear and the engine holds the car back for you. It slows you, settles the car, and saves the brakes.",
+      "question": {
+        "prompt": "How do you use the engine to help control your speed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By changing to a lower gear",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Only the brakes can slow the car",
+            "correct": false,
+            "misconceptionId": "m.handling.brakes-only-slow-you"
+          },
+          {
+            "id": "c",
+            "text": "By changing to a higher gear",
+            "correct": false
+          }
+        ],
+        "explanation": "A lower gear brings engine braking. You feel it the moment you change down."
+      }
+    },
+    {
+      "id": "r3-m4-s3",
+      "type": "contrast",
+      "conceptId": "c.hazard.steep-hill-control",
+      "sourceRef": "HC-160",
+      "a": {
+        "label": "Low gear, careful brakes",
+        "body": "Gravity is held by engine braking; the brakes do short bursts and stay cool."
+      },
+      "b": {
+        "label": "High gear, brakes held on",
+        "body": "The brakes take the whole hill, get hot, and fade just when you need them."
+      },
+      "question": {
+        "prompt": "You're about to go down a steep hill. How do you control your speed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Select a high gear and use the brakes carefully",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Hold the brakes on all the way down",
+            "correct": false,
+            "misconceptionId": "m.handling.ride-the-brakes-downhill"
+          },
+          {
+            "id": "c",
+            "text": "Select a low gear and use the brakes carefully",
+            "correct": true
+          }
+        ],
+        "explanation": "A low gear gives you engine braking; the brakes then only have to do the rest, in short applications."
+      }
+    },
+    {
+      "id": "r3-m4-s4",
+      "type": "rule_card",
+      "conceptId": "c.hazard.skid-cause",
+      "sourceRef": "HC-119",
+      "title": "Skids have a driver",
+      "body": "A skid is caused by braking, steering or accelerating too harshly for the grip that's there. The weather only sets the limit.",
+      "question": {
+        "prompt": "What's the main cause of skidding?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The weather",
+            "correct": false,
+            "misconceptionId": "m.handling.skids-just-happen"
+          },
+          {
+            "id": "b",
+            "text": "The driver",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The road surface",
+            "correct": false
+          }
+        ],
+        "explanation": "Skidding is usually driver error. Adjust your driving to the road and weather and you keep the grip you have."
+      }
+    },
+    {
+      "id": "r3-m4-s5",
+      "type": "sequence",
+      "conceptId": "c.hazard.abs-emergency",
+      "sourceRef": "HC-120",
+      "title": "Emergency stop with ABS",
+      "prompt": "Order an emergency stop in a car fitted with anti-lock brakes.",
+      "items": [
+        { "id": "i1", "text": "A hazard appears — you decide to stop" },
+        { "id": "i2", "text": "Apply the footbrake promptly and firmly" },
+        { "id": "i3", "text": "Hold that pressure — the pedal may judder and grate" },
+        { "id": "i4", "text": "Keep it applied until the vehicle has stopped" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "Never pump the pedal. The juddering is the ABS working — hold firm pressure until you've stopped."
+    },
+    {
+      "id": "r3-m4-s6",
+      "type": "rule_card",
+      "conceptId": "c.hazard.icy-wheelspin",
+      "sourceRef": "HC-231",
+      "title": "Gentle wins on ice",
+      "body": "On ice, keep your speed down and use the highest gear you can. Less power at the wheels means less chance of spinning them.",
+      "question": {
+        "prompt": "How do you avoid wheelspin on an icy road?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Drive slowly in the highest gear possible",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Use a low gear and plenty of revs to get moving",
+            "correct": false,
+            "misconceptionId": "m.handling.ice-low-gear-power"
+          },
+          {
+            "id": "c",
+            "text": "Brake gently and repeatedly",
+            "correct": false
+          }
+        ],
+        "explanation": "Torque at the wheels is what breaks them loose. A high gear and a light foot keep what grip there is."
+      }
+    },
+    {
+      "id": "r3-m4-s7",
+      "type": "hazard_cue",
+      "conceptId": "c.hazard.icy-road-cue",
+      "sourceRef": "HC-231",
+      "scene": "A cold, clear morning. The road looks merely damp, but the tyres have gone almost silent and the steering feels light.",
+      "question": {
+        "prompt": "What's the cue telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The road is icy — be very gentle with everything",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It's only damp — ice would be visible",
+            "correct": false,
+            "misconceptionId": "m.handling.ice-is-visible"
+          },
+          {
+            "id": "c",
+            "text": "A tyre is losing pressure",
+            "correct": false
+          }
+        ],
+        "explanation": "On ice the tyres make almost no noise and the steering goes light. Brake, steer and accelerate gently."
+      }
+    },
+    {
+      "id": "r3-m4-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-122",
+      "questions": [
+        { "bankRef": "c.hazard.coasting" },
+        { "bankRef": "c.hazard.steep-hill-control" },
+        { "bankRef": "c.hazard.skid-cause" },
+        { "bankRef": "c.hazard.abs-emergency" },
+        { "bankRef": "c.hazard.icy-wheelspin" }
+      ]
+    }
+  ]
+}

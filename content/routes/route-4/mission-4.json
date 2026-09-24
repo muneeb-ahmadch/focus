@@ -1,0 +1,236 @@
+{
+  "missionId": "r4-m4",
+  "routeId": "route-4",
+  "title": "Lanes & one-way streets",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r4-m4-s1",
+      "type": "scene_decision",
+      "conceptId": "c.lanes.wrong-lane-late",
+      "sourceRef": "HC-134",
+      "scene": "You're in a queue at a busy junction. At the last moment you realise you're in the wrong lane for where you want to go.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cut into the correct lane while there's still a gap",
+            "correct": false,
+            "misconceptionId": "m.lanes.late-lane-change"
+          },
+          {
+            "id": "b",
+            "text": "Carry on in the lane you're in and find another way round",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Stop and wait for someone to let you across",
+            "correct": false
+          }
+        ],
+        "explanation": "A last-moment lane change is how side-swipes happen. Go where your lane takes you: it costs you a minute."
+      }
+    },
+    {
+      "id": "r4-m4-s2",
+      "type": "rule_card",
+      "conceptId": "c.lanes.dual-right-lane",
+      "sourceRef": "HC-137",
+      "title": "The right-hand lane",
+      "body": "On a dual carriageway the right-hand lane is for overtaking or turning right. Move back to the left once you're past.",
+      "question": {
+        "prompt": "When should you use the right-hand lane of a three-lane dual carriageway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When you're overtaking or turning right",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Whenever you want to travel faster than the traffic on your left",
+            "correct": false,
+            "misconceptionId": "m.lanes.right-is-fast-lane"
+          },
+          {
+            "id": "c",
+            "text": "As soon as the road widens to three lanes",
+            "correct": false
+          }
+        ],
+        "explanation": "There's no 'fast lane'. The right-hand lane is for overtaking or turning right — the left-hand lane is where you belong."
+      }
+    },
+    {
+      "id": "r4-m4-s3",
+      "type": "rule_card",
+      "conceptId": "c.lanes.one-way-overtaking",
+      "sourceRef": "HC-143",
+      "title": "One-way streets",
+      "body": "In a one-way street every vehicle is going the same way, so you may pass on the right or on the left.",
+      "question": {
+        "prompt": "Where may you overtake on a one-way street?",
+        "options": [
+          {
+            "id": "a",
+            "text": "On either the right or the left",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "On the right only, as on any other road",
+            "correct": false,
+            "misconceptionId": "m.lanes.oneway-right-only"
+          },
+          {
+            "id": "c",
+            "text": "Nowhere — overtaking is banned in one-way streets",
+            "correct": false
+          }
+        ],
+        "explanation": "Nothing is coming the other way, so either side is legal. Pick the lane your exit needs, early, and stay in it."
+      }
+    },
+    {
+      "id": "r4-m4-s4",
+      "type": "contrast",
+      "conceptId": "c.lanes.cycle-lane-solid",
+      "sourceRef": "HC-140",
+      "a": {
+        "label": "Solid white line",
+        "body": "The cycle lane is in operation. You must not drive or park in it during its hours."
+      },
+      "b": {
+        "label": "Broken white line",
+        "body": "Advisory: keep out unless it's unavoidable, and never park in it."
+      },
+      "question": {
+        "prompt": "A cycle lane beside you is marked with a solid white line. What does that mean for you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You must not drive or park in it",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "You may use it while the traffic beside it is slow",
+            "correct": false,
+            "misconceptionId": "m.lanes.cycle-lane-when-empty"
+          },
+          {
+            "id": "c",
+            "text": "It's advice only, so you may drive in it",
+            "correct": false
+          }
+        ],
+        "explanation": "A solid line makes it compulsory: that strip of road isn't yours while the lane is operating."
+      }
+    },
+    {
+      "id": "r4-m4-s5",
+      "type": "rule_card",
+      "conceptId": "c.lanes.bus-lane-hours",
+      "sourceRef": "HC-141",
+      "title": "Bus lanes",
+      "body": "The sign at the start of a bus lane shows who may use it and when. Outside those times, other traffic may use it too.",
+      "question": {
+        "prompt": "When may you drive a car in a bus lane?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Outside its hours of operation, as shown on the sign",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Whenever there's no bus in sight",
+            "correct": false,
+            "misconceptionId": "m.lanes.bus-lane-if-empty"
+          },
+          {
+            "id": "c",
+            "text": "Never, at any time of day",
+            "correct": false
+          }
+        ],
+        "explanation": "Read the plate. Some bus lanes run only at peak times, some run all day. Empty is not the same as allowed."
+      }
+    },
+    {
+      "id": "r4-m4-s6",
+      "type": "scene_decision",
+      "conceptId": "c.lanes.left-turn-position",
+      "sourceRef": "HC-182",
+      "scene": "You're on a main road, about to turn left into a side road. There's a cyclist somewhere behind you.",
+      "question": {
+        "prompt": "How should you position the car on the approach?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep well to the left, so nobody can come up your inside",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Move out to the middle so you can swing in wide",
+            "correct": false,
+            "misconceptionId": "m.lanes.swing-wide-to-turn"
+          },
+          {
+            "id": "c",
+            "text": "Straddle both lanes so drivers know you're slowing",
+            "correct": false
+          }
+        ],
+        "explanation": "Keeping left closes the gap a cyclist or moped could ride into, and it shows everyone behind exactly what you're doing."
+      }
+    },
+    {
+      "id": "r4-m4-s7",
+      "type": "misconception",
+      "conceptId": "c.lanes.signal-then-move",
+      "sourceRef": "HC-133",
+      "wrongBelief": "Putting your indicator on gives you the right to move into the next lane.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's right — a signal makes the space yours",
+            "correct": false,
+            "misconceptionId": "m.lanes.signal-gives-priority"
+          },
+          {
+            "id": "b",
+            "text": "A signal is only information — you still have to find a safe gap",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Signals aren't needed when you change lane",
+            "correct": false
+          }
+        ],
+        "explanation": "Mirror, signal, manoeuvre — in that order. Nobody has to make room for you because your indicator is on."
+      },
+      "repairNote": "A signal says what you intend. Check the mirror and the blind spot, and move only when the gap is really there."
+    },
+    {
+      "id": "r4-m4-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-134",
+      "questions": [
+        { "bankRef": "c.lanes.wrong-lane-late" },
+        { "bankRef": "c.lanes.dual-right-lane" },
+        { "bankRef": "c.lanes.one-way-overtaking" },
+        { "bankRef": "c.lanes.cycle-lane-solid" },
+        { "bankRef": "c.lanes.left-turn-position" }
+      ]
+    }
+  ]
+}

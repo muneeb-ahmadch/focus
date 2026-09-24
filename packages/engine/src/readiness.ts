@@ -13,6 +13,27 @@ export interface Readiness { score: number | null; band: Band | null; provisiona
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
+// One route's contribution to yield-weighted coverage: how much of it is done
+// (completion 0..1) and how big a slice of the bank it is (bankShare 0..1).
+export interface RouteShare { bankShare: number; completion: number }
+
+// CURRICULUM §4 P1-4: weight each route's coverage by its share of the bank, so
+// finishing a large-share route counts for more than a small one. bankShare is
+// each route's fraction of the whole bank (summing to ≤1 across the routes
+// supplied — routes absent from the list, or with completion 0, contribute
+// nothing, keeping partial-catalogue coverage honestly low). The shares are
+// computed at the app layer from bank.json and passed in (this stays pure —
+// no bank loader here), mirroring routeQuotaFromShares in mock.ts. Returns the
+// 0..1 routeCoverage input for computeReadiness; the 0.25 weight and the band
+// cuts are unchanged.
+export function routeCoverageFromShares(routes: readonly RouteShare[]): number {
+  const coverage = routes.reduce(
+    (sum, r) => sum + clamp01(r.bankShare) * clamp01(r.completion),
+    0,
+  );
+  return clamp01(coverage);
+}
+
 const mockTrend = (mockScores: number[]): number => {
   const window = mockScores.slice(-3);
   let weightedSum = 0;

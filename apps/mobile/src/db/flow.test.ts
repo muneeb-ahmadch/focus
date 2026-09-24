@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { getMission, getRouteManifest } from '@/content';
+import { checkpointConceptId } from '@focus/shared';
 import { gradeCheckpoint, computeReadiness, computeStreak } from '@focus/engine';
 import { dayNumber } from '@/lib/clock';
 import type { Db } from './adapter';
@@ -49,15 +50,16 @@ describe('core loop flow (data layer)', () => {
     const checkpoint = mission.steps[mission.steps.length - 1];
     if (checkpoint?.type !== 'checkpoint') throw new Error('last step must be checkpoint');
     const checkpointAnswers = checkpoint.questions.map((q, i) => {
+      const conceptId = checkpointConceptId(q);
       const correct = i !== 1; // 4/5 — miss the nsl-sign question again
       recordAnswer(db, attemptId, {
         stepId: `${checkpoint.id}#q${i}`,
-        conceptId: q.conceptId,
+        conceptId,
         correct,
         confidence: correct ? 'sure' : 'unsure',
       });
-      if (!correct) upsertMiss(db, q.conceptId, 'wrong', TODAY);
-      return { conceptId: q.conceptId, correct };
+      if (!correct) upsertMiss(db, conceptId, 'wrong', TODAY);
+      return { conceptId, correct };
     });
 
     const result = gradeCheckpoint(checkpointAnswers);

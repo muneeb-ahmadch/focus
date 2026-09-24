@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import type { Step } from '@focus/shared';
+import { bankAsset } from '@/content/bankAssets';
 import { type Theme } from '@/theme/tokens';
 import { useThemedStyles } from '@/theme/useTheme';
 import { stepNarration } from '@/lib/narration';
@@ -15,13 +16,20 @@ export function SignMeaning(props: {
   onAnswer: (id: string) => void;
 }) {
   const styles = useThemedStyles(makeStyles);
+  const { sign } = props.step;
   return (
     <View style={styles.card}>
-      <SignView
-        shape={props.step.sign.shape}
-        glyph={props.step.sign.glyph}
-        label={props.step.sign.label}
-      />
+      {sign.imageRef ? (
+        <Image
+          source={bankAsset(sign.imageRef)}
+          accessibilityRole="image"
+          accessibilityLabel={sign.label ?? 'Sign'}
+          resizeMode="contain"
+          style={styles.signImage}
+        />
+      ) : (
+        <SignView shape={sign.shape} glyph={sign.glyph} label={sign.label} />
+      )}
       <View style={styles.promptRow}>
         <Text style={styles.prompt}>{props.step.question.prompt}</Text>
         <AudioButton text={stepNarration(props.step)} />
@@ -40,6 +48,7 @@ export function SignMeaning(props: {
 const makeStyles = (t: Theme) =>
   StyleSheet.create({
     card: { gap: t.space.lg },
+    signImage: { width: '100%', height: 140 },
     promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
     prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
   });

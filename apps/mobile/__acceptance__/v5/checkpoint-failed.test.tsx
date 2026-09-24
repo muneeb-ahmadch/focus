@@ -5,7 +5,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ReactNode } from 'react';
-import { getMission, getRouteManifest } from '@/content';
+import { checkpointConceptId, getMission, getRouteManifest } from '@/content';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { createProfile } from '@/db/repo/profile';
@@ -54,7 +54,7 @@ describe('CheckpointFailed screen', () => {
     const mission = getMission('r1-m1')!;
     const checkpoint = mission.steps.find((s) => s.type === 'checkpoint');
     if (!checkpoint || checkpoint.type !== 'checkpoint') throw new Error('no checkpoint');
-    const missed = new Set(checkpoint.questions.slice(0, 2).map((q) => q.conceptId));
+    const missed = new Set(checkpoint.questions.slice(0, 2).map(checkpointConceptId));
 
     const plan: PlayPlan = {
       correct: (card) => !(card.kind === 'checkpoint-q' && missed.has(card.conceptId)),

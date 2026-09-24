@@ -1,0 +1,228 @@
+{
+  "missionId": "r3-m1",
+  "routeId": "route-3",
+  "title": "Spotting hazards",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r3-m1-s1",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.parked-doors",
+      "sourceRef": "HC-206",
+      "scene": "A narrow street lined with parked cars. In one of them, someone is sitting in the driver's seat.",
+      "question": {
+        "prompt": "What should you be ready for?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Glare bouncing off their windscreen",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Their door opening into your path",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Nothing — a parked car can't be a hazard",
+            "correct": false,
+            "misconceptionId": "m.hazard.parked-is-static"
+          }
+        ],
+        "explanation": "Someone sitting in a parked car is about to get out. Slow down, leave room, and watch that door."
+      }
+    },
+    {
+      "id": "r3-m1-s2",
+      "type": "rule_card",
+      "conceptId": "c.hazard.scanning",
+      "sourceRef": "HC-160",
+      "title": "Look for what's hidden",
+      "body": "A hazard is anything that may make you change speed or direction. Scan far ahead, close in, and your mirrors — not just the car in front.",
+      "question": {
+        "prompt": "Where should most of your attention be?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Well ahead, so you meet hazards early",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "On the bumper of the car in front",
+            "correct": false,
+            "misconceptionId": "m.hazard.watch-the-car-ahead"
+          },
+          {
+            "id": "c",
+            "text": "On your speedometer",
+            "correct": false
+          }
+        ],
+        "explanation": "Looking well ahead buys you time. React to what's developing, not to what has already happened."
+      }
+    },
+    {
+      "id": "r3-m1-s3",
+      "type": "hazard_cue",
+      "conceptId": "c.hazard.children-between-cars",
+      "sourceRef": "HC-205",
+      "scene": "A residential street. Cars are parked nose to tail and an ice-cream van has stopped on the far side.",
+      "question": {
+        "prompt": "What's the cue telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Children may run out between the parked cars",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The van driver will wave you through",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "The children will see you and wait",
+            "correct": false,
+            "misconceptionId": "m.hazard.children-will-look"
+          }
+        ],
+        "explanation": "You can't see a child between parked cars until they're in the road. Ease off and cover the brake."
+      }
+    },
+    {
+      "id": "r3-m1-s4",
+      "type": "hazard_cue",
+      "conceptId": "c.hazard.bus-pulling-out",
+      "sourceRef": "HC-223",
+      "scene": "A bus is stopped at a bus stop ahead of you. The last person in the queue has just stepped aboard.",
+      "question": {
+        "prompt": "What should you expect next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The bus will wait until you've passed",
+            "correct": false,
+            "misconceptionId": "m.hazard.bus-waits-for-you"
+          },
+          {
+            "id": "b",
+            "text": "The bus may signal and pull out",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The bus will stay put for several minutes",
+            "correct": false
+          }
+        ],
+        "explanation": "Once the last passenger boards, the bus is ready to move. Give way if you safely can, and watch for people crossing in front."
+      }
+    },
+    {
+      "id": "r3-m1-s5",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.cyclist-swerve",
+      "sourceRef": "HC-213",
+      "scene": "You're following a cyclist on a wet road. Ahead of them is a line of metal drain covers close to the kerb.",
+      "question": {
+        "prompt": "What's the main risk?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The cyclist will stop and dismount",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "The cyclist may swerve out to avoid them",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The cyclist will hold their line, so you can pass close",
+            "correct": false,
+            "misconceptionId": "m.hazard.cyclist-holds-line"
+          }
+        ],
+        "explanation": "Wet metal is slippery, so riders steer around it. Stay back and give a cyclist room to move out."
+      }
+    },
+    {
+      "id": "r3-m1-s6",
+      "type": "rule_card",
+      "conceptId": "c.hazard.restricted-view",
+      "sourceRef": "HC-170",
+      "title": "When you can't see",
+      "body": "At a junction with a blocked view, creep forward until you can see. The traffic on the main road can't see you either.",
+      "question": {
+        "prompt": "Your view emerging from a junction is blocked by a hedge. What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Edge out slowly until you can see clearly",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Pull out quickly to get it over with",
+            "correct": false,
+            "misconceptionId": "m.hazard.blind-junction-rush"
+          },
+          {
+            "id": "c",
+            "text": "Sound your horn and go",
+            "correct": false
+          }
+        ],
+        "explanation": "Pull forward slowly until you can see up and down the road. If you don't know it's clear, don't go."
+      }
+    },
+    {
+      "id": "r3-m1-s7",
+      "type": "misconception",
+      "conceptId": "c.hazard.plan-early",
+      "sourceRef": "HC-147",
+      "wrongBelief": "Good reactions make up for not looking far ahead.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's right — quick reactions are all that matter",
+            "correct": false,
+            "misconceptionId": "m.hazard.fast-reactions-cover"
+          },
+          {
+            "id": "b",
+            "text": "You still travel while you react, so late is late",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Reactions have nothing to do with driving",
+            "correct": false
+          }
+        ],
+        "explanation": "Thinking distance is real distance. Spotting a hazard early is what gives you room to deal with it."
+      },
+      "repairNote": "Reacting quickly still costs you thinking distance. Planning early is what keeps the gap you need."
+    },
+    {
+      "id": "r3-m1-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-206",
+      "questions": [
+        { "bankRef": "c.hazard.parked-doors" },
+        { "bankRef": "c.hazard.children-between-cars" },
+        { "bankRef": "c.hazard.bus-pulling-out" },
+        { "bankRef": "c.hazard.cyclist-swerve" },
+        { "bankRef": "c.hazard.restricted-view" }
+      ]
+    }
+  ]
+}

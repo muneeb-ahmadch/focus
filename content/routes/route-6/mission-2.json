@@ -1,0 +1,233 @@
+{
+  "missionId": "r6-m2",
+  "routeId": "route-6",
+  "title": "Children & school runs",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r6-m2-s1",
+      "type": "scene_decision",
+      "conceptId": "c.vru.ball-in-road",
+      "sourceRef": "HC-205",
+      "scene": "You're driving along a line of parked cars near a park. A football bounces out into the road ahead of you.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Slow right down and be ready to stop for a child",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Hold your speed and sound the horn as a warning",
+            "correct": false,
+            "misconceptionId": "m.hazard.children-will-look"
+          },
+          {
+            "id": "c",
+            "text": "Stop and wave whoever comes out across the road",
+            "correct": false,
+            "misconceptionId": "m.crossings.waving-is-polite"
+          }
+        ],
+        "explanation": "Where a ball goes, a child follows — and they won't be looking. Cover the brake before you see them."
+      }
+    },
+    {
+      "id": "r6-m2-s2",
+      "type": "rule_card",
+      "conceptId": "c.vru.school-patrol",
+      "sourceRef": "HC-210",
+      "title": "School crossing patrol",
+      "body": "A patrol steps into the road holding a 'stop' sign. You must stop, and stay stopped until they and the children are clear of the road.",
+      "question": {
+        "prompt": "How does a school crossing patrol tell you to stop?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By giving you an arm signal from the kerb",
+            "correct": false,
+            "misconceptionId": "m.vru.patrol-is-advisory"
+          },
+          {
+            "id": "b",
+            "text": "By displaying a 'stop' sign",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "By showing a red light on a pole",
+            "correct": false
+          }
+        ],
+        "explanation": "The 'stop' sign is an order, not a request. Wait — and never wave children across yourself."
+      }
+    },
+    {
+      "id": "r6-m2-s3",
+      "type": "sign_meaning",
+      "conceptId": "c.vru.school-flashing-amber",
+      "sourceRef": "HC-208",
+      "sign": {
+        "shape": "warning-triangle",
+        "label": "Children crossing"
+      },
+      "question": {
+        "prompt": "Amber lights are flashing under this sign. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Speed up to clear the area before the children reach it",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Wait at the lights until they stop flashing",
+            "correct": false,
+            "misconceptionId": "m.vru.school-amber-advisory"
+          },
+          {
+            "id": "c",
+            "text": "Cut your speed until you're clear of the area",
+            "correct": true
+          }
+        ],
+        "explanation": "The lights are switched on when children may be crossing. Slow down and be ready to stop."
+      }
+    },
+    {
+      "id": "r6-m2-s4",
+      "type": "rule_card",
+      "conceptId": "c.vru.school-zigzag",
+      "sourceRef": "HC-238",
+      "title": "Yellow zigzags outside a school",
+      "body": "Don't wait or park on them, even for a moment. A parked car hides the school entrance and hides the children stepping out of it.",
+      "question": {
+        "prompt": "What do the yellow zigzag lines outside a school mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You may stop on them to drop off or pick up children",
+            "correct": false,
+            "misconceptionId": "m.vru.school-zigzag-dropoff"
+          },
+          {
+            "id": "b",
+            "text": "You should not wait or park your vehicle here",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "You may park here if you stay with the vehicle",
+            "correct": false
+          }
+        ],
+        "explanation": "The markings keep the view of the school entrance clear, both for drivers and for the children crossing."
+      }
+    },
+    {
+      "id": "r6-m2-s5",
+      "type": "misconception",
+      "conceptId": "c.vru.reverse-get-out-check",
+      "sourceRef": "HC-202",
+      "wrongBelief": "If the mirrors look clear behind you, it's safe to start reversing.",
+      "question": {
+        "prompt": "You can't be sure the area behind your car is clear. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Check the mirrors again and reverse slowly",
+            "correct": false,
+            "misconceptionId": "m.vru.reverse-mirrors-enough"
+          },
+          {
+            "id": "b",
+            "text": "Get out and check before you move",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Carry on, assuming it's clear behind you",
+            "correct": false
+          }
+        ],
+        "explanation": "Mirrors leave a blind area right behind the car. If you cannot tell, the only safe check is on foot."
+      },
+      "repairNote": "Mirrors don't see everything. Where there might be children or a low obstruction, get out and look before you reverse."
+    },
+    {
+      "id": "r6-m2-s6",
+      "type": "rule_card",
+      "conceptId": "c.vru.reverse-children-hidden",
+      "sourceRef": "HC-202",
+      "title": "Who disappears behind your car",
+      "body": "A small child can stand right behind your boot and be invisible through the rear window. They're the road users you're least likely to see.",
+      "question": {
+        "prompt": "Which road users are hardest to see while you're reversing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Children",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Motorcyclists",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Car drivers behind you",
+            "correct": false,
+            "misconceptionId": "m.vru.reverse-children-visible"
+          }
+        ],
+        "explanation": "Anyone short enough to sit below the rear window vanishes. Check on foot when children may be about."
+      }
+    },
+    {
+      "id": "r6-m2-s7",
+      "type": "scene_decision",
+      "conceptId": "c.vru.reverse-give-way",
+      "sourceRef": "HC-202",
+      "scene": "You're about to reverse into a side road. Someone is standing on the kerb waiting to cross behind your car.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reverse before they start to cross",
+            "correct": false,
+            "misconceptionId": "m.vru.reverse-pedestrian-waits"
+          },
+          {
+            "id": "b",
+            "text": "Give way and let them cross first",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Sound your horn to warn them you're reversing",
+            "correct": false
+          }
+        ],
+        "explanation": "Stop and let anyone waiting cross behind you. Don't wave or signal them past — you can't see the whole road."
+      }
+    },
+    {
+      "id": "r6-m2-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-205",
+      "questions": [
+        { "bankRef": "c.vru.ball-in-road" },
+        { "bankRef": "c.vru.school-patrol" },
+        { "bankRef": "c.vru.school-flashing-amber" },
+        { "bankRef": "c.vru.school-zigzag" },
+        { "bankRef": "c.vru.reverse-give-way" }
+      ]
+    }
+  ]
+}

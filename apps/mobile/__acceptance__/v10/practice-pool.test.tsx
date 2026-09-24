@@ -93,10 +93,12 @@ describe('practice pool derivation', () => {
       expect(t.count).toBeGreaterThanOrEqual(PRACTICE_MIN_POOL);
       expect(t.label.length).toBeGreaterThan(0);
     }
-    // spot pins against today's authored pack
-    expect(topics.some((t) => t.topic === 'lights')).toBe(true);
-    expect(topics.some((t) => t.topic === 'signs')).toBe(false);
-    expect(topics.some((t) => t.topic === 'hazard')).toBe(false);
+    // spot pins against the bank's real topic slugs
+    expect(topics.some((t) => t.topic === 'signs')).toBe(true);
+    expect(topics.some((t) => t.topic === 'essential-documents')).toBe(false); // only 3 — thin
+    expect(topics.some((t) => t.topic === 'video')).toBe(false); // video is mock-only
+    // vB: the picker renders the official DVSA topic name, never the raw slug
+    expect(topics.find((t) => t.topic === 'signs')?.label).toBe('Road and traffic signs');
   });
 
   it('weak concepts = open review items including snoozed, excluding cleared', () => {
@@ -131,8 +133,8 @@ describe('PracticeConfig — topic', () => {
     h.params = { kind: 'topic' };
     render(<PracticeConfigScreen />);
 
-    expect(screen.queryByText(/^signs$/i)).toBeNull();
-    fireEvent.click(screen.getByText(/^lights$/i));
+    expect(screen.queryByText(/^essential-documents$/i)).toBeNull(); // thin — hidden
+    fireEvent.click(screen.getByText(/^road and traffic signs$/i));
     fireEvent.click(screen.getByText(/10 questions/i));
     fireEvent.click(screen.getByRole('button', { name: /start/i }));
 
@@ -140,7 +142,7 @@ describe('PracticeConfig — topic', () => {
     expect(s.active).toBe(true);
     expect(s.mode).toBe('practice');
     expect(s.queue).toHaveLength(10);
-    expect(s.queue.every((c) => getMockPool().questionById.get(c.stepId)?.conceptId.startsWith('c.lights'))).toBe(
+    expect(s.queue.every((c) => getMockPool().questionById.get(c.stepId)?.conceptId.startsWith('c.signs'))).toBe(
       true,
     );
     expect(JSON.stringify(h.push.mock.calls)).toContain('/player');
@@ -149,7 +151,7 @@ describe('PracticeConfig — topic', () => {
   it('R6: hammering Start opens one attempt and one navigation', () => {
     h.params = { kind: 'topic' };
     render(<PracticeConfigScreen />);
-    fireEvent.click(screen.getByText(/^lights$/i));
+    fireEvent.click(screen.getByText(/^road and traffic signs$/i));
     fireEvent.click(screen.getByText(/10 questions/i));
     const start = screen.getByRole('button', { name: /start/i });
     fireEvent.click(start);

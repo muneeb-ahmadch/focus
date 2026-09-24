@@ -1,0 +1,235 @@
+{
+  "missionId": "r5-m2",
+  "routeId": "route-5",
+  "title": "Lanes & overtaking",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r5-m2-s1",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.keep-left",
+      "sourceRef": "HC-264",
+      "scene": "On a three-lane motorway you've just passed a lorry in the middle lane. The left-hand lane ahead is empty for as far as you can see.",
+      "question": {
+        "prompt": "Which lane should you be in now?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The middle lane — it's the normal cruising lane",
+            "correct": false,
+            "misconceptionId": "m.motorway.middle-lane-cruise"
+          },
+          {
+            "id": "b",
+            "text": "The left-hand lane",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Whichever lane you're in — stay put until your exit",
+            "correct": false
+          }
+        ],
+        "explanation": "You've finished overtaking, so move back left. Sitting in the middle lane holds up everyone behind you."
+      }
+    },
+    {
+      "id": "r5-m2-s2",
+      "type": "rule_card",
+      "conceptId": "c.motorway.right-lane-overtaking",
+      "sourceRef": "HC-267",
+      "title": "The lanes to your right",
+      "body": "Lanes to the right are for overtaking. When you're past, move back left — without cutting in front of the vehicle you've just overtaken.",
+      "question": {
+        "prompt": "When would you use the right-hand lane of a three-lane motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When you're travelling at 70 mph",
+            "correct": false,
+            "misconceptionId": "m.lanes.right-is-fast-lane"
+          },
+          {
+            "id": "b",
+            "text": "When you're turning right at the next junction",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "When you're overtaking",
+            "correct": true
+          }
+        ],
+        "explanation": "There's no fast lane. The lanes to your right exist so you can pass — then you move back left."
+      }
+    },
+    {
+      "id": "r5-m2-s3",
+      "type": "contrast",
+      "conceptId": "c.motorway.no-left-overtake",
+      "sourceRef": "HC-268",
+      "a": {
+        "label": "Traffic flowing freely",
+        "body": "Never overtake on the left. Pass slower vehicles only on their right."
+      },
+      "b": {
+        "label": "Slow-moving queues",
+        "body": "If the queue to your right is moving more slowly than yours, you may keep going past it in your lane."
+      },
+      "question": {
+        "prompt": "When may you pass traffic on its left on a motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Whenever the lane to the left is clear",
+            "correct": false,
+            "misconceptionId": "m.motorway.undertake-if-clear"
+          },
+          {
+            "id": "b",
+            "text": "In queues, when traffic to your right is moving more slowly",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "When the driver ahead won't move over",
+            "correct": false
+          }
+        ],
+        "explanation": "Drivers don't expect to be passed on the left. The only exception is queuing traffic moving at different speeds."
+      }
+    },
+    {
+      "id": "r5-m2-s4",
+      "type": "hazard_cue",
+      "conceptId": "c.motorway.joining-traffic",
+      "sourceRef": "HC-259",
+      "scene": "You're in the left-hand lane approaching a junction. Several cars are speeding up the slip road to join just ahead of you.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hold your speed — they have to give way to you",
+            "correct": false,
+            "misconceptionId": "m.motorway.joiners-not-my-problem"
+          },
+          {
+            "id": "b",
+            "text": "Speed up so they have to join behind you",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Adjust your speed, or move out a lane if it's safe",
+            "correct": true
+          }
+        ],
+        "explanation": "Joining traffic must give way, but you can make it easier. Planning ahead keeps the whole flow moving."
+      }
+    },
+    {
+      "id": "r5-m2-s5",
+      "type": "scene_decision",
+      "conceptId": "c.motorway.hazard-lights-warning",
+      "sourceRef": "HC-116",
+      "scene": "The traffic ahead brakes hard to a stop around a bend. Fast traffic is coming up behind you.",
+      "question": {
+        "prompt": "How can you warn the drivers behind you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Briefly switch on your hazard warning lights",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "You can't — hazard lights are only for breakdowns",
+            "correct": false,
+            "misconceptionId": "m.motorway.hazard-lights-breakdown-only"
+          },
+          {
+            "id": "c",
+            "text": "Flash your headlights",
+            "correct": false
+          }
+        ],
+        "explanation": "On a motorway or dual carriageway you may use hazard lights briefly to warn of a hazard ahead. Switch them off once you've been seen."
+      }
+    },
+    {
+      "id": "r5-m2-s6",
+      "type": "rule_card",
+      "conceptId": "c.motorway.towing-limit",
+      "sourceRef": "HC-124",
+      "title": "Towing on the motorway",
+      "body": "Towing a caravan or trailer drops your limit to 60 mph on motorways and dual carriageways — even where the cars around you can do 70.",
+      "question": {
+        "prompt": "What's the speed limit for a car towing a trailer on a motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50 mph",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "70 mph, the same as any other car",
+            "correct": false,
+            "misconceptionId": "m.motorway.towing-70"
+          },
+          {
+            "id": "c",
+            "text": "60 mph",
+            "correct": true
+          }
+        ],
+        "explanation": "A trailer makes your vehicle longer, heavier and less stable, so the limit is lower."
+      }
+    },
+    {
+      "id": "r5-m2-s7",
+      "type": "misconception",
+      "conceptId": "c.motorway.keep-left",
+      "sourceRef": "HC-264",
+      "wrongBelief": "The left-hand lane of a motorway is really for lorries and slow vehicles.",
+      "question": {
+        "prompt": "Which vehicles should use the left-hand lane of a three-lane motorway?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only lorries and other slow vehicles",
+            "correct": false,
+            "misconceptionId": "m.motorway.left-lane-slow-only"
+          },
+          {
+            "id": "b",
+            "text": "Any vehicle that isn't overtaking",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Only vehicles about to leave at the next exit",
+            "correct": false
+          }
+        ],
+        "explanation": "Keep left unless you're overtaking — whatever you're driving and however fast you're going."
+      },
+      "repairNote": "The left-hand lane is everyone's lane. Use the others only to overtake, then move back."
+    },
+    {
+      "id": "r5-m2-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-264",
+      "questions": [
+        { "bankRef": "c.motorway.keep-left" },
+        { "bankRef": "c.motorway.right-lane-overtaking" },
+        { "bankRef": "c.motorway.no-left-overtake" },
+        { "bankRef": "c.motorway.joining-traffic" },
+        { "bankRef": "c.motorway.hazard-lights-warning" }
+      ]
+    }
+  ]
+}

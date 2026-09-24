@@ -68,7 +68,7 @@ function correctOptionText(card: PlayerCard): string {
   if (card.kind !== 'step') {
     const o = card.question.options.find((opt) => opt.correct);
     if (!o) throw new Error('no correct option');
-    return o.text;
+    return o.text ?? o.altText ?? '';
   }
   const step = card.step;
   if (step.type === 'sequence' || step.type === 'checkpoint') {

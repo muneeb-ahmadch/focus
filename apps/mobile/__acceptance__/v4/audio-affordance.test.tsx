@@ -81,7 +81,7 @@ function currentCard(): PlayerCard {
 }
 
 function optionTexts(card: PlayerCard): string[] {
-  if (card.kind !== 'step') return card.question.options.map((o) => o.text);
+  if (card.kind !== 'step') return card.question.options.map((o) => o.text ?? o.altText ?? '');
   const step = card.step;
   if (step.type === 'sequence') return step.items.map((i) => i.text);
   if (step.type === 'checkpoint') throw new Error('checkpoint card has no options');

@@ -23,9 +23,11 @@ export default function MissionCompleteRoute() {
     newReviews?: string;
     missed?: string;
     xp?: string;
+    repaired?: string;
   }>();
 
   const score = Number(params.score ?? 0);
+  const repaired = params.repaired === "1";
   const streak = Number(params.streak ?? 0);
   const milestone = params.milestone ? Number(params.milestone) : null;
   const masteryBefore = Number(params.masteryBefore ?? 0);
@@ -66,7 +68,7 @@ export default function MissionCompleteRoute() {
 
         <View style={styles.ring}>
           <Text style={styles.ringScore}>{Math.round(score * 5)}/5</Text>
-          <Text style={styles.ringLabel}>checkpoint</Text>
+          <Text style={styles.ringLabel}>{repaired ? "→ Repaired ✓" : "checkpoint"}</Text>
         </View>
 
         {xp > 0 ? <Text style={styles.xpLine}>⚡ +{xp} XP</Text> : null}
@@ -86,7 +88,11 @@ export default function MissionCompleteRoute() {
 
         {newReviews > 0 ? (
           <Text style={styles.reviewLine}>
-            {newReviews} item{newReviews === 1 ? "" : "s"} added to review
+            {repaired
+              ? `${newReviews === 1 ? "This" : "These"} ${newReviews} concept${
+                  newReviews === 1 ? " is" : "s are"
+                } in tomorrow's review`
+              : `${newReviews} item${newReviews === 1 ? "" : "s"} added to review`}
           </Text>
         ) : null}
       </View>

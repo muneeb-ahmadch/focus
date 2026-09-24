@@ -1,0 +1,218 @@
+{
+  "missionId": "r4-m5",
+  "routeId": "route-4",
+  "title": "Level crossings",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r4-m5-s1",
+      "type": "scene_decision",
+      "conceptId": "c.rail.first-warning",
+      "sourceRef": "HC-293",
+      "scene": "You're approaching a level crossing with lights. The crossing is clear, then a steady amber light comes on.",
+      "question": {
+        "prompt": "What is that amber light telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A train is coming — stop, unless you've already crossed the white line",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Hurry across before the red lights start",
+            "correct": false,
+            "misconceptionId": "m.rail.amber-hurry"
+          },
+          {
+            "id": "c",
+            "text": "Nothing yet — wait for red before you do anything",
+            "correct": false
+          }
+        ],
+        "explanation": "Steady amber is the first warning of a train. Flashing red lights follow it, and then the barriers come down."
+      }
+    },
+    {
+      "id": "r4-m5-s2",
+      "type": "rule_card",
+      "conceptId": "c.rail.red-flashing",
+      "sourceRef": "HC-293",
+      "title": "Flashing red means stop",
+      "body": "Flashing red lights at a level crossing mean stop before the barrier or stop line — whatever the barrier is doing.",
+      "question": {
+        "prompt": "The red lights start flashing as you approach a level crossing. What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop before the barrier",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Cross quickly, while the barrier is still up",
+            "correct": false,
+            "misconceptionId": "m.rail.beat-the-barrier"
+          },
+          {
+            "id": "c",
+            "text": "Drive on, because you can't see a train yet",
+            "correct": false
+          }
+        ],
+        "explanation": "The lights come on well before the train does, and they mean stop. Never try to beat a barrier."
+      }
+    },
+    {
+      "id": "r4-m5-s3",
+      "type": "rule_card",
+      "conceptId": "c.rail.keep-waiting",
+      "sourceRef": "HC-293",
+      "title": "One train can hide another",
+      "body": "If the lights keep flashing after a train has gone by, another one is coming. Carry on waiting until they stop.",
+      "question": {
+        "prompt": "A train passes, but the red lights keep flashing. What must you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Carry on waiting",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Cross as soon as that train is out of sight",
+            "correct": false,
+            "misconceptionId": "m.rail.one-train"
+          },
+          {
+            "id": "c",
+            "text": "Wait ten seconds, then go",
+            "correct": false
+          }
+        ],
+        "explanation": "The lights stop when it's safe, not when the train has passed. A second train from the other way is exactly the danger."
+      }
+    },
+    {
+      "id": "r4-m5-s4",
+      "type": "scene_decision",
+      "conceptId": "c.rail.amber-while-crossing",
+      "sourceRef": "HC-293",
+      "scene": "You're already driving over a level crossing when the amber lights come on and a warning starts to sound.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop where you are and wait for the barrier",
+            "correct": false,
+            "misconceptionId": "m.rail.stop-on-crossing"
+          },
+          {
+            "id": "b",
+            "text": "Keep going and clear the crossing",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Reverse back the way you came",
+            "correct": false
+          }
+        ],
+        "explanation": "Once you're on the crossing the only safe direction is forward. Keep going and get clear of the rails."
+      }
+    },
+    {
+      "id": "r4-m5-s5",
+      "type": "sequence",
+      "conceptId": "c.rail.broken-down",
+      "sourceRef": "HC-299",
+      "title": "Stalled on the crossing",
+      "prompt": "Your car has stalled on a level crossing. Put the steps in order.",
+      "items": [
+        { "id": "i1", "text": "Get everyone out of the car and clear of the crossing" },
+        { "id": "i2", "text": "Use the railway telephone to tell the signal operator" },
+        { "id": "i3", "text": "Move the vehicle clear, if there's time and you're told you can" },
+        { "id": "i4", "text": "If the alarm sounds, leave the vehicle and get clear at once" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "People first, then the phone, then the car — and the moment an alarm sounds, get off the crossing and stay off."
+    },
+    {
+      "id": "r4-m5-s6",
+      "type": "sign_meaning",
+      "conceptId": "c.rail.countdown-markers",
+      "sourceRef": "KYTS-warning",
+      "sign": {
+        "shape": "info-rect",
+        "label": "Countdown markers"
+      },
+      "question": {
+        "prompt": "Three white boards with red diagonal bars, beside the road, mean…",
+        "options": [
+          {
+            "id": "a",
+            "text": "You're approaching a concealed level crossing",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "A lay-by is coming up shortly",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Roadworks ahead, so slow down",
+            "correct": false,
+            "misconceptionId": "m.rail.markers-roadworks"
+          }
+        ],
+        "explanation": "The bars count you down to a concealed level crossing: three, two, one. Be ready to stop when they run out."
+      }
+    },
+    {
+      "id": "r4-m5-s7",
+      "type": "misconception",
+      "conceptId": "c.rail.exit-clear",
+      "sourceRef": "HC-291",
+      "wrongBelief": "As long as no lights are flashing, you can drive onto a level crossing.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's right — no lights means the crossing is yours",
+            "correct": false,
+            "misconceptionId": "m.rail.lights-only-rule"
+          },
+          {
+            "id": "b",
+            "text": "The road beyond must be clear too, so you never stop on the rails",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "You must always stop first, then cross",
+            "correct": false
+          }
+        ],
+        "explanation": "It's the box-junction rule with far worse consequences: don't move on until you can drive straight off again."
+      },
+      "repairNote": "Unlit or not, never drive onto a crossing until the far side is clear. Nothing should ever stop you on the rails."
+    },
+    {
+      "id": "r4-m5-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-293",
+      "questions": [
+        { "bankRef": "c.rail.first-warning" },
+        { "bankRef": "c.rail.red-flashing" },
+        { "bankRef": "c.rail.keep-waiting" },
+        { "bankRef": "c.rail.amber-while-crossing" },
+        { "bankRef": "c.rail.broken-down" }
+      ]
+    }
+  ]
+}

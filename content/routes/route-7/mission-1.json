@@ -1,0 +1,236 @@
+{
+  "missionId": "r7-m1",
+  "routeId": "route-7",
+  "title": "Paperwork",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r7-m1-s1",
+      "type": "scene_decision",
+      "conceptId": "c.docs.insured-to-drive",
+      "sourceRef": "HC-annex3",
+      "scene": "You've just passed your test. A friend offers to let you drive their car home after a party.",
+      "question": {
+        "prompt": "What must you check before you drive it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nothing — their insurance covers anyone who drives it",
+            "correct": false,
+            "misconceptionId": "m.docs.car-insured-anyone-drives"
+          },
+          {
+            "id": "b",
+            "text": "That the car is insured for you to drive",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "That it has enough fuel to get you home",
+            "correct": false
+          }
+        ],
+        "explanation": "Insurance covers named drivers, not the car itself. Check you're covered on their policy or your own before you drive."
+      }
+    },
+    {
+      "id": "r7-m1-s2",
+      "type": "rule_card",
+      "conceptId": "c.docs.third-party",
+      "sourceRef": "HC-annex3",
+      "title": "The legal minimum",
+      "body": "By law you need at least third-party insurance. It pays for damage and injury you cause to others — not for your own car.",
+      "question": {
+        "prompt": "What's the legal minimum insurance to drive on public roads?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Third party only",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Fully comprehensive",
+            "correct": false,
+            "misconceptionId": "m.docs.comprehensive-required"
+          },
+          {
+            "id": "c",
+            "text": "Third party, fire and theft",
+            "correct": false
+          }
+        ],
+        "explanation": "Comprehensive cover also pays for your own car, but it's a choice. Third party is the minimum the law requires."
+      }
+    },
+    {
+      "id": "r7-m1-s3",
+      "type": "contrast",
+      "conceptId": "c.docs.mot-rules",
+      "sourceRef": "HC-annex3",
+      "a": {
+        "label": "No valid MOT",
+        "body": "Illegal to drive, and it may invalidate your insurance."
+      },
+      "b": {
+        "label": "Driving to a booked MOT",
+        "body": "Allowed if it's booked in advance and the car is otherwise roadworthy."
+      },
+      "question": {
+        "prompt": "Your car needs an MOT. When may you drive it without a current certificate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "For a month after it runs out, as a grace period",
+            "correct": false,
+            "misconceptionId": "m.docs.mot-grace-period"
+          },
+          {
+            "id": "b",
+            "text": "On short local journeys only",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "When driving to a booked MOT appointment",
+            "correct": true
+          }
+        ],
+        "explanation": "There's no grace period. Book the test before the old certificate runs out."
+      }
+    },
+    {
+      "id": "r7-m1-s4",
+      "type": "rule_card",
+      "conceptId": "c.docs.keeper-v5c",
+      "sourceRef": "HC-annex3",
+      "title": "The registered keeper",
+      "body": "The keeper named on the V5C must keep it up to date. Tell DVLA when you move house, change your name or sell the car.",
+      "question": {
+        "prompt": "When should you update your vehicle registration certificate (V5C)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only when you sell the car",
+            "correct": false,
+            "misconceptionId": "m.docs.v5c-only-on-sale"
+          },
+          {
+            "id": "b",
+            "text": "When you move house",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Each time you renew your insurance",
+            "correct": false
+          }
+        ],
+        "explanation": "DVLA uses the V5C to reach you — for tax reminders, and for fines. An old address doesn't excuse you."
+      }
+    },
+    {
+      "id": "r7-m1-s5",
+      "type": "scene_decision",
+      "conceptId": "c.docs.produce-7-days",
+      "sourceRef": "HC-annex3",
+      "scene": "A police officer stops you and asks to see your insurance certificate. It's at home in a drawer.",
+      "question": {
+        "prompt": "What happens now?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You may be asked to show it at a police station within 7 days",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "You're committing an offence by not carrying it",
+            "correct": false,
+            "misconceptionId": "m.docs.must-carry-documents"
+          },
+          {
+            "id": "c",
+            "text": "Nothing — the police can't ask to see it",
+            "correct": false
+          }
+        ],
+        "explanation": "You don't have to carry your documents, but you must be able to produce them when asked."
+      }
+    },
+    {
+      "id": "r7-m1-s6",
+      "type": "rule_card",
+      "conceptId": "c.docs.health-dvla",
+      "sourceRef": "HC-90",
+      "title": "Your health and DVLA",
+      "body": "You must tell DVLA about any medical condition that could affect your driving — it's your duty, not your doctor's.",
+      "question": {
+        "prompt": "When must you contact DVLA?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only if your doctor says you must stop driving",
+            "correct": false,
+            "misconceptionId": "m.docs.doctor-tells-dvla"
+          },
+          {
+            "id": "b",
+            "text": "Whenever you change your insurer",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "When a health condition could affect your driving",
+            "correct": true
+          }
+        ],
+        "explanation": "Some conditions, and some treatments, affect your fitness to drive. Telling DVLA is the law."
+      }
+    },
+    {
+      "id": "r7-m1-s7",
+      "type": "misconception",
+      "conceptId": "c.docs.new-driver-points",
+      "sourceRef": "HC-penalties",
+      "wrongBelief": "New drivers have the same 12-point limit as everyone else.",
+      "question": {
+        "prompt": "You passed your test a year ago. What happens if you reach 6 penalty points?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nothing yet — the limit is 12 points",
+            "correct": false,
+            "misconceptionId": "m.docs.new-driver-12-points"
+          },
+          {
+            "id": "b",
+            "text": "Your licence is revoked — you retake theory and practical tests",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "You must go on a speed awareness course",
+            "correct": false
+          }
+        ],
+        "explanation": "The rule covers your first two years after passing. Points from before you passed can count too."
+      },
+      "repairNote": "Within 2 years of passing, 6 points revokes your licence. You go back to a provisional and must pass both tests again."
+    },
+    {
+      "id": "r7-m1-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-annex3",
+      "questions": [
+        { "bankRef": "c.docs.insured-to-drive" },
+        { "bankRef": "c.docs.third-party" },
+        { "bankRef": "c.docs.mot-rules" },
+        { "bankRef": "c.docs.health-dvla" },
+        { "bankRef": "c.docs.new-driver-points" }
+      ]
+    }
+  ]
+}

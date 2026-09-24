@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { computeReadiness, type ReadinessInputs } from '../src/readiness';
+import { computeReadiness, routeCoverageFromShares, type ReadinessInputs } from '../src/readiness';
 import { lcg } from './helpers';
 
 const inputs = (over: Partial<ReadinessInputs>): ReadinessInputs => ({
@@ -195,6 +195,75 @@ describe('components (breakdown surface reads these, never recomputes)', () => {
     expect(component(computeReadiness(inputs({ dueReviews: 0 })), 'review_debt')!.value).toBe(1);
     expect(component(computeReadiness(inputs({ dueReviews: 20 })), 'review_debt')!.value).toBe(0);
     expect(component(computeReadiness(inputs({ dueReviews: 10 })), 'review_debt')!.value).toBe(0.5);
+  });
+});
+
+// CURRICULUM §4 P1-4: route_coverage is yield-weighted by each route's share of
+// the bank, so completing a large-share route (R7, ~24%) counts for more than a
+// small one (R1, ~8%). This is a formula-INTERNAL change producing the 0..1
+// routeCoverage input; the top-level 0.25 weight and the band cuts are untouched.
+// The bank shares are computed at the app layer (from bank.json) and passed in —
+// this pure function only combines them, mirroring routeQuotaFromShares.
+describe('routeCoverageFromShares — yield-weighted coverage (§4 P1-4)', () => {
+  it('empty list → 0', () => {
+    expect(routeCoverageFromShares([])).toBe(0);
+  });
+
+  it('one fully-completed route contributes exactly its bank share', () => {
+    expect(routeCoverageFromShares([{ bankShare: 0.084, completion: 1 }])).toBeCloseTo(0.084, 10);
+  });
+
+  it('completing a bigger-share route yields more coverage than a smaller one', () => {
+    const small = routeCoverageFromShares([{ bankShare: 0.084, completion: 1 }]);
+    const big = routeCoverageFromShares([{ bankShare: 0.245, completion: 1 }]);
+    expect(big).toBeGreaterThan(small);
+    expect(big).toBeCloseTo(0.245, 10);
+  });
+
+  it('coverage sums each route bankShare × completion', () => {
+    // R1 fully done (share .084) + R2 half done (share .18) → .084 + .09
+    const c = routeCoverageFromShares([
+      { bankShare: 0.084, completion: 1 },
+      { bankShare: 0.18, completion: 0.5 },
+    ]);
+    expect(c).toBeCloseTo(0.084 + 0.09, 10);
+  });
+
+  it('a route with completion 0 (unauthored or untouched) contributes nothing', () => {
+    const c = routeCoverageFromShares([
+      { bankShare: 0.084, completion: 1 },
+      { bankShare: 0.5, completion: 0 },
+    ]);
+    expect(c).toBeCloseTo(0.084, 10);
+  });
+
+  it('all seven routes fully done (shares sum to 1) → coverage 1', () => {
+    const shares = [0.084, 0.18, 0.207, 0.088, 0.075, 0.123, 0.243]; // sums to 1
+    const c = routeCoverageFromShares(shares.map((s) => ({ bankShare: s, completion: 1 })));
+    expect(c).toBeCloseTo(1, 10);
+  });
+
+  it('out-of-range shares/completion are clamped; result never leaves 0..1', () => {
+    expect(routeCoverageFromShares([{ bankShare: 2, completion: 2 }])).toBe(1);
+    expect(routeCoverageFromShares([{ bankShare: -1, completion: 1 }])).toBe(0);
+    expect(routeCoverageFromShares([{ bankShare: 0.5, completion: -1 }])).toBe(0);
+  });
+
+  it('more completion never lowers coverage (monotonic), all else equal', () => {
+    const lo = routeCoverageFromShares([{ bankShare: 0.3, completion: 0.4 }]);
+    const hi = routeCoverageFromShares([{ bankShare: 0.3, completion: 0.7 }]);
+    expect(hi).toBeGreaterThanOrEqual(lo);
+  });
+
+  it('plugs into computeReadiness as routeCoverage — same 65/medium vector, 0.25 weight intact', () => {
+    // coverage .2 mirrors the existing hand-computed vector: acc .8, consistency 1, no debt → 65
+    const coverage = routeCoverageFromShares([{ bankShare: 0.2, completion: 1 }]);
+    const r = computeReadiness(
+      inputs({ routeCoverage: coverage, dueReviews: 0, recentAccuracy: 0.8, consistency: 1 }),
+    );
+    expect(r.score).toBe(65);
+    expect(r.band).toBe('medium');
+    expect(component(r, 'coverage')!.weight).toBeCloseTo(0.25 / 0.65, 10);
   });
 });
 

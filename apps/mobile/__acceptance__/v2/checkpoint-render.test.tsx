@@ -5,15 +5,14 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ReactNode } from 'react';
-import { getMission, getRouteManifest } from '@/content';
-import type { Question } from '@focus/shared';
+import { checkpointConceptId, getMission, getRouteManifest } from '@/content';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { createProfile } from '@/db/repo/profile';
 import { syncRoutesFromContent } from '@/db/repo/routes';
 import { openTestDb } from '@/db/testing/adapter.node';
 import { PlayerScreen } from '@/components/player/PlayerScreen';
-import { usePlayerStore } from '@/stores/playerStore';
+import { usePlayerStore, type PlayerQuestion } from '@/stores/playerStore';
 import { playToEnd, playUntil, type PlayPlan } from './driver';
 
 const h = vi.hoisted(() => ({ db: null as unknown, today: '2026-07-06' }));
@@ -66,9 +65,9 @@ function currentQuestionCard(kind: 'checkpoint-q' | 'drill-q') {
   return card;
 }
 
-function expectQuestionOnScreen(q: Question, previous?: Question) {
+function expectQuestionOnScreen(q: PlayerQuestion, previous?: PlayerQuestion) {
   for (const option of q.options) {
-    screen.getByText(option.text);
+    screen.getByText(option.text!);
   }
   if (previous) {
     const stale = previous.options.filter(
@@ -76,15 +75,15 @@ function expectQuestionOnScreen(q: Question, previous?: Question) {
     );
     expect(stale.length).toBeGreaterThan(0);
     for (const option of stale) {
-      expect(screen.queryByText(option.text)).toBeNull();
+      expect(screen.queryByText(option.text!)).toBeNull();
     }
   }
 }
 
-function answerVisibleCorrectOption(q: Question) {
+function answerVisibleCorrectOption(q: PlayerQuestion) {
   const correct = q.options.find((o) => o.correct);
   if (!correct) throw new Error('question has no correct option');
-  fireEvent.click(screen.getByText(correct.text));
+  fireEvent.click(screen.getByText(correct.text!));
   const last = usePlayerStore.getState().lastAnswer;
   expect(last?.correct).toBe(true);
 }
@@ -99,7 +98,7 @@ describe('question cards re-render per question while mounted (DEFECT-1)', () =>
 
     render(<PlayerScreen />);
 
-    let previous: Question | undefined;
+    let previous: PlayerQuestion | undefined;
     for (let i = 0; i < 5; i++) {
       const card = currentQuestionCard('checkpoint-q');
       const q = card.question;
@@ -116,7 +115,7 @@ describe('question cards re-render per question while mounted (DEFECT-1)', () =>
     const mission = getMission('r1-m1');
     const checkpoint = mission?.steps.find((s) => s.type === 'checkpoint');
     if (checkpoint?.type !== 'checkpoint') throw new Error('r1-m1 has no checkpoint');
-    const drillable = new Set(checkpoint.questions.map((q) => q.conceptId));
+    const drillable = new Set(checkpoint.questions.map(checkpointConceptId));
 
     let unsureConcept: string | undefined;
     let wrongConcept: string | undefined;

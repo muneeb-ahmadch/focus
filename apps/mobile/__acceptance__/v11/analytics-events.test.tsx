@@ -8,7 +8,7 @@
 // double-counts app_open.
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { getMission, getRouteManifest } from '@/content';
+import { checkpointConceptId, getMission, getRouteManifest } from '@/content';
 import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { getMissionState } from '@/db/repo/missions';
@@ -113,7 +113,7 @@ function checkpointConceptOf(missionId: string): string {
   const mission = getMission(missionId);
   const step = mission?.steps.find((s) => s.type === 'checkpoint');
   if (step?.type !== 'checkpoint') throw new Error('mission has no checkpoint');
-  return step.questions[0].conceptId;
+  return checkpointConceptId(step.questions[0]);
 }
 
 function walkPractice(): void {
@@ -245,15 +245,15 @@ describe('drill, rehab, practice events', () => {
   it('finishing a practice session queues practice_completed with the session label', () => {
     seedProfile();
     const ids = getPracticePool()
-      .filter((q) => q.topic === 'lights')
+      .filter((q) => q.topic === 'signs')
       .slice(0, 3)
       .map((q) => q.id);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, 'topic:signs');
     walkPractice();
     expect(events('practice_completed')).toEqual([
       {
         name: 'practice_completed',
-        props: { content_id: 'topic:lights', total: 3, correct: 3 },
+        props: { content_id: 'topic:signs', total: 3, correct: 3 },
       },
     ]);
   });
@@ -321,10 +321,10 @@ describe('the stream is catalogue-clean and PII-free', () => {
     usePlayerStore.getState().startDrill([concept]);
     playToEnd(usePlayerStore, allCorrect);
     const ids = getPracticePool()
-      .filter((q) => q.topic === 'lights')
+      .filter((q) => q.topic === 'signs')
       .slice(0, 3)
       .map((q) => q.id);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, 'topic:signs');
     walkPractice();
     useMockStore.getState().startMock(MINI_MOCK_CONFIG);
     useMockStore.getState().requestSubmit();

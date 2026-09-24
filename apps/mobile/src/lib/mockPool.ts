@@ -1,82 +1,102 @@
-import type { Blueprint, MockPoolQuestion } from '@focus/engine';
-import type { Question } from '@focus/shared';
-import { ROUTES } from '@/content';
+import { routeQuotaFromShares, type Blueprint, type MockPoolQuestion } from '@focus/engine';
+import type { BankFile } from '@focus/shared';
+import { BANK } from '@/content/bank';
+
+// A pool option is either text or a bundled image; an image option carries its authored
+// altText so it stays audible (rule 8). Mirrors the bank's BankOption, minus the schema noise.
+export interface PoolOption {
+  id: string;
+  text?: string;
+  imageRef?: string;
+  altText?: string;
+  correct: boolean;
+}
 
 export interface PoolQuestion {
   id: string;
   conceptId: string;
   routeId: string;
   prompt: string;
-  options: Question['options'];
+  // present when the situation is shown as an image above the (text) options
+  stemImage?: string;
+  options: PoolOption[];
   // authored feedback — practice renders it; the strict mock never does
   explanation: string;
   video: boolean;
   sign: boolean;
 }
 
-export const MOCK_BLUEPRINT: Blueprint = { total: 50, videoCount: 3, minSigns: 1 };
+// The road-sign floor (product rule 5 guarantees sign coverage). The per-route quota
+// derived below already yields ~this many route-2 questions; this is a hard backstop.
+const MIN_SIGNS = 4;
 
 interface BuiltPool {
   pool: MockPoolQuestion[];
   questionById: Map<string, PoolQuestion>;
+  byConcept: Map<string, PoolQuestion>;
 }
 
-let cache: BuiltPool | null = null;
-
-function buildPool(): BuiltPool {
+function buildPool(bank: BankFile): BuiltPool {
   const pool: MockPoolQuestion[] = [];
   const questionById = new Map<string, PoolQuestion>();
-  const videoCandidates: string[] = [];
+  const byConcept = new Map<string, PoolQuestion>();
 
-  for (const route of ROUTES) {
-    for (const mission of route.missions) {
-      for (const step of mission.steps) {
-        if (step.type === 'checkpoint') {
-          step.questions.forEach((q, i) => {
-            const id = `${step.id}#q${i}`;
-            questionById.set(id, {
-              id,
-              conceptId: q.conceptId,
-              routeId: route.routeId,
-              prompt: q.prompt,
-              options: q.options,
-              explanation: q.explanation,
-              video: false,
-              sign: false,
-            });
-            pool.push({ id, routeId: route.routeId, video: false, sign: false });
-          });
-          continue;
-        }
-        if (step.type === 'sequence') continue;
-
-        const id = step.id;
-        const sign = step.type === 'sign_meaning';
-        questionById.set(id, {
-          id,
-          conceptId: step.conceptId,
-          routeId: route.routeId,
-          prompt: step.question.prompt,
-          options: step.question.options,
-          explanation: step.question.explanation,
-          video: false,
-          sign,
-        });
-        pool.push({ id, routeId: route.routeId, video: false, sign });
-        if (step.type === 'scene_decision' || step.type === 'hazard_cue') videoCandidates.push(id);
-      }
-    }
+  for (const q of bank.questions) {
+    const video = !!q.clipId;
+    const sign = q.routeId === 'route-2'; // topic-map: route-2 = Road and traffic signs
+    const entry: PoolQuestion = {
+      id: q.item,
+      conceptId: q.conceptId,
+      routeId: q.routeId,
+      prompt: q.prompt,
+      ...(q.stemImage ? { stemImage: q.stemImage } : {}),
+      options: q.options.map((o) => ({
+        id: o.id,
+        correct: o.correct,
+        ...(o.text ? { text: o.text } : {}),
+        ...(o.imageRef ? { imageRef: o.imageRef, altText: o.altText } : {}),
+      })),
+      explanation: q.explanation,
+      video,
+      sign,
+    };
+    questionById.set(q.item, entry);
+    if (!byConcept.has(q.conceptId)) byConcept.set(q.conceptId, entry);
+    pool.push({ id: q.item, routeId: q.routeId, video, sign });
   }
 
-  for (const id of videoCandidates.sort().slice(0, MOCK_BLUEPRINT.videoCount)) {
-    questionById.get(id)!.video = true;
-    pool.find((q) => q.id === id)!.video = true;
-  }
-
-  return { pool, questionById };
+  return { pool, questionById, byConcept };
 }
 
+const built = buildPool(BANK);
+
+// Review items originating from mock/practice carry a bank conceptId that the authored
+// lesson pack doesn't know. The drill/rehab loop uses this to resolve a question for them.
+export function getBankQuestionByConcept(conceptId: string): PoolQuestion | undefined {
+  return built.byConcept.get(conceptId);
+}
+
+// Each route's share of the (non-video) bank, summing to 1 across routes with content.
+// Non-video mirrors routeQuotaFromShares — video questions sit on a placeholder route
+// until v14 and would skew the distribution. Readiness weights route coverage by these
+// shares (§4 P1-4): finishing a larger-share route counts for more.
+export function getRouteBankShares(): Record<string, number> {
+  const counts = new Map<string, number>();
+  for (const q of built.pool) if (!q.video) counts.set(q.routeId, (counts.get(q.routeId) ?? 0) + 1);
+  const total = [...counts.values()].reduce((a, b) => a + b, 0);
+  const shares: Record<string, number> = {};
+  if (total === 0) return shares;
+  for (const [routeId, count] of counts) shares[routeId] = count / total;
+  return shares;
+}
+
+export const MOCK_BLUEPRINT: Blueprint = {
+  total: 50,
+  videoCount: 3,
+  minSigns: MIN_SIGNS,
+  routeQuota: routeQuotaFromShares(built.pool, 50 - 3),
+};
+
 export function getMockPool(): BuiltPool {
-  if (!cache) cache = buildPool();
-  return cache;
+  return built;
 }

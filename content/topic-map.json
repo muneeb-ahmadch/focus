@@ -1,0 +1,24 @@
+{
+  "topicMapFormat": 1,
+  "variants": {
+    "Safety and your vehicle/motorcycle": "Safety and your vehicle",
+    "Vehicle/motorcycle handling": "Vehicle handling",
+    "Vehicle/motorcycle loading": "Vehicle loading"
+  },
+  "topics": {
+    "Alertness": { "routeId": "route-1", "slug": "alertness" },
+    "Attitude": { "routeId": "route-1", "slug": "attitude" },
+    "Road and traffic signs": { "routeId": "route-2", "slug": "signs" },
+    "Hazard awareness": { "routeId": "route-3", "slug": "hazard-awareness" },
+    "Safety margins": { "routeId": "route-3", "slug": "safety-margins" },
+    "Vehicle handling": { "routeId": "route-3", "slug": "vehicle-handling" },
+    "Rules of the road": { "routeId": "route-4", "slug": "rules-of-the-road" },
+    "Motorway rules": { "routeId": "route-5", "slug": "motorway-rules" },
+    "Vulnerable road users": { "routeId": "route-6", "slug": "vulnerable-road-users" },
+    "Other types of vehicle": { "routeId": "route-6", "slug": "other-vehicles" },
+    "Safety and your vehicle": { "routeId": "route-7", "slug": "safety-and-your-vehicle" },
+    "Essential documents": { "routeId": "route-7", "slug": "essential-documents" },
+    "Incidents, accidents and emergencies": { "routeId": "route-7", "slug": "incidents" },
+    "Vehicle loading": { "routeId": "route-7", "slug": "vehicle-loading" }
+  }
+}

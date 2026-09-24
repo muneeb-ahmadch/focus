@@ -21,6 +21,9 @@ const byText = (a: DistilledOption, b: DistilledOption): number =>
   a.text < b.text ? -1 : a.text > b.text ? 1 : 0;
 
 function distillQuestion(q: Question | CheckpointQuestion): Record<string, unknown> {
+  // A curated bankRef checkpoint question distills to just its reference. Route 1 is fully
+  // authored (no bankRefs), so this branch never fires for the snapshot — the pin stays intact.
+  if ('bankRef' in q) return { bankRef: q.bankRef };
   const options: DistilledOption[] = q.options
     .map((o) => ({
       text: o.text,
@@ -87,7 +90,10 @@ function distillMission(m: Mission): Record<string, unknown> {
 
 describe('conversion integrity — pipeline output equals pre-conversion content', () => {
   it('route-1 pack content matches the snapshot captured from main', () => {
+    // The snapshot pins Route 1's pre-conversion content. Route 2+ are authored later (draft) and
+    // are not part of this pin, so scope the comparison to route-1.
     const distilled = [...MISSIONS]
+      .filter((m) => m.routeId === 'route-1')
       .sort((a, b) => (a.missionId < b.missionId ? -1 : 1))
       .map(distillMission);
     expect(distilled).toEqual(snapshot);

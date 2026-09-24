@@ -1,0 +1,252 @@
+{
+  "missionId": "r7-m6",
+  "routeId": "route-7",
+  "title": "First aid at the scene",
+  "estimatedMinutes": 8,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r7-m6-s1",
+      "type": "scene_decision",
+      "conceptId": "c.firstaid.danger-first",
+      "sourceRef": "HC-annex7",
+      "scene": "You arrive at a crash. Someone is lying still in the road, and traffic is still moving past.",
+      "question": {
+        "prompt": "What should you do first?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Run straight to the casualty",
+            "correct": false,
+            "misconceptionId": "m.firstaid.rush-in"
+          },
+          {
+            "id": "b",
+            "text": "Check it's safe to approach",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Drag them onto the pavement",
+            "correct": false
+          }
+        ],
+        "explanation": "If you get hurt too, there are two casualties and no helper. Make the scene safe before you go in."
+      }
+    },
+    {
+      "id": "r7-m6-s2",
+      "type": "sequence",
+      "conceptId": "c.firstaid.dr-abc",
+      "sourceRef": "HC-annex7",
+      "title": "DR ABC",
+      "prompt": "Put the first checks on an unconscious casualty in order.",
+      "items": [
+        { "id": "i1", "text": "Danger — make sure it's safe" },
+        { "id": "i2", "text": "Response — try to get a response" },
+        { "id": "i3", "text": "Airway — make sure it's open" },
+        { "id": "i4", "text": "Breathing — check it's normal" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "Then C: if they're not breathing normally, start chest compressions."
+    },
+    {
+      "id": "r7-m6-s3",
+      "type": "rule_card",
+      "conceptId": "c.firstaid.dont-move",
+      "sourceRef": "HC-annex7",
+      "title": "Leave them where they are",
+      "body": "Don't move a casualty unless they're in further danger, such as from traffic or fire. They may have injuries you can't see.",
+      "question": {
+        "prompt": "A casualty is unconscious but breathing. When should you move them?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Straight away, into a more comfortable position",
+            "correct": false,
+            "misconceptionId": "m.firstaid.move-to-comfort"
+          },
+          {
+            "id": "b",
+            "text": "As soon as someone else can help lift",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Only if they're in further danger",
+            "correct": true
+          }
+        ],
+        "explanation": "Moving someone with a neck or back injury can make it much worse."
+      }
+    },
+    {
+      "id": "r7-m6-s4",
+      "type": "rule_card",
+      "conceptId": "c.firstaid.helmet",
+      "sourceRef": "HC-annex7",
+      "title": "A rider's helmet",
+      "body": "Leave an injured motorcyclist's helmet on unless it's essential to remove it — for example, to keep their airway open.",
+      "question": {
+        "prompt": "A motorcyclist is injured after a crash. When should their helmet be removed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only when it's essential",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Straight away, to help them breathe",
+            "correct": false,
+            "misconceptionId": "m.firstaid.remove-helmet"
+          },
+          {
+            "id": "c",
+            "text": "Once they've been moved to the kerb",
+            "correct": false
+          }
+        ],
+        "explanation": "Pulling off a helmet can move the head and neck. Leave it to the paramedics unless there's no other way."
+      }
+    },
+    {
+      "id": "r7-m6-s5",
+      "type": "contrast",
+      "conceptId": "c.firstaid.cpr-depth",
+      "sourceRef": "HC-annex7",
+      "a": {
+        "label": "Adult CPR",
+        "body": "Two hands on the centre of the chest. Press 5–6 cm, about twice a second."
+      },
+      "b": {
+        "label": "Child CPR",
+        "body": "One hand may be enough. Press 4–5 cm, at the same rate."
+      },
+      "question": {
+        "prompt": "How far should you press down when giving CPR to an adult?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Just 1–2 cm, so you don't hurt them",
+            "correct": false,
+            "misconceptionId": "m.firstaid.cpr-gentle"
+          },
+          {
+            "id": "b",
+            "text": "5 to 6 centimetres",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "As far as you possibly can",
+            "correct": false
+          }
+        ],
+        "explanation": "Compressions must be hard and fast to keep blood moving. Don't stop unless they start breathing or help takes over."
+      }
+    },
+    {
+      "id": "r7-m6-s6",
+      "type": "rule_card",
+      "conceptId": "c.firstaid.aed",
+      "sourceRef": "DVSA-DES-s16",
+      "title": "Public defibrillators",
+      "body": "Anyone can use a public defibrillator (AED). It talks you through every step, and the 999 operator can tell you where the nearest one is.",
+      "question": {
+        "prompt": "Who can use a public access defibrillator (AED)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only trained first aiders",
+            "correct": false,
+            "misconceptionId": "m.firstaid.aed-trained-only"
+          },
+          {
+            "id": "b",
+            "text": "Anyone",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Only the emergency services",
+            "correct": false
+          }
+        ],
+        "explanation": "An AED won't shock someone who doesn't need it. If someone else is there, send them for one while you do CPR."
+      }
+    },
+    {
+      "id": "r7-m6-s7",
+      "type": "scene_decision",
+      "conceptId": "c.firstaid.bleeding",
+      "sourceRef": "HC-annex7",
+      "scene": "A pedestrian has a deep cut to their leg and is bleeding heavily. The leg isn't broken and there's nothing in the wound.",
+      "question": {
+        "prompt": "How could you help?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Let it bleed freely first to clean the wound",
+            "correct": false,
+            "misconceptionId": "m.firstaid.let-it-bleed"
+          },
+          {
+            "id": "b",
+            "text": "Give them a drink to replace lost fluid",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Apply firm pressure over the wound",
+            "correct": true
+          }
+        ],
+        "explanation": "Firm pressure slows the bleeding. Protect yourself from their blood if you can, and keep the pressure on until help arrives."
+      }
+    },
+    {
+      "id": "r7-m6-s8",
+      "type": "misconception",
+      "conceptId": "c.firstaid.shock",
+      "sourceRef": "HC-annex7",
+      "wrongBelief": "Someone in shock after a crash should be given a hot, sweet drink.",
+      "question": {
+        "prompt": "A driver seems to be in shock after a crash. How can you help?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reassure them confidently and keep them warm",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Give them a hot, sweet drink",
+            "correct": false,
+            "misconceptionId": "m.firstaid.shock-drink"
+          },
+          {
+            "id": "c",
+            "text": "Walk them around to calm them down",
+            "correct": false
+          }
+        ],
+        "explanation": "Shock can be serious and isn't always obvious. Stay with them and watch for changes until help arrives."
+      },
+      "repairNote": "Keep them warm and reassure them. Don't give them anything to eat or drink."
+    },
+    {
+      "id": "r7-m6-s9",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-annex7",
+      "questions": [
+        { "bankRef": "c.firstaid.danger-first" },
+        { "bankRef": "c.firstaid.dr-abc" },
+        { "bankRef": "c.firstaid.cpr-depth" },
+        { "bankRef": "c.firstaid.bleeding" },
+        { "bankRef": "c.firstaid.shock" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "missionId": "r7-m2",
+  "routeId": "route-7",
+  "title": "Roadworthy",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r7-m2-s1",
+      "type": "scene_decision",
+      "conceptId": "c.vehicle.warning-light",
+      "sourceRef": "HC-annex6",
+      "scene": "You're driving along when a red warning light you don't recognise comes on on the dashboard.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ignore it while the car still seems to drive normally",
+            "correct": false,
+            "misconceptionId": "m.vehicle.light-ignore-if-fine"
+          },
+          {
+            "id": "b",
+            "text": "Check out the problem as soon as you safely can",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Stop at once, wherever you are",
+            "correct": false
+          }
+        ],
+        "explanation": "A warning light can mean the car isn't safe to drive. Pull over safely and check the handbook — get help if you're unsure."
+      }
+    },
+    {
+      "id": "r7-m2-s2",
+      "type": "rule_card",
+      "conceptId": "c.vehicle.tread-legal",
+      "sourceRef": "HC-annex6",
+      "title": "Tyre tread: the legal limit",
+      "body": "Car tyres need at least 1.6 mm of tread across the central three-quarters, all the way round — with no deep cuts or bulges.",
+      "question": {
+        "prompt": "What's the legal minimum tread depth for car tyres?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 mm",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Any tread is legal as long as the tyre isn't bald",
+            "correct": false,
+            "misconceptionId": "m.vehicle.any-tread-legal"
+          },
+          {
+            "id": "c",
+            "text": "1.6 mm",
+            "correct": true
+          }
+        ],
+        "explanation": "1.6 mm is the legal floor, not a safe target. Grip in the wet falls away well before then."
+      }
+    },
+    {
+      "id": "r7-m2-s3",
+      "type": "contrast",
+      "conceptId": "c.vehicle.pressures-cold",
+      "sourceRef": "HC-annex6",
+      "a": {
+        "label": "Under-inflated",
+        "body": "Longer stopping distances, poorer handling and more fuel used."
+      },
+      "b": {
+        "label": "Checked cold",
+        "body": "Driving warms tyres and raises the reading. Check before you set off."
+      },
+      "question": {
+        "prompt": "When should you check your tyre pressures?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When the tyres are cold",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "After a long drive, once the tyres have warmed up",
+            "correct": false,
+            "misconceptionId": "m.vehicle.check-pressure-warm"
+          },
+          {
+            "id": "c",
+            "text": "Only when the car is serviced",
+            "correct": false
+          }
+        ],
+        "explanation": "Compare the cold reading with the figure in the handbook, and adjust it for a heavy load if the handbook says so."
+      }
+    },
+    {
+      "id": "r7-m2-s4",
+      "type": "scene_decision",
+      "conceptId": "c.vehicle.brakes-pull",
+      "sourceRef": "HC-annex6",
+      "scene": "Every time you brake, the car pulls towards the left.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nothing — it's just the camber of the road",
+            "correct": false,
+            "misconceptionId": "m.vehicle.pull-is-camber"
+          },
+          {
+            "id": "b",
+            "text": "Pump the brakes to even them out",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Have the brakes checked as soon as possible",
+            "correct": true
+          }
+        ],
+        "explanation": "Brakes pulling to one side usually means a fault. It can make you swerve in an emergency stop."
+      }
+    },
+    {
+      "id": "r7-m2-s5",
+      "type": "rule_card",
+      "conceptId": "c.vehicle.head-restraint",
+      "sourceRef": "HC-97",
+      "title": "Set your head restraint",
+      "body": "A properly adjusted head restraint cuts the risk of neck injury in a crash. Set it before you drive, close to the back of your head.",
+      "question": {
+        "prompt": "What's the main reason to adjust your head restraint properly?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To make long journeys more comfortable",
+            "correct": false,
+            "misconceptionId": "m.vehicle.head-restraint-comfort"
+          },
+          {
+            "id": "b",
+            "text": "To help you avoid neck injury",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "To stop you nodding off at the wheel",
+            "correct": false
+          }
+        ],
+        "explanation": "In a crash your head is thrown forwards, then back. A well-set restraint stops it snapping backwards."
+      }
+    },
+    {
+      "id": "r7-m2-s6",
+      "type": "misconception",
+      "conceptId": "c.vehicle.adas-support",
+      "sourceRef": "HC-150",
+      "wrongBelief": "With driver-assist systems switched on, the car is doing the driving.",
+      "question": {
+        "prompt": "Your car has lane-keep assist and adaptive cruise control switched on. Who's in control?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You are — the systems only help",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The car, while the systems are switched on",
+            "correct": false,
+            "misconceptionId": "m.vehicle.adas-self-driving"
+          },
+          {
+            "id": "c",
+            "text": "The systems, until they sound a warning",
+            "correct": false
+          }
+        ],
+        "explanation": "Driver-assist systems are there to make driving safer. They can't see everything, so you stay responsible."
+      },
+      "repairNote": "Driver-assist systems support you. You must stay alert and in control of the car at all times."
+    },
+    {
+      "id": "r7-m2-s7",
+      "type": "scene_decision",
+      "conceptId": "c.vehicle.lock-and-key",
+      "sourceRef": "HC-239",
+      "scene": "You're popping into a shop for two minutes. You've parked right outside the door.",
+      "question": {
+        "prompt": "What should you do with the car?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Leave the engine running — you'll be straight back",
+            "correct": false,
+            "misconceptionId": "m.vehicle.quick-stop-leave-running"
+          },
+          {
+            "id": "b",
+            "text": "Switch off, take the key and lock it",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Leave the key in so you can keep an eye on it",
+            "correct": false
+          }
+        ],
+        "explanation": "Cars are stolen in seconds. Leaving the key in can also invalidate your insurance."
+      }
+    },
+    {
+      "id": "r7-m2-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-annex6",
+      "questions": [
+        { "bankRef": "c.vehicle.warning-light" },
+        { "bankRef": "c.vehicle.tread-legal" },
+        { "bankRef": "c.vehicle.pressures-cold" },
+        { "bankRef": "c.vehicle.brakes-pull" },
+        { "bankRef": "c.vehicle.adas-support" }
+      ]
+    }
+  ]
+}

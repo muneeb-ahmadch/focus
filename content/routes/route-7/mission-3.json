@@ -1,0 +1,236 @@
+{
+  "missionId": "r7-m3",
+  "routeId": "route-7",
+  "title": "Greener driving",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r7-m3-s1",
+      "type": "scene_decision",
+      "conceptId": "c.eco.smooth-driving",
+      "sourceRef": "DVSA-DES-s17",
+      "scene": "In stop-start town traffic, you accelerate hard into every gap and brake late for every queue.",
+      "question": {
+        "prompt": "What's this doing to your fuel use?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Saving fuel — you spend less time on the road",
+            "correct": false,
+            "misconceptionId": "m.eco.quick-is-efficient"
+          },
+          {
+            "id": "b",
+            "text": "Nothing — modern engines use the same either way",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Using far more fuel than driving smoothly",
+            "correct": true
+          }
+        ],
+        "explanation": "Harsh acceleration and braking waste fuel and wear the car. Smooth driving can save about 15%."
+      }
+    },
+    {
+      "id": "r7-m3-s2",
+      "type": "rule_card",
+      "conceptId": "c.eco.tyre-pressure-fuel",
+      "sourceRef": "DVSA-DES-s17",
+      "title": "Soft tyres cost money",
+      "body": "Under-inflated tyres drag on the road, so the engine works harder and burns more fuel. Check your pressures regularly.",
+      "question": {
+        "prompt": "What's most likely to waste fuel?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Under-inflated tyres",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Tyres at the pressure in the handbook",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Nothing about tyres — pressure only affects grip",
+            "correct": false,
+            "misconceptionId": "m.eco.pressure-only-safety"
+          }
+        ],
+        "explanation": "Correct pressures save fuel, make the tyres last longer and keep your stopping distance as short as it can be."
+      }
+    },
+    {
+      "id": "r7-m3-s3",
+      "type": "contrast",
+      "conceptId": "c.eco.speed-cost",
+      "sourceRef": "DVSA-DES-s17",
+      "a": {
+        "label": "Steady 50 mph",
+        "body": "Lower revs and less air resistance — an economical way to cover the miles."
+      },
+      "b": {
+        "label": "Steady 70 mph",
+        "body": "Uses about 15% more fuel than 50 mph over the same distance."
+      },
+      "question": {
+        "prompt": "How much more fuel will you use at 70 mph than at 50 mph?",
+        "options": [
+          {
+            "id": "a",
+            "text": "None, as long as you're in top gear",
+            "correct": false,
+            "misconceptionId": "m.eco.top-gear-free"
+          },
+          {
+            "id": "b",
+            "text": "About 15% more",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "About 75% more",
+            "correct": false
+          }
+        ],
+        "explanation": "Air resistance climbs steeply with speed. The faster you go, the harder the engine has to work."
+      }
+    },
+    {
+      "id": "r7-m3-s4",
+      "type": "misconception",
+      "conceptId": "c.eco.engine-off-waiting",
+      "sourceRef": "HC-123",
+      "wrongBelief": "Restarting the engine uses more fuel than leaving it running while you wait.",
+      "question": {
+        "prompt": "You've stopped at the roadside to wait several minutes for a friend. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep it idling — restarting burns more fuel",
+            "correct": false,
+            "misconceptionId": "m.eco.idling-cheaper"
+          },
+          {
+            "id": "b",
+            "text": "Rev it now and then to keep the battery charged",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Switch off the engine",
+            "correct": true
+          }
+        ],
+        "explanation": "An idling engine burns fuel and pollutes for nothing. You mustn't leave it running unnecessarily while parked."
+      },
+      "repairNote": "If you'll be stationary for a while, switch off. Leaving an engine running unnecessarily while parked is against the rules."
+    },
+    {
+      "id": "r7-m3-s5",
+      "type": "rule_card",
+      "conceptId": "c.eco.short-journeys",
+      "sourceRef": "DVSA-DES-s17",
+      "title": "Short trips, cold engine",
+      "body": "A cold engine runs inefficiently and pollutes more. For short trips, walking or cycling is cleaner — and often quicker.",
+      "question": {
+        "prompt": "How can you reduce the harm your car does to the environment?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Warm the engine up by idling before you set off",
+            "correct": false,
+            "misconceptionId": "m.eco.idle-to-warm"
+          },
+          {
+            "id": "b",
+            "text": "Avoid making lots of short journeys",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Drive short trips in a low gear",
+            "correct": false
+          }
+        ],
+        "explanation": "An engine only runs cleanly once it's warm. On a short trip it barely gets there."
+      }
+    },
+    {
+      "id": "r7-m3-s6",
+      "type": "scene_decision",
+      "conceptId": "c.eco.anticipate",
+      "sourceRef": "DVSA-DES-s17",
+      "scene": "You're doing 40 mph when the traffic lights far ahead turn red.",
+      "question": {
+        "prompt": "What's the greenest way to deal with it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ease off early, stay in gear and let the car slow",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Keep your speed up, then brake firmly at the line",
+            "correct": false,
+            "misconceptionId": "m.eco.quick-is-efficient"
+          },
+          {
+            "id": "c",
+            "text": "Speed up in case they change back to green",
+            "correct": false
+          }
+        ],
+        "explanation": "Looking well ahead lets you slow gently — often without stopping at all. Late, hard braking throws that energy away."
+      }
+    },
+    {
+      "id": "r7-m3-s7",
+      "type": "rule_card",
+      "conceptId": "c.eco.dispose-oil",
+      "sourceRef": "DVSA-DES-s17",
+      "title": "Old oil and batteries",
+      "body": "Used engine oil and old batteries are hazardous. Never pour oil down a drain — take both to a local authority disposal site.",
+      "question": {
+        "prompt": "You've changed your own engine oil. What should you do with the old oil?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pour it down a drain with plenty of water",
+            "correct": false,
+            "misconceptionId": "m.eco.oil-down-drain"
+          },
+          {
+            "id": "b",
+            "text": "Take it to a local authority site",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Put it in your household bin",
+            "correct": false
+          }
+        ],
+        "explanation": "Oil poured down a drain pollutes rivers and harms wildlife. It's also illegal."
+      }
+    },
+    {
+      "id": "r7-m3-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "DVSA-DES-s17",
+      "questions": [
+        { "bankRef": "c.eco.smooth-driving" },
+        { "bankRef": "c.eco.tyre-pressure-fuel" },
+        { "bankRef": "c.eco.speed-cost" },
+        { "bankRef": "c.eco.engine-off-waiting" },
+        { "bankRef": "c.eco.short-journeys" }
+      ]
+    }
+  ]
+}

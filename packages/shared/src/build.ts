@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { BankQuestion, resolveBankQuestionByConcept, type BankFile } from './bank';
 import {
   MisconceptionEntry,
   MissionSchema,
@@ -9,6 +10,35 @@ import {
   type Mission,
 } from './schema';
 import { validateContent, type RawContentInput, type ValidationReport } from './validate';
+
+export interface UnresolvedBankRef {
+  missionId: string;
+  stepId: string;
+  index: number;
+  bankRef: string;
+}
+
+// Build-time resolution of curated checkpoint bankRefs against the bank; a ref that does not
+// resolve BANK-WIDE by concept is reported so the CLI can fail loudly (runs only where the
+// excluded bank exists). Authored inline checkpoint questions have nothing to resolve.
+export function unresolvedCheckpointBankRefs(
+  missions: Mission[],
+  bank: BankFile,
+): UnresolvedBankRef[] {
+  const unresolved: UnresolvedBankRef[] = [];
+  for (const mission of missions) {
+    for (const step of mission.steps) {
+      if (step.type !== 'checkpoint') continue;
+      step.questions.forEach((q, index) => {
+        if (!('bankRef' in q)) return;
+        if (!resolveBankQuestionByConcept(bank, q.bankRef)) {
+          unresolved.push({ missionId: mission.missionId, stepId: step.id, index, bankRef: q.bankRef });
+        }
+      });
+    }
+  }
+  return unresolved;
+}
 
 export class ContentValidationError extends Error {
   readonly report: ValidationReport;
@@ -32,8 +62,36 @@ function canonicalize(value: unknown): unknown {
   return value;
 }
 
+// The single canonical serializer — key-sorted, 2-space, trailing newline — used for both the
+// content pack and the ingested bank so every generated JSON is byte-stable across machines.
+export function serializeCanonical(value: unknown): string {
+  return `${JSON.stringify(canonicalize(value), null, 2)}\n`;
+}
+
 export function serializePack(pack: ContentPack): string {
-  return `${JSON.stringify(canonicalize(pack), null, 2)}\n`;
+  return serializeCanonical(pack);
+}
+
+function bankQuestions(rawFile: unknown): unknown[] {
+  const qs = (rawFile as { questions?: unknown } | null)?.questions;
+  return Array.isArray(qs) ? qs : [];
+}
+
+// The app-facing pool bank: pool-eligible questions only, car then video. Questions that
+// fail BankQuestion parse are dropped — today that is the image-option questions still
+// awaiting alt-text (vB.3), so the bundled bank never carries a question the app can't
+// render audibly (rule 8). Video questions (clipId) come from the VMC bank.
+export function selectAppBank(rawCarFile: unknown, rawVmcFile: unknown): BankFile {
+  const questions: BankQuestion[] = [];
+  for (const raw of [...bankQuestions(rawCarFile), ...bankQuestions(rawVmcFile)]) {
+    const parsed = BankQuestion.safeParse(raw);
+    if (parsed.success) questions.push(parsed.data);
+  }
+  return { bankFormat: 1, source: 'Focus question bank', questions };
+}
+
+export function buildBank(rawCarFile: unknown, rawVmcFile: unknown): string {
+  return serializeCanonical(selectAppBank(rawCarFile, rawVmcFile));
 }
 
 function ascending(a: string, b: string): number {

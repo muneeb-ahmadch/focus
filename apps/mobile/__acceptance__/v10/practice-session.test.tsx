@@ -13,7 +13,6 @@ import type { Db } from '@/db/adapter';
 import { migrate } from '@/db/migrations';
 import { openTestDb } from '@/db/testing/adapter.node';
 import { getActiveDays } from '@/db/repo/activity';
-import { MISSIONS } from '@/content';
 import { getPracticePool } from '@/lib/practicePool';
 import { getMockPool } from '@/lib/mockPool';
 import { usePlayerStore } from '@/stores/playerStore';
@@ -56,9 +55,13 @@ const today = () => {
   ).padStart(2, '0')}`;
 };
 
+// A real bank topic with plenty of questions to build sessions from.
+const TOPIC = 'signs';
+const LABEL = `topic:${TOPIC}`;
+
 function sessionIds(n: number): string[] {
   return getPracticePool()
-    .filter((q) => q.topic === 'lights')
+    .filter((q) => q.topic === TOPIC)
     .slice(0, n)
     .map((q) => q.id);
 }
@@ -67,21 +70,10 @@ const question = (id: string) => getMockPool().questionById.get(id)!;
 const correctOf = (id: string) => question(id).options.find((o) => o.correct)!;
 const wrongOf = (id: string) => question(id).options.find((o) => !o.correct)!;
 
-// the authored explanation for a pool question, straight from content —
-// practice is a learning surface, so feedback must carry it (mock never does)
+// the authored explanation for a pool question, straight from the bank — practice is a
+// learning surface, so feedback must carry it (the mock never does)
 function contentExplanation(poolId: string): string {
-  const [stepId, qIdx] = poolId.split('#q');
-  for (const m of MISSIONS) {
-    for (const s of m.steps) {
-      if (s.type === 'checkpoint' && s.id === stepId && qIdx !== undefined) {
-        return s.questions[Number(qIdx)]!.explanation;
-      }
-      if (s.id === poolId && s.type !== 'checkpoint' && s.type !== 'sequence') {
-        return s.question.explanation;
-      }
-    }
-  }
-  throw new Error(`no content explanation for ${poolId}`);
+  return question(poolId).explanation;
 }
 
 beforeEach(() => {
@@ -100,7 +92,7 @@ afterEach(() => {
 describe('practice session lifecycle', () => {
   it('startPractice builds the queue and opens a practice attempt', () => {
     const ids = sessionIds(6);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, LABEL);
 
     const s = usePlayerStore.getState();
     expect(s.mode).toBe('practice');
@@ -112,14 +104,14 @@ describe('practice session lifecycle', () => {
     );
     expect(attempt).toEqual({
       attempt_type: 'practice',
-      content_id: 'topic:lights',
+      content_id: LABEL,
       status: 'in_progress',
     });
   });
 
   it('wrong answer → review item with origin wrong; correct answer → no review item', () => {
     const ids = sessionIds(2);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, LABEL);
 
     usePlayerStore.getState().answer(wrongOf(ids[0]!).id);
     usePlayerStore.getState().advance();
@@ -135,7 +127,7 @@ describe('practice session lifecycle', () => {
 
   it('correct answers advance without a confidence step and are recorded sure', () => {
     const ids = sessionIds(2);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, LABEL);
     usePlayerStore.getState().answer(correctOf(ids[0]!).id);
     expect(usePlayerStore.getState().phase).toBe('feedback');
     usePlayerStore.getState().advance();
@@ -149,7 +141,7 @@ describe('practice session lifecycle', () => {
 
   it('finish: attempt submitted with fraction score, XP = drillXp(correct), day NOT active', () => {
     const ids = sessionIds(5);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, LABEL);
     for (let i = 0; i < ids.length; i++) {
       const option = i === 0 ? wrongOf(ids[i]!) : correctOf(ids[i]!);
       usePlayerStore.getState().answer(option.id);
@@ -175,7 +167,7 @@ describe('practice session lifecycle', () => {
 
   it('R3/R6: double answer records once; double advance moves one card', () => {
     const ids = sessionIds(3);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, LABEL);
     usePlayerStore.getState().answer(correctOf(ids[0]!).id);
     usePlayerStore.getState().answer(correctOf(ids[0]!).id);
     expect(db.all('SELECT id FROM answer_event')).toHaveLength(1);
@@ -187,7 +179,7 @@ describe('practice session lifecycle', () => {
   });
 
   it('abandon mid-session marks the attempt abandoned and deactivates', () => {
-    usePlayerStore.getState().startPractice(sessionIds(5), 'topic:lights');
+    usePlayerStore.getState().startPractice(sessionIds(5), LABEL);
     usePlayerStore.getState().answer(correctOf(sessionIds(5)[0]!).id);
     usePlayerStore.getState().abandon();
 
@@ -202,11 +194,11 @@ describe('practice session lifecycle', () => {
 describe('practice session render (R5 walk)', () => {
   it('walks two cards through the real tree: Continue on correct feedback, never confidence chips; summary shows the score', () => {
     const ids = sessionIds(2);
-    usePlayerStore.getState().startPractice(ids, 'topic:lights');
+    usePlayerStore.getState().startPractice(ids, LABEL);
     render(<PlayerScreen />);
 
     for (const id of ids) {
-      fireEvent.click(screen.getByText(correctOf(id).text));
+      fireEvent.click(screen.getByText(correctOf(id).text!));
       expect(screen.queryByText(/how did that feel|were you sure/i)).toBeNull();
       expect(screen.getByText(contentExplanation(id))).toBeTruthy();
       fireEvent.click(screen.getByRole('button', { name: /continue/i }));

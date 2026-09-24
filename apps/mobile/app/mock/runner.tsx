@@ -1,9 +1,10 @@
 import { mockRemainingMs } from '@focus/engine';
 import { router } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PrimaryButton } from '@/components/PrimaryButton';
+import { bankAsset } from '@/content/bankAssets';
 import { now } from '@/lib/clock';
 import { getMockPool } from '@/lib/mockPool';
 import { useMockStore } from '@/stores/mockStore';
@@ -116,6 +117,15 @@ export default function MockRunnerScreen() {
                 <Text style={styles.videoText}>Silent video clip — placeholder</Text>
               </View>
             ) : null}
+            {question.stemImage ? (
+              <Image
+                source={bankAsset(question.stemImage)}
+                accessibilityRole="image"
+                accessibilityLabel="Question image"
+                resizeMode="contain"
+                style={styles.stemImage}
+              />
+            ) : null}
             <Text style={styles.prompt}>{question.prompt}</Text>
             <View style={styles.options}>
               {question.options.map((option) => {
@@ -125,11 +135,22 @@ export default function MockRunnerScreen() {
                     key={option.id}
                     onPress={() => useMockStore.getState().answer(questionId, option.id)}
                     accessibilityRole="button"
+                    accessibilityLabel={option.imageRef ? option.altText : undefined}
                     accessibilityState={{ selected }}
                     aria-selected={selected}
                     style={[styles.option, selected && styles.optionSelected]}
                   >
-                    <Text style={styles.optionText}>{option.text}</Text>
+                    {option.imageRef ? (
+                      <Image
+                        source={bankAsset(option.imageRef)}
+                        accessibilityRole="image"
+                        accessibilityLabel={option.altText}
+                        resizeMode="contain"
+                        style={styles.optionImage}
+                      />
+                    ) : (
+                      <Text style={styles.optionText}>{option.text}</Text>
+                    )}
                   </Pressable>
                 );
               })}
@@ -206,8 +227,10 @@ const makeStyles = (t: Theme) =>
       justifyContent: 'center',
     },
     videoText: { ...t.text(t.font.sm), color: t.colors.textMuted },
+    stemImage: { width: '100%', height: 200 },
     prompt: { ...t.text(t.font.lg), color: t.colors.text, fontWeight: '600' },
     options: { gap: t.space.sm },
+    optionImage: { width: '100%', height: 96 },
     option: {
       backgroundColor: t.colors.surface,
       borderWidth: 1,

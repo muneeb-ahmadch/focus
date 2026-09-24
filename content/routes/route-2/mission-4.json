@@ -1,0 +1,236 @@
+{
+  "missionId": "r2-m4",
+  "routeId": "route-2",
+  "title": "Traffic lights & signals",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r2-m4-s1",
+      "type": "scene_decision",
+      "conceptId": "c.signs.signal-sequence",
+      "sourceRef": "KYTS-signals",
+      "scene": "You're approaching a junction. The lights ahead change from red to red and amber showing together.",
+      "question": {
+        "prompt": "What does red and amber together mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Go — that combination means the way is clear",
+            "correct": false,
+            "misconceptionId": "m.signs.red-amber-means-go"
+          },
+          {
+            "id": "b",
+            "text": "Wait — green is next, but you must not move yet",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The lights have failed; treat it as a crossroads",
+            "correct": false
+          }
+        ],
+        "explanation": "The order never changes: red, red and amber, green, amber, red. Red and amber still means stop — wait for green."
+      }
+    },
+    {
+      "id": "r2-m4-s2",
+      "type": "rule_card",
+      "conceptId": "c.signs.signal-amber-alone",
+      "sourceRef": "KYTS-signals",
+      "title": "Amber on its own",
+      "body": "Amber alone means stop at the stop line. Carry on only if you've already crossed it, or you're so close that stopping could cause a collision.",
+      "question": {
+        "prompt": "The light turns amber while you're still well back. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop at the stop line",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Speed up to clear the junction before red",
+            "correct": false,
+            "misconceptionId": "m.signs.amber-means-hurry"
+          },
+          {
+            "id": "c",
+            "text": "Carry on — amber only warns that the light is changing",
+            "correct": false
+          }
+        ],
+        "explanation": "Amber on its own means stop. You carry on only if you've already crossed the line or stopping would be unsafe."
+      }
+    },
+    {
+      "id": "r2-m4-s3",
+      "type": "rule_card",
+      "conceptId": "c.signs.signal-green-blocked",
+      "sourceRef": "KYTS-signals",
+      "title": "Green isn't automatic",
+      "body": "Green means you may go on only if the way is clear. If your exit road is blocked, hold back behind the line — even on green.",
+      "question": {
+        "prompt": "The light is green but traffic beyond the junction is at a standstill. You…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move into the junction and wait there",
+            "correct": false,
+            "misconceptionId": "m.signs.green-means-enter"
+          },
+          {
+            "id": "b",
+            "text": "Wait behind the line until your exit is clear",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Go — a green light gives you right of way",
+            "correct": false
+          }
+        ],
+        "explanation": "Look into the road you're taking before you move off. Entering a junction you can't clear blocks everyone else."
+      }
+    },
+    {
+      "id": "r2-m4-s4",
+      "type": "scene_decision",
+      "conceptId": "c.signs.signal-filter-arrow",
+      "sourceRef": "KYTS-signals",
+      "scene": "You're in the left-hand lane at lights, waiting to turn left. Red is showing, with a green arrow pointing left.",
+      "question": {
+        "prompt": "What may you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Go straight on — a green arrow counts as a green light",
+            "correct": false,
+            "misconceptionId": "m.signs.filter-arrow-any-direction"
+          },
+          {
+            "id": "b",
+            "text": "Wait: an arrow never applies to your lane",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Turn left if the way is clear",
+            "correct": true
+          }
+        ],
+        "explanation": "A green filter arrow lets you go in that direction only. The red still holds every other movement at the line."
+      }
+    },
+    {
+      "id": "r2-m4-s5",
+      "type": "contrast",
+      "conceptId": "c.signs.signal-flashing-red",
+      "sourceRef": "KYTS-signals",
+      "a": {
+        "label": "Steady red",
+        "body": "At a junction: stop behind the line and wait for the lights to change."
+      },
+      "b": {
+        "label": "Twin flashing red",
+        "body": "At a level crossing, lifting bridge or airfield: stop, and don't cross while they flash."
+      },
+      "question": {
+        "prompt": "Two red lights flashing alternately mean…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop, and wait until they stop flashing",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Cross if you can't see a train coming",
+            "correct": false,
+            "misconceptionId": "m.signs.flashing-red-if-clear"
+          },
+          {
+            "id": "c",
+            "text": "Slow down and give way to traffic on the crossing",
+            "correct": false
+          }
+        ],
+        "explanation": "Flashing red means stop whether or not the way looks clear — a second train or a closing bridge may follow."
+      }
+    },
+    {
+      "id": "r2-m4-s6",
+      "type": "rule_card",
+      "conceptId": "c.signs.gantry-red-x",
+      "sourceRef": "KYTS-motorway",
+      "title": "Signals above your lane",
+      "body": "Overhead gantry signals apply lane by lane. A red X above your lane closes that lane — move into an open one as soon as it's safe.",
+      "question": {
+        "prompt": "The gantry shows a red X above your lane only. What does it mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every lane ahead is closed — leave at the next exit",
+            "correct": false,
+            "misconceptionId": "m.signs.gantry-applies-to-all"
+          },
+          {
+            "id": "b",
+            "text": "Your lane is closed — move into an open lane",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Slow to 40 mph but stay in your lane",
+            "correct": false
+          }
+        ],
+        "explanation": "Gantry signals are lane-specific. A red X over your lane means that lane is closed — move out early, before you reach it."
+      }
+    },
+    {
+      "id": "r2-m4-s7",
+      "type": "misconception",
+      "conceptId": "c.signs.gantry-temporary-limit",
+      "sourceRef": "KYTS-motorway",
+      "wrongBelief": "A speed shown on a motorway gantry is a minimum you're expected to keep up to.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's a temporary maximum for the road ahead",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It's right — gantry speeds set a minimum",
+            "correct": false,
+            "misconceptionId": "m.signs.gantry-limit-minimum"
+          },
+          {
+            "id": "c",
+            "text": "It applies only to the left-hand lane",
+            "correct": false
+          }
+        ],
+        "explanation": "Gantry and matrix signals show a temporary maximum for the conditions ahead. Shown in a red ring it's the legal limit."
+      },
+      "repairNote": "A gantry speed is a temporary maximum, never a minimum — shown in a red ring it's the legal limit for that stretch."
+    },
+    {
+      "id": "r2-m4-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "KYTS-signals",
+      "questions": [
+        { "bankRef": "c.signs.signal-sequence" },
+        { "bankRef": "c.signs.signal-green-blocked" },
+        { "bankRef": "c.signs.signal-filter-arrow" },
+        { "bankRef": "c.signs.signal-flashing-red" },
+        { "bankRef": "c.signs.gantry-red-x" }
+      ]
+    }
+  ]
+}

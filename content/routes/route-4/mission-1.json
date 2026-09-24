@@ -1,0 +1,238 @@
+{
+  "missionId": "r4-m1",
+  "routeId": "route-4",
+  "title": "Priority at junctions",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r4-m1-s1",
+      "type": "scene_decision",
+      "conceptId": "c.junction.unmarked-crossroads",
+      "sourceRef": "HC-146",
+      "scene": "A quiet residential crossroads. There are no signs, no give-way lines and no markings on any of the four roads.",
+      "question": {
+        "prompt": "Who has priority here?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You do, because your road is wider",
+            "correct": false,
+            "misconceptionId": "m.junction.wider-road-wins"
+          },
+          {
+            "id": "b",
+            "text": "No-one — you both have to be sure before you go",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Whoever gets there first",
+            "correct": false,
+            "misconceptionId": "m.junction.first-to-arrive"
+          }
+        ],
+        "explanation": "At an unmarked crossroads nobody has priority. Slow right down, look both ways, and be ready to give way."
+      }
+    },
+    {
+      "id": "r4-m1-s2",
+      "type": "rule_card",
+      "conceptId": "c.junction.box-clear-exit",
+      "sourceRef": "HC-174",
+      "title": "Keep the box clear",
+      "body": "Enter a yellow box junction only when your exit road is clear, so you can drive straight across without stopping in it.",
+      "question": {
+        "prompt": "When may you enter a box junction?",
+        "options": [
+          {
+            "id": "a",
+            "text": "As soon as the lights turn green",
+            "correct": false,
+            "misconceptionId": "m.markings.green-overrides-box"
+          },
+          {
+            "id": "b",
+            "text": "When your exit road is clear",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Whenever the traffic ahead is queuing slowly",
+            "correct": false,
+            "misconceptionId": "m.markings.box-queueing-ok"
+          }
+        ],
+        "explanation": "The box exists to keep the junction flowing. If you would have to stop inside it, wait outside it."
+      }
+    },
+    {
+      "id": "r4-m1-s3",
+      "type": "contrast",
+      "conceptId": "c.junction.box-right-turn",
+      "sourceRef": "HC-174",
+      "a": {
+        "label": "Going straight on",
+        "body": "Never enter the box until your exit is clear. Slow queueing traffic is not an exception."
+      },
+      "b": {
+        "label": "Turning right",
+        "body": "You may wait in the box when the only thing stopping you is oncoming traffic."
+      },
+      "question": {
+        "prompt": "You're turning right and oncoming traffic is holding you up. What may you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wait in the box, as long as your exit is clear",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Nothing — you may never stop inside a box junction",
+            "correct": false,
+            "misconceptionId": "m.markings.box-no-waiting-ever"
+          },
+          {
+            "id": "c",
+            "text": "Reverse back out of the box",
+            "correct": false
+          }
+        ],
+        "explanation": "The right-turn wait is the one exception to keeping the box clear — and your exit still has to be clear."
+      }
+    },
+    {
+      "id": "r4-m1-s4",
+      "type": "scene_decision",
+      "conceptId": "c.junction.turn-right-crossroads",
+      "sourceRef": "HC-181",
+      "scene": "You're turning right at a crossroads. A driver coming the other way is turning right too, and you meet in the middle.",
+      "question": {
+        "prompt": "Why is it usually better to pass behind each other?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It gets both of you through more quickly",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "You each get a clearer view of the traffic coming towards you",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Once you've started to turn, oncoming traffic must wait for you",
+            "correct": false,
+            "misconceptionId": "m.junction.right-turn-priority"
+          }
+        ],
+        "explanation": "Passing behind each other keeps your view along the road open. Nose to nose, you each hide what the other needs to see."
+      }
+    },
+    {
+      "id": "r4-m1-s5",
+      "type": "rule_card",
+      "conceptId": "c.junction.obstruction-give-way",
+      "sourceRef": "HC-163",
+      "title": "Whose side is blocked?",
+      "body": "When parked cars or roadworks block your side of the road, the gap belongs to oncoming traffic. Wait until it's clear.",
+      "question": {
+        "prompt": "Parked cars block your side and a car is coming the other way. What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Give way — the obstruction is on your side",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Keep going, because you reached the gap first",
+            "correct": false,
+            "misconceptionId": "m.junction.obstruction-first-come"
+          },
+          {
+            "id": "c",
+            "text": "Flash your headlights and drive through",
+            "correct": false,
+            "misconceptionId": "m.junction.flash-means-go"
+          }
+        ],
+        "explanation": "The obstruction is yours to deal with, so the road is theirs. Hold back where you can see and be seen."
+      }
+    },
+    {
+      "id": "r4-m1-s6",
+      "type": "scene_decision",
+      "conceptId": "c.junction.narrow-central-reservation",
+      "sourceRef": "HC-173",
+      "scene": "You're waiting to turn right onto a dual carriageway. The gap in the central reservation is shorter than your car.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wait until both carriageways are clear, then cross in one go",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Cross to the gap and wait there for the far side to clear",
+            "correct": false,
+            "misconceptionId": "m.junction.reservation-wait"
+          },
+          {
+            "id": "c",
+            "text": "Turn left and make a U-turn further along",
+            "correct": false
+          }
+        ],
+        "explanation": "If your car would stick out into a live lane, treat it as one crossing and go only when both directions are clear."
+      }
+    },
+    {
+      "id": "r4-m1-s7",
+      "type": "misconception",
+      "conceptId": "c.junction.headlight-flash",
+      "sourceRef": "HC-110",
+      "wrongBelief": "A driver flashing their headlights at a junction is telling you it's safe to pull out.",
+      "question": {
+        "prompt": "What does a flash of headlights actually tell you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Come out — the way is clear",
+            "correct": false,
+            "misconceptionId": "m.junction.flash-means-go"
+          },
+          {
+            "id": "b",
+            "text": "Only that someone is there — the decision is still yours",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "That the driver is annoyed with you",
+            "correct": false
+          }
+        ],
+        "explanation": "Flashing headlights means the same as the horn: 'I am here.' It is never a signal that the road is safe."
+      },
+      "repairNote": "A flash only says someone is there. Whether it's safe to emerge is still your judgement, not theirs."
+    },
+    {
+      "id": "r4-m1-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-146",
+      "questions": [
+        { "bankRef": "c.junction.unmarked-crossroads" },
+        { "bankRef": "c.junction.box-clear-exit" },
+        { "bankRef": "c.junction.box-right-turn" },
+        { "bankRef": "c.junction.turn-right-crossroads" },
+        { "bankRef": "c.junction.obstruction-give-way" }
+      ]
+    }
+  ]
+}

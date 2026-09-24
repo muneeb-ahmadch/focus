@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
-import type { Question } from '@focus/shared';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { bankAsset } from '@/content/bankAssets';
+import type { PlayerQuestion } from '@/stores/playerStore';
 import { type Theme } from '@/theme/tokens';
 import { useThemedStyles } from '@/theme/useTheme';
 import { AnswerOptions } from './AnswerOptions';
 import { AudioButton } from './AudioButton';
 
 export function CheckpointQuestion(props: {
-  question: Question;
+  question: PlayerQuestion;
   heading: string;
   answered: boolean;
   selectedId?: string;
@@ -17,6 +18,15 @@ export function CheckpointQuestion(props: {
   return (
     <View style={styles.card}>
       <Text style={styles.heading}>{props.heading}</Text>
+      {props.question.stemImage ? (
+        <Image
+          source={bankAsset(props.question.stemImage)}
+          accessibilityRole="image"
+          accessibilityLabel="Question image"
+          resizeMode="contain"
+          style={styles.stemImage}
+        />
+      ) : null}
       <View style={styles.promptRow}>
         <Text style={styles.prompt}>{props.question.prompt}</Text>
         <AudioButton text={props.question.prompt} />
@@ -43,4 +53,5 @@ const makeStyles = (t: Theme) =>
     },
     promptRow: { flexDirection: 'row', alignItems: 'center', gap: t.space.sm },
     prompt: { flex: 1, ...t.text(t.font.md), fontWeight: '600', color: t.colors.text },
+    stemImage: { width: '100%', height: 180 },
   });
