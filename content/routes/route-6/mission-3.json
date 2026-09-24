@@ -1,0 +1,229 @@
+{
+  "missionId": "r6-m3",
+  "routeId": "route-6",
+  "title": "Motorcyclists at junctions",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r6-m3-s1",
+      "type": "scene_decision",
+      "conceptId": "c.vru.moto-hidden-emerging",
+      "sourceRef": "HC-211",
+      "scene": "You're waiting to pull out of a side road. Parked vans line the main road on your right. You look, and the road reads clear.",
+      "question": {
+        "prompt": "Why look again before you go?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A motorcycle is easily hidden behind an obstruction",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Once it looked clear, it's clear — go before it changes",
+            "correct": false,
+            "misconceptionId": "m.vru.looked-once-is-enough"
+          },
+          {
+            "id": "c",
+            "text": "Motorcycles have priority over cars emerging",
+            "correct": false
+          }
+        ],
+        "explanation": "A bike is narrow enough to sit entirely behind a parked van. Look again, and look for the small shape."
+      }
+    },
+    {
+      "id": "r6-m3-s2",
+      "type": "hazard_cue",
+      "conceptId": "c.vru.windscreen-pillar",
+      "sourceRef": "HC-211",
+      "scene": "You're easing up to a junction on a bend. The thick pillar between your windscreen and side window sweeps across your view.",
+      "question": {
+        "prompt": "What's the cue here?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The pillar is too narrow to hide anything that matters",
+            "correct": false,
+            "misconceptionId": "m.vru.pillar-hides-nothing"
+          },
+          {
+            "id": "b",
+            "text": "Pillars only block your view on fast, open roads",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Move your head to look around it before you commit",
+            "correct": true
+          }
+        ],
+        "explanation": "At bends and junctions a windscreen pillar can hide a whole rider, cyclist or pedestrian. Lean and look past it."
+      }
+    },
+    {
+      "id": "r6-m3-s3",
+      "type": "rule_card",
+      "conceptId": "c.vru.look-at-junctions",
+      "sourceRef": "HC-211",
+      "title": "Where bikes go missing",
+      "body": "Junctions are where motorcyclists and cyclists are hardest to see: small, often masked by traffic, and arriving faster than you expect.",
+      "question": {
+        "prompt": "Where should you take particular care to look for riders?",
+        "options": [
+          {
+            "id": "a",
+            "text": "On dual carriageways",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "At junctions",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Anywhere — a car is the thing you're really looking for",
+            "correct": false,
+            "misconceptionId": "m.vru.junction-look-for-cars"
+          }
+        ],
+        "explanation": "Bikes are the road users drivers most often miss at junctions. Make looking for them a separate, deliberate check."
+      }
+    },
+    {
+      "id": "r6-m3-s4",
+      "type": "rule_card",
+      "conceptId": "c.vru.turn-right-check-overtakers",
+      "sourceRef": "HC-180",
+      "title": "The check just before you turn right",
+      "body": "Waiting to turn right into a side road, take a last look in the right mirror and blind spot. Something may be overtaking the queue you're in.",
+      "question": {
+        "prompt": "What are you looking for in that final right-mirror check?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Traffic overtaking you on your right",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Nothing — your indicator has already warned them",
+            "correct": false,
+            "misconceptionId": "m.vru.signal-protects-right-turn"
+          },
+          {
+            "id": "c",
+            "text": "Whether the side road you're entering is clear",
+            "correct": false
+          }
+        ],
+        "explanation": "A rider may never have seen your signal, and the road behind changed while you waited. Look before you turn across it."
+      }
+    },
+    {
+      "id": "r6-m3-s5",
+      "type": "hazard_cue",
+      "conceptId": "c.vru.filtering-queue",
+      "sourceRef": "HC-211",
+      "scene": "Traffic is crawling in two lanes. A gap opens in the lane beside you and you're about to move across into it.",
+      "question": {
+        "prompt": "What must you check first?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nothing can be moving between lanes in a slow queue",
+            "correct": false,
+            "misconceptionId": "m.vru.queue-is-static"
+          },
+          {
+            "id": "b",
+            "text": "Mirrors and blind spot, for a rider filtering past",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Sound the horn and flash to claim the gap",
+            "correct": false
+          }
+        ],
+        "explanation": "In queues, motorcyclists filter past on either side. Mirror and blind-spot check every time you change lane."
+      }
+    },
+    {
+      "id": "r6-m3-s6",
+      "type": "rule_card",
+      "conceptId": "c.vru.moto-lifesaver",
+      "sourceRef": "HC-212",
+      "title": "Reading a rider's shoulder check",
+      "body": "A rider glancing back over their right shoulder is checking their blind area. It usually means they're about to change direction.",
+      "question": {
+        "prompt": "Why do riders often look over their right shoulder before turning right?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It helps them balance through the turn",
+            "correct": false,
+            "misconceptionId": "m.vru.shoulder-look-means-balance"
+          },
+          {
+            "id": "b",
+            "text": "To check for traffic in their blind area",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Motorcycles aren't fitted with mirrors",
+            "correct": false
+          }
+        ],
+        "explanation": "Spot that glance and you know what's coming next. Hold back rather than drawing alongside."
+      }
+    },
+    {
+      "id": "r6-m3-s7",
+      "type": "misconception",
+      "conceptId": "c.vru.moto-conspicuity",
+      "sourceRef": "HC-86",
+      "wrongBelief": "A bike with its headlight on in daylight is impossible to miss.",
+      "question": {
+        "prompt": "Why do motorcyclists ride on dipped headlights in daylight?",
+        "options": [
+          {
+            "id": "a",
+            "text": "So the rider can be seen more easily",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It means the rider is inviting you to go first",
+            "correct": false,
+            "misconceptionId": "m.vru.lights-make-them-obvious"
+          },
+          {
+            "id": "c",
+            "text": "It improves how far the rider can see ahead",
+            "correct": false
+          }
+        ],
+        "explanation": "The light helps them stand out, but a bike is still narrow and easily lost behind other traffic."
+      },
+      "repairNote": "Headlights and bright kit make a rider easier to see — they don't make one impossible to miss. Look for the bike itself."
+    },
+    {
+      "id": "r6-m3-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-211",
+      "questions": [
+        { "bankRef": "c.vru.moto-hidden-emerging" },
+        { "bankRef": "c.vru.windscreen-pillar" },
+        { "bankRef": "c.vru.look-at-junctions" },
+        { "bankRef": "c.vru.turn-right-check-overtakers" },
+        { "bankRef": "c.vru.filtering-queue" }
+      ]
+    }
+  ]
+}

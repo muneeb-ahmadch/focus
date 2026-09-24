@@ -26,6 +26,9 @@ const SOURCES_PATH = join(BANK_DIR, 'sources.json');
 const CAR_BANK_PATH = join(BANK_DIR, 'car-b.json');
 const VMC_BANK_PATH = join(BANK_DIR, 'vmc.json');
 const ALT_TEXT_PATH = join(BANK_DIR, 'alt-text.json');
+// Curated concept map (item id → authored, item-free conceptId) so a mission's checkpoint can
+// bankRef its taught concept. Git-excluded like the bank itself; absent on a clean clone.
+const CONCEPT_MAP_PATH = join(BANK_DIR, 'concept-map.json');
 const TOPIC_MAP_PATH = join(ROOT, 'content/topic-map.json');
 const ASSET_BANK_DIR = join(ROOT, 'apps/mobile/assets/bank');
 // Generated require map so Metro bundles the licensed gifs offline (git-excluded, tripwire 7);
@@ -69,6 +72,12 @@ function isReal(e: BankIssue): boolean {
 function loadAltText(): Record<string, string> {
   return existsSync(ALT_TEXT_PATH)
     ? (JSON.parse(readFileSync(ALT_TEXT_PATH, 'utf8')) as Record<string, string>)
+    : {};
+}
+
+function loadConceptMap(): Record<string, string> {
+  return existsSync(CONCEPT_MAP_PATH)
+    ? (JSON.parse(readFileSync(CONCEPT_MAP_PATH, 'utf8')) as Record<string, string>)
     : {};
 }
 
@@ -131,6 +140,7 @@ export function runIngest(): void {
   const sources = JSON.parse(readFileSync(SOURCES_PATH, 'utf8')) as Sources;
   const topicMap = loadTopicMap();
   const altText = loadAltText();
+  const conceptMap = loadConceptMap();
 
   const gifIndex = new Map<string, string>();
   for (const abs of walkFiles(join(ROOT, sources.carGifsDir))) {
@@ -140,7 +150,7 @@ export function runIngest(): void {
 
   const carSheet = readXlsxSheet1(readFileSync(join(ROOT, sources.carXlsx)));
   const carRows = dataRows(carSheet);
-  const carQuestions = carRows.map((r) => carRowToQuestion(r, topicMap, altText));
+  const carQuestions = carRows.map((r) => carRowToQuestion(r, topicMap, altText, conceptMap));
   const carBank = { bankFormat: 1 as const, source: sheetTitle(carSheet, 'Car question bank'), questions: carQuestions };
 
   const vmcSheet = readXlsxSheet1(readFileSync(join(ROOT, sources.vmcXlsx)));

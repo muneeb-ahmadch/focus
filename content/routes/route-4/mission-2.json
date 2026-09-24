@@ -1,0 +1,221 @@
+{
+  "missionId": "r4-m2",
+  "routeId": "route-4",
+  "title": "Roundabouts",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r4-m2-s1",
+      "type": "sign_meaning",
+      "conceptId": "c.junction.roundabout-sign",
+      "sourceRef": "KYTS-warning",
+      "sign": {
+        "shape": "warning-triangle",
+        "label": "Roundabout ahead"
+      },
+      "question": {
+        "prompt": "A red-bordered triangle holding three curved arrows chasing each other means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Roundabout ahead",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "You have priority all the way through the junction ahead",
+            "correct": false,
+            "misconceptionId": "m.junction.roundabout-priority-through"
+          },
+          {
+            "id": "c",
+            "text": "Traffic merges from the left ahead",
+            "correct": false
+          }
+        ],
+        "explanation": "Three curved arrows in a warning triangle: a roundabout is coming. Slow down and start looking to your right early."
+      }
+    },
+    {
+      "id": "r4-m2-s2",
+      "type": "sign_meaning",
+      "conceptId": "c.junction.mini-roundabout-sign",
+      "sourceRef": "KYTS-circles",
+      "sign": {
+        "shape": "mandatory-blue",
+        "label": "Mini-roundabout"
+      },
+      "question": {
+        "prompt": "A blue circle holding three arrows chasing each other means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Mini-roundabout — treat it like any other roundabout",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "A one-way system you may enter from any side",
+            "correct": false,
+            "misconceptionId": "m.junction.mini-is-oneway"
+          },
+          {
+            "id": "c",
+            "text": "You have priority over traffic already on it",
+            "correct": false
+          }
+        ],
+        "explanation": "A mini-roundabout is still a roundabout: give way to traffic coming from your immediate right, and signal as normal."
+      }
+    },
+    {
+      "id": "r4-m2-s3",
+      "type": "rule_card",
+      "conceptId": "c.junction.mini-roundabout-markings",
+      "sourceRef": "HC-188",
+      "title": "The painted circle",
+      "body": "A mini-roundabout is a white circle painted on the road. Drive round it, not across it, and give way to your right.",
+      "question": {
+        "prompt": "You meet a white painted circle in the middle of a small junction. What is it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A mini-roundabout — give way to traffic from your right",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "A no-waiting area you must keep clear",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "A marking you may drive straight over to save time",
+            "correct": false,
+            "misconceptionId": "m.junction.mini-drive-over"
+          }
+        ],
+        "explanation": "The painted circle is the roundabout. Go round it unless your vehicle is physically too long to do so."
+      }
+    },
+    {
+      "id": "r4-m2-s4",
+      "type": "rule_card",
+      "conceptId": "c.junction.roundabout-lane-choice",
+      "sourceRef": "HC-186",
+      "title": "Choosing your lane",
+      "body": "Turning left or going ahead: approach in the left lane. Turning right or going full circle: approach in the right lane, signalling right.",
+      "question": {
+        "prompt": "You're turning right at a roundabout. Which lane, and which signal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Right-hand lane, signalling right on the approach",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Left-hand lane, because you always join on the left",
+            "correct": false,
+            "misconceptionId": "m.junction.roundabout-left-lane-always"
+          },
+          {
+            "id": "c",
+            "text": "Either lane — position doesn't matter on a roundabout",
+            "correct": false
+          }
+        ],
+        "explanation": "Your lane and signal tell everyone else where you're going. Get both right before you reach the give-way line."
+      }
+    },
+    {
+      "id": "r4-m2-s5",
+      "type": "sequence",
+      "conceptId": "c.junction.roundabout-straight-signal",
+      "sourceRef": "HC-186",
+      "title": "Straight ahead",
+      "prompt": "Put a straight-ahead roundabout in order, from approach to exit.",
+      "items": [
+        { "id": "i1", "text": "Approach in the left lane, giving no signal" },
+        { "id": "i2", "text": "Give way to traffic coming from your immediate right" },
+        { "id": "i3", "text": "Pass the exit before the one you want" },
+        { "id": "i4", "text": "Signal left, then leave at your exit" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "Going straight ahead you signal nothing on the approach. The left signal comes only after you pass the exit before yours."
+    },
+    {
+      "id": "r4-m2-s6",
+      "type": "hazard_cue",
+      "conceptId": "c.junction.roundabout-long-vehicle",
+      "sourceRef": "HC-187",
+      "scene": "A long lorry is ahead of you at the roundabout. It's in the left-hand lane but positioned well over to the right.",
+      "question": {
+        "prompt": "What should you expect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's turning right, so you can safely pass on its left",
+            "correct": false,
+            "misconceptionId": "m.junction.lorry-position-tells-you"
+          },
+          {
+            "id": "b",
+            "text": "It may swing wide and take an unusual course — keep well back",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The driver has made a mistake and will move over",
+            "correct": false
+          }
+        ],
+        "explanation": "A long vehicle needs the whole road to get round. Its position doesn't tell you where it's going — hang back and read the indicators."
+      }
+    },
+    {
+      "id": "r4-m2-s7",
+      "type": "misconception",
+      "conceptId": "c.junction.roundabout-exit-check",
+      "sourceRef": "HC-187",
+      "wrongBelief": "Once you're on a roundabout you can cross to your exit without checking behind.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's right — traffic on the roundabout has priority",
+            "correct": false,
+            "misconceptionId": "m.junction.roundabout-exit-no-check"
+          },
+          {
+            "id": "b",
+            "text": "Someone may be on your left, going further round than you",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "You have to stop before every exit",
+            "correct": false
+          }
+        ],
+        "explanation": "Cyclists, riders and motorcyclists often keep left all the way round. Mirror and blind spot before you cut across to your exit."
+      },
+      "repairNote": "Check your left mirror and blind spot before leaving a roundabout — someone may be staying on it, on your inside."
+    },
+    {
+      "id": "r4-m2-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-186",
+      "questions": [
+        { "bankRef": "c.junction.roundabout-sign" },
+        { "bankRef": "c.junction.mini-roundabout-sign" },
+        { "bankRef": "c.junction.mini-roundabout-markings" },
+        { "bankRef": "c.junction.roundabout-straight-signal" },
+        { "bankRef": "c.junction.roundabout-long-vehicle" }
+      ]
+    }
+  ]
+}

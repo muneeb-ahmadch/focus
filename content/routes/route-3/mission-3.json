@@ -1,0 +1,221 @@
+{
+  "missionId": "r3-m3",
+  "routeId": "route-3",
+  "title": "Stopping distance & grip",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r3-m3-s1",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.wet-doubles",
+      "sourceRef": "HC-227",
+      "scene": "Very heavy rain. Spray is coming off the vehicles ahead and you're holding your usual dry-road gap.",
+      "question": {
+        "prompt": "What has happened to your overall stopping distance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's about doubled",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "It's much the same — a gap is a gap",
+            "correct": false,
+            "misconceptionId": "m.stopping.wet-same-as-dry"
+          },
+          {
+            "id": "c",
+            "text": "It's shorter, because you're driving more slowly",
+            "correct": false
+          }
+        ],
+        "explanation": "Wet roads at least double stopping distances. Double your separation distance to match."
+      }
+    },
+    {
+      "id": "r3-m3-s2",
+      "type": "contrast",
+      "conceptId": "c.hazard.ice-ten-times",
+      "sourceRef": "HC-230",
+      "a": {
+        "label": "Wet road",
+        "body": "Grip is reduced: your overall stopping distance roughly doubles."
+      },
+      "b": {
+        "label": "Icy road",
+        "body": "Grip nearly disappears: stopping distances can be up to TEN times greater."
+      },
+      "question": {
+        "prompt": "By how much can icy conditions increase stopping distances?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About twice, the same as rain",
+            "correct": false,
+            "misconceptionId": "m.stopping.wet-ice-same"
+          },
+          {
+            "id": "b",
+            "text": "Up to ten times",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "About three times",
+            "correct": false
+          }
+        ],
+        "explanation": "Bad weather doesn't add a bit. Wet doubles it; ice can multiply it by ten."
+      }
+    },
+    {
+      "id": "r3-m3-s3",
+      "type": "sequence",
+      "conceptId": "c.hazard.stopping-build",
+      "sourceRef": "HC-126",
+      "title": "How a stop is built",
+      "prompt": "Put an emergency stop in order, from the moment the hazard appears.",
+      "items": [
+        { "id": "i1", "text": "The hazard appears ahead of you" },
+        { "id": "i2", "text": "Thinking distance — you travel on while you react" },
+        { "id": "i3", "text": "Braking distance — the brakes bring you down" },
+        { "id": "i4", "text": "Stopped, at the end of your overall stopping distance" }
+      ],
+      "correctOrder": ["i1", "i2", "i3", "i4"],
+      "explanation": "Overall stopping distance = thinking + braking. Weather stretches the braking part hardest."
+    },
+    {
+      "id": "r3-m3-s4",
+      "type": "rule_card",
+      "conceptId": "c.hazard.ice-following-gap",
+      "sourceRef": "HC-230",
+      "title": "Ten times the gap",
+      "body": "On an icy road, leave up to ten times your normal following distance — and only travel at all if the journey is essential.",
+      "question": {
+        "prompt": "How far behind the car in front should you drive on an icy road?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A bit more than usual — say twice the gap",
+            "correct": false,
+            "misconceptionId": "m.stopping.ice-gap-a-bit-more"
+          },
+          {
+            "id": "b",
+            "text": "Four times the normal distance",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Ten times the normal distance",
+            "correct": true
+          }
+        ],
+        "explanation": "Ice is the one condition where a small increase is nowhere near enough — ten times the normal gap."
+      }
+    },
+    {
+      "id": "r3-m3-s5",
+      "type": "rule_card",
+      "conceptId": "c.hazard.tyre-condition",
+      "sourceRef": "HC-126",
+      "title": "Four small patches",
+      "body": "Your tyres are the only thing touching the road. Their tread and pressure change how far you need to stop.",
+      "question": {
+        "prompt": "Which of these affects your vehicle's stopping distance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The speed limit on the road",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "The condition of the tyres",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Nothing, as long as the tyres are still road-legal",
+            "correct": false,
+            "misconceptionId": "m.stopping.tyres-legal-is-fine"
+          }
+        ],
+        "explanation": "Correctly inflated tyres in good condition grip best — and grip is what braking distance is made of."
+      }
+    },
+    {
+      "id": "r3-m3-s6",
+      "type": "hazard_cue",
+      "conceptId": "c.hazard.aquaplane-cue",
+      "sourceRef": "HC-227",
+      "scene": "You're moving briskly along a soaking wet road when the steering suddenly goes feather-light in your hands.",
+      "question": {
+        "prompt": "What's the cue telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The car is handling well on the wet surface",
+            "correct": false,
+            "misconceptionId": "m.stopping.light-steering-is-good"
+          },
+          {
+            "id": "b",
+            "text": "The tyres have lifted onto the water — ease off",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "A tyre has gone flat",
+            "correct": false
+          }
+        ],
+        "explanation": "That's aquaplaning: the tyres are floating on water. Ease off and don't brake until the steering feels normal."
+      }
+    },
+    {
+      "id": "r3-m3-s7",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.gap-restored",
+      "sourceRef": "HC-168",
+      "scene": "Wet road. You've left a proper gap — and a driver overtakes you and drops straight into it.",
+      "question": {
+        "prompt": "What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Close the gap back up to keep your place",
+            "correct": false,
+            "misconceptionId": "m.stopping.reclaim-your-gap"
+          },
+          {
+            "id": "b",
+            "text": "Ease back until the gap is safe again",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Flash your headlights to warn them",
+            "correct": false
+          }
+        ],
+        "explanation": "You've lost your stopping distance, not your place in a queue. Ease off until you've rebuilt it."
+      }
+    },
+    {
+      "id": "r3-m3-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-227",
+      "questions": [
+        { "bankRef": "c.hazard.wet-doubles" },
+        { "bankRef": "c.hazard.ice-ten-times" },
+        { "bankRef": "c.hazard.ice-following-gap" },
+        { "bankRef": "c.hazard.tyre-condition" },
+        { "bankRef": "c.hazard.gap-restored" }
+      ]
+    }
+  ]
+}

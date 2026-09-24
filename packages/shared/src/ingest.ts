@@ -117,6 +117,7 @@ export function carRowToQuestion(
   cells: Cells,
   topicMap: TopicMap,
   altText?: Record<string, string>,
+  conceptMap?: Record<string, string>,
 ): BankQuestion {
   const item = trim(cells.A);
   const topic = normalizeTopic(cells.B, topicMap);
@@ -136,7 +137,10 @@ export function carRowToQuestion(
     item,
     topic,
     routeId: mapped?.routeId ?? 'route-0',
-    conceptId: `c.${slug}.${item.toLowerCase()}`,
+    // A mission that teaches a concept curates its bank questions to that concept id at authoring
+    // time (content/bank/concept-map.json); otherwise the item-scoped default. The curated id is
+    // authored and item-free, so a checkpoint bankRef in the tracked pack never carries a raw item.
+    conceptId: conceptMap?.[item] ?? `c.${slug}.${item.toLowerCase()}`,
     prompt: trim(cells.D),
     options,
     explanation: trim(cells.J),

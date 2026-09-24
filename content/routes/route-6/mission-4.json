@@ -1,0 +1,229 @@
+{
+  "missionId": "r6-m4",
+  "routeId": "route-6",
+  "title": "Cyclists, riders & animals",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r6-m4-s1",
+      "type": "scene_decision",
+      "conceptId": "c.vru.roundabout-left-lane",
+      "sourceRef": "HC-186",
+      "scene": "You're following two cyclists towards a roundabout. Both are in the left-hand lane, keeping well over to the kerb.",
+      "question": {
+        "prompt": "Which way should you expect them to go?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Left — that's the lane they're in",
+            "correct": false,
+            "misconceptionId": "m.vru.cyclist-left-lane-turns-left"
+          },
+          {
+            "id": "b",
+            "text": "Any direction",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Straight ahead only",
+            "correct": false
+          }
+        ],
+        "explanation": "Cyclists often stay left the whole way round because crossing the traffic feels unsafe — even when turning right."
+      }
+    },
+    {
+      "id": "r6-m4-s2",
+      "type": "rule_card",
+      "conceptId": "c.vru.roundabout-cyclist-room",
+      "sourceRef": "HC-186",
+      "title": "A cyclist signalling right",
+      "body": "They need space and time to take their line across the roundabout. Hold back and leave them room — don't try to help them along.",
+      "question": {
+        "prompt": "A cyclist ahead of you signals right at a roundabout. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Signal them across so they know you've seen them",
+            "correct": false,
+            "misconceptionId": "m.vru.cyclist-needs-help-across"
+          },
+          {
+            "id": "b",
+            "text": "Overtake on their right while there's room",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Give them plenty of room and stay back",
+            "correct": true
+          }
+        ],
+        "explanation": "Room and patience are all they need. A wave from you could send them across the path of a car you can't see."
+      }
+    },
+    {
+      "id": "r6-m4-s3",
+      "type": "hazard_cue",
+      "conceptId": "c.vru.roundabout-horse",
+      "sourceRef": "HC-186",
+      "scene": "A horse and rider are ahead of you at a roundabout. The rider is signalling right, but staying well over to the left.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay well back and let them go at their own pace",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Treat the left-hand position as the real intention",
+            "correct": false,
+            "misconceptionId": "m.vru.horse-keeps-left"
+          },
+          {
+            "id": "c",
+            "text": "Move up close so they know you're waiting",
+            "correct": false
+          }
+        ],
+        "explanation": "Horses move slowly and often keep left all the way round. Close or alongside will unsettle the horse."
+      }
+    },
+    {
+      "id": "r6-m4-s4",
+      "type": "rule_card",
+      "conceptId": "c.vru.horse-centre-lane",
+      "sourceRef": "HC-213",
+      "title": "A rider in the middle of the lane",
+      "body": "On a narrow road a rider may take the centre deliberately. It makes them visible and stops you squeezing past where there's no room.",
+      "question": {
+        "prompt": "A horse rider ahead is riding in the centre of a narrow lane. You should…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ease past on the right where the road allows",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Stay behind and let them ride in that position",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Move up close to encourage them to pull aside",
+            "correct": false,
+            "misconceptionId": "m.vru.horse-centre-is-selfish"
+          }
+        ],
+        "explanation": "It's a safety position, not bad manners. Wait until there's genuine room, then pass slowly and wide."
+      }
+    },
+    {
+      "id": "r6-m4-s5",
+      "type": "rule_card",
+      "conceptId": "c.vru.advanced-stop-line",
+      "sourceRef": "HC-178",
+      "title": "The box between two stop lines",
+      "body": "At some lights a marked area sits between two stop lines. It's reserved for cyclists, so they can wait ahead of the traffic and be seen.",
+      "question": {
+        "prompt": "What is the marked area between the two stop lines for?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's spare space any vehicle may wait in",
+            "correct": false,
+            "misconceptionId": "m.vru.stop-box-is-for-anyone"
+          },
+          {
+            "id": "b",
+            "text": "To let cyclists wait in front of other traffic",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "To let people cross the road between the lines",
+            "correct": false
+          }
+        ],
+        "explanation": "Stop at the first line. If the lights changed as you crossed it, stop at the second — but don't aim for the box."
+      }
+    },
+    {
+      "id": "r6-m4-s6",
+      "type": "hazard_cue",
+      "conceptId": "c.vru.bike-between-parked-cars",
+      "sourceRef": "HC-211",
+      "scene": "You're driving past a line of parked cars. Between two of them you catch sight of a bicycle wheel, pointing out into the road.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nothing — it's a parked bike between the cars",
+            "correct": false,
+            "misconceptionId": "m.vru.bike-wheel-is-parked"
+          },
+          {
+            "id": "b",
+            "text": "Slow down, ready to stop for a cyclist pulling out",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Sound your horn and keep your speed up past them",
+            "correct": false
+          }
+        ],
+        "explanation": "Read the part you can see. A wheel at that angle is a cyclist about to join the road in front of you."
+      }
+    },
+    {
+      "id": "r6-m4-s7",
+      "type": "rule_card",
+      "conceptId": "c.vru.loose-animals",
+      "sourceRef": "HC-214",
+      "title": "Loose animals in the road",
+      "body": "Sheep or cattle in the road are easily panicked by engine noise and close passes. Go very slowly, and stop if the person in charge signals you.",
+      "question": {
+        "prompt": "How should you pass loose sheep on the road?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sound your horn briefly to move them along",
+            "correct": false,
+            "misconceptionId": "m.vru.horn-moves-animals"
+          },
+          {
+            "id": "b",
+            "text": "Quickly but quietly, so you're past sooner",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Very slowly, ready to stop",
+            "correct": true
+          }
+        ],
+        "explanation": "Noise scatters animals into the road rather than out of it. Crawl past, and be ready to stop and wait."
+      }
+    },
+    {
+      "id": "r6-m4-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-186",
+      "questions": [
+        { "bankRef": "c.vru.roundabout-left-lane" },
+        { "bankRef": "c.vru.roundabout-cyclist-room" },
+        { "bankRef": "c.vru.roundabout-horse" },
+        { "bankRef": "c.vru.advanced-stop-line" },
+        { "bankRef": "c.vru.loose-animals" }
+      ]
+    }
+  ]
+}

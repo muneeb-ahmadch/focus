@@ -1,0 +1,236 @@
+{
+  "missionId": "r2-m1",
+  "routeId": "route-2",
+  "title": "Warning signs",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r2-m1-s1",
+      "type": "scene_decision",
+      "conceptId": "c.signs.warning-grammar",
+      "sourceRef": "KYTS-shapes",
+      "scene": "Ahead you spot a road sign shaped like a triangle with a thick red border. You can't read the symbol inside yet.",
+      "question": {
+        "prompt": "Before you read the symbol, what is the triangle already telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "There is a hazard ahead to prepare for",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "You must obey an order at once",
+            "correct": false,
+            "misconceptionId": "m.signs.warning-is-order"
+          },
+          {
+            "id": "c",
+            "text": "It points the way to a destination",
+            "correct": false
+          }
+        ],
+        "explanation": "The shape carries the message: a red-bordered triangle always warns of a hazard ahead. The symbol inside says which hazard."
+      }
+    },
+    {
+      "id": "r2-m1-s2",
+      "type": "rule_card",
+      "conceptId": "c.signs.warning-crossroads",
+      "sourceRef": "KYTS-warning",
+      "title": "Crossroads ahead",
+      "body": "A warning triangle with a plus-shaped symbol means roads cross ahead. Traffic may pull out from either side — ease off and look both ways.",
+      "question": {
+        "prompt": "A warning triangle shows a plus-shaped symbol. It means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "You must give way to the right",
+            "correct": false,
+            "misconceptionId": "m.signs.crossroads-is-give-way"
+          },
+          {
+            "id": "b",
+            "text": "A crossroads is ahead",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The road ahead is closed",
+            "correct": false
+          }
+        ],
+        "explanation": "The plus shape stands for a crossroads ahead. It warns you roads meet; it does not set who has priority."
+      }
+    },
+    {
+      "id": "r2-m1-s3",
+      "type": "contrast",
+      "conceptId": "c.signs.warning-t-junction",
+      "sourceRef": "KYTS-warning",
+      "a": {
+        "label": "Plus symbol",
+        "body": "Roads cross ahead — a crossroads. Watch left and right as you approach."
+      },
+      "b": {
+        "label": "T symbol",
+        "body": "Your road ends ahead at a junction — a T-junction. Be ready to give way."
+      },
+      "question": {
+        "prompt": "A warning triangle shows a T-shaped symbol. It warns that…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Another road crosses straight over yours",
+            "correct": false,
+            "misconceptionId": "m.signs.t-junction-is-crossroads"
+          },
+          {
+            "id": "b",
+            "text": "Your road ends ahead at a junction",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The road divides into two lanes",
+            "correct": false
+          }
+        ],
+        "explanation": "The T shape shows your road ending at a junction ahead. The plus shape, not the T, means a crossroads."
+      }
+    },
+    {
+      "id": "r2-m1-s4",
+      "type": "rule_card",
+      "conceptId": "c.signs.warning-road-narrows",
+      "sourceRef": "KYTS-warning",
+      "title": "Road narrows",
+      "body": "Arrows angling inward warn the road narrows ahead — on one side or both. The carriageway gets tighter, so hold back if it isn't clear.",
+      "question": {
+        "prompt": "A warning triangle shows arrows angling inward. What should you read from it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The road narrows ahead, on one or both sides",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The road always narrows on the right only",
+            "correct": false,
+            "misconceptionId": "m.signs.road-narrows-one-side"
+          },
+          {
+            "id": "c",
+            "text": "A lane is closed for roadworks",
+            "correct": false
+          }
+        ],
+        "explanation": "Inward arrows warn the road narrows ahead. Which side depends on the symbol — it can be one side or both."
+      }
+    },
+    {
+      "id": "r2-m1-s5",
+      "type": "hazard_cue",
+      "conceptId": "c.signs.warning-steep-hill",
+      "sourceRef": "KYTS-warning",
+      "scene": "A warning triangle shows a vehicle on a downward slope with a gradient figure like 10%. The road ahead drops away steeply.",
+      "question": {
+        "prompt": "What is the sign cueing you to do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pick a lower gear early so engine braking controls your speed",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Hold the brakes down firmly the whole way down",
+            "correct": false,
+            "misconceptionId": "m.signs.steep-hill-brake-hard"
+          },
+          {
+            "id": "c",
+            "text": "Speed up to get the hill over with",
+            "correct": false
+          }
+        ],
+        "explanation": "A steep-hill-down sign warns of a sharp descent. A lower gear lets the engine hold you back so the brakes don't overheat."
+      }
+    },
+    {
+      "id": "r2-m1-s6",
+      "type": "rule_card",
+      "conceptId": "c.signs.warning-slippery",
+      "sourceRef": "KYTS-warning",
+      "title": "Slippery road",
+      "body": "A triangle with a skidding-car symbol warns of a slippery road; an 'ice' plate warns of likely ice. Grip drops, so slow down and stay smooth.",
+      "question": {
+        "prompt": "You see this slippery-road warning with an 'ice' plate. It tells you…",
+        "options": [
+          {
+            "id": "a",
+            "text": "The road may be icy — slow down and brake gently",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "The road has been gritted, so it is safe",
+            "correct": false,
+            "misconceptionId": "m.signs.ice-sign-means-gritted"
+          },
+          {
+            "id": "c",
+            "text": "You must fit snow chains here",
+            "correct": false
+          }
+        ],
+        "explanation": "It warns the surface may be icy or slippery, not that it is safe. Slow down early and avoid sudden braking or steering."
+      }
+    },
+    {
+      "id": "r2-m1-s7",
+      "type": "misconception",
+      "conceptId": "c.signs.warning-response",
+      "sourceRef": "KYTS-warning",
+      "wrongBelief": "Every warning sign tells you to do one fixed thing, like stopping.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It isn't — every warning sign means stop",
+            "correct": false,
+            "misconceptionId": "m.signs.warning-fixed-action"
+          },
+          {
+            "id": "b",
+            "text": "Warning signs name the hazard; you choose how to respond to it",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Warning signs can be ignored once you have seen them once",
+            "correct": false
+          }
+        ],
+        "explanation": "A warning tells you what is ahead. How you respond — slow, hold back, change position — depends on the hazard and conditions."
+      },
+      "repairNote": "Warning signs give you information to act on, not a single order. Read the hazard, then judge the safe response."
+    },
+    {
+      "id": "r2-m1-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "KYTS-warning",
+      "questions": [
+        { "bankRef": "c.signs.warning-crossroads" },
+        { "bankRef": "c.signs.warning-t-junction" },
+        { "bankRef": "c.signs.warning-road-narrows" },
+        { "bankRef": "c.signs.warning-steep-hill" },
+        { "bankRef": "c.signs.warning-slippery" }
+      ]
+    }
+  ]
+}

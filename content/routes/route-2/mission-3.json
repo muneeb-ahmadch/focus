@@ -1,0 +1,239 @@
+{
+  "missionId": "r2-m3",
+  "routeId": "route-2",
+  "title": "Direction, info & markings",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r2-m3-s1",
+      "type": "scene_decision",
+      "conceptId": "c.signs.info-grammar",
+      "sourceRef": "KYTS-shapes",
+      "scene": "Ahead is a rectangular sign — a plain oblong, not a triangle or a circle.",
+      "question": {
+        "prompt": "What does the rectangle shape tell you to expect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Information or directions",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "An order you must obey",
+            "correct": false,
+            "misconceptionId": "m.signs.rect-is-order"
+          },
+          {
+            "id": "c",
+            "text": "A hazard warning",
+            "correct": false
+          }
+        ],
+        "explanation": "Rectangles inform or direct. Triangles warn and circles order — the oblong tells you what's there or where to go."
+      }
+    },
+    {
+      "id": "r2-m3-s2",
+      "type": "contrast",
+      "conceptId": "c.signs.info-tourist",
+      "sourceRef": "KYTS-info",
+      "a": {
+        "label": "Green",
+        "body": "Primary route direction sign — the main roads between towns."
+      },
+      "b": {
+        "label": "Brown",
+        "body": "Tourist information — attractions and visitor facilities."
+      },
+      "question": {
+        "prompt": "A brown rectangular sign with white symbols shows…",
+        "options": [
+          {
+            "id": "a",
+            "text": "A hazard at the attraction",
+            "correct": false,
+            "misconceptionId": "m.signs.brown-is-warning"
+          },
+          {
+            "id": "b",
+            "text": "Directions to a tourist attraction",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "An order for tourist coaches only",
+            "correct": false
+          }
+        ],
+        "explanation": "Brown signs give tourist directions and information. Green is for primary routes; brown never warns of danger."
+      }
+    },
+    {
+      "id": "r2-m3-s3",
+      "type": "sign_meaning",
+      "conceptId": "c.signs.info-parking",
+      "sourceRef": "KYTS-info",
+      "sign": {
+        "shape": "info-rect",
+        "glyph": "P"
+      },
+      "question": {
+        "prompt": "A blue rectangular sign showing a white letter P means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Parking is available here or ahead",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "No parking — keep moving",
+            "correct": false,
+            "misconceptionId": "m.signs.blue-p-is-no-parking"
+          },
+          {
+            "id": "c",
+            "text": "Police station ahead",
+            "correct": false
+          }
+        ],
+        "explanation": "A blue sign with a white P points you to parking. A parking ban is a red-and-blue circular sign, not this."
+      }
+    },
+    {
+      "id": "r2-m3-s4",
+      "type": "rule_card",
+      "conceptId": "c.signs.info-diversion",
+      "sourceRef": "KYTS-info",
+      "title": "Diversion route",
+      "body": "A diversion sign marks a temporary route around a road closure ahead. Follow it until the normal road resumes.",
+      "question": {
+        "prompt": "A sign marked 'Diversion' with a symbol tells you…",
+        "options": [
+          {
+            "id": "a",
+            "text": "A permanent new main road opens here",
+            "correct": false,
+            "misconceptionId": "m.signs.diversion-permanent"
+          },
+          {
+            "id": "b",
+            "text": "Follow a temporary route around a closure",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "This route is for lorries only",
+            "correct": false
+          }
+        ],
+        "explanation": "Diversions are temporary — they route you around roadworks or a closure, then hand you back to the normal road."
+      }
+    },
+    {
+      "id": "r2-m3-s5",
+      "type": "rule_card",
+      "conceptId": "c.signs.markings-centre-line",
+      "sourceRef": "KYTS-markings",
+      "title": "Centre lines",
+      "body": "A broken white line down the middle of the road separates traffic flowing in opposite directions. Longer marks mean a greater hazard.",
+      "question": {
+        "prompt": "A broken white line down the middle of the road…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Separates lanes travelling the same way",
+            "correct": false,
+            "misconceptionId": "m.signs.centre-line-lane"
+          },
+          {
+            "id": "b",
+            "text": "Separates traffic going in opposite directions",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Means no stopping at any time",
+            "correct": false
+          }
+        ],
+        "explanation": "The centre line divides opposing flows. Lanes going the same way are divided by lane lines, not the centre line."
+      }
+    },
+    {
+      "id": "r2-m3-s6",
+      "type": "rule_card",
+      "conceptId": "c.signs.markings-double-white",
+      "sourceRef": "KYTS-markings",
+      "title": "Double white lines",
+      "body": "Where the white line nearest you is solid, you must not cross or straddle it to overtake. Wait until it becomes broken and it's safe.",
+      "question": {
+        "prompt": "The white line nearest you is solid (double white lines). You…",
+        "options": [
+          {
+            "id": "a",
+            "text": "May cross it whenever the road ahead looks clear",
+            "correct": false,
+            "misconceptionId": "m.signs.cross-solid-if-clear"
+          },
+          {
+            "id": "b",
+            "text": "Must not cross or straddle it to overtake",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "May cross it only after dark",
+            "correct": false
+          }
+        ],
+        "explanation": "A solid line nearest you means no crossing to overtake — wait until it becomes broken and the way is clear."
+      }
+    },
+    {
+      "id": "r2-m3-s7",
+      "type": "misconception",
+      "conceptId": "c.signs.markings-enforceable",
+      "sourceRef": "KYTS-markings",
+      "wrongBelief": "Road markings are only guidance, not rules you can be penalised for.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It's right — only signs are enforceable",
+            "correct": false,
+            "misconceptionId": "m.signs.markings-decorative"
+          },
+          {
+            "id": "b",
+            "text": "Many markings are legal orders — stop lines, box junctions, solid whites",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Markings only matter inside towns",
+            "correct": false
+          }
+        ],
+        "explanation": "Plenty of markings carry the force of law: stop lines, box junctions and solid white lines can all bring a penalty."
+      },
+      "repairNote": "Road markings can be as binding as signs — a stop line, box junction or solid white line is a legal order, not advice."
+    },
+    {
+      "id": "r2-m3-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "KYTS-info",
+      "questions": [
+        { "bankRef": "c.signs.info-tourist" },
+        { "bankRef": "c.signs.info-parking" },
+        { "bankRef": "c.signs.info-diversion" },
+        { "bankRef": "c.signs.markings-centre-line" },
+        { "bankRef": "c.signs.markings-double-white" }
+      ]
+    }
+  ]
+}

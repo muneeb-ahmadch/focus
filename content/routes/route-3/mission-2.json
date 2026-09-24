@@ -1,0 +1,236 @@
+{
+  "missionId": "r3-m2",
+  "routeId": "route-3",
+  "title": "Fog & poor visibility",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r3-m2-s1",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.fog-lights-on",
+      "sourceRef": "HC-226",
+      "scene": "You drive into a bank of fog. You can no longer make out the road much beyond the car in front.",
+      "question": {
+        "prompt": "When may you switch your fog lights on?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Whenever the weather turns bad",
+            "correct": false,
+            "misconceptionId": "m.lights.brighter-always-safer"
+          },
+          {
+            "id": "b",
+            "text": "Once you can see less than 100 metres",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Only after dark, whatever the visibility",
+            "correct": false
+          }
+        ],
+        "explanation": "Fog lights are for seriously reduced visibility — 100 metres or less. Below that they earn their glare."
+      }
+    },
+    {
+      "id": "r3-m2-s2",
+      "type": "rule_card",
+      "conceptId": "c.hazard.fog-lights-off",
+      "sourceRef": "HC-236",
+      "title": "Off the moment it clears",
+      "body": "You MUST switch fog lights off when visibility improves. Be ready to use them again if it drops back below 100 metres.",
+      "question": {
+        "prompt": "The fog has lifted and your front fog lights are still on. What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Leave them on until you park",
+            "correct": false,
+            "misconceptionId": "m.lights.fog-leave-on"
+          },
+          {
+            "id": "b",
+            "text": "Leave them on if other drivers have theirs on",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Switch them off while visibility stays good",
+            "correct": true
+          }
+        ],
+        "explanation": "Switch them off as soon as the weather improves, and switch them back on if visibility drops again."
+      }
+    },
+    {
+      "id": "r3-m2-s3",
+      "type": "contrast",
+      "conceptId": "c.hazard.fog-rear-masks-brakes",
+      "sourceRef": "HC-114",
+      "a": {
+        "label": "Front fog lights",
+        "body": "Help YOU see. Left on in clear weather they dazzle drivers coming the other way."
+      },
+      "b": {
+        "label": "Rear fog lights",
+        "body": "Help you BE seen. Left on in clear weather they look just like brake lights."
+      },
+      "question": {
+        "prompt": "Why is leaving rear fog lights on after the fog clears dangerous?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They may be confused with your brake lights",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "They do the same job as the front ones, so it's harmless",
+            "correct": false,
+            "misconceptionId": "m.lights.fog-front-and-rear-same"
+          },
+          {
+            "id": "c",
+            "text": "The bulbs will fail sooner",
+            "correct": false
+          }
+        ],
+        "explanation": "A driver behind can't tell whether you're braking or have simply forgotten your rear fog lights."
+      }
+    },
+    {
+      "id": "r3-m2-s4",
+      "type": "rule_card",
+      "conceptId": "c.hazard.dipped-poor-visibility",
+      "sourceRef": "HC-115",
+      "title": "Poor, but not that poor",
+      "body": "Murky daylight that isn't seriously reduced calls for dipped headlights — seen by others, without the glare of fog lights.",
+      "question": {
+        "prompt": "Daytime visibility is poor but not seriously reduced. Which lights?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Front fog lights",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Dipped headlights",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "None — it's still daylight",
+            "correct": false,
+            "misconceptionId": "m.lights.daytime-needs-no-lights"
+          }
+        ],
+        "explanation": "Dipped headlights make you visible without dazzling. Fog lights wait until visibility is seriously reduced."
+      }
+    },
+    {
+      "id": "r3-m2-s5",
+      "type": "hazard_cue",
+      "conceptId": "c.hazard.fog-following-gap",
+      "sourceRef": "HC-235",
+      "scene": "Thick fog. A pair of tail lights swims into view ahead and you settle in behind them.",
+      "question": {
+        "prompt": "What's wrong with sitting close behind them?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They can't see hazards early either, so they may stop suddenly",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Their fog lights will dazzle you",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Nothing — following their lights keeps you on the road",
+            "correct": false,
+            "misconceptionId": "m.hazard.fog-follow-tail-lights"
+          }
+        ],
+        "explanation": "The driver ahead sees hazards just as late as you do. Stay well back — the surface is likely wet too."
+      }
+    },
+    {
+      "id": "r3-m2-s6",
+      "type": "rule_card",
+      "conceptId": "c.hazard.fog-speed",
+      "sourceRef": "HC-234",
+      "title": "Slow to what you can see",
+      "body": "In fog it is harder to judge what's ahead. Drive at a speed you could stop in within the distance you can see to be clear.",
+      "question": {
+        "prompt": "Why reduce your speed in fog?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Concentrating hard makes up for the speed",
+            "correct": false,
+            "misconceptionId": "m.hazard.fog-speed-by-feel"
+          },
+          {
+            "id": "b",
+            "text": "It's harder to see what's ahead of you",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Fog makes the engine work harder",
+            "correct": false
+          }
+        ],
+        "explanation": "You can only stop within what you can see. In fog that distance is short, so your speed has to be too."
+      }
+    },
+    {
+      "id": "r3-m2-s7",
+      "type": "misconception",
+      "conceptId": "c.hazard.fog-journey-prep",
+      "sourceRef": "HC-228",
+      "wrongBelief": "Fog just means taking a bit more care — nothing else about the journey changes.",
+      "question": {
+        "prompt": "What else should change before you set off?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Allow more time, and clean your windows and lights",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Nothing — just concentrate harder on the way",
+            "correct": false,
+            "misconceptionId": "m.hazard.fog-just-drive-careful"
+          },
+          {
+            "id": "c",
+            "text": "Set off earlier and drive at your normal speed",
+            "correct": false
+          }
+        ],
+        "explanation": "Fog journeys take longer. Clean glass and lights, allow the extra time, and ask if the trip is essential."
+      },
+      "repairNote": "Allow more time, clean your windows and lights before setting off, and consider whether the journey is essential."
+    },
+    {
+      "id": "r3-m2-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-226",
+      "questions": [
+        { "bankRef": "c.hazard.fog-lights-on" },
+        { "bankRef": "c.hazard.fog-lights-off" },
+        { "bankRef": "c.hazard.fog-rear-masks-brakes" },
+        { "bankRef": "c.hazard.dipped-poor-visibility" },
+        { "bankRef": "c.hazard.fog-following-gap" }
+      ]
+    }
+  ]
+}

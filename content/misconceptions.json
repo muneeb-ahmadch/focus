@@ -236,5 +236,915 @@
     "wrongBelief": "The hierarchy of road users says all road users carry exactly equal responsibility.",
     "repairNote": "The greatest capacity for harm brings the greatest responsibility.",
     "sourceRef": "HC-H1"
+  },
+  {
+    "misconceptionId": "m.signs.warning-is-order",
+    "conceptId": "c.signs.warning-grammar",
+    "wrongBelief": "A red-bordered triangular sign is an order you must obey.",
+    "repairNote": "Triangles warn of a hazard ahead. Only circles give orders — a warning tells you to prepare, not obey.",
+    "sourceRef": "KYTS-shapes"
+  },
+  {
+    "misconceptionId": "m.signs.crossroads-is-give-way",
+    "conceptId": "c.signs.warning-crossroads",
+    "wrongBelief": "The crossroads warning triangle means you must give way.",
+    "repairNote": "It warns that roads cross ahead so you watch both ways; priority is set by separate signs or markings.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.signs.t-junction-is-crossroads",
+    "conceptId": "c.signs.warning-t-junction",
+    "wrongBelief": "A T-junction warning sign means there is a crossroads ahead.",
+    "repairNote": "A T-shape warns your road ends at a junction ahead; a plus-shape warns of a crossroads. Read the symbol.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.signs.road-narrows-one-side",
+    "conceptId": "c.signs.warning-road-narrows",
+    "wrongBelief": "The road-narrows sign always warns the road narrows on the right only.",
+    "repairNote": "The arrows show which side narrows — the left, the right, or both. Read the symbol before you commit.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.signs.steep-hill-brake-hard",
+    "conceptId": "c.signs.warning-steep-hill",
+    "wrongBelief": "On a steep downhill you should hold the brakes down all the way to the bottom.",
+    "repairNote": "Choose a lower gear early so engine braking holds your speed; riding the brakes can overheat and fade them.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.signs.ice-sign-means-gritted",
+    "conceptId": "c.signs.warning-slippery",
+    "wrongBelief": "The ice warning sign means the road has been gritted and is safe.",
+    "repairNote": "It warns the road may be icy or slippery. Slow down and avoid sharp braking, steering or acceleration.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.signs.warning-fixed-action",
+    "conceptId": "c.signs.warning-response",
+    "wrongBelief": "Every warning sign tells you to do one fixed thing, such as stop.",
+    "repairNote": "A warning names the hazard ahead; you choose the response for the hazard and the conditions you meet.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.signs.circle-is-warning",
+    "conceptId": "c.signs.order-grammar",
+    "wrongBelief": "A round sign with a red ring is warning you about a hazard ahead.",
+    "repairNote": "Circles give orders, not warnings. A red ring means a prohibition — something you must not do.",
+    "sourceRef": "KYTS-circles"
+  },
+  {
+    "misconceptionId": "m.signs.no-entry-is-no-through",
+    "conceptId": "c.signs.order-no-entry",
+    "wrongBelief": "A red circle with a white bar means 'no through road'.",
+    "repairNote": "That sign is 'no entry' — you must not drive past it. 'No through road' is a separate rectangular sign.",
+    "sourceRef": "KYTS-order"
+  },
+  {
+    "misconceptionId": "m.signs.no-motor-is-no-entry",
+    "conceptId": "c.signs.order-no-motor-vehicles",
+    "wrongBelief": "The 'no motor vehicles' sign bans everyone, the same as 'no entry'.",
+    "repairNote": "It bans motor vehicles only — cyclists and pedestrians may still pass. 'No entry' bans all vehicles.",
+    "sourceRef": "KYTS-order"
+  },
+  {
+    "misconceptionId": "m.signs.no-overtaking-advisory",
+    "conceptId": "c.signs.order-no-overtaking",
+    "wrongBelief": "The no-overtaking sign is just advice you can ignore if the road looks clear.",
+    "repairNote": "It is an order: you must not overtake until you pass the sign that ends the restriction.",
+    "sourceRef": "KYTS-order"
+  },
+  {
+    "misconceptionId": "m.signs.speed-limit-is-minimum",
+    "conceptId": "c.signs.order-speed-limit",
+    "wrongBelief": "A red ring around a number is a minimum speed you must reach.",
+    "repairNote": "A red ring around a number is a compulsory maximum — never a minimum or a target.",
+    "sourceRef": "KYTS-order"
+  },
+  {
+    "misconceptionId": "m.signs.give-priority-is-your-priority",
+    "conceptId": "c.signs.order-give-priority",
+    "wrongBelief": "The 'give priority to oncoming traffic' sign means you have priority.",
+    "repairNote": "The larger arrow is the oncoming traffic that has priority — you give way. A separate sign gives you priority.",
+    "sourceRef": "KYTS-order"
+  },
+  {
+    "misconceptionId": "m.signs.blue-is-advice",
+    "conceptId": "c.signs.order-blue-mandatory",
+    "wrongBelief": "A solid blue circle is only advice or information you can ignore.",
+    "repairNote": "Blue circles give positive orders you must follow, such as 'turn left' or 'mini-roundabout'.",
+    "sourceRef": "KYTS-circles"
+  },
+  {
+    "misconceptionId": "m.signs.rect-is-order",
+    "conceptId": "c.signs.info-grammar",
+    "wrongBelief": "A rectangular sign is giving an order you must obey.",
+    "repairNote": "Rectangles inform or give directions. Triangles warn and circles order — the oblong just tells you what's there.",
+    "sourceRef": "KYTS-shapes"
+  },
+  {
+    "misconceptionId": "m.signs.brown-is-warning",
+    "conceptId": "c.signs.info-tourist",
+    "wrongBelief": "A brown sign is warning you of a hazard at the attraction.",
+    "repairNote": "Brown signs give tourist directions and information — they never warn of danger.",
+    "sourceRef": "KYTS-info"
+  },
+  {
+    "misconceptionId": "m.signs.blue-p-is-no-parking",
+    "conceptId": "c.signs.info-parking",
+    "wrongBelief": "A blue sign with a white P means no parking, keep moving.",
+    "repairNote": "A blue sign with a white P points you TO parking. A parking prohibition is a red-and-blue circular sign.",
+    "sourceRef": "KYTS-info"
+  },
+  {
+    "misconceptionId": "m.signs.diversion-permanent",
+    "conceptId": "c.signs.info-diversion",
+    "wrongBelief": "A diversion route sign marks a permanent new main road.",
+    "repairNote": "A diversion is temporary — it routes you around roadworks or a closure, then back to the normal road.",
+    "sourceRef": "KYTS-info"
+  },
+  {
+    "misconceptionId": "m.signs.centre-line-lane",
+    "conceptId": "c.signs.markings-centre-line",
+    "wrongBelief": "The white centre line separates lanes travelling in the same direction.",
+    "repairNote": "The centre line separates traffic flowing in OPPOSITE directions; same-way lanes are split by lane lines.",
+    "sourceRef": "KYTS-markings"
+  },
+  {
+    "misconceptionId": "m.signs.cross-solid-if-clear",
+    "conceptId": "c.signs.markings-double-white",
+    "wrongBelief": "You may cross a solid white centre line whenever the road ahead looks clear.",
+    "repairNote": "Where the line nearest you is solid you must not cross it to overtake — wait until it becomes broken.",
+    "sourceRef": "KYTS-markings"
+  },
+  {
+    "misconceptionId": "m.signs.markings-decorative",
+    "conceptId": "c.signs.markings-enforceable",
+    "wrongBelief": "Road markings are only guidance, not rules you can be penalised for.",
+    "repairNote": "Many markings are legal orders — stop lines, box junctions and solid white lines can all bring a penalty.",
+    "sourceRef": "KYTS-markings"
+  },
+  {
+    "misconceptionId": "m.signs.red-amber-means-go",
+    "conceptId": "c.signs.signal-sequence",
+    "wrongBelief": "Red and amber showing together means you can move off.",
+    "repairNote": "Red and amber still means stop — it only tells you green is next. Wait until green shows.",
+    "sourceRef": "KYTS-signals"
+  },
+  {
+    "misconceptionId": "m.signs.amber-means-hurry",
+    "conceptId": "c.signs.signal-amber-alone",
+    "wrongBelief": "Amber means speed up to get through before the light turns red.",
+    "repairNote": "Amber alone means stop at the stop line — carry on only if you've crossed it or stopping would be unsafe.",
+    "sourceRef": "KYTS-signals"
+  },
+  {
+    "misconceptionId": "m.signs.green-means-enter",
+    "conceptId": "c.signs.signal-green-blocked",
+    "wrongBelief": "A green light means you may enter the junction whatever is happening beyond it.",
+    "repairNote": "Green means go on only if the way is clear — if your exit is blocked, hold back behind the line.",
+    "sourceRef": "KYTS-signals"
+  },
+  {
+    "misconceptionId": "m.signs.filter-arrow-any-direction",
+    "conceptId": "c.signs.signal-filter-arrow",
+    "wrongBelief": "A green filter arrow lets you go in any direction, like a full green light.",
+    "repairNote": "A filter arrow releases only the direction it points; the red still holds every other movement.",
+    "sourceRef": "KYTS-signals"
+  },
+  {
+    "misconceptionId": "m.signs.flashing-red-if-clear",
+    "conceptId": "c.signs.signal-flashing-red",
+    "wrongBelief": "You may cross at flashing red lights once the way looks clear.",
+    "repairNote": "Flashing red means stop and wait until they stop flashing — a second train or a closing bridge may follow.",
+    "sourceRef": "KYTS-signals"
+  },
+  {
+    "misconceptionId": "m.signs.gantry-applies-to-all",
+    "conceptId": "c.signs.gantry-red-x",
+    "wrongBelief": "A red X on a gantry closes the whole carriageway, not just the lane below it.",
+    "repairNote": "Gantry signals are lane-specific — a red X above your lane only closes that lane, so move into an open one.",
+    "sourceRef": "KYTS-motorway"
+  },
+  {
+    "misconceptionId": "m.signs.gantry-limit-minimum",
+    "conceptId": "c.signs.gantry-temporary-limit",
+    "wrongBelief": "A speed shown on a motorway gantry is a minimum you must keep up to.",
+    "repairNote": "A gantry speed is a temporary maximum, never a minimum — shown in a red ring it's the legal limit.",
+    "sourceRef": "KYTS-motorway"
+  },
+  {
+    "misconceptionId": "m.signs.stop-sign-if-clear",
+    "conceptId": "c.signs.context-stop-line",
+    "wrongBelief": "You can roll past a STOP sign without stopping when the road looks clear.",
+    "repairNote": "STOP signs sit where your view is restricted — you must stop at the line every time, then look before emerging.",
+    "sourceRef": "KYTS-order"
+  },
+  {
+    "misconceptionId": "m.signs.covered-sign-unreadable",
+    "conceptId": "c.signs.context-octagon-obscured",
+    "wrongBelief": "If snow or dirt covers a sign's face, there's no way to know what it says.",
+    "repairNote": "Shape still tells you: the octagon is used for STOP alone, precisely so it can be obeyed when it's obscured.",
+    "sourceRef": "KYTS-shapes"
+  },
+  {
+    "misconceptionId": "m.signs.broken-line-must-stop",
+    "conceptId": "c.signs.context-give-way-line",
+    "wrongBelief": "A broken white line across a junction means you must stop, like a stop line.",
+    "repairNote": "Broken means give way — stay behind it and emerge when it's safe. Only a solid stop line means stop every time.",
+    "sourceRef": "KYTS-markings"
+  },
+  {
+    "misconceptionId": "m.signs.hazard-line-lane-divider",
+    "conceptId": "c.signs.context-hazard-line",
+    "wrongBelief": "Long white lines down the middle of the road are just an ordinary lane marking.",
+    "repairNote": "When the marks are longer than the gaps it's a hazard warning line — a hazard is coming, so don't overtake.",
+    "sourceRef": "KYTS-markings"
+  },
+  {
+    "misconceptionId": "m.signs.zigzag-short-stop-ok",
+    "conceptId": "c.signs.context-zigzag",
+    "wrongBelief": "Stopping briefly on the zigzags at a crossing is fine if you're quick.",
+    "repairNote": "No parking on zigzags at any time — a parked car hides pedestrians from the drivers approaching the crossing.",
+    "sourceRef": "KYTS-markings"
+  },
+  {
+    "misconceptionId": "m.signs.failed-lights-main-road",
+    "conceptId": "c.signs.context-lights-failed",
+    "wrongBelief": "When traffic lights fail, traffic on the main road keeps its priority.",
+    "repairNote": "Nobody has priority at failed lights — treat it as an unmarked crossroads and be ready to stop.",
+    "sourceRef": "KYTS-signals"
+  },
+  {
+    "misconceptionId": "m.signs.officer-below-signs",
+    "conceptId": "c.signs.context-officer-overrides",
+    "wrongBelief": "Traffic lights and signs override a police officer directing traffic.",
+    "repairNote": "You must obey a police officer, traffic officer, traffic warden or school crossing patrol — their signals take over.",
+    "sourceRef": "HC-105"
+  },
+  {
+    "misconceptionId": "m.hazard.parked-is-static",
+    "conceptId": "c.hazard.parked-doors",
+    "wrongBelief": "A parked car isn't a hazard — it isn't going anywhere.",
+    "repairNote": "Someone may open a door or step out. Pass parked cars slowly and leave room for a door.",
+    "sourceRef": "HC-206"
+  },
+  {
+    "misconceptionId": "m.hazard.watch-the-car-ahead",
+    "conceptId": "c.hazard.scanning",
+    "wrongBelief": "Watching the vehicle in front closely is all the observation you need.",
+    "repairNote": "Scan far ahead, close in and behind — the hazard that catches you out is the one you never looked at.",
+    "sourceRef": "HC-160"
+  },
+  {
+    "misconceptionId": "m.hazard.children-will-look",
+    "conceptId": "c.hazard.children-between-cars",
+    "wrongBelief": "Children near the road will see your car and wait.",
+    "repairNote": "Children get absorbed and step out between parked cars. Where they might be, expect them.",
+    "sourceRef": "HC-205"
+  },
+  {
+    "misconceptionId": "m.hazard.bus-waits-for-you",
+    "conceptId": "c.hazard.bus-pulling-out",
+    "wrongBelief": "A bus at a stop will wait until you've passed.",
+    "repairNote": "It may signal and pull out — give way if you safely can, and watch for people crossing in front.",
+    "sourceRef": "HC-223"
+  },
+  {
+    "misconceptionId": "m.hazard.cyclist-holds-line",
+    "conceptId": "c.hazard.cyclist-swerve",
+    "wrongBelief": "A cyclist ahead will hold a straight line, so you can pass close.",
+    "repairNote": "They swerve for potholes, drains and gusts. Hang back and give them room to move out.",
+    "sourceRef": "HC-213"
+  },
+  {
+    "misconceptionId": "m.hazard.blind-junction-rush",
+    "conceptId": "c.hazard.restricted-view",
+    "wrongBelief": "If you can't see at a junction, edging out fast gets it over with.",
+    "repairNote": "Creep forward until you can see. Traffic can't see you either — if you don't know it's clear, don't go.",
+    "sourceRef": "HC-170"
+  },
+  {
+    "misconceptionId": "m.hazard.fast-reactions-cover",
+    "conceptId": "c.hazard.plan-early",
+    "wrongBelief": "Good reactions make up for not looking far ahead.",
+    "repairNote": "Reacting quickly still costs you thinking distance. Planning early is what keeps the gap you need.",
+    "sourceRef": "HC-147"
+  },
+  {
+    "misconceptionId": "m.lights.fog-front-and-rear-same",
+    "conceptId": "c.hazard.fog-rear-masks-brakes",
+    "wrongBelief": "Front and rear fog lights do the same job, so it makes no difference which are left on.",
+    "repairNote": "Front fogs help you see; rear fogs help you be seen — and in clear weather rear fogs read as brake lights.",
+    "sourceRef": "HC-114"
+  },
+  {
+    "misconceptionId": "m.lights.daytime-needs-no-lights",
+    "conceptId": "c.hazard.dipped-poor-visibility",
+    "wrongBelief": "In daylight you don't need lights on, however murky it gets.",
+    "repairNote": "Poor daytime visibility calls for dipped headlights so others can see you — fog lights only below 100 m.",
+    "sourceRef": "HC-115"
+  },
+  {
+    "misconceptionId": "m.hazard.fog-follow-tail-lights",
+    "conceptId": "c.hazard.fog-following-gap",
+    "wrongBelief": "In fog, sitting close behind the tail lights ahead is the safest way to keep your place.",
+    "repairNote": "That driver sees hazards as late as you do and may stop suddenly. Stay well back.",
+    "sourceRef": "HC-235"
+  },
+  {
+    "misconceptionId": "m.hazard.fog-speed-by-feel",
+    "conceptId": "c.hazard.fog-speed",
+    "wrongBelief": "In fog you can hold your normal speed as long as you concentrate hard.",
+    "repairNote": "Drive at a speed you could stop within the distance you can see to be clear.",
+    "sourceRef": "HC-234"
+  },
+  {
+    "misconceptionId": "m.hazard.fog-just-drive-careful",
+    "conceptId": "c.hazard.fog-journey-prep",
+    "wrongBelief": "Fog only means taking a bit more care — nothing else about the journey changes.",
+    "repairNote": "Allow more time, clean your windows and lights, and consider whether the journey is essential.",
+    "sourceRef": "HC-228"
+  },
+  {
+    "misconceptionId": "m.stopping.wet-ice-same",
+    "conceptId": "c.hazard.ice-ten-times",
+    "wrongBelief": "Bad weather adds a bit to your stopping distance, whether it is wet or icy.",
+    "repairNote": "Wet roughly doubles it; ice can multiply it by ten — the two are nothing like each other.",
+    "sourceRef": "HC-230"
+  },
+  {
+    "misconceptionId": "m.stopping.ice-gap-a-bit-more",
+    "conceptId": "c.hazard.ice-following-gap",
+    "wrongBelief": "On ice you just need a slightly bigger gap than usual.",
+    "repairNote": "Leave up to ten times the normal gap — on ice a small increase is nowhere near enough.",
+    "sourceRef": "HC-230"
+  },
+  {
+    "misconceptionId": "m.stopping.tyres-legal-is-fine",
+    "conceptId": "c.hazard.tyre-condition",
+    "wrongBelief": "While tyres are above the legal tread limit they stop you just as well.",
+    "repairNote": "Tread depth and pressure change your braking distance long before a tyre becomes illegal.",
+    "sourceRef": "HC-126"
+  },
+  {
+    "misconceptionId": "m.stopping.light-steering-is-good",
+    "conceptId": "c.hazard.aquaplane-cue",
+    "wrongBelief": "Steering that goes light on a wet road means the car is handling well.",
+    "repairNote": "It means the tyres are floating on water. Ease off the accelerator; do not brake until the steering feels normal.",
+    "sourceRef": "HC-227"
+  },
+  {
+    "misconceptionId": "m.stopping.reclaim-your-gap",
+    "conceptId": "c.hazard.gap-restored",
+    "wrongBelief": "If someone pulls into the gap you left, close it back up to keep your place.",
+    "repairNote": "You've lost your stopping distance, not your place in a queue — ease back until the gap is safe again.",
+    "sourceRef": "HC-168"
+  },
+  {
+    "misconceptionId": "m.handling.coasting-saves",
+    "conceptId": "c.hazard.coasting",
+    "wrongBelief": "Rolling in neutral saves fuel and is harmless.",
+    "repairNote": "Coasting removes engine braking and steering response — less control, and no real benefit.",
+    "sourceRef": "HC-122"
+  },
+  {
+    "misconceptionId": "m.handling.brakes-only-slow-you",
+    "conceptId": "c.hazard.engine-braking",
+    "wrongBelief": "The brakes are the only thing that can slow the car down.",
+    "repairNote": "A lower gear brings engine braking — it slows you, settles the car and saves the brakes.",
+    "sourceRef": "HC-160"
+  },
+  {
+    "misconceptionId": "m.handling.ride-the-brakes-downhill",
+    "conceptId": "c.hazard.steep-hill-control",
+    "wrongBelief": "On a long descent, holding the brakes on all the way is the safe way down.",
+    "repairNote": "Select a low gear and use the brakes carefully — continuous braking overheats them and they fade.",
+    "sourceRef": "HC-160"
+  },
+  {
+    "misconceptionId": "m.handling.skids-just-happen",
+    "conceptId": "c.hazard.skid-cause",
+    "wrongBelief": "Skids are caused by the weather or the road, not by the driver.",
+    "repairNote": "The driver causes the skid — braking, steering or accelerating too harshly for the grip available.",
+    "sourceRef": "HC-119"
+  },
+  {
+    "misconceptionId": "m.handling.ice-low-gear-power",
+    "conceptId": "c.hazard.icy-wheelspin",
+    "wrongBelief": "On ice, pull away in a low gear with plenty of revs to get moving.",
+    "repairNote": "Use the highest gear you can and a light foot — power at the wheels is what spins them.",
+    "sourceRef": "HC-231"
+  },
+  {
+    "misconceptionId": "m.handling.ice-is-visible",
+    "conceptId": "c.hazard.icy-road-cue",
+    "wrongBelief": "You can always see when a road is icy.",
+    "repairNote": "Ice can look like damp tarmac. Near-silent tyres and light steering are the warning you get.",
+    "sourceRef": "HC-231"
+  },
+  {
+    "misconceptionId": "m.hazard.food-soaks-alcohol",
+    "conceptId": "c.hazard.alcohol-none",
+    "wrongBelief": "Eating a big meal or sticking to one drink keeps you fit to drive later.",
+    "repairNote": "Nothing speeds alcohol out of your body. If you are driving later in the day, drink none at all.",
+    "sourceRef": "HC-95"
+  },
+  {
+    "misconceptionId": "m.hazard.alcohol-self-aware",
+    "conceptId": "c.hazard.alcohol-judgement",
+    "wrongBelief": "You can tell when alcohol is affecting your driving, so you'd compensate for it.",
+    "repairNote": "Alcohol raises confidence while cutting judgement — the impairment hides itself from you.",
+    "sourceRef": "HC-95"
+  },
+  {
+    "misconceptionId": "m.hazard.push-through-tiredness",
+    "conceptId": "c.hazard.drowsy-stop",
+    "wrongBelief": "Fresh air, loud music or driving slower will get you through a spell of drowsiness.",
+    "repairNote": "Those buy seconds, not alertness. Stop and rest as soon as you safely can.",
+    "sourceRef": "HC-91"
+  },
+  {
+    "misconceptionId": "m.hazard.hard-shoulder-rest",
+    "conceptId": "c.hazard.motorway-tiredness",
+    "wrongBelief": "If you get tired on a motorway you can pull onto the hard shoulder for a rest.",
+    "repairNote": "The hard shoulder is for emergencies only. Leave at the next exit or services, then rest.",
+    "sourceRef": "HC-91"
+  },
+  {
+    "misconceptionId": "m.hazard.otc-medicine-safe",
+    "conceptId": "c.hazard.medicine-drowsy",
+    "wrongBelief": "Medicine you can buy without a prescription can't affect your driving.",
+    "repairNote": "Cough and cold remedies cause drowsiness too. Check the label, and ask your doctor if unsure.",
+    "sourceRef": "HC-96"
+  },
+  {
+    "misconceptionId": "m.hazard.glasses-when-needed",
+    "conceptId": "c.hazard.eyesight",
+    "wrongBelief": "Glasses you need for driving are only needed at night or in bad weather.",
+    "repairNote": "If you need them to read a number plate at the required distance, you must wear them whenever you drive.",
+    "sourceRef": "HC-92"
+  },
+  {
+    "misconceptionId": "m.hazard.quick-glance-is-safe",
+    "conceptId": "c.hazard.distraction",
+    "wrongBelief": "A quick glance at a map or phone between mirror checks is safe enough.",
+    "repairNote": "Nothing may take your attention off the road. Stop somewhere safe and check it there.",
+    "sourceRef": "HC-148"
+  },
+  {
+    "misconceptionId": "m.junction.wider-road-wins",
+    "conceptId": "c.junction.unmarked-crossroads",
+    "wrongBelief": "At an unmarked crossroads the wider or busier road has priority.",
+    "repairNote": "No-one has priority at an unmarked crossroads. Slow down, look both ways and be ready to give way.",
+    "sourceRef": "HC-146"
+  },
+  {
+    "misconceptionId": "m.junction.first-to-arrive",
+    "conceptId": "c.junction.unmarked-crossroads",
+    "wrongBelief": "Whoever reaches an unmarked crossroads first can go through.",
+    "repairNote": "Arriving first gives you nothing. Nobody has priority, so make sure the other driver has seen you.",
+    "sourceRef": "HC-146"
+  },
+  {
+    "misconceptionId": "m.junction.right-turn-priority",
+    "conceptId": "c.junction.turn-right-crossroads",
+    "wrongBelief": "Once you've started turning right, oncoming traffic has to wait for you.",
+    "repairNote": "Oncoming traffic keeps priority until you're across. Wait for a gap you're certain of before you commit.",
+    "sourceRef": "HC-181"
+  },
+  {
+    "misconceptionId": "m.junction.obstruction-first-come",
+    "conceptId": "c.junction.obstruction-give-way",
+    "wrongBelief": "When parked cars narrow the road, whoever reaches the gap first goes through.",
+    "repairNote": "If the obstruction is on your side, give way to oncoming traffic — arriving first changes nothing.",
+    "sourceRef": "HC-163"
+  },
+  {
+    "misconceptionId": "m.junction.reservation-wait",
+    "conceptId": "c.junction.narrow-central-reservation",
+    "wrongBelief": "You can always wait in the central reservation until the far carriageway clears.",
+    "repairNote": "Only if your whole vehicle fits in the gap. If it doesn't, wait until both carriageways are clear.",
+    "sourceRef": "HC-173"
+  },
+  {
+    "misconceptionId": "m.junction.flash-means-go",
+    "conceptId": "c.junction.headlight-flash",
+    "wrongBelief": "A flash of headlights is another driver inviting you to pull out.",
+    "repairNote": "Flashing headlights only means 'I am here'. Never move off on someone else's flash without checking yourself.",
+    "sourceRef": "HC-110"
+  },
+  {
+    "misconceptionId": "m.junction.roundabout-priority-through",
+    "conceptId": "c.junction.roundabout-sign",
+    "wrongBelief": "A roundabout sign means you have priority through the junction ahead.",
+    "repairNote": "It only warns you a roundabout is coming. On it, you give way to traffic from your immediate right.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.junction.mini-is-oneway",
+    "conceptId": "c.junction.mini-roundabout-sign",
+    "wrongBelief": "A mini-roundabout is a one-way system you can enter from any side.",
+    "repairNote": "It's a roundabout like any other: approach it the same way and give way to traffic from your right.",
+    "sourceRef": "HC-188"
+  },
+  {
+    "misconceptionId": "m.junction.mini-drive-over",
+    "conceptId": "c.junction.mini-roundabout-markings",
+    "wrongBelief": "The painted circle at a mini-roundabout is just a marking you can drive straight over.",
+    "repairNote": "Drive round the circle. Only vehicles physically too long to do so may pass over it.",
+    "sourceRef": "HC-188"
+  },
+  {
+    "misconceptionId": "m.junction.roundabout-left-lane-always",
+    "conceptId": "c.junction.roundabout-lane-choice",
+    "wrongBelief": "You always join a roundabout in the left-hand lane, whichever exit you want.",
+    "repairNote": "Left lane for left or straight ahead; right lane, signalling right, when you're turning right.",
+    "sourceRef": "HC-186"
+  },
+  {
+    "misconceptionId": "m.junction.lorry-position-tells-you",
+    "conceptId": "c.junction.roundabout-long-vehicle",
+    "wrongBelief": "A long vehicle's position on the road tells you which exit it's taking.",
+    "repairNote": "Long vehicles swing wide to get round. Read the indicators, not the position, and keep well back.",
+    "sourceRef": "HC-187"
+  },
+  {
+    "misconceptionId": "m.junction.roundabout-exit-no-check",
+    "conceptId": "c.junction.roundabout-exit-check",
+    "wrongBelief": "Being already on a roundabout means you can cross to your exit without checking behind.",
+    "repairNote": "Mirror and blind spot first — cyclists and riders often stay left all the way round, on your inside.",
+    "sourceRef": "HC-187"
+  },
+  {
+    "misconceptionId": "m.crossings.flashing-amber-go",
+    "conceptId": "c.crossings.pelican-flashing-amber",
+    "wrongBelief": "Flashing amber at a pelican crossing means go.",
+    "repairNote": "Give way to anyone still on the crossing; go only when it's clear.",
+    "sourceRef": "HC-196"
+  },
+  {
+    "misconceptionId": "m.crossings.puffin-flashes",
+    "conceptId": "c.crossings.puffin-no-flashing",
+    "wrongBelief": "Every light-controlled crossing has a flashing-amber phase.",
+    "repairNote": "A puffin has none: sensors hold the red while people cross, then a steady amber follows the green.",
+    "sourceRef": "HC-199"
+  },
+  {
+    "misconceptionId": "m.crossings.cyclists-ride-any",
+    "conceptId": "c.crossings.toucan",
+    "wrongBelief": "Cyclists may ride across any pedestrian crossing.",
+    "repairNote": "Only a toucan is shared. At a pelican or puffin a cyclist should get off and push across.",
+    "sourceRef": "HC-199"
+  },
+  {
+    "misconceptionId": "m.crossings.zebra-only-when-stepped",
+    "conceptId": "c.crossings.zebra-waiting",
+    "wrongBelief": "Someone waiting at a zebra crossing can be ignored until they step out.",
+    "repairNote": "You MUST give way once they're on the crossing, and you should give way to anyone waiting to cross.",
+    "sourceRef": "HC-195"
+  },
+  {
+    "misconceptionId": "m.crossings.waving-is-polite",
+    "conceptId": "c.crossings.never-wave",
+    "wrongBelief": "Waving a pedestrian across is polite if you've checked your mirrors.",
+    "repairNote": "Never wave anyone across. Your mirrors can't see what an overtaking driver is about to do.",
+    "sourceRef": "HC-195"
+  },
+  {
+    "misconceptionId": "m.crossings.overtake-if-clear",
+    "conceptId": "c.crossings.no-overtaking",
+    "wrongBelief": "You may overtake a car stopped at a crossing if the crossing looks clear from where you are.",
+    "repairNote": "Never overtake the vehicle nearest a crossing. It's stopped because it can see something you can't.",
+    "sourceRef": "HC-191"
+  },
+  {
+    "misconceptionId": "m.crossings.queue-onto-crossing",
+    "conceptId": "c.crossings.keep-clear",
+    "wrongBelief": "Queuing across a pedestrian crossing is fine as long as you keep moving with the traffic.",
+    "repairNote": "Stop before the crossing and leave it clear, even if it opens a gap in the queue.",
+    "sourceRef": "HC-192"
+  },
+  {
+    "misconceptionId": "m.lanes.late-lane-change",
+    "conceptId": "c.lanes.wrong-lane-late",
+    "wrongBelief": "If you're in the wrong lane at a junction, cut across into the right one.",
+    "repairNote": "Stay in your lane and find another way round. A last-moment change is how side-swipes happen.",
+    "sourceRef": "HC-134"
+  },
+  {
+    "misconceptionId": "m.lanes.right-is-fast-lane",
+    "conceptId": "c.lanes.dual-right-lane",
+    "wrongBelief": "The right-hand lane of a dual carriageway is the fast lane, for anyone in a hurry.",
+    "repairNote": "It's for overtaking or turning right. Move back to the left as soon as you've finished.",
+    "sourceRef": "HC-137"
+  },
+  {
+    "misconceptionId": "m.lanes.oneway-right-only",
+    "conceptId": "c.lanes.one-way-overtaking",
+    "wrongBelief": "You may only ever overtake on the right, including in a one-way street.",
+    "repairNote": "In a one-way street all the traffic runs the same way, so you may pass on either side.",
+    "sourceRef": "HC-143"
+  },
+  {
+    "misconceptionId": "m.lanes.cycle-lane-when-empty",
+    "conceptId": "c.lanes.cycle-lane-solid",
+    "wrongBelief": "You may drive in a cycle lane when no cyclist is using it.",
+    "repairNote": "A solid white line means keep out while the lane is operating, empty or not.",
+    "sourceRef": "HC-140"
+  },
+  {
+    "misconceptionId": "m.lanes.bus-lane-if-empty",
+    "conceptId": "c.lanes.bus-lane-hours",
+    "wrongBelief": "You may use a bus lane whenever there's no bus in sight.",
+    "repairNote": "The sign gives the hours it operates. Outside those hours you may use it; inside them you may not.",
+    "sourceRef": "HC-141"
+  },
+  {
+    "misconceptionId": "m.lanes.swing-wide-to-turn",
+    "conceptId": "c.lanes.left-turn-position",
+    "wrongBelief": "Move out to the middle of the road before turning left, so you can swing in.",
+    "repairNote": "Keep well to the left. Swinging out opens a gap a cyclist or moped can ride straight into.",
+    "sourceRef": "HC-182"
+  },
+  {
+    "misconceptionId": "m.lanes.signal-gives-priority",
+    "conceptId": "c.lanes.signal-then-move",
+    "wrongBelief": "Signalling to change lane makes the space yours.",
+    "repairNote": "A signal is information, not a claim. Mirror, blind spot, then move only into a gap that's really there.",
+    "sourceRef": "HC-133"
+  },
+  {
+    "misconceptionId": "m.rail.amber-hurry",
+    "conceptId": "c.rail.first-warning",
+    "wrongBelief": "A steady amber at a level crossing means hurry across before the red lights start.",
+    "repairNote": "Amber is the first warning of a train. Stop, unless you've already crossed the white line.",
+    "sourceRef": "HC-293"
+  },
+  {
+    "misconceptionId": "m.rail.beat-the-barrier",
+    "conceptId": "c.rail.red-flashing",
+    "wrongBelief": "You can cross while the barrier is still up, even once the red lights are flashing.",
+    "repairNote": "Flashing red means stop, whatever the barrier is doing. The lights start well before the train arrives.",
+    "sourceRef": "HC-293"
+  },
+  {
+    "misconceptionId": "m.rail.one-train",
+    "conceptId": "c.rail.keep-waiting",
+    "wrongBelief": "Once a train has passed the crossing is safe to cross.",
+    "repairNote": "If the lights are still flashing, another train is coming. Wait until they stop.",
+    "sourceRef": "HC-293"
+  },
+  {
+    "misconceptionId": "m.rail.stop-on-crossing",
+    "conceptId": "c.rail.amber-while-crossing",
+    "wrongBelief": "If the warning starts while you're on a level crossing, stop and wait for the barrier.",
+    "repairNote": "Keep going and clear the crossing. Never stop on the rails.",
+    "sourceRef": "HC-293"
+  },
+  {
+    "misconceptionId": "m.rail.markers-roadworks",
+    "conceptId": "c.rail.countdown-markers",
+    "wrongBelief": "White boards with red diagonal bars beside the road are roadworks markers.",
+    "repairNote": "They count down to a concealed level crossing — three bars, two, one.",
+    "sourceRef": "KYTS-warning"
+  },
+  {
+    "misconceptionId": "m.rail.lights-only-rule",
+    "conceptId": "c.rail.exit-clear",
+    "wrongBelief": "If no lights are flashing you can drive straight onto a level crossing.",
+    "repairNote": "The far side has to be clear too, so nothing can leave you stopped on the rails.",
+    "sourceRef": "HC-291"
+  },
+  {
+    "misconceptionId": "m.vru.pass-behind-crossers",
+    "conceptId": "c.vru.turn-give-way-crossing",
+    "wrongBelief": "If people are already crossing a side road you can steer round behind them.",
+    "repairNote": "Once they've started to cross they have priority — wait until they're clear of the road.",
+    "sourceRef": "HC-170"
+  },
+  {
+    "misconceptionId": "m.vru.roadworks-hurry",
+    "conceptId": "c.vru.pavement-closed",
+    "wrongBelief": "The safest way past roadworks is to keep your speed up and get clear of them.",
+    "repairNote": "A closed pavement puts people in the road — slow down and expect them to be walking there.",
+    "sourceRef": "HC-206"
+  },
+  {
+    "misconceptionId": "m.vru.walkers-with-traffic",
+    "conceptId": "c.vru.country-road-walkers",
+    "wrongBelief": "On a road with no pavement, walkers keep to the left like the traffic does.",
+    "repairNote": "Without a pavement they walk on the right, facing traffic — so they meet you head-on.",
+    "sourceRef": "HC-2"
+  },
+  {
+    "misconceptionId": "m.vru.red-band-blind-only",
+    "conceptId": "c.vru.white-stick-red-band",
+    "wrongBelief": "The red band on a white stick is just a reflective strip; the person is blind.",
+    "repairNote": "The red band means deaf as well as blind — they can neither see you nor hear your horn.",
+    "sourceRef": "HC-207"
+  },
+  {
+    "misconceptionId": "m.vru.dog-coat-trainer",
+    "conceptId": "c.vru.assistance-dog-coat",
+    "wrongBelief": "A dog in a yellow or burgundy coat belongs to a trainer out working with a puppy.",
+    "repairNote": "That coat marks an assistance dog for a deaf owner, who may not hear you coming.",
+    "sourceRef": "HC-207"
+  },
+  {
+    "misconceptionId": "m.vru.green-means-my-turn",
+    "conceptId": "c.vru.older-need-time",
+    "wrongBelief": "Once the crossing light turns green the road is yours and pedestrians should hurry.",
+    "repairNote": "Green means go only when the crossing is clear. Wait for anyone still on it, however slow.",
+    "sourceRef": "HC-207"
+  },
+  {
+    "misconceptionId": "m.vru.patrol-is-advisory",
+    "conceptId": "c.vru.school-patrol",
+    "wrongBelief": "A school crossing patrol is only advising you to stop, so you can creep past when it looks clear.",
+    "repairNote": "Their 'stop' sign is an order. Stop, and stay stopped until they're back on the pavement.",
+    "sourceRef": "HC-210"
+  },
+  {
+    "misconceptionId": "m.vru.school-amber-advisory",
+    "conceptId": "c.vru.school-flashing-amber",
+    "wrongBelief": "Flashing amber lights under a school sign only remind you that a school is somewhere nearby.",
+    "repairNote": "They're switched on because children may be crossing now — cut your speed until you're clear.",
+    "sourceRef": "HC-208"
+  },
+  {
+    "misconceptionId": "m.vru.school-zigzag-dropoff",
+    "conceptId": "c.vru.school-zigzag",
+    "wrongBelief": "You may stop on the school zigzags to drop off or pick up children.",
+    "repairNote": "No waiting or parking on them at all — they keep the crossing point visible from both sides.",
+    "sourceRef": "HC-238"
+  },
+  {
+    "misconceptionId": "m.vru.reverse-mirrors-enough",
+    "conceptId": "c.vru.reverse-get-out-check",
+    "wrongBelief": "Your mirrors show you everything you need to see before you reverse.",
+    "repairNote": "A small child or a low obstruction sits entirely below the glass. If you can't be sure, get out and look.",
+    "sourceRef": "HC-202"
+  },
+  {
+    "misconceptionId": "m.vru.reverse-children-visible",
+    "conceptId": "c.vru.reverse-children-hidden",
+    "wrongBelief": "Anyone standing behind your car would show up in the rear window before you moved.",
+    "repairNote": "Children are the hardest road users to see when reversing — they can be completely hidden.",
+    "sourceRef": "HC-202"
+  },
+  {
+    "misconceptionId": "m.vru.reverse-pedestrian-waits",
+    "conceptId": "c.vru.reverse-give-way",
+    "wrongBelief": "A pedestrian will wait for you to finish reversing before they cross behind you.",
+    "repairNote": "Stop and give way to anyone wanting to cross behind you, and never wave them past.",
+    "sourceRef": "HC-202"
+  },
+  {
+    "misconceptionId": "m.vru.looked-once-is-enough",
+    "conceptId": "c.vru.moto-hidden-emerging",
+    "wrongBelief": "If the road looked clear when you first looked, it's safe to pull out of the side road.",
+    "repairNote": "A motorbike can sit entirely behind a parked van or a pillar. Look a second time, for the small shape.",
+    "sourceRef": "HC-211"
+  },
+  {
+    "misconceptionId": "m.vru.pillar-hides-nothing",
+    "conceptId": "c.vru.windscreen-pillar",
+    "wrongBelief": "Windscreen pillars are too narrow to hide anything that matters.",
+    "repairNote": "At bends and junctions a pillar can hide a whole rider, cyclist or pedestrian. Move your head and look past it.",
+    "sourceRef": "HC-211"
+  },
+  {
+    "misconceptionId": "m.vru.junction-look-for-cars",
+    "conceptId": "c.vru.look-at-junctions",
+    "wrongBelief": "At a junction you're looking for cars; anything smaller you'd notice anyway.",
+    "repairNote": "Bikes are exactly what drivers miss. Take particular care to look for motorcyclists and cyclists at junctions.",
+    "sourceRef": "HC-211"
+  },
+  {
+    "misconceptionId": "m.vru.signal-protects-right-turn",
+    "conceptId": "c.vru.turn-right-check-overtakers",
+    "wrongBelief": "Once your right-turn signal is on, nobody will try to overtake you.",
+    "repairNote": "A rider may not have seen it. Check the right mirror and blind spot again just before you turn.",
+    "sourceRef": "HC-180"
+  },
+  {
+    "misconceptionId": "m.vru.queue-is-static",
+    "conceptId": "c.vru.filtering-queue",
+    "wrongBelief": "In slow-moving queued traffic nothing can be moving between the lanes.",
+    "repairNote": "Motorcyclists filter past on either side. Mirror and blind-spot check before every lane change.",
+    "sourceRef": "HC-211"
+  },
+  {
+    "misconceptionId": "m.vru.shoulder-look-means-balance",
+    "conceptId": "c.vru.moto-lifesaver",
+    "wrongBelief": "A rider glancing over their shoulder is just shifting their weight to keep balance.",
+    "repairNote": "It's a blind-spot check, and it usually means they're about to change direction.",
+    "sourceRef": "HC-212"
+  },
+  {
+    "misconceptionId": "m.vru.lights-make-them-obvious",
+    "conceptId": "c.vru.moto-conspicuity",
+    "wrongBelief": "A motorcycle showing a headlight in daylight is inviting you to pull out in front of it.",
+    "repairNote": "The headlight is there to make the rider easier to see, never as a signal to you.",
+    "sourceRef": "HC-86"
+  },
+  {
+    "misconceptionId": "m.vru.cyclist-left-lane-turns-left",
+    "conceptId": "c.vru.roundabout-left-lane",
+    "wrongBelief": "A cyclist in the left-hand lane approaching a roundabout must be turning left.",
+    "repairNote": "They may keep left the whole way round and still be turning right. Expect any direction.",
+    "sourceRef": "HC-186"
+  },
+  {
+    "misconceptionId": "m.vru.cyclist-needs-help-across",
+    "conceptId": "c.vru.roundabout-cyclist-room",
+    "wrongBelief": "A cyclist signalling right at a roundabout needs you to wave them across.",
+    "repairNote": "Never signal them across. Hold back and leave them the room to take their own line.",
+    "sourceRef": "HC-186"
+  },
+  {
+    "misconceptionId": "m.vru.horse-keeps-left",
+    "conceptId": "c.vru.roundabout-horse",
+    "wrongBelief": "A horse rider keeping to the left at a roundabout will be leaving at the first exit.",
+    "repairNote": "Horses often stay left all the way round, whatever the signal says. Stay well back.",
+    "sourceRef": "HC-186"
+  },
+  {
+    "misconceptionId": "m.vru.horse-centre-is-selfish",
+    "conceptId": "c.vru.horse-centre-lane",
+    "wrongBelief": "A rider in the middle of a narrow lane is being inconsiderate and should be moved along.",
+    "repairNote": "Riding centrally makes them visible and stops you squeezing past. Stay behind until it's genuinely safe.",
+    "sourceRef": "HC-213"
+  },
+  {
+    "misconceptionId": "m.vru.stop-box-is-for-anyone",
+    "conceptId": "c.vru.advanced-stop-line",
+    "wrongBelief": "The marked box between two stop lines is spare space any vehicle may wait in.",
+    "repairNote": "It's reserved for cyclists. Stop at the first line unless the lights changed as you crossed it.",
+    "sourceRef": "HC-178"
+  },
+  {
+    "misconceptionId": "m.vru.bike-wheel-is-parked",
+    "conceptId": "c.vru.bike-between-parked-cars",
+    "wrongBelief": "A bicycle wheel showing between parked cars is just a bike parked at the kerb.",
+    "repairNote": "Treat it as a cyclist about to pull out. Slow down and be ready to stop.",
+    "sourceRef": "HC-211"
+  },
+  {
+    "misconceptionId": "m.vru.horn-moves-animals",
+    "conceptId": "c.vru.loose-animals",
+    "wrongBelief": "A quick blast of the horn moves loose animals out of your way.",
+    "repairNote": "Noise frightens them further into the road. Pass very slowly and quietly, ready to stop.",
+    "sourceRef": "HC-214"
+  },
+  {
+    "misconceptionId": "m.vru.trust-the-indicator",
+    "conceptId": "c.vru.long-vehicle-swings",
+    "wrongBelief": "A long vehicle indicating one way must have signalled wrongly if it moves the other way.",
+    "repairNote": "It swings out the opposite way first so the trailer clears the kerb. Stay back and give it room.",
+    "sourceRef": "HC-221"
+  },
+  {
+    "misconceptionId": "m.vru.close-behind-sees-more",
+    "conceptId": "c.vru.keep-back-for-view",
+    "wrongBelief": "Tucking in close behind a lorry gives you a better view of the road past it.",
+    "repairNote": "The closer you are, the less you see — and the driver loses you from their mirrors. Drop back.",
+    "sourceRef": "HC-222"
+  },
+  {
+    "misconceptionId": "m.vru.reclaim-the-gap",
+    "conceptId": "c.vru.gap-cut-in",
+    "wrongBelief": "If a driver takes the gap you left, close up so it can't happen again.",
+    "repairNote": "That gap is your stopping room. Ease off and rebuild it rather than defending it.",
+    "sourceRef": "HC-168"
+  },
+  {
+    "misconceptionId": "m.vru.spray-tuck-in",
+    "conceptId": "c.vru.lorry-spray",
+    "wrongBelief": "Moving closer to a lorry keeps you out of the worst of its spray.",
+    "repairNote": "Closer means less spray but far less view. Drop back until you can see the road again.",
+    "sourceRef": "HC-227"
+  },
+  {
+    "misconceptionId": "m.vru.bus-passengers-use-crossings",
+    "conceptId": "c.vru.bus-hides-pedestrians",
+    "wrongBelief": "People getting off a bus will walk to a crossing before stepping into the road.",
+    "repairNote": "They step straight out from in front of and behind the bus, hidden until the last moment.",
+    "sourceRef": "HC-223"
+  },
+  {
+    "misconceptionId": "m.vru.bus-must-wait",
+    "conceptId": "c.vru.bus-pulling-away",
+    "wrongBelief": "A bus signalling to leave a stop has to wait for all the passing traffic.",
+    "repairNote": "Give way to it when you safely can, rather than accelerating to get past.",
+    "sourceRef": "HC-223"
+  },
+  {
+    "misconceptionId": "m.vru.learner-needs-pushing",
+    "conceptId": "c.vru.learner-patience",
+    "wrongBelief": "Staying close behind a hesitant learner encourages them to get on with it.",
+    "repairNote": "Pressure makes mistakes more likely. Hang back and give them time and room.",
+    "sourceRef": "HC-217"
   }
 ]

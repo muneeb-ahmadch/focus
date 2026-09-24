@@ -247,6 +247,31 @@ describe('carRowToQuestion — text question', () => {
   });
 });
 
+// A curated concept map lets a mission's checkpoint reference a bank question by an authored,
+// item-free concept id (vB.4 / R2 authoring): the tracked pack carries only `c.signs.warning-…`,
+// never the DVSA item id, and the resolver matches the bank question that now carries that id.
+describe('carRowToQuestion — curated concept map', () => {
+  it('overrides the default conceptId when the item is curated', () => {
+    const q = carRowToQuestion(carTextRow(), topicMap, undefined, {
+      AB2001: 'c.alertness.u-turn-check',
+    });
+    expect(q.conceptId).toBe('c.alertness.u-turn-check');
+  });
+
+  it('falls back to the default conceptId for an item not in the map', () => {
+    const q = carRowToQuestion(carTextRow(), topicMap, undefined, { AB9999: 'c.other.thing' });
+    expect(q.conceptId).toBe('c.alertness.ab2001');
+  });
+
+  it('threads independently of alt-text and keeps the bank valid', () => {
+    const q = carRowToQuestion(carImageRow(), topicMap, altTextAll, { AB2036: 'c.signs.no-entry' });
+    expect(q.conceptId).toBe('c.signs.no-entry');
+    expect(q.options.map((o) => o.altText)).toEqual(Object.values(altTextAll));
+    const bank = { bankFormat: 1, source: 'synthetic', questions: [q] };
+    expect(validateBank(bank, topicMap, { images: imageSet }).errors).toEqual([]);
+  });
+});
+
 describe('carRowToQuestion — image-option question', () => {
   it('detects image options from the gif columns and carries the stem image', () => {
     const q = carRowToQuestion(carImageRow(), topicMap, altTextAll);

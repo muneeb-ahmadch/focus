@@ -1,0 +1,229 @@
+{
+  "missionId": "r3-m5",
+  "routeId": "route-3",
+  "title": "Staying sharp",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r3-m5-s1",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.alcohol-none",
+      "sourceRef": "HC-95",
+      "scene": "You're invited to a pub lunch. You know you'll have to drive that evening.",
+      "question": {
+        "prompt": "What should you do about alcohol?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Have a hot meal alongside your drinks",
+            "correct": false,
+            "misconceptionId": "m.hazard.food-soaks-alcohol"
+          },
+          {
+            "id": "b",
+            "text": "Don't drink any alcohol at all",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Stick to one type of drink",
+            "correct": false
+          }
+        ],
+        "explanation": "Alcohol stays in your body for hours. If you're driving later in the day, the safe amount is none."
+      }
+    },
+    {
+      "id": "r3-m5-s2",
+      "type": "rule_card",
+      "conceptId": "c.hazard.alcohol-judgement",
+      "sourceRef": "HC-95",
+      "title": "It takes the judgement first",
+      "body": "Alcohol slows reactions, blunts your sense of danger and reduces your ability to judge speed — while making you feel more confident.",
+      "question": {
+        "prompt": "How does drinking alcohol affect your driving?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your ability to judge speed is reduced",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Your reactions get faster",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "You drive worse but you know you're doing it",
+            "correct": false,
+            "misconceptionId": "m.hazard.alcohol-self-aware"
+          }
+        ],
+        "explanation": "The cruel part is the confidence: judgement falls while your belief in your own driving rises."
+      }
+    },
+    {
+      "id": "r3-m5-s3",
+      "type": "rule_card",
+      "conceptId": "c.hazard.drowsy-stop",
+      "sourceRef": "HC-91",
+      "title": "Drowsy means stop",
+      "body": "If you begin to feel drowsy, stop and rest as soon as you safely can. Plan rest stops into any long journey before you set off.",
+      "question": {
+        "prompt": "You start to feel drowsy at the wheel. What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Open the window and press on more slowly",
+            "correct": false,
+            "misconceptionId": "m.hazard.push-through-tiredness"
+          },
+          {
+            "id": "b",
+            "text": "Stop and rest as soon as possible",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Turn the heater up to stay comfortable",
+            "correct": false
+          }
+        ],
+        "explanation": "Fresh air and radios buy you seconds, not alertness. The only fix for tiredness is stopping."
+      }
+    },
+    {
+      "id": "r3-m5-s4",
+      "type": "scene_decision",
+      "conceptId": "c.hazard.motorway-tiredness",
+      "sourceRef": "HC-91",
+      "scene": "You're an hour into a motorway journey and your eyes are getting heavy. The hard shoulder is right there.",
+      "question": {
+        "prompt": "What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pull onto the hard shoulder for a nap",
+            "correct": false,
+            "misconceptionId": "m.hazard.hard-shoulder-rest"
+          },
+          {
+            "id": "b",
+            "text": "Leave at the next exit or services and rest",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Speed up to finish the journey sooner",
+            "correct": false
+          }
+        ],
+        "explanation": "The hard shoulder is for emergencies only. Leave at the next exit or services, then rest properly."
+      }
+    },
+    {
+      "id": "r3-m5-s5",
+      "type": "misconception",
+      "conceptId": "c.hazard.medicine-drowsy",
+      "sourceRef": "HC-96",
+      "wrongBelief": "Medicine you can buy without a prescription can't affect your driving.",
+      "question": {
+        "prompt": "You've taken a medicine that makes you drowsy. What now?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Drive only on quiet roads",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "text": "Avoid driving and check with your doctor",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Drive as normal — it's not a prescription drug",
+            "correct": false,
+            "misconceptionId": "m.hazard.otc-medicine-safe"
+          }
+        ],
+        "explanation": "Drowsiness is drowsiness whatever caused it. Read the label, and ask your doctor if you're unsure."
+      },
+      "repairNote": "Cough and cold remedies can make you drowsy too. Check the label before driving, and ask your doctor if unsure."
+    },
+    {
+      "id": "r3-m5-s6",
+      "type": "rule_card",
+      "conceptId": "c.hazard.eyesight",
+      "sourceRef": "HC-92",
+      "title": "Glasses are not optional",
+      "body": "If you need glasses or lenses to read a number plate at the required distance, you MUST wear them every time you drive.",
+      "question": {
+        "prompt": "When must you wear the glasses you need to read a number plate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Whenever you're driving",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Only at night and in bad weather",
+            "correct": false,
+            "misconceptionId": "m.hazard.glasses-when-needed"
+          },
+          {
+            "id": "c",
+            "text": "Whenever you think it's necessary",
+            "correct": false
+          }
+        ],
+        "explanation": "It's a legal requirement, not a judgement call — and tinted lenses make night driving harder still."
+      }
+    },
+    {
+      "id": "r3-m5-s7",
+      "type": "hazard_cue",
+      "conceptId": "c.hazard.distraction",
+      "sourceRef": "HC-148",
+      "scene": "You're unsure of your route. The map is on the passenger seat and the next junction is coming up fast.",
+      "question": {
+        "prompt": "What's the safe move?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Glance at the map between mirror checks",
+            "correct": false,
+            "misconceptionId": "m.hazard.quick-glance-is-safe"
+          },
+          {
+            "id": "b",
+            "text": "Stop somewhere safe and check it there",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Take the junction and work it out after",
+            "correct": false
+          }
+        ],
+        "explanation": "Reading a map at the wheel is a serious distraction. Nothing may take your attention off the road."
+      }
+    },
+    {
+      "id": "r3-m5-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-95",
+      "questions": [
+        { "bankRef": "c.hazard.alcohol-none" },
+        { "bankRef": "c.hazard.alcohol-judgement" },
+        { "bankRef": "c.hazard.drowsy-stop" },
+        { "bankRef": "c.hazard.motorway-tiredness" },
+        { "bankRef": "c.hazard.medicine-drowsy" }
+      ]
+    }
+  ]
+}

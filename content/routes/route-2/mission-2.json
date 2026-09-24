@@ -1,0 +1,238 @@
+{
+  "missionId": "r2-m2",
+  "routeId": "route-2",
+  "title": "Order & priority signs",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r2-m2-s1",
+      "type": "scene_decision",
+      "conceptId": "c.signs.order-grammar",
+      "sourceRef": "KYTS-circles",
+      "scene": "Ahead is a round sign with a bold red ring around the edge. You can't make out the symbol inside yet.",
+      "question": {
+        "prompt": "What is the round shape with a red ring already telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "There is something you must NOT do ahead",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "There is a hazard ahead to watch for",
+            "correct": false,
+            "misconceptionId": "m.signs.circle-is-warning"
+          },
+          {
+            "id": "c",
+            "text": "It is giving directions to a place",
+            "correct": false
+          }
+        ],
+        "explanation": "Circles give orders. A red ring means a prohibition — something you must not do. The symbol shows what."
+      }
+    },
+    {
+      "id": "r2-m2-s2",
+      "type": "rule_card",
+      "conceptId": "c.signs.order-no-entry",
+      "sourceRef": "KYTS-order",
+      "title": "No entry",
+      "body": "A red circle with a white horizontal bar means no entry — you must not drive past it. It often marks the exit of a one-way street.",
+      "question": {
+        "prompt": "A red circle with a single white horizontal bar means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "No through road",
+            "correct": false,
+            "misconceptionId": "m.signs.no-entry-is-no-through"
+          },
+          {
+            "id": "b",
+            "text": "No entry for vehicles",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Give way ahead",
+            "correct": false
+          }
+        ],
+        "explanation": "The red circle with a white bar is 'no entry'. A no-through-road sign is a different, rectangular sign."
+      }
+    },
+    {
+      "id": "r2-m2-s3",
+      "type": "contrast",
+      "conceptId": "c.signs.order-no-motor-vehicles",
+      "sourceRef": "KYTS-order",
+      "a": {
+        "label": "White bar",
+        "body": "A red circle with one white bar: no entry — no vehicles may pass at all."
+      },
+      "b": {
+        "label": "Car + bike",
+        "body": "A red circle showing a car and motorbike: no motor vehicles (cycles may still pass)."
+      },
+      "question": {
+        "prompt": "A red circle shows a black car and motorbike. It means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "No entry for anyone, the same as the white-bar sign",
+            "correct": false,
+            "misconceptionId": "m.signs.no-motor-is-no-entry"
+          },
+          {
+            "id": "b",
+            "text": "No motor vehicles — cycles and pedestrians may still pass",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Cars must turn around here",
+            "correct": false
+          }
+        ],
+        "explanation": "It bans motor vehicles, not all traffic. The white-bar 'no entry' sign bans all vehicles."
+      }
+    },
+    {
+      "id": "r2-m2-s4",
+      "type": "rule_card",
+      "conceptId": "c.signs.order-no-overtaking",
+      "sourceRef": "KYTS-order",
+      "title": "No overtaking",
+      "body": "A red circle with a red car beside a black car means no overtaking. You must not overtake until you pass the sign that ends it.",
+      "question": {
+        "prompt": "A red circle shows two cars side by side, one red. It means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Overtaking is discouraged but allowed if clear",
+            "correct": false,
+            "misconceptionId": "m.signs.no-overtaking-advisory"
+          },
+          {
+            "id": "b",
+            "text": "You must not overtake",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Two-way traffic ahead",
+            "correct": false
+          }
+        ],
+        "explanation": "It is an order, not advice: no overtaking until the end sign. Two-way traffic is a warning triangle, not a red circle."
+      }
+    },
+    {
+      "id": "r2-m2-s5",
+      "type": "sign_meaning",
+      "conceptId": "c.signs.order-speed-limit",
+      "sourceRef": "KYTS-order",
+      "sign": {
+        "shape": "order-red-ring",
+        "glyph": "30"
+      },
+      "question": {
+        "prompt": "A red ring around the number 30 means…",
+        "options": [
+          {
+            "id": "a",
+            "text": "Maximum 30 mph — you must not exceed it",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Aim to drive at least 30 mph",
+            "correct": false,
+            "misconceptionId": "m.signs.speed-limit-is-minimum"
+          },
+          {
+            "id": "c",
+            "text": "The recommended speed is 30 mph",
+            "correct": false
+          }
+        ],
+        "explanation": "A red ring around a number is a compulsory maximum speed limit — never a minimum or a suggestion."
+      }
+    },
+    {
+      "id": "r2-m2-s6",
+      "type": "scene_decision",
+      "conceptId": "c.signs.order-give-priority",
+      "sourceRef": "KYTS-order",
+      "scene": "You reach a narrow bridge. A sign shows a large black arrow pointing up and a smaller red arrow pointing down. A car is coming the other way.",
+      "question": {
+        "prompt": "What does the sign tell you to do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You have priority — carry on across",
+            "correct": false,
+            "misconceptionId": "m.signs.give-priority-is-your-priority"
+          },
+          {
+            "id": "b",
+            "text": "Give way to the oncoming traffic",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Both directions must stop and wait",
+            "correct": false
+          }
+        ],
+        "explanation": "The larger black arrow is the oncoming traffic with priority; the small red arrow is you — wait. The reverse sign gives you priority."
+      }
+    },
+    {
+      "id": "r2-m2-s7",
+      "type": "misconception",
+      "conceptId": "c.signs.order-blue-mandatory",
+      "sourceRef": "KYTS-circles",
+      "wrongBelief": "A solid blue circle is just advice or information you can ignore.",
+      "question": {
+        "prompt": "Why is that wrong?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It isn't — only red signs are orders",
+            "correct": false,
+            "misconceptionId": "m.signs.blue-is-advice"
+          },
+          {
+            "id": "b",
+            "text": "Blue circles give positive orders you must follow, like 'turn left'",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Blue circles always mean parking",
+            "correct": false
+          }
+        ],
+        "explanation": "Circles give orders. Red-ringed circles say what you must not do; solid blue circles say what you must do."
+      },
+      "repairNote": "A blue circle is a positive instruction you must obey (turn left, mini-roundabout). It is an order, not a hint."
+    },
+    {
+      "id": "r2-m2-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "KYTS-order",
+      "questions": [
+        { "bankRef": "c.signs.order-no-entry" },
+        { "bankRef": "c.signs.order-no-motor-vehicles" },
+        { "bankRef": "c.signs.order-no-overtaking" },
+        { "bankRef": "c.signs.order-speed-limit" },
+        { "bankRef": "c.signs.order-give-priority" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "missionId": "r6-m5",
+  "routeId": "route-6",
+  "title": "Large vehicles & learners",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r6-m5-s1",
+      "type": "scene_decision",
+      "conceptId": "c.vru.long-vehicle-swings",
+      "sourceRef": "HC-221",
+      "scene": "You're behind a long lorry approaching a crossroads. It signals left — then swings out towards the right-hand side of the road.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay well back and give it room",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Assume the signal is wrong and it's turning right",
+            "correct": false,
+            "misconceptionId": "m.vru.trust-the-indicator"
+          },
+          {
+            "id": "c",
+            "text": "Move into the gap on its left as it slows",
+            "correct": false
+          }
+        ],
+        "explanation": "A long vehicle swings the opposite way first so its rear wheels clear the kerb. Any gap it opens will close as it turns."
+      }
+    },
+    {
+      "id": "r6-m5-s2",
+      "type": "rule_card",
+      "conceptId": "c.vru.keep-back-for-view",
+      "sourceRef": "HC-222",
+      "title": "Why you sit back from a lorry",
+      "body": "The further back you are, the more of the road ahead you can see past it — and the more likely the driver is to see you in their mirrors.",
+      "question": {
+        "prompt": "Why keep well back while following a large vehicle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tucking in close gives you a better view past it",
+            "correct": false,
+            "misconceptionId": "m.vru.close-behind-sees-more"
+          },
+          {
+            "id": "b",
+            "text": "To get the best view of the road ahead",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "In case the vehicle stops and rolls backwards",
+            "correct": false
+          }
+        ],
+        "explanation": "Close behind a lorry you can see nothing but the lorry, and you sit in the driver's blind area."
+      }
+    },
+    {
+      "id": "r6-m5-s3",
+      "type": "scene_decision",
+      "conceptId": "c.vru.gap-cut-in",
+      "sourceRef": "HC-168",
+      "scene": "You've left a good gap behind a lorry. A car pulls out of the queue beside you and drops straight into it.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Close up again so it can't happen twice",
+            "correct": false,
+            "misconceptionId": "m.vru.reclaim-the-gap"
+          },
+          {
+            "id": "b",
+            "text": "Flash your headlights at the car that cut in",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Drop back further and rebuild the gap",
+            "correct": true
+          }
+        ],
+        "explanation": "The gap is your stopping room, not your property. Ease off and take it back calmly."
+      }
+    },
+    {
+      "id": "r6-m5-s4",
+      "type": "hazard_cue",
+      "conceptId": "c.vru.lorry-spray",
+      "sourceRef": "HC-227",
+      "scene": "You're following a lorry on a soaking wet dual carriageway. Its spray is coating your windscreen and you can't read the road ahead.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move closer, where there's less spray to deal with",
+            "correct": false,
+            "misconceptionId": "m.vru.spray-tuck-in"
+          },
+          {
+            "id": "b",
+            "text": "Drop back until you can see properly again",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Switch to full beam so you can see through it",
+            "correct": false
+          }
+        ],
+        "explanation": "Dropping back takes you out of the spray and buys stopping distance you badly need on a wet road."
+      }
+    },
+    {
+      "id": "r6-m5-s5",
+      "type": "hazard_cue",
+      "conceptId": "c.vru.bus-hides-pedestrians",
+      "sourceRef": "HC-223",
+      "scene": "A bus is stopped at a bus stop ahead of you, and people are getting off it onto the pavement.",
+      "question": {
+        "prompt": "What's the hazard as you pass?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Passengers will walk to a crossing before stepping out",
+            "correct": false,
+            "misconceptionId": "m.vru.bus-passengers-use-crossings"
+          },
+          {
+            "id": "b",
+            "text": "Someone stepping into the road from behind the bus",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The bus reversing back towards the stop",
+            "correct": false
+          }
+        ],
+        "explanation": "People cross straight from the front and back of a bus, hidden from you until the last moment."
+      }
+    },
+    {
+      "id": "r6-m5-s6",
+      "type": "rule_card",
+      "conceptId": "c.vru.bus-pulling-away",
+      "sourceRef": "HC-223",
+      "title": "A bus signalling to pull out",
+      "body": "Give way to it when you safely can. Don't accelerate to get past, and don't flash it out — other road users read your lights too.",
+      "question": {
+        "prompt": "A bus at a stop signals to move away. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Get past it before it starts to move",
+            "correct": false,
+            "misconceptionId": "m.vru.bus-must-wait"
+          },
+          {
+            "id": "b",
+            "text": "Let it pull away, if it's safe to do so",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Signal left and wave the driver out",
+            "correct": false
+          }
+        ],
+        "explanation": "Letting a bus out costs you seconds. Squeezing past it puts you alongside as it moves off."
+      }
+    },
+    {
+      "id": "r6-m5-s7",
+      "type": "misconception",
+      "conceptId": "c.vru.learner-patience",
+      "sourceRef": "HC-217",
+      "wrongBelief": "Sitting close behind a hesitant learner encourages them to get on with it.",
+      "question": {
+        "prompt": "The learner ahead of you stalls at a junction. What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay close behind and flash your headlights",
+            "correct": false,
+            "misconceptionId": "m.vru.learner-needs-pushing"
+          },
+          {
+            "id": "b",
+            "text": "Be patient — expect them to make mistakes",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Steer around them and carry on",
+            "correct": false
+          }
+        ],
+        "explanation": "Pressure makes a nervous driver stall again. Hang back and give them the room to sort it out."
+      },
+      "repairNote": "Learners react more slowly and make mistakes — that's the point of learning. Leave room and wait."
+    },
+    {
+      "id": "r6-m5-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-221",
+      "questions": [
+        { "bankRef": "c.vru.long-vehicle-swings" },
+        { "bankRef": "c.vru.keep-back-for-view" },
+        { "bankRef": "c.vru.lorry-spray" },
+        { "bankRef": "c.vru.bus-hides-pedestrians" },
+        { "bankRef": "c.vru.learner-patience" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "missionId": "r6-m1",
+  "routeId": "route-6",
+  "title": "People on foot",
+  "estimatedMinutes": 6,
+  "reviewStatus": "draft",
+  "steps": [
+    {
+      "id": "r6-m1-s1",
+      "type": "scene_decision",
+      "conceptId": "c.vru.turn-give-way-crossing",
+      "sourceRef": "HC-170",
+      "scene": "You're turning left into a side road. Two people have already stepped off the kerb and are walking across it.",
+      "question": {
+        "prompt": "What should you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Steer round behind them, leaving plenty of room",
+            "correct": false,
+            "misconceptionId": "m.vru.pass-behind-crossers"
+          },
+          {
+            "id": "b",
+            "text": "Give way and let them finish crossing",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Sound your horn so they know you're turning in",
+            "correct": false
+          }
+        ],
+        "explanation": "People already crossing the side road have priority. Wait — don't hurry them with the horn, your lights or your engine."
+      }
+    },
+    {
+      "id": "r6-m1-s2",
+      "type": "rule_card",
+      "conceptId": "c.vru.turn-right-waiting-pedestrians",
+      "sourceRef": "HC-H2",
+      "title": "A clear road isn't the whole check",
+      "body": "Turning right with nothing coming the other way? People waiting to cross that side road still come first. Give way before you turn in.",
+      "question": {
+        "prompt": "Nothing is coming, but people wait to cross the side road. What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Turn in — they're safe where they are on the pavement",
+            "correct": false,
+            "misconceptionId": "m.sharing.cars-first-at-junctions"
+          },
+          {
+            "id": "b",
+            "text": "Wave them across so you can get on",
+            "correct": false,
+            "misconceptionId": "m.crossings.waving-is-polite"
+          },
+          {
+            "id": "c",
+            "text": "Wait and give way to them",
+            "correct": true
+          }
+        ],
+        "explanation": "Give way to anyone crossing, or waiting to cross, the road you turn into. Never wave them over — you can't see what's behind you."
+      }
+    },
+    {
+      "id": "r6-m1-s3",
+      "type": "hazard_cue",
+      "conceptId": "c.vru.pavement-closed",
+      "sourceRef": "HC-206",
+      "scene": "Street repairs have closed the left-hand pavement ahead, and barriers funnel people off it towards the kerb.",
+      "question": {
+        "prompt": "What is that cue telling you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep your speed up to get clear of the works quickly",
+            "correct": false,
+            "misconceptionId": "m.vru.roadworks-hurry"
+          },
+          {
+            "id": "b",
+            "text": "Expect people walking in the road — slow right down",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "Nothing changes; pedestrians have to wait for traffic",
+            "correct": false
+          }
+        ],
+        "explanation": "A closed pavement pushes people into the carriageway. Pass slowly and leave them room."
+      }
+    },
+    {
+      "id": "r6-m1-s4",
+      "type": "rule_card",
+      "conceptId": "c.vru.country-road-walkers",
+      "sourceRef": "HC-2",
+      "title": "Walkers on a country lane",
+      "body": "With no pavement, people are told to walk on the right so they face the traffic. On a lane, that means they come towards you on your side.",
+      "question": {
+        "prompt": "On a country lane with no pavement, where do you expect walkers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Coming towards you, on your side of the road",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "text": "Ahead of you with their backs turned, on your left",
+            "correct": false,
+            "misconceptionId": "m.vru.walkers-with-traffic"
+          },
+          {
+            "id": "c",
+            "text": "On the verge only — they never walk on the road",
+            "correct": false
+          }
+        ],
+        "explanation": "Expect walkers head-on, and expect to meet them late on a right-hand bend. Ease off and give them width."
+      }
+    },
+    {
+      "id": "r6-m1-s5",
+      "type": "contrast",
+      "conceptId": "c.vru.white-stick-red-band",
+      "sourceRef": "HC-207",
+      "a": {
+        "label": "A white stick",
+        "body": "The person is blind. They may have no idea your car is there until they hear it."
+      },
+      "b": {
+        "label": "A white stick with a red band",
+        "body": "The person is deaf as well as blind. Your horn tells them nothing at all."
+      },
+      "question": {
+        "prompt": "A pedestrian carries a white stick with a red band. What does it mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They're blind — the band is only a reflective strip",
+            "correct": false,
+            "misconceptionId": "m.vru.red-band-blind-only"
+          },
+          {
+            "id": "b",
+            "text": "They have limited mobility",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "They're deaf and blind",
+            "correct": true
+          }
+        ],
+        "explanation": "Red band means deaf and blind. Sounding your horn achieves nothing — wait, and give them all the time they need."
+      }
+    },
+    {
+      "id": "r6-m1-s6",
+      "type": "rule_card",
+      "conceptId": "c.vru.assistance-dog-coat",
+      "sourceRef": "HC-207",
+      "title": "A dog in a coloured coat",
+      "body": "A dog in a yellow or burgundy coat is trained to help a deaf person. Its owner may never hear you approaching.",
+      "question": {
+        "prompt": "You see a pedestrian with a dog in a burgundy coat. What does it tell you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The dog is in training and the owner is its trainer",
+            "correct": false,
+            "misconceptionId": "m.vru.dog-coat-trainer"
+          },
+          {
+            "id": "b",
+            "text": "The pedestrian is deaf",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "text": "The pedestrian is an older person",
+            "correct": false
+          }
+        ],
+        "explanation": "Yellow or burgundy coat means a hearing dog. Don't count on engine noise or a horn to be noticed."
+      }
+    },
+    {
+      "id": "r6-m1-s7",
+      "type": "scene_decision",
+      "conceptId": "c.vru.older-need-time",
+      "sourceRef": "HC-207",
+      "scene": "You're first in the queue at a pelican crossing. Your light turns green, but two older people are only halfway across.",
+      "question": {
+        "prompt": "What do you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Edge forward and rev gently so they get a move on",
+            "correct": false,
+            "misconceptionId": "m.vru.green-means-my-turn"
+          },
+          {
+            "id": "b",
+            "text": "Flash your lights in case they haven't seen you",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "text": "Wait patiently until they're clear",
+            "correct": true
+          }
+        ],
+        "explanation": "Older or disabled people often need far longer than you'd expect. Green means go only once the crossing is clear."
+      }
+    },
+    {
+      "id": "r6-m1-s8",
+      "type": "checkpoint",
+      "conceptId": "c.checkpoint",
+      "sourceRef": "HC-170",
+      "questions": [
+        { "bankRef": "c.vru.turn-give-way-crossing" },
+        { "bankRef": "c.vru.pavement-closed" },
+        { "bankRef": "c.vru.country-road-walkers" },
+        { "bankRef": "c.vru.white-stick-red-band" },
+        { "bankRef": "c.vru.older-need-time" }
+      ]
+    }
+  ]
+}
